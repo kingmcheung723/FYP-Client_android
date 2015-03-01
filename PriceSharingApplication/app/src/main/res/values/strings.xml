@@ -4,5 +4,6 @@
     <string name="app_name">Price Sharing Application</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="category">分類</string>
 
 </resources>
