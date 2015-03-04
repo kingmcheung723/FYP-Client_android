@@ -8,47 +8,41 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.view.View.OnClickListener;
-import android.content.Context;
 
 
-public class MainActivity extends ActionBarActivity {
-
-    @Override
-
-
+public class Search extends ActionBarActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        setContentView(R.layout.activity_main);
-        Button search = (Button)findViewById(R.id.button_search);
-        Button recommend = (Button)findViewById(R.id.button_recommend);
+        setContentView(R.layout.activity_search);
+        Button recommendation = (Button)findViewById(R.id.button_recommend);
+        Button category = (Button)findViewById(R.id.button_category);
         Button member = (Button)findViewById(R.id.button_member);
         Button barcode = (Button)findViewById(R.id.button_barcode);
 
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(MainActivity.this,Member.class);
+                Intent myintent1 = new Intent(Search.this,Member.class);
                 startActivity(myintent1);
 
             }
         });
-        search.setOnClickListener(new View.OnClickListener() {
+        category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(MainActivity.this,Search.class);
+                Intent myintent2 = new Intent(Search.this,MainActivity.class);
                 startActivity(myintent2);
 
             }
         });
-        recommend.setOnClickListener(new View.OnClickListener() {
+        recommendation.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(MainActivity.this,Recommendation.class);
+                Intent myintent3 = new Intent(Search.this,Recommendation.class);
                 startActivity(myintent3);
 
             }
@@ -56,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(MainActivity.this,Barcode.class);
+                Intent myintent4 = new Intent(Search.this,Barcode.class);
                 startActivity(myintent4);
             }
         });
@@ -67,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_search, menu);
         return true;
     }
 

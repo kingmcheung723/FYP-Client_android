@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/category"
+        android:text="@string/category＿chinese"
         android:textColor="#ffffffff"
         android:id="@+id/Category_title"
         style="@style/TextAppearance.AppCompat.Title"
@@ -28,178 +28,207 @@
         android:layout_marginTop="434dp"
         android:id="@+id/linearLayout">
 
-        <ImageButton
-            android:layout_width="76dp"
-            android:layout_height="100dp"
-            android:id="@+id/imageButton3"
-            android:src="@drawable/ic_button_category"
-            android:layout_gravity="bottom" />
+        <Button
+            android:layout_width="65dp"
+            android:layout_height="80dp"
+            android:text="@string/category＿chinese"
+            android:id="@+id/button_category"
+            android:layout_column="6"
+            android:background="@drawable/ic_button_category"
+            android:layout_gravity="bottom"
+            android:paddingTop="50dp"
+            android:textColor="#ffffffff" />
 
-        <ImageButton
-            android:layout_width="76dp"
-            android:layout_height="100dp"
-            android:id="@+id/imageButton2"
-            android:src="@drawable/ic_button_search"
-            android:layout_gravity="bottom" />
-
-        <ImageButton
-            android:layout_width="80dp"
-            android:layout_height="100dp"
-            android:id="@+id/imageButton"
-            android:src="@drawable/ic_button_barcode"
-            android:layout_gravity="bottom" />
-
-        <ImageButton
-            android:layout_width="76dp"
-            android:layout_height="100dp"
-            android:id="@+id/imageButton5"
-            android:src="@drawable/ic_button_recommend"
-            android:layout_gravity="bottom" />
-
-        <ImageButton
-            android:layout_width="76dp"
-            android:layout_height="100dp"
-            android:id="@+id/imageButton4"
-            android:src="@drawable/ic_button_member"
-            android:layout_alignTop="@+id/linearLayout"
+        <Button
+            android:layout_width="65dp"
+            android:layout_height="80dp"
+            android:text="@string/search_chinese"
+            android:id="@+id/button_search"
+            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_gravity="bottom" />
+            android:background="@drawable/ic_button_search"
+            android:layout_gravity="bottom"
+            android:paddingTop="50dp"
+            android:textColor="#ffffffff"/>
 
+        <Button
+            android:layout_width="65dp"
+            android:layout_height="80dp"
+            android:text="@string/barcode_chinese"
+            android:id="@+id/button_barcode"
+            android:background="@drawable/ic_button_barcode"
+            android:layout_gravity="bottom"
+            android:paddingTop="50dp"
+            android:textColor="#ffffffff"/>
+
+        <Button
+            android:layout_width="65dp"
+            android:layout_height="80dp"
+            android:text="@string/recommend_chinese"
+            android:id="@+id/button_recommend"
+            android:background="@drawable/ic_button_recommend"
+            android:layout_gravity="bottom"
+            android:paddingTop="50dp"
+            android:textColor="#ffffffff" />
+
+        <Button
+            android:layout_width="65dp"
+            android:layout_height="80dp"
+            android:text="@string/member_chinese"
+            android:id="@+id/button_member"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ic_button_member"
+            android:layout_gravity="bottom"
+            android:paddingTop="50dp"
+            android:textColor="#ffffffff"/>
     </LinearLayout>
 
+
     <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
         android:layout_below="@+id/Category_title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+<TableRow
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-            <Button
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:text="@string/category_baby_chinese"
-                android:id="@+id/button2"
-                android:background="@drawable/ic_button_category_baby"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp"
-                android:layout_column="2"
-                android:paddingTop="50dp"
-                android:textSize="10dp"/>
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:text="@string/category_baby_chinese"
+        android:id="@+id/button2"
+        android:background="@drawable/ic_button_category_baby"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_column="2"
+        android:paddingTop="50dp"
+        android:textSize="10dp"/>
 
-            <Button
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:text="@string/category_alcohol_chinese"
-                android:id="@+id/button"
-                android:background="@drawable/ic_button_category_alcohol"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="40dp"
-                android:layout_column="6"
-                android:paddingTop="50dp"
-                android:textSize="10dp"/>
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:text="@string/category_alcohol_chinese"
+        android:id="@+id/button"
+        android:background="@drawable/ic_button_category_alcohol"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_column="6"
+        android:paddingTop="50dp"
+        android:textSize="10dp"/>
 
-            <Button
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:text="@string/category_bread_chinese"
-                android:id="@+id/button3"
-                android:background="@drawable/ic_button_category_bread"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp"
-                android:layout_column="9"
-                android:paddingTop="50dp"
-                android:textSize="10dp" />
-        </TableRow>
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:text="@string/category_bread_chinese"
+        android:id="@+id/button3"
+        android:background="@drawable/ic_button_category_bread"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_column="9"
+        android:paddingTop="50dp"
+        android:textSize="10dp" />
+</TableRow>
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+<TableRow
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-            <Button
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:text="@string/category_candy_chinese"
-                android:id="@+id/button5"
-                android:layout_column="2"
-                android:background="@drawable/ic_button_category_candy"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="30dp"
-                android:paddingTop="50dp"
-                android:textSize="10dp"/>
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:text="@string/category_candy_chinese"
+        android:id="@+id/button5"
+        android:layout_column="2"
+        android:background="@drawable/ic_button_category_candy"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"
+        android:paddingTop="50dp"
+        android:textSize="10dp"/>
 
-            <Button
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:text="@string/category_cleaning_chinese"
-                android:id="@+id/button4"
-                android:layout_column="6"
-                android:background="@drawable/ic_button_category_cleaning"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="40dp"
-                android:paddingTop="50dp"
-                android:textSize="10dp"/>
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:text="@string/category_cleaning_chinese"
+        android:id="@+id/button4"
+        android:layout_column="6"
+        android:background="@drawable/ic_button_category_cleaning"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:paddingTop="50dp"
+        android:textSize="10dp"/>
 
-            <Button
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:text="@string/category_daily_chinese"
-                android:id="@+id/button6"
-                android:layout_column="9"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/ic_button_category_daily"
-                android:layout_marginLeft="30dp"
-                android:paddingTop="50dp"
-                android:textSize="10dp"/>
-        </TableRow>
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:text="@string/category_daily_chinese"
+        android:id="@+id/button6"
+        android:layout_column="9"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/ic_button_category_daily"
+        android:layout_marginLeft="30dp"
+        android:paddingTop="50dp"
+        android:textSize="10dp"/>
+
+</TableRow>
 
 
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+<TableRow
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-            <Button
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:text="@string/category_dairy_chinese"
-                android:id="@+id/button7"
-                android:layout_column="2"
-                android:background="@drawable/ic_button_category_dairy"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="40dp"
-                android:paddingTop="50dp"
-                android:textSize="10dp"/>
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:text="@string/category_dairy_chinese"
+        android:id="@+id/button7"
+        android:layout_column="2"
+        android:background="@drawable/ic_button_category_dairy"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:paddingTop="50dp"
+        android:textSize="10dp"/>
 
-            <Button
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:text="@string/category_drink_chinese"
-                android:id="@+id/button8"
-                android:layout_column="6"
-                android:background="@drawable/ic_button_category_drink"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="40dp"
-                android:paddingTop="50dp"
-                android:textSize="10dp"/>
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:text="@string/category_drink_chinese"
+        android:id="@+id/button8"
+        android:layout_column="6"
+        android:background="@drawable/ic_button_category_drink"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:paddingTop="50dp"
+        android:textSize="10dp"/>
 
-            <Button
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:text="@string/category_rice_chinese"
-                android:id="@+id/button9"
-                android:layout_column="9"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/ic_button_category_rice"
-                android:paddingTop="50dp"
-                android:textSize="10dp"/>
-        </TableRow>
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:text="@string/category_rice_chinese"
+        android:id="@+id/button9"
+        android:layout_column="9"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/ic_button_category_rice"
+        android:paddingTop="50dp"
+        android:textSize="10dp"/>
+
+</TableRow>
 
     </TableLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_column="11"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>
