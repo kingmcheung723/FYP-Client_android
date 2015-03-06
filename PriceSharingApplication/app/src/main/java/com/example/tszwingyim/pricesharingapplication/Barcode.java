@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 
 public class Barcode extends ActionBarActivity {
@@ -24,15 +28,14 @@ public class Barcode extends ActionBarActivity {
         Button member = (Button)findViewById(R.id.button_member);
 
         search.setOnClickListener(new View.OnClickListener() {
-
+            @Override
             public void onClick(View v) {
                 Intent myintent1 = new Intent(Barcode.this,Search.class);
                 startActivity(myintent1);
-
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
-
+            @Override
             public void onClick(View v) {
                 Intent myintent2 = new Intent(Barcode.this,MainActivity.class);
                 startActivity(myintent2);
@@ -40,7 +43,7 @@ public class Barcode extends ActionBarActivity {
             }
         });
         recommendation.setOnClickListener(new View.OnClickListener() {
-
+            @Override
             public void onClick(View v) {
                 Intent myintent3 = new Intent(Barcode.this,Recommendation.class);
                 startActivity(myintent3);
@@ -48,14 +51,27 @@ public class Barcode extends ActionBarActivity {
             }
         });
         member.setOnClickListener(new View.OnClickListener() {
-
+            @Override
             public void onClick(View v) {
-                Intent myintent4 = new Intent(Barcode.this,Member.class);
+                Intent myintent4 = new Intent(Barcode.this, Member.class);
                 startActivity(myintent4);
             }
         });
+
+        // Initialize the barcode scanner
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.initiateScan();
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanResult != null) {
+            String re = scanResult.getContents();
+            Log.d("code", re);
+        }
+        // else continue with any other code you need in the method
+
+    }
 
 
     @Override
