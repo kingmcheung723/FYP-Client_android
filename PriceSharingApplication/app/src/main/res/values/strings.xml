@@ -67,4 +67,8 @@
             <item>貨品品牌</item>
         </string-array>
 
+    <string name="search_title">搜尋貨品</string>
+
+
+
 </resources>
