@@ -1,15 +1,13 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.view.View.OnClickListener;
-import android.content.Context;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -25,6 +23,8 @@ public class MainActivity extends ActionBarActivity {
         Button recommend = (Button)findViewById(R.id.button_recommend);
         Button member = (Button)findViewById(R.id.button_member);
         Button barcode = (Button)findViewById(R.id.button_barcode);
+
+        TabManager.getInstance().setIntent(new Intent(MainActivity.this, MainActivity.class), TabManager.Pages.MainPage);
 
         member.setOnClickListener(new View.OnClickListener() {
 

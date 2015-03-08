@@ -30,7 +30,6 @@ public class Search extends ActionBarActivity {
             public void onClick(View v) {
                 Intent myintent1 = new Intent(Search.this, Member.class);
                 startActivity(myintent1);
-
             }
         });
         category.setOnClickListener(new View.OnClickListener() {

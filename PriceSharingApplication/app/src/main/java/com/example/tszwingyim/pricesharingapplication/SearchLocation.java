@@ -26,11 +26,9 @@ public class SearchLocation extends ActionBarActivity {
         Button goods = (Button)findViewById(R.id.button_goods);
 
         member.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
                 Intent myintent1 = new Intent(SearchLocation.this,Member.class);
                 startActivity(myintent1);
-
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
