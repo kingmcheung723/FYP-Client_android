@@ -3,6 +3,7 @@
     package="com.example.tszwingyim.pricesharingapplication" >
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -35,6 +36,14 @@
         <activity
             android:name=".Recommendation"
             android:label="@string/title_activity_recommendation" >
+        </activity>
+        <activity
+            android:name=".SearchGoods"
+            android:label="@string/title_activity_search_goods" >
+        </activity>
+        <activity
+            android:name=".SearchLocation"
+            android:label="@string/title_activity_search_location" >
         </activity>
     </application>
 

@@ -1,34 +1,34 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 
 
-public class Search extends ActionBarActivity {
+public class SearchLocation extends ActionBarActivity {
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_search);
-        Button recommendation = (Button) findViewById(R.id.button_recommend);
-        Button category = (Button) findViewById(R.id.button_category);
-        Button member = (Button) findViewById(R.id.button_member);
-        Button barcode = (Button) findViewById(R.id.button_barcode);
-        Button location = (Button) findViewById(R.id.button_location);
+        Button recommendation = (Button)findViewById(R.id.button_recommend);
+        Button category = (Button)findViewById(R.id.button_category);
+        Button member = (Button)findViewById(R.id.button_member);
+        Button barcode = (Button)findViewById(R.id.button_barcode);
+        Button goods = (Button)findViewById(R.id.button_goods);
+
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(Search.this, Member.class);
+                Intent myintent1 = new Intent(SearchLocation.this,Member.class);
                 startActivity(myintent1);
 
             }
@@ -36,7 +36,7 @@ public class Search extends ActionBarActivity {
         category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(Search.this, MainActivity.class);
+                Intent myintent2 = new Intent(SearchLocation.this,MainActivity.class);
                 startActivity(myintent2);
 
             }
@@ -44,7 +44,7 @@ public class Search extends ActionBarActivity {
         recommendation.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(Search.this, Recommendation.class);
+                Intent myintent3 = new Intent(SearchLocation.this,Recommendation.class);
                 startActivity(myintent3);
 
             }
@@ -52,32 +52,24 @@ public class Search extends ActionBarActivity {
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(Search.this, Barcode.class);
+                Intent myintent4 = new Intent(SearchLocation.this,Barcode.class);
                 startActivity(myintent4);
             }
         });
-        location.setOnClickListener(new View.OnClickListener() {
+        goods.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v) {
-                Intent myintent5 = new Intent(Search.this, SearchLocation.class);
+                Intent myintent5 = new Intent(SearchLocation.this,Search.class);
                 startActivity(myintent5);
             }
         });
-
-
-        Spinner goods = (Spinner) findViewById(R.id.spinner_search);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.searchgoods_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        goods.setAdapter(adapter);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
+        getMenuInflater().inflate(R.menu.menu_search_location, menu);
         return true;
     }
 
