@@ -18,7 +18,7 @@ public class SearchLocation extends ActionBarActivity {
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_search_location);
         Button recommendation = (Button)findViewById(R.id.button_recommend);
         Button category = (Button)findViewById(R.id.button_category);
         Button member = (Button)findViewById(R.id.button_member);

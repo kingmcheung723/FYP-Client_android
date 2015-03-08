@@ -15,9 +15,6 @@ import android.content.Context;
 public class MainActivity extends ActionBarActivity {
 
     @Override
-
-
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide the action bar
