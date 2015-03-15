@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,10 @@ public class Member extends ActionBarActivity {
         Button category = (Button)findViewById(R.id.button_category);
         Button search = (Button)findViewById(R.id.button_search);
         Button barcode = (Button)findViewById(R.id.button_barcode);
+        Button login = (Button)findViewById(R.id.button_login);
+        Button register = (Button)findViewById(R.id.button_register);
+        Button about = (Button)findViewById(R.id.button_about);
+        Button setting = (Button)findViewById(R.id.button_setting);
 
         search.setOnClickListener(new View.OnClickListener() {
 
@@ -52,6 +57,34 @@ public class Member extends ActionBarActivity {
             public void onClick(View v) {
                 Intent myintent4 = new Intent(Member.this,Barcode.class);
                 startActivity(myintent4);
+            }
+        });
+        login.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent5 = new Intent(Member.this, Login.class);
+                startActivity(myintent5);
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent6 = new Intent(Member.this, Register.class);
+                startActivity(myintent6);
+            }
+        });
+        setting.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent7 = new Intent(Member.this, Setting.class);
+                startActivity(myintent7);
+            }
+        });
+        about.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent8 = new Intent(Member.this, About.class);
+                startActivity(myintent8);
             }
         });
     }

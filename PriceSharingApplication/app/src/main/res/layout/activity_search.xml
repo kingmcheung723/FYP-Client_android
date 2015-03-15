@@ -45,12 +45,13 @@
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:text="@string/Goods_chinese"
-                android:id="@+id/button11"
+                android:id="@+id/button_goods"
                 android:layout_below="@+id/search_title"
                 android:layout_toRightOf="@+id/button_location"
                 android:layout_toEndOf="@+id/button_location"
                 android:layout_gravity="top"
-                android:background="#5ac4beda" />
+                android:background="#ffffffff"
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="160dp"
@@ -61,24 +62,41 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_gravity="top"
-                android:background="#5ac4beda" />
+                android:background="#5ac4beda"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner_search"
-            android:background="#ffffffff"
-            android:textAlignment="center" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <SearchView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/searchView"
-            android:gravity="top|left"
-            android:background="#ffffffff"
-            android:layout_gravity="top" />
+            <Spinner
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:id="@+id/spinner_search"
+                android:background="#ffffffff"
+                android:textAlignment="center"
+                android:spinnerMode="dropdown"
+                android:contentDescription="搜尋類型"
+                android:dropDownWidth="fill_parent"
+                android:layoutMode="clipBounds"
+                android:outlineProvider="bounds" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/editText"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_itempage"
+                android:background="@drawable/ic_action_search" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -86,7 +104,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="434dp"
         android:id="@+id/linearLayout">
@@ -100,7 +118,8 @@
             android:background="@drawable/ic_button_category"
             android:layout_gravity="bottom"
             android:paddingTop="50dp"
-            android:textColor="#ffffffff" />
+            android:textColor="#ffffffff"
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="65dp"
@@ -113,7 +132,8 @@
             android:background="@drawable/ic_button_search"
             android:layout_gravity="bottom"
             android:paddingTop="50dp"
-            android:textColor="#ffffffff"/>
+            android:textColor="#ffffffff"
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="65dp"
@@ -123,7 +143,8 @@
             android:background="@drawable/ic_button_barcode"
             android:layout_gravity="bottom"
             android:paddingTop="50dp"
-            android:textColor="#ffffffff"/>
+            android:textColor="#ffffffff"
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="65dp"
@@ -133,7 +154,8 @@
             android:background="@drawable/ic_button_recommend"
             android:layout_gravity="bottom"
             android:paddingTop="50dp"
-            android:textColor="#ffffffff" />
+            android:textColor="#ffffffff"
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="65dp"
@@ -145,7 +167,8 @@
             android:background="@drawable/ic_button_member"
             android:layout_gravity="bottom"
             android:paddingTop="50dp"
-            android:textColor="#ffffffff"/>
+            android:textColor="#ffffffff"
+            android:layout_weight="1" />
     </LinearLayout>
 
 </RelativeLayout>

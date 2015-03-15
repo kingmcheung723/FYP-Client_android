@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- tap-->
+    <!-- tap -->
     <string name="app_name">Price Sharing Application</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -27,7 +27,14 @@
     <string name="Goods＿eng">Goods</string>
     <string name="Location_chinese">店鋪</string>
     <string name="Location＿eng">Location</string>
-
+    <string name="Email＿eng">Email:</string>
+    <string name="Email_chinese">電郵地址:</string>
+    <string name="Password＿eng">Password:</string>
+    <string name="Password_chinese">密碼:</string>
+    <string name="ConfirmPassword＿eng">Confirm Password:</string>
+    <string name="ConfirmPassword_chinese">確認密碼:</string>
+    <string name="Priceinfo＿eng">Information</string>
+    <string name="Priceinfo_chinese">貨品資料</string>
     <!-- search -->
     <string name="category_bread_chinese">麵包蛋糕/穀類早餐/麵包醬</string>
     <string name="category_alcohol_chinese">酒類</string>
@@ -49,26 +56,61 @@
     <string name="category_drink_eng">Beverages</string>
     <string name="category_rice_eng">Rice/Oil/Canned food/Fruits/Vegetables/Meat</string>
     <string name="category_sugar_eng">Noodles/Cooking needs/Chilled/frozen processed food</string>
+    <!--iteminfo-->
+    <string name="search_goodname_eng">Name:</string>
+    <string name="search_goodname_chinese">貨品姓名:</string>
+    <string name="search_goodbrand_eng">Brand:</string>
+    <string name="search_goodbrand_chinese">牌子:</string>
+    <string name="search_goodcategory_eng">Category:</string>
+    <string name="search_goodcategory_chinese">分類:</string>
+    <string name="search_parknshop_eng">Parknshop:</string>
+    <string name="search_parknshop_chinese">百佳:</string>
+    <string name="search_wellcome_eng">Wellcome:</string>
+    <string name="search_wellcome_chinese">惠康:</string>
+    <string name="search_aeon_eng">Wellcome:</string>
+    <string name="search_aeon_chinese">永旺:</string>
+    <string name="search_marketplace_eng">Marketplace:</string>
+    <string name="search_marketplace_chinese">Marketplace:</string>
+    <string name="search_daicheong_eng">大昌食品:</string>
+    <string name="search_daicheong_chinese">大昌食品:</string>
 
-<!--title-->
+
+
+    <!-- title -->
     <string name="title_activity_search">Search</string>
     <string name="title_activity_barcode">Barcode</string>
     <string name="title_activity_member">Member</string>
     <string name="title_activity_recommendation">Recommendation</string>
     <string name="title_activity_search_goods">SearchGoods</string>
     <string name="title_activity_search_location">SearchLocation</string>
-
     <string name="searchgoods_prompt">Choose a country</string>
-    <!-- spinner-->
-        <string-array name="searchgoods_array">
-            <item>貨品分類</item>
-            <item>貨品名稱</item>
-            <item>超市名稱</item>
-            <item>貨品品牌</item>
-        </string-array>
+    <!-- spinner -->
+    <string-array name="searchgoods_array">
+        <item>貨品分類</item>
+        <item>貨品名稱</item>
+        <item>超市名稱</item>
+        <item>貨品品牌</item>
+    </string-array>
 
     <string name="search_title">搜尋貨品</string>
+    <string name="searchdistrict_prompt">Choose a country</string>
+    <!-- spinner -->
+    <string-array name="searchdistrict_array">
+        <item>地區</item>
+        <item>商店</item>
+    </string-array>
 
-
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_about">About</string>
+    <string name="title_activity_setting">Setting</string>
+    <string name="title_activity_itempage">Itempage</string>
+    <string name="title_activity_pricechart">Pricechart</string>
+    <string name="title_activity_commentlist">Commentlist</string>
+    <string name="title_activity_share_pricelist">SharePricelist</string>
+    <string name="title_activity_sharepriceform">Sharepriceform</string>
+    <string name="title_activity_commentform">Commentform</string>
+    <string name="title_activity_shopping_cart">ShoppingCart</string>
+    <string name="title_activity_memberpage">Memberpage</string>
 
 </resources>

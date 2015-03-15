@@ -30,11 +30,11 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="434dp"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        android:layout_alignParentBottom="true">
 
         <Button
             android:layout_width="65dp"
@@ -45,7 +45,8 @@
             android:background="@drawable/ic_button_category"
             android:layout_gravity="bottom"
             android:paddingTop="50dp"
-            android:textColor="#ffffffff" />
+            android:textColor="#ffffffff"
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="65dp"
@@ -58,7 +59,8 @@
             android:background="@drawable/ic_button_search"
             android:layout_gravity="bottom"
             android:paddingTop="50dp"
-            android:textColor="#ffffffff"/>
+            android:textColor="#ffffffff"
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="65dp"
@@ -68,7 +70,8 @@
             android:background="@drawable/ic_button_barcode"
             android:layout_gravity="bottom"
             android:paddingTop="50dp"
-            android:textColor="#ffffffff"/>
+            android:textColor="#ffffffff"
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="65dp"
@@ -78,7 +81,8 @@
             android:background="@drawable/ic_button_recommend"
             android:layout_gravity="bottom"
             android:paddingTop="50dp"
-            android:textColor="#ffffffff" />
+            android:textColor="#ffffffff"
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="65dp"
@@ -90,7 +94,9 @@
             android:background="@drawable/ic_button_member"
             android:layout_gravity="bottom"
             android:paddingTop="50dp"
-            android:textColor="#ffffffff"/>
+            android:textColor="#ffffffff"
+            android:layout_weight="1" />
+
     </LinearLayout>
     <TextView
         android:id="@+id/scan_format"

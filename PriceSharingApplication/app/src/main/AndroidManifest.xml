@@ -45,6 +45,54 @@
             android:name=".SearchLocation"
             android:label="@string/title_activity_search_location" >
         </activity>
+        <activity
+            android:name=".Login"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name=".Register"
+            android:label="@string/title_activity_register" >
+        </activity>
+        <activity
+            android:name=".About"
+            android:label="@string/title_activity_about" >
+        </activity>
+        <activity
+            android:name=".Setting"
+            android:label="@string/title_activity_setting" >
+        </activity>
+        <activity
+            android:name=".Itempage"
+            android:label="@string/title_activity_itempage" >
+        </activity>
+        <activity
+            android:name=".Pricechart"
+            android:label="@string/title_activity_pricechart" >
+        </activity>
+        <activity
+            android:name=".Commentlist"
+            android:label="@string/title_activity_commentlist" >
+        </activity>
+        <activity
+            android:name=".SharePricelist"
+            android:label="@string/title_activity_share_pricelist" >
+        </activity>
+        <activity
+            android:name=".Sharepriceform"
+            android:label="@string/title_activity_sharepriceform" >
+        </activity>
+        <activity
+            android:name=".Commentform"
+            android:label="@string/title_activity_commentform" >
+        </activity>
+        <activity
+            android:name=".ShoppingCart"
+            android:label="@string/title_activity_shopping_cart" >
+        </activity>
+        <activity
+            android:name=".Memberpage"
+            android:label="@string/title_activity_memberpage" >
+        </activity>
     </application>
 
 </manifest>

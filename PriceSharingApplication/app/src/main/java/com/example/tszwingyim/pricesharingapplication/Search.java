@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 
@@ -25,11 +26,14 @@ public class Search extends ActionBarActivity {
         Button member = (Button) findViewById(R.id.button_member);
         Button barcode = (Button) findViewById(R.id.button_barcode);
         Button location = (Button) findViewById(R.id.button_location);
+        Button itempage = (Button) findViewById(R.id.button_itempage);
+
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 Intent myintent1 = new Intent(Search.this, Member.class);
                 startActivity(myintent1);
+
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
@@ -53,12 +57,23 @@ public class Search extends ActionBarActivity {
             public void onClick(View v) {
                 Intent myintent4 = new Intent(Search.this, Barcode.class);
                 startActivity(myintent4);
+
             }
         });
         location.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v) {
                 Intent myintent5 = new Intent(Search.this, SearchLocation.class);
                 startActivity(myintent5);
+
+            }
+        });
+        itempage.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent6 = new Intent(Search.this, Itempage.class);
+                startActivity(myintent6);
+
             }
         });
 
