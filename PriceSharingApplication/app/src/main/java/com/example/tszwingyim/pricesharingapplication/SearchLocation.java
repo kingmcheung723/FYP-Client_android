@@ -29,40 +29,40 @@ public class SearchLocation extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(SearchLocation.this, Member.class);
-                startActivity(myintent1);
+                Intent intent = TabManager.getInstance().getIntent(SearchLocation.this, Member.class);
+                startActivity(intent);
 
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(SearchLocation.this, MainActivity.class);
-                startActivity(myintent2);
+                Intent intent = TabManager.getInstance().getIntent(SearchLocation.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
         recommendation.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(SearchLocation.this, Recommendation.class);
-                startActivity(myintent3);
+                Intent intent = TabManager.getInstance().getIntent(SearchLocation.this, Recommendation.class);
+                startActivity(intent);
 
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(SearchLocation.this, Barcode.class);
-                startActivity(myintent4);
+                Intent intent = TabManager.getInstance().getIntent(SearchLocation.this, Barcode.class);
+                startActivity(intent);
 
             }
         });
         goods.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent5 = new Intent(SearchLocation.this, Search.class);
-                startActivity(myintent5);
+                Intent intent = TabManager.getInstance().getIntent(SearchLocation.this, Search.class);
+                startActivity(intent);
 
             }
         });

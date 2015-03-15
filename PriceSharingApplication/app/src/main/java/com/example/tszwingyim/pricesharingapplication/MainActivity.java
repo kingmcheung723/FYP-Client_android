@@ -15,9 +15,6 @@ import android.content.Context;
 public class MainActivity extends ActionBarActivity {
 
     @Override
-
-
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide the action bar
@@ -32,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(MainActivity.this,Member.class);
+                Intent myintent1 = TabManager.getInstance().getIntent(MainActivity.this, Member.class);
                 startActivity(myintent1);
 
             }
@@ -40,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
         search.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(MainActivity.this,Search.class);
+                Intent myintent2 = TabManager.getInstance().getIntent(MainActivity.this, Search.class);
                 startActivity(myintent2);
 
             }
@@ -48,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
         recommend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(MainActivity.this,Recommendation.class);
+                Intent myintent3 = TabManager.getInstance().getIntent(MainActivity.this, Recommendation.class);
                 startActivity(myintent3);
 
             }
@@ -56,7 +53,7 @@ public class MainActivity extends ActionBarActivity {
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(MainActivity.this,Barcode.class);
+                Intent myintent4 = TabManager.getInstance().getIntent(MainActivity.this, Barcode.class);
                 startActivity(myintent4);
             }
         });

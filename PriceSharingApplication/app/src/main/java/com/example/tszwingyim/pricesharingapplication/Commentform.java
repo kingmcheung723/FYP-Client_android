@@ -32,69 +32,69 @@ public class Commentform extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(Commentform.this,Member.class);
-                startActivity(myintent1);
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Member.class);
+                startActivity(intent);
 
             }
         });
         recommend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(Commentform.this,Recommendation.class);
-                startActivity(myintent2);
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Recommendation.class);
+                startActivity(intent);
 
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(Commentform.this,MainActivity.class);
-                startActivity(myintent3);
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(Commentform.this,Barcode.class);
-                startActivity(myintent4);
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Barcode.class);
+                startActivity(intent);
             }
         });
         commentlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent5 = new Intent(Commentform.this,Commentlist.class);
-                startActivity(myintent5);
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Commentlist.class);
+                startActivity(intent);
 
             }
         });
         pricechart.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent6 = new Intent(Commentform.this,Pricechart.class);
-                startActivity(myintent6);
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Pricechart.class);
+                startActivity(intent);
 
             }
         });
         sharepricelist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent7 = new Intent(Commentform.this,SharePricelist.class);
-                startActivity(myintent7);
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, SharePricelist.class);
+                startActivity(intent);
             }
         });
         itempage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent8 = new Intent(Commentform.this,Itempage.class);
-                startActivity(myintent8);
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Itempage.class);
+                startActivity(intent);
             }
         });
         confirm.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent9 = new Intent(Commentform.this,Commentlist.class);
-                startActivity(myintent9);
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Commentlist.class);
+                startActivity(intent);
             }
         });
     }

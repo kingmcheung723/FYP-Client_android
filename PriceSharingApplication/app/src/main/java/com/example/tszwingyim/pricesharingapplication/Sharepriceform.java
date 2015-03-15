@@ -32,69 +32,69 @@ public class Sharepriceform extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(Sharepriceform.this,Member.class);
-                startActivity(myintent1);
+                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, Member.class);
+                startActivity(intent);
 
             }
         });
         recommend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(Sharepriceform.this,Recommendation.class);
-                startActivity(myintent2);
+                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, Recommendation.class);
+                startActivity(intent);
 
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(Sharepriceform.this,MainActivity.class);
-                startActivity(myintent3);
+                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(Sharepriceform.this,Barcode.class);
-                startActivity(myintent4);
+                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, Barcode.class);
+                startActivity(intent);
             }
         });
         commentlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent5 = new Intent(Sharepriceform.this,Commentlist.class);
-                startActivity(myintent5);
+                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, Commentlist.class);
+                startActivity(intent);
 
             }
         });
         itempage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent8 = new Intent(Sharepriceform.this,Itempage.class);
-                startActivity(myintent8);
+                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, Itempage.class);
+                startActivity(intent);
             }
         });
         pricechart.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent6 = new Intent(Sharepriceform.this,Pricechart.class);
-                startActivity(myintent6);
+                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, Pricechart.class);
+                startActivity(intent);
 
             }
         });
         sharepricelist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent7 = new Intent(Sharepriceform.this,SharePricelist.class);
-                startActivity(myintent7);
+                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, SharePricelist.class);
+                startActivity(intent);
             }
         });
         confirm.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent8 = new Intent(Sharepriceform.this,SharePricelist.class);
-                startActivity(myintent8);
+                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, SharePricelist.class);
+                startActivity(intent);
             }
         });
     }

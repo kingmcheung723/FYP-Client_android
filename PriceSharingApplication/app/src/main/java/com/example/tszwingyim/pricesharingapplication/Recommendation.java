@@ -26,32 +26,32 @@ public class Recommendation extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(Recommendation.this,Member.class);
-                startActivity(myintent1);
+                Intent intent = TabManager.getInstance().getIntent(Recommendation.this, Member.class);
+                startActivity(intent);
 
             }
         });
         search.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(Recommendation.this,Search.class);
-                startActivity(myintent2);
+                Intent intent = TabManager.getInstance().getIntent(Recommendation.this, Search.class);
+                startActivity(intent);
 
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(Recommendation.this,MainActivity.class);
-                startActivity(myintent3);
+                Intent intent = TabManager.getInstance().getIntent(Recommendation.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(Recommendation.this,Barcode.class);
-                startActivity(myintent4);
+                Intent intent = TabManager.getInstance().getIntent(Recommendation.this, Barcode.class);
+                startActivity(intent);
             }
         });
     }

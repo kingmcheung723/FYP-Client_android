@@ -31,60 +31,60 @@ public class Member extends ActionBarActivity {
         search.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(Member.this,Search.class);
-                startActivity(myintent1);
+                Intent intent = TabManager.getInstance().getIntent(Member.this, Search.class);
+                startActivity(intent);
 
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(Member.this,MainActivity.class);
-                startActivity(myintent2);
+                Intent intent = TabManager.getInstance().getIntent(Member.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
         recommendation.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(Member.this,Recommendation.class);
-                startActivity(myintent3);
+                Intent intent = TabManager.getInstance().getIntent(Member.this, Recommendation.class);
+                startActivity(intent);
 
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(Member.this,Barcode.class);
-                startActivity(myintent4);
+                Intent intent = TabManager.getInstance().getIntent(Member.this, Barcode.class);
+                startActivity(intent);
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent5 = new Intent(Member.this, Login.class);
-                startActivity(myintent5);
+                Intent intent = TabManager.getInstance().getIntent(Member.this, Login.class);
+                startActivity(intent);
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent6 = new Intent(Member.this, Register.class);
-                startActivity(myintent6);
+                Intent intent = TabManager.getInstance().getIntent(Member.this, Register.class);
+                startActivity(intent);
             }
         });
         setting.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent7 = new Intent(Member.this, Setting.class);
-                startActivity(myintent7);
+                Intent intent = TabManager.getInstance().getIntent(Member.this, Setting.class);
+                startActivity(intent);
             }
         });
         about.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent8 = new Intent(Member.this, About.class);
-                startActivity(myintent8);
+                Intent intent = TabManager.getInstance().getIntent(Member.this, About.class);
+                startActivity(intent);
             }
         });
     }

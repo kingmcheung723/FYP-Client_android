@@ -32,31 +32,31 @@ public class Barcode extends ActionBarActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myintent1 = new Intent(Barcode.this, Search.class);
-                startActivity(myintent1);
+                Intent intent = TabManager.getInstance().getIntent(Barcode.this, Search.class);
+                startActivity(intent);
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myintent2 = new Intent(Barcode.this, MainActivity.class);
-                startActivity(myintent2);
+                Intent intent = TabManager.getInstance().getIntent(Barcode.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
         recommendation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myintent3 = new Intent(Barcode.this, Recommendation.class);
-                startActivity(myintent3);
+                Intent intent = TabManager.getInstance().getIntent(Barcode.this, Recommendation.class);
+                startActivity(intent);
 
             }
         });
         member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myintent4 = new Intent(Barcode.this, Member.class);
-                startActivity(myintent4);
+                Intent intent = TabManager.getInstance().getIntent(Barcode.this, Member.class);
+                startActivity(intent);
             }
         });
 

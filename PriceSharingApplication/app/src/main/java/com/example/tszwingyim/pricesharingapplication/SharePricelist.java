@@ -30,53 +30,53 @@ public class SharePricelist extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(SharePricelist.this,Member.class);
-                startActivity(myintent1);
+                Intent intent = TabManager.getInstance().getIntent(SharePricelist.this, Member.class);
+                startActivity(intent);
 
             }
         });
         recommend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(SharePricelist.this,Recommendation.class);
-                startActivity(myintent2);
+                Intent intent = TabManager.getInstance().getIntent(SharePricelist.this, Recommendation.class);
+                startActivity(intent);
 
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(SharePricelist.this,MainActivity.class);
-                startActivity(myintent3);
+                Intent intent = TabManager.getInstance().getIntent(SharePricelist.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(SharePricelist.this,Barcode.class);
-                startActivity(myintent4);
+                Intent intent = TabManager.getInstance().getIntent(SharePricelist.this, Barcode.class);
+                startActivity(intent);
             }
         });
         pricechart.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent5 = new Intent(SharePricelist.this,Pricechart.class);
-                startActivity(myintent5);
+                Intent intent = TabManager.getInstance().getIntent(SharePricelist.this, Pricechart.class);
+                startActivity(intent);
             }
         });
         commentlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent6 = new Intent(SharePricelist.this,Commentlist.class);
-                startActivity(myintent6);
+                Intent intent = TabManager.getInstance().getIntent(SharePricelist.this, Commentlist.class);
+                startActivity(intent);
             }
         });
         itempage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent7 = new Intent(SharePricelist.this,Itempage.class);
-                startActivity(myintent7);
+                Intent intent = TabManager.getInstance().getIntent(SharePricelist.this, Itempage.class);
+                startActivity(intent);
             }
         });
     }

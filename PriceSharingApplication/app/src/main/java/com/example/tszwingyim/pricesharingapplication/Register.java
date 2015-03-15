@@ -28,40 +28,40 @@ public class Register extends ActionBarActivity {
         search.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(Register.this,Search.class);
-                startActivity(myintent1);
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Search.class);
+                startActivity(intent);
 
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(Register.this,MainActivity.class);
-                startActivity(myintent2);
+                Intent intent = TabManager.getInstance().getIntent(Register.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
         recommendation.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(Register.this,Recommendation.class);
-                startActivity(myintent3);
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Recommendation.class);
+                startActivity(intent);
 
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(Register.this,Barcode.class);
-                startActivity(myintent4);
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Barcode.class);
+                startActivity(intent);
             }
         });
 
        confirm.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent5 = new Intent(Register.this,Memberpage.class);
-                startActivity(myintent5);
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
+                startActivity(intent);
             }
         });
     }

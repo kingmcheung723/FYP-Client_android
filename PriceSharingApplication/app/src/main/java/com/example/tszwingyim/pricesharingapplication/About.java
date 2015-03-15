@@ -1,9 +1,9 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,40 +19,40 @@ public class About extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_about);
-        Button recommendation = (Button)findViewById(R.id.button_recommend);
-        Button category = (Button)findViewById(R.id.button_category);
-        Button search = (Button)findViewById(R.id.button_search);
-        Button barcode = (Button)findViewById(R.id.button_barcode);
+        Button recommendation = (Button) findViewById(R.id.button_recommend);
+        Button category = (Button) findViewById(R.id.button_category);
+        Button search = (Button) findViewById(R.id.button_search);
+        Button barcode = (Button) findViewById(R.id.button_barcode);
 
         search.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(About.this,Search.class);
-                startActivity(myintent1);
+                Intent intent = TabManager.getInstance().getIntent(About.this, Search.class);
+                startActivity(intent);
 
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(About.this,MainActivity.class);
-                startActivity(myintent2);
+                Intent intent = TabManager.getInstance().getIntent(About.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
         recommendation.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(About.this,Recommendation.class);
-                startActivity(myintent3);
+                Intent intent = TabManager.getInstance().getIntent(About.this, Recommendation.class);
+                startActivity(intent);
 
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(About.this,Barcode.class);
-                startActivity(myintent4);
+                Intent intent = TabManager.getInstance().getIntent(About.this, Barcode.class);
+                startActivity(intent);
             }
         });
 

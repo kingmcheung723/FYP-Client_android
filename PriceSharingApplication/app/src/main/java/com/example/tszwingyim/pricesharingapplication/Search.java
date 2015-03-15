@@ -31,48 +31,47 @@ public class Search extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(Search.this, Member.class);
-                startActivity(myintent1);
+                Intent intent = TabManager.getInstance().getIntent(Search.this, Member.class);
+                startActivity(intent);
 
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(Search.this, MainActivity.class);
-                startActivity(myintent2);
+                Intent intent = TabManager.getInstance().getIntent(Search.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
         recommendation.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(Search.this, Recommendation.class);
-                startActivity(myintent3);
-
+                Intent intent = TabManager.getInstance().getIntent(Search.this, Recommendation.class);
+                startActivity(intent);
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(Search.this, Barcode.class);
-                startActivity(myintent4);
+                Intent intent = TabManager.getInstance().getIntent(Search.this, Barcode.class);
+                startActivity(intent);
 
             }
         });
         location.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent5 = new Intent(Search.this, SearchLocation.class);
-                startActivity(myintent5);
+                Intent intent = TabManager.getInstance().getIntent(Search.this, SearchLocation.class);
+                startActivity(intent);
 
             }
         });
         itemPage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent6 = new Intent(Search.this, Itempage.class);
-                startActivity(myintent6);
+                Intent intent = TabManager.getInstance().getIntent(Search.this, Itempage.class);
+                startActivity(intent);
 
             }
         });

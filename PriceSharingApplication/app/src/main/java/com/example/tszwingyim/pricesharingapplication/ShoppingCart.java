@@ -30,53 +30,53 @@ public class ShoppingCart extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(ShoppingCart.this,Member.class);
-                startActivity(myintent1);
+                Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, Member.class);
+                startActivity(intent);
 
             }
         });
         recommend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(ShoppingCart.this,Recommendation.class);
-                startActivity(myintent2);
+                Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, Recommendation.class);
+                startActivity(intent);
 
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(ShoppingCart.this,MainActivity.class);
-                startActivity(myintent3);
+                Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(ShoppingCart.this,Barcode.class);
-                startActivity(myintent4);
+                Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, Barcode.class);
+                startActivity(intent);
             }
         });
         pricechart.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent5 = new Intent(ShoppingCart.this,Pricechart.class);
-                startActivity(myintent5);
+                Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, Pricechart.class);
+                startActivity(intent);
             }
         });
         commentlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent6 = new Intent(ShoppingCart.this,Commentlist.class);
-                startActivity(myintent6);
+                Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, Commentlist.class);
+                startActivity(intent);
             }
         });
         itempage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent7 = new Intent(ShoppingCart.this,Itempage.class);
-                startActivity(myintent7);
+                Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, Itempage.class);
+                startActivity(intent);
             }
         });
     }

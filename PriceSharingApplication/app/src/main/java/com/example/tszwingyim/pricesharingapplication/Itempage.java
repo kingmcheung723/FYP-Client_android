@@ -31,69 +31,69 @@ public class Itempage extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = new Intent(Itempage.this,Member.class);
-                startActivity(myintent1);
+                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Member.class);
+                startActivity(intent);
 
             }
         });
         recommend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = new Intent(Itempage.this,Recommendation.class);
-                startActivity(myintent2);
+                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Recommendation.class);
+                startActivity(intent);
 
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = new Intent(Itempage.this,MainActivity.class);
-                startActivity(myintent3);
+                Intent intent = TabManager.getInstance().getIntent(Itempage.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = new Intent(Itempage.this,Barcode.class);
-                startActivity(myintent4);
+                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Barcode.class);
+                startActivity(intent);
             }
         });
         commentlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent5 = new Intent(Itempage.this,Commentlist.class);
-                startActivity(myintent5);
+                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Commentlist.class);
+                startActivity(intent);
 
             }
         });
         pricechart.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent6 = new Intent(Itempage.this,Pricechart.class);
-                startActivity(myintent6);
+                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Pricechart.class);
+                startActivity(intent);
 
             }
         });
         sharepricelist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent7 = new Intent(Itempage.this,SharePricelist.class);
-                startActivity(myintent7);
+                Intent intent = TabManager.getInstance().getIntent(Itempage.this, SharePricelist.class);
+                startActivity(intent);
             }
         });
         sharepriceform.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent8 = new Intent(Itempage.this,Sharepriceform.class);
-                startActivity(myintent8);
+                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Sharepriceform.class);
+                startActivity(intent);
             }
         });
         commentform.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent9 = new Intent(Itempage.this,Commentform.class);
-                startActivity(myintent9);
+                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Commentform.class);
+                startActivity(intent);
             }
         });
     }
