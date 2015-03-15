@@ -1,9 +1,10 @@
 package com.example.tszwingyim.pricesharingapplication;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,22 +23,23 @@ public class Barcode extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_barcode);
-        Button recommendation = (Button)findViewById(R.id.button_recommend);
-        Button category = (Button)findViewById(R.id.button_category);
-        Button search = (Button)findViewById(R.id.button_search);
-        Button member = (Button)findViewById(R.id.button_member);
+        Button recommendation = (Button) findViewById(R.id.button_recommend);
+        Button category = (Button) findViewById(R.id.button_category);
+        Button search = (Button) findViewById(R.id.button_search);
+        Button member = (Button) findViewById(R.id.button_member);
+        Button scan = (Button) findViewById(R.id.button_scan);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myintent1 = new Intent(Barcode.this,Search.class);
+                Intent myintent1 = new Intent(Barcode.this, Search.class);
                 startActivity(myintent1);
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myintent2 = new Intent(Barcode.this,MainActivity.class);
+                Intent myintent2 = new Intent(Barcode.this, MainActivity.class);
                 startActivity(myintent2);
 
             }
@@ -45,7 +47,7 @@ public class Barcode extends ActionBarActivity {
         recommendation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myintent3 = new Intent(Barcode.this,Recommendation.class);
+                Intent myintent3 = new Intent(Barcode.this, Recommendation.class);
                 startActivity(myintent3);
 
             }
@@ -58,9 +60,8 @@ public class Barcode extends ActionBarActivity {
             }
         });
 
-        // Initialize the barcode scanner
-        IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.initiateScan();
+        // Tap scan to trigger barcode scanner
+        scan.setOnClickListener(new MyOnClickListener(this));
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -94,5 +95,20 @@ public class Barcode extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public class MyOnClickListener implements View.OnClickListener {
+        Activity activity;
+
+        public MyOnClickListener(Activity activity) {
+            this.activity = activity;
+        }
+
+        @Override
+        public void onClick(View v) {
+            IntentIntegrator integrator = new IntentIntegrator(activity);
+            integrator.initiateScan();
+        }
     }
 }

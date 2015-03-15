@@ -26,7 +26,7 @@ public class Search extends ActionBarActivity {
         Button member = (Button) findViewById(R.id.button_member);
         Button barcode = (Button) findViewById(R.id.button_barcode);
         Button location = (Button) findViewById(R.id.button_location);
-        Button itempage = (Button) findViewById(R.id.button_itempage);
+        Button itemPage = (Button) findViewById(R.id.button_itempage);
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -68,7 +68,7 @@ public class Search extends ActionBarActivity {
 
             }
         });
-        itempage.setOnClickListener(new View.OnClickListener() {
+        itemPage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 Intent myintent6 = new Intent(Search.this, Itempage.class);
@@ -82,9 +82,9 @@ public class Search extends ActionBarActivity {
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.searchgoods_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
+        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+        // Apply the adapter to the spinner
         goods.setAdapter(adapter);
     }
 
