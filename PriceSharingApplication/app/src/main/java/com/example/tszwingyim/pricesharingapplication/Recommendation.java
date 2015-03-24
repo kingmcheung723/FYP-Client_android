@@ -18,42 +18,6 @@ public class Recommendation extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_recommendation);
-        Button search = (Button)findViewById(R.id.button_search);
-        Button category = (Button)findViewById(R.id.button_category);
-        Button member = (Button)findViewById(R.id.button_member);
-        Button barcode = (Button)findViewById(R.id.button_barcode);
-
-        member.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Recommendation.this, Member.class);
-                startActivity(intent);
-
-            }
-        });
-        search.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Recommendation.this, Search.class);
-                startActivity(intent);
-
-            }
-        });
-        category.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Recommendation.this, MainActivity.class);
-                startActivity(intent);
-
-            }
-        });
-        barcode.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Recommendation.this, Barcode.class);
-                startActivity(intent);
-            }
-        });
     }
 
 

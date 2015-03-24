@@ -10,12 +10,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 
 public class Barcode extends ActionBarActivity {
+
+    private String barcode;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +70,14 @@ public class Barcode extends ActionBarActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null) {
-            String re = scanResult.getContents();
-            Log.d("code", re);
+            String barcode = scanResult.getContents();
+            this.barcode = barcode;
+
+            TextView view = (TextView)this.findViewById(R.id.barcode);
+            view.setText(barcode);
         }
         // else continue with any other code you need in the method
-
+        super.onActivityResult(requestCode, resultCode, intent);
     }
 
 
@@ -108,6 +114,8 @@ public class Barcode extends ActionBarActivity {
         @Override
         public void onClick(View v) {
             IntentIntegrator integrator = new IntentIntegrator(activity);
+            integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+            integrator.autoWide();
             integrator.initiateScan();
         }
     }

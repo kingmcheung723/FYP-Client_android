@@ -19,13 +19,30 @@
         android:clickable="false"
         android:textSize="25dp" />
 
-    <Button android:id="@+id/button_scan"
+    <TextView
+        android:id="@+id/barcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/button_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/barcode_chinese"
         android:layout_alignBottom="@+id/linearLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="173dp" />
+
+    <Button
+        android:id="@+id/button_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/scan_chinese"
+        android:layout_above="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -112,4 +129,6 @@
         android:textIsSelectable="true"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/scan_format" />
+
+
 </RelativeLayout>
