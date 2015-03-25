@@ -13,7 +13,6 @@ import android.widget.Spinner;
 
 
 public class SearchLocation extends ActionBarActivity {
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide the action bar

@@ -84,6 +84,11 @@
                 android:layoutMode="clipBounds"
                 android:outlineProvider="bounds" />
 
+            <Spinner
+                android:layout_width="81dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner_category" />
+
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
