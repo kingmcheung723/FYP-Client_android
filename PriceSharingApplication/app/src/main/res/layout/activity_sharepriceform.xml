@@ -71,11 +71,11 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="353dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.01"
             android:layout_marginTop="40dp"
-            android:layout_gravity="center_horizontal">
+            android:baselineAligned="false"
+            android:layout_weight="0.78">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -174,7 +174,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/linearLayout">
+            android:id="@+id/linearLayout"
+            android:baselineAligned="false"
+            android:gravity="bottom"
+            android:layout_gravity="bottom">
 
             <Button
                 android:layout_width="65dp"

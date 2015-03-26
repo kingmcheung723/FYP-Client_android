@@ -174,6 +174,48 @@
         <item>商店</item>
     </string-array>
 
+    <string-array name="searcharea_array">
+        <item>港島</item>
+        <item>九龍</item>
+        <item>新界</item>
+    </string-array>
+
+
+    <string-array name="searchhkisland_array">
+    <item>中西區</item>
+    <item>灣仔區</item>
+    <item>東區</item>
+    <item>南區</item>
+    </string-array>
+
+    <string-array name="searchkowloon_array">
+    <item>九龍城區</item>
+    <item>黃大仙區</item>
+    <item>觀塘區</item>
+    <item>油尖旺區</item>
+    <item>深水埠區</item>
+    </string-array>
+
+    <string-array name="searchnewterr_array">
+    <item>荃灣區</item>
+    <item>葵青區</item>
+    <item>西貢區</item>
+    <item>沙田區</item>
+    <item>大埔區</item>
+    <item>北區</item>
+    <item>屯門區</item>
+    <item>元朗區</item>
+    <item>離島區</item>
+    </string-array>
+
+    <string-array name="searchstore_array">
+        <item>百佳</item>
+        <item>惠康</item>
+        <item>MarketPlace</item>
+        <item>永旺</item>
+        <item>大昌</item>
+    </string-array>
+
     <string name="title_activity_login">Login</string>
     <string name="title_activity_register">Register</string>
     <string name="title_activity_about">About</string>
