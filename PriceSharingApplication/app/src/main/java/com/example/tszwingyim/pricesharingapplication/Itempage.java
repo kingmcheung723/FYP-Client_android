@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 public class Itempage extends ActionBarActivity {
@@ -96,6 +97,50 @@ public class Itempage extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+        String itemname = "hihi1"; // scanResult.getContents();
+        //this.Itempage= itemname;
+        TextView textView = (TextView)this.findViewById(R.id.editText_name);
+        textView.setText(itemname);
+
+        String brandname = "hihi1"; // scanResult.getContents();
+        //this.Itempage= itemname;
+        TextView textView1 = (TextView)this.findViewById(R.id.editText_brand);
+        textView1.setText(brandname);
+
+        String categoryname = "hihi1"; // scanResult.getContents();
+        //this.Itempage= itemname;
+        TextView textView2 = (TextView)this.findViewById(R.id.editText_category);
+        textView2.setText(categoryname);
+
+        String parknshopprice = "hihi1"; // scanResult.getContents();
+        //this.Itempage= itemname;
+        TextView textView3 = (TextView)this.findViewById(R.id.editText_parknshop);
+        textView3.setText(parknshopprice);
+
+        String wellcomeprice = "hihi1"; // scanResult.getContents();
+        //this.Itempage= itemname;
+        TextView textView4 = (TextView)this.findViewById(R.id.editText_wellcome);
+        textView4.setText(wellcomeprice);
+
+        String aeonprice = "hihi1"; // scanResult.getContents();
+        //this.Itempage= itemname;
+        TextView textView5 = (TextView)this.findViewById(R.id.editText_aeon);
+        textView5.setText(aeonprice);
+
+        String daicheongprice = "hihi1"; // scanResult.getContents();
+        //this.Itempage= itemname;
+        TextView textView6 = (TextView)this.findViewById(R.id.editText_daicheong);
+        textView6.setText(daicheongprice);
+
+        String marketplaceprice = "hihi1"; // scanResult.getContents();
+        //this.Itempage= itemname;
+        TextView textView7 = (TextView)this.findViewById(R.id.editText_marketplace);
+        textView7.setText(marketplaceprice);
+        String nooflike = "hihi1"; // scanResult.getContents();
+        //this.Itempage= itemname;
+        TextView textView8 = (TextView)this.findViewById(R.id.textView_numoflike);
+        textView8.setText(nooflike);
+
     }
 
 

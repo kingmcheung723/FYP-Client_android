@@ -92,7 +92,7 @@ public class Search extends ActionBarActivity {
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        choosecategory.setAdapter(adapter);
+        choosecategory.setAdapter(adapter1);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -89,7 +89,7 @@
                 android:id="@+id/imageView"
                 android:layout_column="0"
                 android:src="@drawable/ic_pepsi"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="20dp" />
 
             <TableLayout
@@ -127,7 +127,7 @@
                         android:textSize="10dp"
                         android:layout_weight="1"
                         android:layout_column="3"
-                        android:text="hihi" />
+                         />
 
                 </TableRow>
 
@@ -153,7 +153,7 @@
                         android:textSize="10dp"
                         android:id="@+id/editText_brand"
                         android:layout_column="3"
-                        android:text="hihi" />
+                         />
                 </TableRow>
 
                 <TableRow
@@ -178,7 +178,7 @@
                         android:textColor="#ff000000"
                         android:textSize="10dp"
                         android:layout_column="3"
-                        android:text="hihi" />
+                         />
                 </TableRow>
                 <TableRow
                     android:layout_width="fill_parent"
@@ -202,7 +202,7 @@
                         android:textSize="10dp"
                         android:id="@+id/editText_parknshop"
                         android:layout_column="3"
-                        android:text="hihi" />
+                         />
 
                 </TableRow>
                 <TableRow
@@ -227,7 +227,7 @@
                         android:layout_column="3"
                         android:textColor="#ff000000"
                         android:textSize="10dp"
-                        android:text="hihi" />
+                        />
                 </TableRow>
 
                 <TableRow
@@ -251,7 +251,7 @@
                         android:layout_column="3"
                         android:textColor="#ff000000"
                         android:textSize="10dp"
-                        android:text="hihi" />
+                       />
                 </TableRow>
                 <TableRow
                     android:layout_width="fill_parent"
@@ -274,7 +274,7 @@
                         android:textSize="10dp"
                         android:id="@+id/editText_aeon"
                         android:layout_column="3"
-                        android:text="hihi" />
+                         />
                 </TableRow>
                 <TableRow
                     android:layout_width="fill_parent"
@@ -297,7 +297,7 @@
                         android:textSize="10dp"
                         android:id="@+id/editText_daicheong"
                         android:layout_column="3"
-                        android:text="hihi" />
+                        />
                 </TableRow>
 
 
@@ -315,7 +315,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100"
                 android:id="@+id/textView_numoflike"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical" />
@@ -327,21 +326,6 @@
                 android:focusableInTouchMode="false"
                 android:src="@drawable/ic_like" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="200"
-                android:id="@+id/textView_numofunlike"
-                android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:layout_gravity="center_vertical" />
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="35dp"
-                android:id="@+id/imageView_unlike"
-                android:src="@drawable/ic_unlike"
-                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -364,12 +348,6 @@
                 android:id="@+id/button_save"
                 android:layout_weight="1" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="給評語"
-                android:id="@+id/button_givecomment"
-                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -389,18 +367,17 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="劣評"
-                android:id="@+id/button_dislike"
+                android:text="分享"
+                android:id="@+id/button_sharefd"
                 android:layout_weight="1"
                 android:layout_gravity="center" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="分享"
-                android:id="@+id/button_sharefd"
-                android:layout_weight="1"
-                android:layout_gravity="center" />
+                android:text="給評語"
+                android:id="@+id/button_givecomment"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -475,11 +452,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView2" />
 
 </RelativeLayout>

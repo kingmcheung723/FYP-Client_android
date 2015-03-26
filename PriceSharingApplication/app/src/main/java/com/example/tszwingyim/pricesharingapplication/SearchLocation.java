@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 
@@ -75,6 +76,14 @@ public class SearchLocation extends ActionBarActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
        district.setAdapter(adapter);
+        // Get a reference to the AutoCompleteTextView in the layout
+        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autoComplete_searchlocation);
+// Get the string array
+        String[] shoplocation = getResources().getStringArray(R.array.searcharea_array);
+// Create the adapter and set it to the AutoCompleteTextView
+        ArrayAdapter<String> adapter3 =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, shoplocation);
+        textView.setAdapter(adapter3);
     }
 
     @Override
