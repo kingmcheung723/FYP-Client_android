@@ -90,18 +90,6 @@
 
     </LinearLayout>
 
-    <TableLayout
-android:layout_width="fill_parent"
-android:layout_height="fill_parent"
-        android:layout_below="@+id/Category_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/linearLayout">
-
-
-    </TableLayout>
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,6 +97,14 @@ android:layout_height="fill_parent"
         android:layout_column="11"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView2"
+        android:layout_below="@+id/Category_title"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/linearLayout" />
 
 
 </RelativeLayout>

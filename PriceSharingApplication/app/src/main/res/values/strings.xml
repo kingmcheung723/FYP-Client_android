@@ -229,5 +229,6 @@
          <string name="title_activity_commentform">Commentform</string>
          <string name="title_activity_shopping_cart">ShoppingCart</string>
          <string name="title_activity_memberpage">Memberpage</string>
+    <string name="title_activity_sugarlist">sugarlist</string>
 
      </resources>

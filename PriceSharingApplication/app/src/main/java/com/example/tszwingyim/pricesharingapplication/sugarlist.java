@@ -8,16 +8,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
-public class Recommendation extends ActionBarActivity {
-
+public class sugarlist extends ActionBarActivity {
+    int num = 0;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sugarlist);
         Button search = (Button)findViewById(R.id.button_search);
         Button recommend = (Button)findViewById(R.id.button_recommend);
         Button member = (Button)findViewById(R.id.button_member);
@@ -26,7 +27,7 @@ public class Recommendation extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = TabManager.getInstance().getIntent(Recommendation.this, Member.class);
+                Intent myintent1 = TabManager.getInstance().getIntent(sugarlist.this, Member.class);
                 startActivity(myintent1);
 
             }
@@ -34,7 +35,7 @@ public class Recommendation extends ActionBarActivity {
         search.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = TabManager.getInstance().getIntent(Recommendation.this, Search.class);
+                Intent myintent2 = TabManager.getInstance().getIntent(sugarlist.this, Search.class);
                 startActivity(myintent2);
 
             }
@@ -42,7 +43,7 @@ public class Recommendation extends ActionBarActivity {
         recommend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = TabManager.getInstance().getIntent(Recommendation.this, Recommendation.class);
+                Intent myintent3 = TabManager.getInstance().getIntent(sugarlist.this, Recommendation.class);
                 startActivity(myintent3);
 
             }
@@ -50,10 +51,21 @@ public class Recommendation extends ActionBarActivity {
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = TabManager.getInstance().getIntent(Recommendation.this, Barcode.class);
+                Intent myintent4 = TabManager.getInstance().getIntent(sugarlist.this, Barcode.class);
                 startActivity(myintent4);
             }
         });
+
+
+        //final TextView mTextView = (TextView) findViewById(R.id.Category_title);
+        // mTextView.setText("hihi");
+        //mTextView.setOnClickListener(new View.OnClickListener() {
+           // public void onClick(View v) {
+
+               // String display = String.format(getString(R.string.prompt, Integer.toString(++num)));
+               // mTextView.setText(display);
+          //  }
+       // });
     }
 
 
@@ -62,7 +74,7 @@ public class Recommendation extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_recommendation, menu);
+        getMenuInflater().inflate(R.menu.menu_sugarlist, menu);
         return true;
     }
 
