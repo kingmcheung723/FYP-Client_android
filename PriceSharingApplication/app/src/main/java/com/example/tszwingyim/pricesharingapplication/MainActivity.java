@@ -7,13 +7,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.content.Context;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 
 public class MainActivity extends ActionBarActivity {
-
+    // ListView lv1  = (ListView) findViewById(R.id.listView_category);
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +28,7 @@ public class MainActivity extends ActionBarActivity {
         Button recommend = (Button)findViewById(R.id.button_recommend);
         Button member = (Button)findViewById(R.id.button_member);
         Button barcode = (Button)findViewById(R.id.button_barcode);
+        Button sugarlist = (Button)findViewById(R.id.button_sugar);
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -56,8 +60,39 @@ public class MainActivity extends ActionBarActivity {
                 Intent myintent4 = TabManager.getInstance().getIntent(MainActivity.this, Barcode.class);
                 startActivity(myintent4);
             }
+            });
+        sugarlist.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent5 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
+                startActivity(myintent5);
+
+            }
         });
-    }
+           // Button sugar = (Button) findViewById(R.id.button_sugar);
+        //    Button rice = (Button) findViewById(R.id.button_rice);
+          //  Button buttonalcohol = (Button) findViewById(R.id.button_alcohol);
+         //   Button buttondrink = (Button) findViewById(R.id.button_drink);
+         //   Button buttondaily = (Button) findViewById(R.id.button_daily);
+           // Button buttondairy = (Button) findViewById(R.id.button_dairy);
+           // Button buttoncleaning = (Button) findViewById(R.id.button_cleaning);
+            //Button buttonbread = (Button) findViewById(R.id.button_bread);
+           // Button buttoncandy = (Button) findViewById(R.id.button_candy);
+            }
+               // sugar.setOnClickListener(new View.OnClickListener() {
+                 //   @Override
+                 //   public void onClick(View v) {
+                  //      lv1.setVisibility(View.VISIBLE);
+
+                        //RelativeLayout.LayoutParams head1Params = new RelativeLayout.LayoutParams(
+                        //ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        //head1Params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                        //rice.setLayoutParams(head1Params);//
+
+               // });
+            //}
+
+
 
 
 

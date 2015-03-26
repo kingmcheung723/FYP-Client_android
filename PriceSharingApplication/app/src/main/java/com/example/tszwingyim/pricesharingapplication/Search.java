@@ -85,14 +85,14 @@ public class Search extends ActionBarActivity {
         // Apply the adapter to the spinner
         goods.setAdapter(adapter);
 
-        Spinner choosecategory = (Spinner) findViewById(R.id.spinner_category);
+      //  Spinner choosecategory = (Spinner) findViewById(R.id.spinner_category);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
-                R.array.searchcategory_array, android.R.layout.simple_spinner_item);
+        //ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
+             //   R.array.searchbread_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        choosecategory.setAdapter(adapter1);
+       // choosecategory.setAdapter(adapter1);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -96,13 +96,15 @@
 
     <!-- spinner -->
     <string name="searchcategory_prompt">Choose a country</string>
-    <string-array name="searchcategory_array">
-        <item>cake</item>
+    <string-array name="searchbread_array">
         <item>蛋糕</item>
         <item>麵包</item>
         <item>穀類早餐</item>
         <item>麵包醬</item>
         <item>蜂蜜 / 蜜糖 / 糖漿</item>
+    </string-array>
+
+    <string-array name="searchdairy_array">
         <item>牛奶 / 牛奶飲品</item>
         <item>芝士 / 乳酪 / 乳酸產品</item>
         <item>牛油 / 植物牛油 / 忌廉</item>
@@ -110,11 +112,17 @@
         <item>豆漿 / 豆奶</item>
         <item>豆腐製品</item>
         <item>蛋類</item>
+    </string-array>
+
+    <string-array name="searchcandy_array">
         <item>糖果 / 甜品</item>
         <item>乾果</item>
         <item>能量棒 / 營養棒 / 點心棒</item>
         <item>餅乾</item>
         <item>小食</item>
+    </string-array>
+
+    <string-array name="searchrice_array">
         <item>米</item>
         <item>食用油</item>
         <item>罐頭食品</item>
@@ -125,22 +133,34 @@
         <item>經急凍/解凍處理肉類</item>
         <item>急凍肉類</item>
         <item>急凍海產</item>
+    </string-array>
+
+    <string-array name="searchsugar_array">
         <item>即食麵 / 快熟粉</item>
         <item>烏冬麵</item>
         <item>非即食粉麵</item>
         <item>調味 / 煮食用料</item>
         <item>急凍加工食品 / 冷藏加工食品</item>
+    </string-array>
+
+    <string-array name="searchdrink_array">
         <item>汽水</item>
         <item>咖啡 / 茶包 / 即沖奶茶</item>
         <item>果汁類飲品</item>
         <item>東方特色飲品</item>
         <item>樽裝水 / 運動飲品 / 能量飲品</item>
         <item>麥片飲品 / 麥芽飲品 / 朱古力飲品</item>
+    </string-array>
+
+    <string-array name="searchbaby_array">
         <item>嬰幼兒奶粉 / 兒童奶粉</item>
         <item>孕婦奶粉</item>
         <item>成人奶粉</item>
         <item>嬰幼兒食品 / 嬰兒食品 / 幼兒食品</item>
         <item>嬰兒用品</item>
+    </string-array>
+
+    <string-array name="searchdaily_array">
         <item>口腔護理</item>
         <item>女士衛生用品</item>
         <item>沐浴露 / 皂液 / 肥皂</item>
@@ -152,6 +172,9 @@
         <item>藥品</item>
         <item>避孕</item>
         <item>成人紙尿片 / 紙尿褲</item>
+    </string-array>
+
+    <string-array name="searchcleaning_array">
         <item>洗衣用品</item>
         <item>清潔用品</item>
         <item>紙品</item>
@@ -159,6 +182,9 @@
         <item>吸濕防霉</item>
         <item>電器</item>
         <item>寵物食品</item>
+    </string-array>
+
+    <string-array name="searchalcohol_array">
         <item>啤酒</item>
         <item>仙地</item>
         <item>紅酒</item>

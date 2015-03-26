@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
 public class sugarlist extends ActionBarActivity {
-    int num = 0;
+    //int num = 0;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide the action bar
@@ -56,16 +58,12 @@ public class sugarlist extends ActionBarActivity {
             }
         });
 
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.searchbread_array, android.R.layout.simple_spinner_item);
+        ListView myList=
+                (ListView) findViewById(R.id.listView2);
+        myList.setAdapter(adapter2);
 
-        //final TextView mTextView = (TextView) findViewById(R.id.Category_title);
-        // mTextView.setText("hihi");
-        //mTextView.setOnClickListener(new View.OnClickListener() {
-           // public void onClick(View v) {
-
-               // String display = String.format(getString(R.string.prompt, Integer.toString(++num)));
-               // mTextView.setText(display);
-          //  }
-       // });
     }
 
 
