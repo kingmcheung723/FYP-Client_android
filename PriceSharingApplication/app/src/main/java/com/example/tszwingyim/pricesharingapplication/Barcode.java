@@ -64,7 +64,14 @@ public class Barcode extends ActionBarActivity {
         });
 
         // Tap scan to trigger barcode scanner
-        scan.setOnClickListener(new MyOnClickListener(this));
+        scan.setOnClickListener(new MyOnClickListener(this)//{
+          //  @Override
+           // public void onClick(View v) {
+           //     Intent intent = TabManager.getInstance().getIntent(Barcode.this,Itempage.class);
+            //    startActivity(intent);
+          //  }
+        //}
+    );
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -75,6 +82,7 @@ public class Barcode extends ActionBarActivity {
 
             TextView view = (TextView)this.findViewById(R.id.barcode);
             view.setText(barcode);
+
         }
         // else continue with any other code you need in the method
         super.onActivityResult(requestCode, resultCode, intent);
