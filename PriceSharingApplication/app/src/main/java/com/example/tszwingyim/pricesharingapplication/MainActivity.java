@@ -24,11 +24,19 @@ public class MainActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_main);
-        Button search = (Button)findViewById(R.id.button_search);
-        Button recommend = (Button)findViewById(R.id.button_recommend);
-        Button member = (Button)findViewById(R.id.button_member);
-        Button barcode = (Button)findViewById(R.id.button_barcode);
-        Button sugarlist = (Button)findViewById(R.id.button_sugar);
+        Button search = (Button) findViewById(R.id.button_search);
+        Button recommend = (Button) findViewById(R.id.button_recommend);
+        Button member = (Button) findViewById(R.id.button_member);
+        Button barcode = (Button) findViewById(R.id.button_barcode);
+        Button sugarlist = (Button) findViewById(R.id.button_sugar);
+        Button dairylist = (Button) findViewById(R.id.button_dairy);
+        Button dailylist = (Button) findViewById(R.id.button_daily);
+        Button ricelist = (Button) findViewById(R.id.button_rice);
+        Button candylist = (Button) findViewById(R.id.button_candy);
+        Button cleaninglist = (Button) findViewById(R.id.button_cleaning);
+        Button drinklist = (Button) findViewById(R.id.button_drink);
+        Button alcohollist = (Button) findViewById(R.id.button_alcohol);
+        Button breadlist = (Button) findViewById(R.id.button_bread);
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -60,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
                 Intent myintent4 = TabManager.getInstance().getIntent(MainActivity.this, Barcode.class);
                 startActivity(myintent4);
             }
-            });
+        });
         sugarlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -69,32 +77,73 @@ public class MainActivity extends ActionBarActivity {
 
             }
         });
-           // Button sugar = (Button) findViewById(R.id.button_sugar);
-        //    Button rice = (Button) findViewById(R.id.button_rice);
-          //  Button buttonalcohol = (Button) findViewById(R.id.button_alcohol);
-         //   Button buttondrink = (Button) findViewById(R.id.button_drink);
-         //   Button buttondaily = (Button) findViewById(R.id.button_daily);
-           // Button buttondairy = (Button) findViewById(R.id.button_dairy);
-           // Button buttoncleaning = (Button) findViewById(R.id.button_cleaning);
-            //Button buttonbread = (Button) findViewById(R.id.button_bread);
-           // Button buttoncandy = (Button) findViewById(R.id.button_candy);
+        alcohollist.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent6 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
+                startActivity(myintent6);
+
             }
-               // sugar.setOnClickListener(new View.OnClickListener() {
-                 //   @Override
-                 //   public void onClick(View v) {
-                  //      lv1.setVisibility(View.VISIBLE);
+        });
+        breadlist.setOnClickListener(new View.OnClickListener() {
 
-                        //RelativeLayout.LayoutParams head1Params = new RelativeLayout.LayoutParams(
-                        //ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        //head1Params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                        //rice.setLayoutParams(head1Params);//
+            public void onClick(View v) {
+                Intent myintent7 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
+                startActivity(myintent7);
 
-               // });
-            //}
+            }
+        });
+        candylist.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent8 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
+                startActivity(myintent8);
+
+            }
+        });
+        dailylist.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent9 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
+                startActivity(myintent9);
+
+            }
+        });
+        dairylist.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent10 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
+                startActivity(myintent10);
+
+            }
+        });
+        ricelist.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent11 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
+                startActivity(myintent11);
+
+            }
+        });
+        cleaninglist.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent5 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
+                startActivity(myintent5);
+
+            }
+        });
+        drinklist.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent myintent12 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
+                startActivity(myintent12);
+
+            }
+        });
 
 
-
-
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

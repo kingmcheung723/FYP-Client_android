@@ -71,9 +71,11 @@
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="330dp"
+            android:layout_height="222dp"
             android:id="@+id/listView"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.90"
+            android:onClick="setContentView" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -82,7 +84,8 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/linearLayout"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:gravity="bottom">
 
             <Button
                 android:layout_width="65dp"
