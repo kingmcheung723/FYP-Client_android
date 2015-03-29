@@ -17,13 +17,17 @@ public class DBManager {
     public void executeSql(String sql) {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            new LongOperation().execute(sql);
+            new queryOperation().execute(sql);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private class LongOperation extends AsyncTask<String, Void, String> {
+    public void queryResult(String result) {
+        result=result;
+    }
+
+    private class queryOperation extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -41,9 +45,6 @@ public class DBManager {
                         result +=  rs.getString(i) + "|";
                     }
                 }
-
-                result=result;
-                Log.d("", result);
             }
             catch(Exception e) {
                 e.printStackTrace();
@@ -54,6 +55,7 @@ public class DBManager {
         @Override
         protected void onPostExecute(String result) {
             Log.d("", result);
+            queryResult(result);
             // might want to change "executed" for the returned string passed
             // into onPostExecute() but that is upto you
         }
