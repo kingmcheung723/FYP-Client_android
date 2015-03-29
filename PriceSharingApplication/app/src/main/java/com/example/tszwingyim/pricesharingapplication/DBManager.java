@@ -14,36 +14,41 @@ public class DBManager {
     private static final String user = "root";
     private static final String password = null;
 
-    public void testDB() {
-
-        new LongOperation().execute("");
+    public void executeSql(String sql) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            new LongOperation().execute(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private class LongOperation extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
+            String result = "";
             try {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
                 Connection con = DriverManager.getConnection(url, user, password);
-            /* System.out.println("Databaseection success"); */
 
-                String result = "Database connection success\n";
+                String sql = params[0];
                 Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select * from shops");
+                ResultSet rs = st.executeQuery(sql);
                 ResultSetMetaData rsmd = rs.getMetaData();
-
                 while(rs.next()) {
-                    result += rsmd.getColumnName(1) + ": " + rs.getInt(1) + "\n";
-                    result += rsmd.getColumnName(2) + ": " + rs.getString(2) + "\n";
-                    result += rsmd.getColumnName(3) + ": " + rs.getString(3) + "\n";
+                    for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+                        result +=  rs.getString(i) + "|";
+                    }
                 }
+
+                result=result;
+                Log.d("", result);
             }
             catch(Exception e) {
                 e.printStackTrace();
-                Log.d("MYSQL", e.toString());
             }
-            return "Executed";
+            return result;
         }
 
         @Override
