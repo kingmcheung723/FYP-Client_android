@@ -1,14 +1,17 @@
 package com.example.tszwingyim.pricesharingapplication;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class Register extends ActionBarActivity {
@@ -19,11 +22,11 @@ public class Register extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_register);
-        Button recommendation = (Button)findViewById(R.id.button_recommend);
-        Button category = (Button)findViewById(R.id.button_category);
-        Button search = (Button)findViewById(R.id.button_search);
-        Button barcode = (Button)findViewById(R.id.button_barcode);
-        Button confirm = (Button)findViewById(R.id.button_confirmreg);
+        Button recommendation = (Button) findViewById(R.id.button_recommend);
+        Button category = (Button) findViewById(R.id.button_category);
+        Button search = (Button) findViewById(R.id.button_search);
+        Button barcode = (Button) findViewById(R.id.button_barcode);
+        Button confirm = (Button) findViewById(R.id.button_confirmreg);
 
         search.setOnClickListener(new View.OnClickListener() {
 
@@ -57,15 +60,8 @@ public class Register extends ActionBarActivity {
             }
         });
 
-       confirm.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
-                startActivity(intent);
-            }
-        });
+        confirm.setOnClickListener(new ConfirmButtonOnClickListener(this));
     }
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -96,5 +92,51 @@ public class Register extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class ConfirmButtonOnClickListener implements View.OnClickListener {
+        Activity activity;
+
+        public ConfirmButtonOnClickListener(Activity activity) {
+            this.activity = activity;
+        }
+
+        @Override
+        public void onClick(View v) {
+            EditText emailEditText = (EditText) activity.findViewById(R.id.Textfield_Register_Email);
+            String emailStr = emailEditText.getText().toString();
+            if (this.isValidEmail(emailStr)) {
+                EditText passwordEditText = (EditText) activity.findViewById(R.id.Textfield_Register_Password);
+                EditText confirmPasswordEditText = (EditText) activity.findViewById(R.id.Textfield_Register_ConfPassword);
+                String passwordStr = passwordEditText.getText().toString();
+                String confirmPasswordStr = passwordEditText.getText().toString();
+
+                if (passwordStr.equalsIgnoreCase(confirmPasswordStr)) {
+                    if (passwordStr.length() >= 6) {
+                        if (passwordStr.length() <= 10) {
+                            emailEditText.setText("CorrectPasswordAndEmail");
+                        } else {
+                            emailEditText.setText("PasswordMust<10");
+                        }
+                    } else {
+                        emailEditText.setText("PasswordMust>6");
+                    }
+                } else {
+                    emailEditText.setText("TwoPasswordNotMatch");
+                }
+            } else {
+                emailEditText.setText("InCorrectEmail");
+            }
+//            Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
+//            startActivity(intent);
+        }
+
+        private boolean isValidEmail(CharSequence target) {
+            if (TextUtils.isEmpty(target)) {
+                return false;
+            } else {
+                return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+            }
+        }
     }
 }
