@@ -1,14 +1,15 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class Login extends ActionBarActivity {
@@ -19,11 +20,12 @@ public class Login extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_login);
-        Button recommendation = (Button)findViewById(R.id.button_recommend);
-        Button category = (Button)findViewById(R.id.button_category);
-        Button search = (Button)findViewById(R.id.button_search);
-        Button barcode = (Button)findViewById(R.id.button_barcode);
-        Button confirm = (Button)findViewById(R.id.button_login);
+        Button recommendation = (Button) findViewById(R.id.button_recommend);
+        Button category = (Button) findViewById(R.id.button_category);
+        Button search = (Button) findViewById(R.id.button_search);
+        Button barcode = (Button) findViewById(R.id.button_barcode);
+        Button confirm = (Button) findViewById(R.id.button_login);
+        EditText mEditText = (EditText) findViewById(R.id.EditText_Login_Password);
 
         search.setOnClickListener(new View.OnClickListener() {
 
@@ -96,3 +98,5 @@ public class Login extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+

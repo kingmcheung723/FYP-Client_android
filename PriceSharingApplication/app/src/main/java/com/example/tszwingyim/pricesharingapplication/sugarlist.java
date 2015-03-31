@@ -58,8 +58,13 @@ public class sugarlist extends ActionBarActivity {
             }
         });
 
+        String[] array = {"milk", "soy", "paper"};
+
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
                 R.array.searchbread_array, android.R.layout.simple_spinner_item);
+
+
+
         ListView myList=
                 (ListView) findViewById(R.id.listView2);
         myList.setAdapter(adapter2);

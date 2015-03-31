@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 public class Memberpage extends ActionBarActivity {
@@ -19,6 +20,7 @@ public class Memberpage extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_memberpage);
+
         Button recommendation = (Button)findViewById(R.id.button_recommend);
         Button category = (Button)findViewById(R.id.button_category);
         Button search = (Button)findViewById(R.id.button_search);
@@ -80,6 +82,10 @@ public class Memberpage extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+     //   Intent mIntent = getIntent();
+      //  String email = mIntent.getStringExtra("Email");
+      //  TextView showemail = (TextView) findViewById(R.id.textView_email1);
+      //  showemail.setText(email);
     }
 
 
