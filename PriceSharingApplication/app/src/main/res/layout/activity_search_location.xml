@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context=".MainActivity">
@@ -50,7 +51,8 @@
                 android:layout_toRightOf="@+id/button_location"
                 android:layout_toEndOf="@+id/button_location"
                 android:layout_gravity="top"
-                android:background="#5ac4beda" />
+                android:background="#5ac4beda"
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="160dp"
@@ -61,7 +63,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_gravity="top"
-                android:background="#ffffffff" />
+                android:background="#ffffffff"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -72,19 +75,18 @@
             android:layout_gravity="center_horizontal">
 
             <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="112dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_searchdistrict"
                 android:background="#ffffffff"
-                android:textAlignment="center"
-                android:layout_weight="1" />
+                android:textAlignment="center" />
 
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="店鋪名稱或地區"
                 android:id="@+id/autoComplete_searchlocation"
-                android:layout_gravity="right"
+                android:layout_gravity="center_vertical|right"
                 android:layout_weight="1" />
             <Button
                 android:layout_width="45dp"
@@ -92,6 +94,18 @@
                 android:id="@+id/button_itempage"
                 android:background="@drawable/ic_action_search" />
         </LinearLayout>
+
+        <fragment
+            android:id="@+id/mapView"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="261dp"/>
+        <fragment
+            android:id="@+id/streetView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.google.android.gms.maps.StreetViewPanoramaFragment"/>
 
     </LinearLayout>
 

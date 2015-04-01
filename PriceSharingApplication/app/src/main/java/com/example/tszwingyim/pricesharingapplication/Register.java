@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class Register extends ActionBarActivity {
@@ -103,29 +104,31 @@ public class Register extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
-            EditText emailEditText = (EditText) activity.findViewById(R.id.Textfield_Register_Email);
+            EditText emailEditText = (EditText) activity.findViewById(R.id.EditText_Register_Email);
             String emailStr = emailEditText.getText().toString();
+            TextView emailvalid = (TextView) activity.findViewById(R.id.textView_emailvalid);
             if (this.isValidEmail(emailStr)) {
-                EditText passwordEditText = (EditText) activity.findViewById(R.id.Textfield_Register_Password);
-                EditText confirmPasswordEditText = (EditText) activity.findViewById(R.id.Textfield_Register_ConfPassword);
+                EditText passwordEditText = (EditText) activity.findViewById(R.id.EditText_Register_Email);
+                EditText confirmPasswordEditText = (EditText) activity.findViewById(R.id.EditText_Register_Email);
                 String passwordStr = passwordEditText.getText().toString();
                 String confirmPasswordStr = passwordEditText.getText().toString();
+
 
                 if (passwordStr.equalsIgnoreCase(confirmPasswordStr)) {
                     if (passwordStr.length() >= 6) {
                         if (passwordStr.length() <= 10) {
-                            emailEditText.setText("CorrectPasswordAndEmail");
+                            emailvalid.setText("Correct Password and Email");
                         } else {
-                            emailEditText.setText("PasswordMust<10");
+                            emailvalid.setText("Password must be less than 10 digits");
                         }
                     } else {
-                        emailEditText.setText("PasswordMust>6");
+                        emailvalid.setText("Password must be more than 6 digits");
                     }
                 } else {
-                    emailEditText.setText("TwoPasswordNotMatch");
+                    emailvalid.setText("Confirm password does not match password");
                 }
             } else {
-                emailEditText.setText("InCorrectEmail");
+                emailvalid.setText(" The Email is not valid");
             }
 //            Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
 //            startActivity(intent);
