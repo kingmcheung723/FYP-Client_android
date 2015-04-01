@@ -38,9 +38,9 @@ public class SearchLocation extends ActionBarActivity {
         Button goods = (Button) findViewById(R.id.button_goods);
 
         createMapView();
-//        createStreetView();
+     //  createStreetView();
         addMarker();
-
+//
 //        GoogleMap googleMap; // Might be null if Google Play services APK is not available.
 //            setUpMapIfNeeded();
 
@@ -182,14 +182,14 @@ public class SearchLocation extends ActionBarActivity {
         }
     }
 
-//    StreetViewPanorama m_StreetView;
-//
-//    private void createStreetView() {
-//        m_StreetView = ((StreetViewPanoramaFragment) getFragmentManager().findFragmentById(R.id.streetView)).getStreetViewPanorama();
-//    }
+    StreetViewPanorama m_StreetView;
 
-    // Set up the onClickListener that will pass the selected lat/long
-    //co-ordinates through to the Street View fragment for loading
+    private void createStreetView() {
+        m_StreetView = ((StreetViewPanoramaFragment) getFragmentManager().findFragmentById(R.id.streetView)).getStreetViewPanorama();
+    }
+
+ //   Set up the onClickListener that will pass the selected lat/long
+   // co-ordinates through to the Street View fragment for loading
 //    public class MapsActivity extends FragmentActivity implements
 //            GoogleApiClient.ConnectionCallbacks,
 //            GoogleApiClient.OnConnectionFailedListener {

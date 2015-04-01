@@ -34,7 +34,6 @@ public class Register extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = TabManager.getInstance().getIntent(Register.this, Search.class);
                 startActivity(intent);
-
             }
         });
         category.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +41,6 @@ public class Register extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = TabManager.getInstance().getIntent(Register.this, MainActivity.class);
                 startActivity(intent);
-
             }
         });
         recommendation.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +48,6 @@ public class Register extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = TabManager.getInstance().getIntent(Register.this, Recommendation.class);
                 startActivity(intent);
-
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +57,6 @@ public class Register extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-
         confirm.setOnClickListener(new ConfirmButtonOnClickListener(this));
     }
 
