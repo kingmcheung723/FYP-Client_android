@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search_chinese"
+        android:text="@string/search"
         android:textColor="#ffffffff"
         android:id="@+id/search_title"
         style="@style/TextAppearance.AppCompat.Title"
@@ -44,7 +44,7 @@
             <Button
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:text="@string/Goods_chinese"
+                android:text="@string/Goods"
                 android:id="@+id/button_goods"
                 android:layout_below="@+id/search_title"
                 android:layout_toRightOf="@+id/button_location"
@@ -56,7 +56,7 @@
             <Button
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:text="@string/Location_chinese"
+                android:text="@string/Location"
                 android:id="@+id/button_location"
                 android:layout_below="@+id/search_title"
                 android:layout_alignParentLeft="true"
@@ -124,7 +124,7 @@
             <Button
                 android:layout_width="65dp"
                 android:layout_height="80dp"
-                android:text="@string/category＿chinese"
+                android:text="@string/category"
                 android:id="@+id/button_category"
                 android:layout_column="6"
                 android:background="@drawable/ic_button_category"
@@ -136,7 +136,7 @@
             <Button
                 android:layout_width="65dp"
                 android:layout_height="80dp"
-                android:text="@string/search_chinese"
+                android:text="@string/search"
                 android:id="@+id/button_search"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
@@ -150,7 +150,7 @@
             <Button
                 android:layout_width="65dp"
                 android:layout_height="80dp"
-                android:text="@string/barcode_chinese"
+                android:text="@string/barcode"
                 android:id="@+id/button_barcode"
                 android:background="@drawable/ic_button_barcode"
                 android:layout_gravity="bottom"
@@ -161,7 +161,7 @@
             <Button
                 android:layout_width="65dp"
                 android:layout_height="80dp"
-                android:text="@string/recommend_chinese"
+                android:text="@string/recommend"
                 android:id="@+id/button_recommend"
                 android:background="@drawable/ic_button_recommend"
                 android:layout_gravity="bottom"
@@ -172,7 +172,7 @@
             <Button
                 android:layout_width="65dp"
                 android:layout_height="80dp"
-                android:text="@string/member_chinese"
+                android:text="@string/member"
                 android:id="@+id/button_member"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"

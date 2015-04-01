@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/barcode_chinese"
+        android:text="@string/barcode"
         android:textColor="#ffffffff"
         android:id="@+id/Category_title"
         style="@style/TextAppearance.AppCompat.Title"
@@ -31,7 +31,7 @@
         android:id="@+id/button_scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/scan_chinese"
+        android:text="@string/scan"
         android:layout_above="@+id/linearLayout"
         android:layout_centerHorizontal="true" />
 
@@ -47,7 +47,7 @@
         <Button
             android:layout_width="65dp"
             android:layout_height="80dp"
-            android:text="@string/category＿chinese"
+            android:text="@string/category"
             android:id="@+id/button_category"
             android:layout_column="6"
             android:background="@drawable/ic_button_category"
@@ -59,7 +59,7 @@
         <Button
             android:layout_width="65dp"
             android:layout_height="80dp"
-            android:text="@string/search_chinese"
+            android:text="@string/search"
             android:id="@+id/button_search"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -73,7 +73,7 @@
         <Button
             android:layout_width="65dp"
             android:layout_height="80dp"
-            android:text="@string/barcode_chinese"
+            android:text="@string/barcode"
             android:id="@+id/button_barcode"
             android:background="@drawable/ic_button_barcode"
             android:layout_gravity="bottom"
@@ -84,7 +84,7 @@
         <Button
             android:layout_width="65dp"
             android:layout_height="80dp"
-            android:text="@string/recommend_chinese"
+            android:text="@string/recommend"
             android:id="@+id/button_recommend"
             android:background="@drawable/ic_button_recommend"
             android:layout_gravity="bottom"
@@ -95,7 +95,7 @@
         <Button
             android:layout_width="65dp"
             android:layout_height="80dp"
-            android:text="@string/member_chinese"
+            android:text="@string/member"
             android:id="@+id/button_member"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"

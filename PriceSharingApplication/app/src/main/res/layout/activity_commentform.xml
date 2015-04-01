@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我要報價"
+            android:text="@string/share_price"
             android:textColor="#ffffffff"
             android:id="@+id/Category_title"
             style="@style/TextAppearance.AppCompat.Title"
@@ -43,28 +43,28 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="貨品資料"
+                android:text="@string/prod_info"
                 android:id="@+id/button_priceinfo"
                 android:layout_weight="1" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="走勢圖"
+                android:text="@string/chart"
                 android:id="@+id/button_pricechart"
                 android:layout_weight="1" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="用家報價"
+                android:text="@string/Watch_update"
                 android:id="@+id/button_shareprice"
                 android:layout_weight="1" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="用家評語"
+                android:text="@string/comment"
                 android:id="@+id/button_comment"
                 android:layout_weight="1" />
         </LinearLayout>
@@ -86,7 +86,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="商店名稱："
+                    android:text="@string/search_goodname"
                     android:id="@+id/textview＿shopname" />
 
                 <EditText
@@ -106,7 +106,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="商店地址："
+                    android:text="@string/Store_loc"
                     android:id="@+id/textView_address" />
 
                 <EditText
@@ -125,7 +125,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="用後感想："
+                    android:text="@string/feedback"
                     android:id="@+id/textView_feeling" />
 
                 <EditText
@@ -147,7 +147,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="確定"
+                android:text="@string/confirm"
                 android:id="@+id/button_confirm"
                 android:layout_gravity="center_horizontal" />
 
@@ -168,7 +168,7 @@
             <Button
                 android:layout_width="65dp"
                 android:layout_height="80dp"
-                android:text="@string/category＿chinese"
+                android:text="@string/category"
                 android:id="@+id/button_category"
                 android:layout_column="6"
                 android:background="@drawable/ic_button_category"
@@ -180,7 +180,7 @@
             <Button
                 android:layout_width="65dp"
                 android:layout_height="80dp"
-                android:text="@string/search_chinese"
+                android:text="@string/search"
                 android:id="@+id/button_search"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
@@ -194,7 +194,7 @@
             <Button
                 android:layout_width="65dp"
                 android:layout_height="80dp"
-                android:text="@string/barcode_chinese"
+                android:text="@string/barcode"
                 android:id="@+id/button_barcode"
                 android:background="@drawable/ic_button_barcode"
                 android:layout_gravity="bottom"
@@ -205,7 +205,7 @@
             <Button
                 android:layout_width="65dp"
                 android:layout_height="80dp"
-                android:text="@string/recommend_chinese"
+                android:text="@string/recommend"
                 android:id="@+id/button_recommend"
                 android:background="@drawable/ic_button_recommend"
                 android:layout_gravity="bottom"
@@ -216,7 +216,7 @@
             <Button
                 android:layout_width="65dp"
                 android:layout_height="80dp"
-                android:text="@string/member_chinese"
+                android:text="@string/member"
                 android:id="@+id/button_member"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"

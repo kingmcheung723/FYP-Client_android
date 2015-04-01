@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/member_chinese"
+        android:text="@string/member"
         android:textColor="#ffffffff"
         android:id="@+id/Category_title"
         style="@style/TextAppearance.AppCompat.Title"
@@ -15,7 +15,7 @@
         android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentStart="false"
         android:clickable="false"
         android:textSize="25dp" />
 
@@ -30,7 +30,7 @@
         <Button
             android:layout_width="65dp"
             android:layout_height="80dp"
-            android:text="@string/category＿chinese"
+            android:text="@string/category"
             android:id="@+id/button_category"
             android:layout_column="6"
             android:background="@drawable/ic_button_category"
@@ -42,7 +42,7 @@
         <Button
             android:layout_width="65dp"
             android:layout_height="80dp"
-            android:text="@string/search_chinese"
+            android:text="@string/search"
             android:id="@+id/button_search"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -56,7 +56,7 @@
         <Button
             android:layout_width="65dp"
             android:layout_height="80dp"
-            android:text="@string/barcode_chinese"
+            android:text="@string/barcode"
             android:id="@+id/button_barcode"
             android:background="@drawable/ic_button_barcode"
             android:layout_gravity="bottom"
@@ -67,7 +67,7 @@
         <Button
             android:layout_width="65dp"
             android:layout_height="80dp"
-            android:text="@string/recommend_chinese"
+            android:text="@string/recommend"
             android:id="@+id/button_recommend"
             android:background="@drawable/ic_button_recommend"
             android:layout_gravity="bottom"
@@ -78,7 +78,7 @@
         <Button
             android:layout_width="65dp"
             android:layout_height="80dp"
-            android:text="@string/member_chinese"
+            android:text="@string/member"
             android:id="@+id/button_member"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -104,7 +104,7 @@
         <Button
             android:layout_width="120dp"
             android:layout_height="50dp"
-            android:text="@string/login_chinese"
+            android:text="@string/login"
             android:id="@+id/button_login"
             android:background="@drawable/ic_button_login"
             android:textColor="#ffffffff"
@@ -113,7 +113,7 @@
         <Button
             android:layout_width="120dp"
             android:layout_height="50dp"
-            android:text="@string/register_chinese"
+            android:text="@string/register"
             android:id="@+id/button_register"
             android:background="@drawable/ic_button_register"
             android:layout_marginLeft="20dp"
@@ -134,14 +134,14 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            android:text="@string/setting_chinese"
+            android:text="@string/setting"
             android:id="@+id/button_setting"
             android:layout_marginTop="200dp" />
 
         <Button
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            android:text="@string/about_chinese"
+            android:text="@string/about"
             android:id="@+id/button_about"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
