@@ -38,33 +38,33 @@ public class SearchLocation extends ActionBarActivity {
         Button goods = (Button) findViewById(R.id.button_goods);
 
         createMapView();
-        createStreetView();
+//        createStreetView();
         addMarker();
 
 //        GoogleMap googleMap; // Might be null if Google Play services APK is not available.
 //            setUpMapIfNeeded();
 
-    googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-
-                /**
-                 * Ensure the street view has been initialised correctly and
-                 * pass it through the selected lat/long co-ordinates.
-                 */
-                if (m_StreetView != null) {
-
-                    /**
-                     * Hide the map view to expose the street view.
-                     */
-                    Fragment mapView = getFragmentManager().findFragmentById(R.id.mapView);
-                    getFragmentManager().beginTransaction().hide(mapView).commit();
-
-                    /** Passed the tapped location through to the Street View **/
-                    m_StreetView.setPosition(latLng);
-                }
-            }
-        });
+//    googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//            @Override
+//            public void onMapClick(LatLng latLng) {
+//
+//                /**
+//                 * Ensure the street view has been initialised correctly and
+//                 * pass it through the selected lat/long co-ordinates.
+//                 */
+//                if (m_StreetView != null) {
+//
+//                    /**
+//                     * Hide the map view to expose the street view.
+//                     */
+//                    Fragment mapView = getFragmentManager().findFragmentById(R.id.mapView);
+//                    getFragmentManager().beginTransaction().hide(mapView).commit();
+//
+//                    /** Passed the tapped location through to the Street View **/
+//                    m_StreetView.setPosition(latLng);
+//                }
+//            }
+//        });
 //        if (googleMap != null) {
 //            googleMap.setMyLocationEnabled(true);
 //            googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
@@ -182,11 +182,11 @@ public class SearchLocation extends ActionBarActivity {
         }
     }
 
-    StreetViewPanorama m_StreetView;
-
-    private void createStreetView() {
-        m_StreetView = ((StreetViewPanoramaFragment) getFragmentManager().findFragmentById(R.id.streetView)).getStreetViewPanorama();
-    }
+//    StreetViewPanorama m_StreetView;
+//
+//    private void createStreetView() {
+//        m_StreetView = ((StreetViewPanoramaFragment) getFragmentManager().findFragmentById(R.id.streetView)).getStreetViewPanorama();
+//    }
 
     // Set up the onClickListener that will pass the selected lat/long
     //co-ordinates through to the Street View fragment for loading

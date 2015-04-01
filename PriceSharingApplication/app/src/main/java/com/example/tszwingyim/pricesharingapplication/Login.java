@@ -1,15 +1,18 @@
 package com.example.tszwingyim.pricesharingapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class Login extends ActionBarActivity {
@@ -58,13 +61,14 @@ public class Login extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-        confirm.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Memberpage.class);
-                startActivity(intent);
-            }
-        });
+        confirm.setOnClickListener(new ConfirmButtonOnClickListener(this));
+//        confirm.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent intent = TabManager.getInstance().getIntent(Login.this, Memberpage.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -83,20 +87,63 @@ public class Login extends ActionBarActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    private class ConfirmButtonOnClickListener implements View.OnClickListener {
+        Activity activity;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        public ConfirmButtonOnClickListener(Activity activity) {
+            this.activity = activity;
         }
 
-        return super.onOptionsItemSelected(item);
+        @Override
+        public void onClick(View v) {
+            EditText emailEditText = (EditText) activity.findViewById(R.id.EditText_Login_Email);
+            String emailStr = emailEditText.getText().toString();
+            TextView emailvalid = (TextView) activity.findViewById(R.id.textView_checkvalid);
+            if (this.isValidEmail(emailStr)) {
+                EditText passwordEditText = (EditText) activity.findViewById(R.id.EditText_Login_Password);
+                String passwordStr = passwordEditText.getText().toString();
+                if (passwordStr.length() >= 6) {
+                    if (passwordStr.length() <= 10) {
+                        //public void onClick(View v) {
+             Intent intent = TabManager.getInstance().getIntent(Login.this, Memberpage.class);
+             startActivity(intent);
+                //}
+                    } else {
+                        emailvalid.setText("Password must be less than 10 digits");
+                    }
+                } else {
+                    emailvalid.setText("Password must be more than 6 digits");
+                }
+            } else {
+                emailvalid.setText(" The Email is not valid");
+            }
+//            Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
+//            startActivity(intent);
+        }
+
+        private boolean isValidEmail(CharSequence target) {
+            if (TextUtils.isEmpty(target)) {
+                return false;
+            } else {
+                return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+            }
+        }
     }
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
+
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_settings) {
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
+        }
+
 }
 
 

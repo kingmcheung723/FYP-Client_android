@@ -108,8 +108,8 @@ public class Register extends ActionBarActivity {
             String emailStr = emailEditText.getText().toString();
             TextView emailvalid = (TextView) activity.findViewById(R.id.textView_emailvalid);
             if (this.isValidEmail(emailStr)) {
-                EditText passwordEditText = (EditText) activity.findViewById(R.id.EditText_Register_Email);
-                EditText confirmPasswordEditText = (EditText) activity.findViewById(R.id.EditText_Register_Email);
+                EditText passwordEditText = (EditText) activity.findViewById(R.id.EditText_Register_Password);
+                EditText confirmPasswordEditText = (EditText) activity.findViewById(R.id.EditText_Register_ConfPassword);
                 String passwordStr = passwordEditText.getText().toString();
                 String confirmPasswordStr = passwordEditText.getText().toString();
 

@@ -27,6 +27,7 @@ public class Pricechart extends ActionBarActivity {
         Button sharepricelist = (Button)findViewById(R.id.button_shareprice);
         Button itempage = (Button)findViewById(R.id.button_priceinfo);
 
+
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
