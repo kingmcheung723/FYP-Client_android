@@ -117,7 +117,9 @@ public class Register extends ActionBarActivity {
                 if (passwordStr.equalsIgnoreCase(confirmPasswordStr)) {
                     if (passwordStr.length() >= 6) {
                         if (passwordStr.length() <= 10) {
-                            emailvalid.setText("Correct Password and Email");
+                            //public void onClick(View v) {
+                            Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
+                            startActivity(intent);
                         } else {
                             emailvalid.setText("Password must be less than 10 digits");
                         }
