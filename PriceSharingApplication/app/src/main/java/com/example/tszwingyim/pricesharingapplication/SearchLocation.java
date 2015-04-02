@@ -42,15 +42,15 @@ import com.google.android.gms.maps.model.UrlTileProvider;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class SearchLocation extends FragmentActivity implements OnMapReadyCallback  {
+public class SearchLocation extends ActionBarActivity implements OnMapReadyCallback  {
 
    // GoogleMap googleMap;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        //Hide the action bar
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.hide();
-//        setContentView(R.layout.activity_search_location);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+        setContentView(R.layout.activity_search_location);
 
         //declare buttons
         Button recommendation = (Button) findViewById(R.id.button_recommend);
@@ -140,29 +140,29 @@ public class SearchLocation extends FragmentActivity implements OnMapReadyCallba
 
     }
 
-//    GoogleMap mMap;
-//        //  addMarker();
-//        // Getting Google Play availability status
-//        private void setUpMapIfNeeded() {
-//            // Do a null check to confirm that we have not already instantiated the map.
-//            if (mMap == null) {
-//                // Try to obtain the map from the SupportMapFragment.
-//                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-//                        .getMap();
-//                mMap.setMyLocationEnabled(true);
-//                // Check if we were successful in obtaining the map.
-//                if (mMap != null) {
-//                    mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-//                        @Override
-//                        public void onMyLocationChange(Location arg0) {
-//                            // TODO Auto-generated method stub
-//                            mMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
-//                        }
-//                    });
-//
-//                }
-//            }
-//        }
+    GoogleMap mMap;
+        //  addMarker();
+        // Getting Google Play availability status
+        private void setUpMapIfNeeded() {
+            // Do a null check to confirm that we have not already instantiated the map.
+            if (mMap == null) {
+                // Try to obtain the map from the SupportMapFragment.
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                        .getMap();
+                mMap.setMyLocationEnabled(true);
+                // Check if we were successful in obtaining the map.
+                if (mMap != null) {
+                    mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+                        @Override
+                        public void onMyLocationChange(Location arg0) {
+                            // TODO Auto-generated method stub
+                            mMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
+                        }
+                    });
+
+                }
+            }
+        }
 
     // Adds a marker to the map
     public void onMapReady(GoogleMap map) {
