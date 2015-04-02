@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -113,7 +114,14 @@ public class Register extends ActionBarActivity {
                 if (passwordStr.equalsIgnoreCase(confirmPasswordStr)) {
                     if (passwordStr.length() >= 6) {
                         if (passwordStr.length() <= 10) {
-                            //public void onClick(View v) {
+                            DBManager dbManager = new DBManager();
+                            dbManager.queryCallBack = new QueryCallBack() {
+                                @Override
+                                public void queryResult(String result) {
+                                    Log.d("","");
+                                }
+                            };
+                            dbManager.querySql("SELECT * FROM shops");
                             Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
                             startActivity(intent);
                         } else {
