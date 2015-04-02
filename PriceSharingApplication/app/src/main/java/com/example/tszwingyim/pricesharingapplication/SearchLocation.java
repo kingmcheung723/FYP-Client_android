@@ -1,7 +1,11 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
@@ -14,28 +18,52 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
+import android.app.Dialog;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.TileOverlay;
+import com.google.android.gms.maps.model.TileOverlayOptions;
+import com.google.android.gms.maps.model.TileProvider;
+import com.google.android.gms.maps.model.UrlTileProvider;
 
-public class SearchLocation extends ActionBarActivity implements OnMapReadyCallback {
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class SearchLocation extends ActionBarActivity implements OnMapReadyCallback  {
+
+   // GoogleMap googleMap;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_search_location);
+
         //declare buttons
         Button recommendation = (Button) findViewById(R.id.button_recommend);
         Button category = (Button) findViewById(R.id.button_category);
         Button member = (Button) findViewById(R.id.button_member);
         Button barcode = (Button) findViewById(R.id.button_barcode);
         Button goods = (Button) findViewById(R.id.button_goods);
-      //  addMarker();
         //set onclick listener for tabs
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -81,17 +109,27 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
         //configure the google map
         GoogleMapOptions options = new GoogleMapOptions();
         options.mapType(GoogleMap.MAP_TYPE_SATELLITE)
-                .compassEnabled(false)
-                .rotateGesturesEnabled(false)
-                .tiltGesturesEnabled(false);
+                .zoomControlsEnabled(true)
+                .zoomGesturesEnabled(true)
+                .compassEnabled(true)
+                .rotateGesturesEnabled(true)
+                .scrollGesturesEnabled(true)
+                .tiltGesturesEnabled(true);
+
+        //set center of the map
+      //  googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(22.294698, 114.200783), 5));
+
         // add spinner
         Spinner district = (Spinner) findViewById(R.id.spinner_searchdistrict);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.searchdistrict_array, android.R.layout.simple_spinner_item);
+
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -104,29 +142,47 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
         ArrayAdapter<String> adapter3 =
                 new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, shoplocation);
         textView.setAdapter(adapter3);
+//bound the map to hong kong
+
     }
 
-    /**
-     * Adds a marker to the map
-     */
+    GoogleMap mMap;
+        //  addMarker();
+        // Getting Google Play availability status
+        private void setUpMapIfNeeded() {
+            // Do a null check to confirm that we have not already instantiated the map.
+            if (mMap == null) {
+                // Try to obtain the map from the SupportMapFragment.
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                        .getMap();
+                mMap.setMyLocationEnabled(true);
+                // Check if we were successful in obtaining the map.
+                if (mMap != null) {
+                    mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+                        @Override
+                        public void onMyLocationChange(Location arg0) {
+                            // TODO Auto-generated method stub
+                            mMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
+                        }
+                    });
+
+                }
+            }
+        }
+
+    // Adds a marker to the map
     public void onMapReady(GoogleMap map) {
         map.addMarker(new MarkerOptions()
                 .position(new LatLng(22.192295, 114.130359))
-                .title("Hello world"));
+                .title("Lantau")
+                .snippet("Population: 4,137,400"));
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(22.220664, 114.209022))
+                .title("Stanley")
+                .snippet("Population: 4,137,400"));
     }
 
-//    GoogleMap googleMap;
-//    private void addMarker(){
-//
-//        /** Make sure that the map has been initialised **/
-//        if(null != googleMap){
-//            googleMap.addMarker(new MarkerOptions()
-//                            .position(new LatLng(22.206321, 114.133534))
-//                            .title("Marker")
-//                            .draggable(true)
-//            );
-//        }
-//    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
