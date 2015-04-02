@@ -171,15 +171,22 @@
         <item>港島</item>
         <item>九龍</item>
         <item>新界</item>
-   <!-- </string-array>
+   </string-array>
 
+    <string-array name="searchshop_array">
+        <item>九龍海庭道 8 號富榮花園第2期地下66B號鋪</item>
+        <item>香港小西灣小西灣道23號富怡花園平台(多層停車場)</item>
+        <item>新界屯門石排頭徑1號卓爾廣場2樓210號鋪</item>
+        <item>九龍塘尾道22號長輝大廈地下A-C號鋪</item>
+        <item>香港石塘咀山道7-9 號長發大廈地下</item>
+    </string-array>
 
     <string-array name="searchhkisland_array"> -->
     <item>中西區</item>
     <item>灣仔區</item>
     <item>東區</item>
     <item>南區</item>
-        <!--</string-array>
+        </string-array>
 
         <string-array name="searchkowloon_array"> -->
     <item>九龍城區</item>
@@ -187,7 +194,7 @@
     <item>觀塘區</item>
     <item>油尖旺區</item>
     <item>深水埠區</item>
-        <!-- </string-array>
+         </string-array>
 
          <string-array name="searchnewterr_array"> -->
          <item>荃灣區</item>
@@ -199,9 +206,9 @@
          <item>屯門區</item>
          <item>元朗區</item>
          <item>離島區</item>
-         <!--</string-array>
+         </string-array>
 
-         <string-array name="searchstore_array"> -->
+         <string-array name="searchstore_array">
              <item>百佳</item>
              <item>惠康</item>
              <item>MarketPlace</item>

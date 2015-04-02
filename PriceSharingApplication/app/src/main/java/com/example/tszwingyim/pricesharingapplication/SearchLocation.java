@@ -1,7 +1,11 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
@@ -15,60 +19,46 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.SupportMapFragment;
+import android.app.Dialog;
 
-public class SearchLocation extends ActionBarActivity {
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.TileOverlay;
+import com.google.android.gms.maps.model.TileOverlayOptions;
+import com.google.android.gms.maps.model.TileProvider;
+import com.google.android.gms.maps.model.UrlTileProvider;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class SearchLocation extends ActionBarActivity implements OnMapReadyCallback  {
+
+   // GoogleMap googleMap;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Hide the action bar
+//        //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_search_location);
+
+        //declare buttons
         Button recommendation = (Button) findViewById(R.id.button_recommend);
         Button category = (Button) findViewById(R.id.button_category);
         Button member = (Button) findViewById(R.id.button_member);
         Button barcode = (Button) findViewById(R.id.button_barcode);
         Button goods = (Button) findViewById(R.id.button_goods);
-
-        createMapView();
-     //  createStreetView();
-        addMarker();
-//
-//        GoogleMap googleMap; // Might be null if Google Play services APK is not available.
-//            setUpMapIfNeeded();
-
-//    googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-//            @Override
-//            public void onMapClick(LatLng latLng) {
-//
-//                /**
-//                 * Ensure the street view has been initialised correctly and
-//                 * pass it through the selected lat/long co-ordinates.
-//                 */
-//                if (m_StreetView != null) {
-//
-//                    /**
-//                     * Hide the map view to expose the street view.
-//                     */
-//                    Fragment mapView = getFragmentManager().findFragmentById(R.id.mapView);
-//                    getFragmentManager().beginTransaction().hide(mapView).commit();
-//
-//                    /** Passed the tapped location through to the Street View **/
-//                    m_StreetView.setPosition(latLng);
-//                }
-//            }
-//        });
-//        if (googleMap != null) {
-//            googleMap.setMyLocationEnabled(true);
-//            googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-//        }
+        //set onclick listener for tabs
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -109,25 +99,83 @@ public class SearchLocation extends ActionBarActivity {
 
             }
         });
+        //declare google map fragment
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
 
+//        //configure the google map
+//        GoogleMapOptions options = new GoogleMapOptions();
+//        options.mapType(GoogleMap.MAP_TYPE_SATELLITE)
+//                .zoomControlsEnabled(true)
+//                .zoomGesturesEnabled(true)
+//                .compassEnabled(true)
+//                .rotateGesturesEnabled(true)
+//                .scrollGesturesEnabled(true)
+//                .tiltGesturesEnabled(true);
+
+        //set center of the map
+      //  googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(22.294698, 114.200783), 5));
+
+        // add spinner
         Spinner district = (Spinner) findViewById(R.id.spinner_searchdistrict);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.searchdistrict_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
+
+        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+        // Apply the adapter to the spinner
         district.setAdapter(adapter);
         // Get a reference to the AutoCompleteTextView in the layout
         AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autoComplete_searchlocation);
-// Get the string array
+        // Get the string array
         String[] shoplocation = getResources().getStringArray(R.array.searcharea_array);
-// Create the adapter and set it to the AutoCompleteTextView
+        // Create the adapter and set it to the AutoCompleteTextView
         ArrayAdapter<String> adapter3 =
                 new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, shoplocation);
         textView.setAdapter(adapter3);
+//bound the map to hong kong
+
     }
+
+//    GoogleMap mMap;
+//        //  addMarker();
+//        // Getting Google Play availability status
+//        private void setUpMapIfNeeded() {
+//            // Do a null check to confirm that we have not already instantiated the map.
+//            if (mMap == null) {
+//                // Try to obtain the map from the SupportMapFragment.
+//                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+//                        .getMap();
+//                mMap.setMyLocationEnabled(true);
+//                // Check if we were successful in obtaining the map.
+//                if (mMap != null) {
+//                    mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+//                        @Override
+//                        public void onMyLocationChange(Location arg0) {
+//                            // TODO Auto-generated method stub
+//                            mMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
+//                        }
+//                    });
+//
+//                }
+//            }
+//        }
+
+    // Adds a marker to the map
+    public void onMapReady(GoogleMap map) {
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(22.192295, 114.130359))
+                .title("Lantau")
+                .snippet("Population: 4,137,400"));
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(22.220664, 114.209022))
+                .title("Stanley")
+                .snippet("Population: 4,137,400"));
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -136,84 +184,10 @@ public class SearchLocation extends ActionBarActivity {
         return true;
     }
 
-    /**
-     * Initialises the mapview
-     */
-    GoogleMap googleMap;
-
-    private void createMapView() {
-        /**
-         * Catch the null pointer exception that
-         * may be thrown when initialising the map
-         */
-
-        try {
-            if (googleMap == null) {
-                googleMap = ((MapFragment) getFragmentManager().findFragmentById(
-                        R.id.mapView)).getMap();
-
-                /**
-                 * If the map is still null after attempted initialisation,
-                 * show an error to the user
-                 */
-                if (null == googleMap) {
-                    Toast.makeText(getApplicationContext(),
-                            "Error creating map", Toast.LENGTH_SHORT).show();
-                }
-            }
-        } catch (NullPointerException exception) {
-            Log.e("mapApp", exception.toString());
-        }
-    }
-//    UiSettings mapSettings;
-//    mapSettings = googleMap.getUiSettings();
-    /**
-     * Adds a marker to the map
-     */
-    private void addMarker() {
-
-        /** Make sure that the map has been initialised **/
-        if (null != googleMap) {
-            googleMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(0, 0))
-                            .title("Marker")
-                            .draggable(true)
-            );
-        }
-    }
-
-    StreetViewPanorama m_StreetView;
-
-    private void createStreetView() {
-        m_StreetView = ((StreetViewPanoramaFragment) getFragmentManager().findFragmentById(R.id.streetView)).getStreetViewPanorama();
-    }
-
- //   Set up the onClickListener that will pass the selected lat/long
-   // co-ordinates through to the Street View fragment for loading
-//    public class MapsActivity extends FragmentActivity implements
-//            GoogleApiClient.ConnectionCallbacks,
-//            GoogleApiClient.OnConnectionFailedListener {
-//        @Override
-//        public void onConnected(Bundle bundle) {
-//            Log.i(TAG, "Location services connected.");
-//        }
-//
-//        @Override
-//        public void onConnectionSuspended(int i) {
-//            Log.i(TAG, "Location services suspended. Please reconnect.");
-//        }
-//
-//        @Override
-//        protected void onPause() {
-//            super.onPause();
-//            if (mGoogleApiClient.isConnected()) {
-//                mGoogleApiClient.disconnect();
-//            }
-//        }
 
 
         @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
+        public boolean onOptionsItemSelected (MenuItem item){
             // Handle action bar item clicks here. The action bar will
             // automatically handle clicks on the Home/Up button, so long
             // as you specify a parent activity in AndroidManifest.xml.
@@ -227,11 +201,8 @@ public class SearchLocation extends ActionBarActivity {
             return super.onOptionsItemSelected(item);
         }
 
-//        @Override
-//        public void onConnectionFailed(ConnectionResult connectionResult) {
-//
-//        }
     }
+
 
 
 
