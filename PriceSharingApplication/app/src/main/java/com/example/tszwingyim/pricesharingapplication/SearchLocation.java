@@ -105,15 +105,15 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
 
 
-        //configure the google map
-        GoogleMapOptions options = new GoogleMapOptions();
-        options.mapType(GoogleMap.MAP_TYPE_SATELLITE)
-                .zoomControlsEnabled(true)
-                .zoomGesturesEnabled(true)
-                .compassEnabled(true)
-                .rotateGesturesEnabled(true)
-                .scrollGesturesEnabled(true)
-                .tiltGesturesEnabled(true);
+//        //configure the google map
+//        GoogleMapOptions options = new GoogleMapOptions();
+//        options.mapType(GoogleMap.MAP_TYPE_SATELLITE)
+//                .zoomControlsEnabled(true)
+//                .zoomGesturesEnabled(true)
+//                .compassEnabled(true)
+//                .rotateGesturesEnabled(true)
+//                .scrollGesturesEnabled(true)
+//                .tiltGesturesEnabled(true);
 
         //set center of the map
       //  googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(22.294698, 114.200783), 5));
@@ -140,29 +140,29 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
 
     }
 
-    GoogleMap mMap;
-        //  addMarker();
-        // Getting Google Play availability status
-        private void setUpMapIfNeeded() {
-            // Do a null check to confirm that we have not already instantiated the map.
-            if (mMap == null) {
-                // Try to obtain the map from the SupportMapFragment.
-                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                        .getMap();
-                mMap.setMyLocationEnabled(true);
-                // Check if we were successful in obtaining the map.
-                if (mMap != null) {
-                    mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-                        @Override
-                        public void onMyLocationChange(Location arg0) {
-                            // TODO Auto-generated method stub
-                            mMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
-                        }
-                    });
-
-                }
-            }
-        }
+//    GoogleMap mMap;
+//        //  addMarker();
+//        // Getting Google Play availability status
+//        private void setUpMapIfNeeded() {
+//            // Do a null check to confirm that we have not already instantiated the map.
+//            if (mMap == null) {
+//                // Try to obtain the map from the SupportMapFragment.
+//                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+//                        .getMap();
+//                mMap.setMyLocationEnabled(true);
+//                // Check if we were successful in obtaining the map.
+//                if (mMap != null) {
+//                    mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+//                        @Override
+//                        public void onMyLocationChange(Location arg0) {
+//                            // TODO Auto-generated method stub
+//                            mMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
+//                        }
+//                    });
+//
+//                }
+//            }
+//        }
 
     // Adds a marker to the map
     public void onMapReady(GoogleMap map) {
