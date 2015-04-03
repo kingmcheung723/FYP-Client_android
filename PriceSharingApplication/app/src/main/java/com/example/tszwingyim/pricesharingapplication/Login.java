@@ -1,11 +1,13 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,12 +65,6 @@ public class Login extends ActionBarActivity {
         });
 
         confirm.setOnClickListener(new ConfirmButtonOnClickListener(this));
-//        confirm.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Login.this, Memberpage.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     @Override
@@ -102,16 +98,23 @@ public class Login extends ActionBarActivity {
             if (this.isValidEmail(emailStr)) {
                 EditText passwordEditText = (EditText) activity.findViewById(R.id.EditText_Login_Password);
                 String passwordStr = passwordEditText.getText().toString();
-                if (passwordStr.length() >= 6) {
-                    if (passwordStr.length() <= 10) {
-                        //public void onClick(View v) {
-             Intent intent = TabManager.getInstance().getIntent(Login.this, Memberpage.class);
-             startActivity(intent);
-                //}
-                    } else {
-                        emailvalid.setText("Password must be less than 10 digits");
-                    }
+                if (passwordStr.length() >= 6) if (passwordStr.length() <= 10) {
+                    String sql = "SELECT email FROM members WHERE email = " + "'" + emailStr + "'";
+                    DBManager dbManager = new DBManager();
+                    dbManager.queryCallBack = new QueryCallBack() {
+                        @Override
+                        public void queryResult(String result) {
+                            if (result != null) {
+                                Intent intent = TabManager.getInstance().getIntent(Login.this, Memberpage.class);
+                                startActivity(intent);
+                            }
+                        }
+                    };
+                    dbManager.querySql(sql);
                 } else {
+                    emailvalid.setText("Password must be less than 10 digits");
+                }
+                else {
                     emailvalid.setText("Password must be more than 6 digits");
                 }
             } else {

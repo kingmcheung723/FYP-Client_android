@@ -112,22 +112,24 @@ public class Register extends ActionBarActivity {
 
 
                 if (passwordStr.equalsIgnoreCase(confirmPasswordStr)) {
-                    if (passwordStr.length() >= 6) {
-                        if (passwordStr.length() <= 10) {
-                            DBManager dbManager = new DBManager();
-                            dbManager.queryCallBack = new QueryCallBack() {
-                                @Override
-                                public void queryResult(String result) {
-                                    Log.d("","");
+                    if (passwordStr.length() >= 6) if (passwordStr.length() <= 10) {
+                        DBManager dbManager = new DBManager();
+                        dbManager.queryCallBack = new QueryCallBack() {
+                            @Override
+                            public void queryResult(String result) {
+                                if (result != null) {
+                                    MySharedPreference.saveMemberName(result, Register.this);
+                                    Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
+                                    startActivity(intent);
                                 }
-                            };
-                            dbManager.querySql("SELECT * FROM shops");
-                            Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
-                            startActivity(intent);
-                        } else {
-                            emailvalid.setText("Password must be less than 10 digits");
-                        }
+                            }
+                        };
+                        String sql = "INSERT INTO `members`(`email`, `password`) VALUES ('" + emailStr + "','" + passwordStr + "')";
+                        dbManager.querySql(sql);
                     } else {
+                        emailvalid.setText("Password must be less than 10 digits");
+                    }
+                    else {
                         emailvalid.setText("Password must be more than 6 digits");
                     }
                 } else {
