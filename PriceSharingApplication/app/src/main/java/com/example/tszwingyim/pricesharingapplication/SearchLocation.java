@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -43,7 +44,7 @@ import com.google.android.gms.maps.model.UrlTileProvider;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class SearchLocation extends ActionBarActivity implements OnMapReadyCallback  {
+public class SearchLocation extends ActionBarActivity implements OnMapReadyCallback, Spinner.OnItemSelectedListener {
 
    // GoogleMap googleMap;
     public void onCreate(Bundle savedInstanceState) {
@@ -54,11 +55,7 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
         setContentView(R.layout.activity_search_location);
         Spinner spinnerOsversions;
         TextView selVersion;
-        String[] place = { "港島", "九龍", "新界" };
-        String[] districthk = { "銅鑼灣","炮台山","北角","鰂魚涌","筲箕灣","金鐘","中環","西環","太平山","薄扶林","灣仔","柴灣","香港仔","鴨脷洲","淺水灣","赤柱"};
-        String[] districtkowloon = {  "紅磡","九龍城","九龍塘","官塘","荔枝角","美孚","旺角","西貢","深水埗",
-                "石硤尾", "大角咀", "土瓜灣","將軍澳","尖沙咀", "黃大仙","油麻地", "油塘","鑽石山"};
-        String[] districtnewt = { "北區","大埔","沙田","西貢","荃灣","屯門","元朗","葵青","離島" };
+
         //declare buttons
         Button recommendation = (Button) findViewById(R.id.button_recommend);
         Button category = (Button) findViewById(R.id.button_category);
@@ -124,25 +121,45 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
 
         //set center of the map
       //  googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(22.294698, 114.200783), 5));
-
+        Spinner districtnewt = (Spinner) findViewById(R.id.spinner_district);
+        Spinner districtkowloon = (Spinner) findViewById(R.id.spinner_district);
+        Spinner districthk = (Spinner) findViewById(R.id.spinner_district);
+        Spinner place = (Spinner) findViewById(R.id.spinner_region);
+        Spinner searchdistrict = (Spinner) findViewById(R.id.spinner_searchdistrict);
+        districtnewt.setOnItemSelectedListener(this);
+        districtkowloon.setOnItemSelectedListener(this);
+        districthk.setOnItemSelectedListener(this);
+        place.setOnItemSelectedListener(this);
+        String[] searchdistrictStr = { "地區", "商店" };
+        String[] shopStr = { "百佳","惠康","MarketPlace","永旺","大昌" };
+        String[] placeStr = { "港島", "九龍", "新界" };
+        String[] districthkStr = { "北區","大埔","沙田","西貢","荃灣","屯門","元朗","葵青","離島", "紅磡","九龍城","九龍塘","觀塘","荔枝角","美孚","旺角","西貢","深水埗",
+                "石硤尾", "大角咀", "土瓜灣","將軍澳","油塘", "黃大仙","油麻地", "油塘","鑽石山","銅鑼灣","炮台山","北角","鰂魚涌","筲箕灣","金鐘","中環","西環","太平山","薄扶林","灣仔","柴灣","香港仔","鴨脷洲","淺水灣","赤柱"};
+        String[] districtkowloonStr = { };
+        String[] districtnewtStr = {  };
         // add spinner
-        Spinner district = (Spinner) findViewById(R.id.spinner_searchdistrict);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.searchdistrict_array, android.R.layout.simple_spinner_item);
 
-        // Specify the layout to use when the list of choices appears
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, searchdistrictStr); //selected item will look like a spinner set from XML
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, placeStr); //selected item will look like a spinner set from XML
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // Apply the adapter to the spinner
-        district.setAdapter(adapter);
-        // Get a reference to the AutoCompleteTextView in the layout
-        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autoComplete_searchlocation);
-        // Get the string array
-        String[] shoplocation = getResources().getStringArray(R.array.searcharea_array);
-        // Create the adapter and set it to the AutoCompleteTextView
-        ArrayAdapter<String> adapter3 =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, shoplocation);
-        textView.setAdapter(adapter3);
+        searchdistrict.setAdapter(adapter);
+        place.setAdapter(adapter);
+        districthk.setAdapter(adapter);
+        districtnewt.setAdapter(adapter);
+        districtkowloon.setAdapter(adapter);
+//        // Get a reference to the AutoCompleteTextView in the layout
+//        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autoComplete_searchlocation);
+
+//        // Get the string array
+//        String[] shoplocation = getResources().getStringArray(R.array.searcharea_array);
+//        // Create the adapter and set it to the AutoCompleteTextView
+//        ArrayAdapter<String> adapter3 =
+//                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, shoplocation);
+//        textView.setAdapter(adapter3);
 //bound the map to hong kong
 
     }
@@ -183,6 +200,19 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
                 .snippet("Population: 4,137,400"));
     }
 
+    @Override
+    public void onItemSelected(AdapterView <?> parent, View view,
+                               int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+        Log.d("","");
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+        Log.d("", "");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -190,8 +220,6 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
         getMenuInflater().inflate(R.menu.menu_search_location, menu);
         return true;
     }
-
-
 
         @Override
         public boolean onOptionsItemSelected (MenuItem item){

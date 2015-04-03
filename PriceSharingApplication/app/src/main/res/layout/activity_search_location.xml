@@ -73,19 +73,25 @@
             android:layout_gravity="center_horizontal">
 
             <Spinner
-                android:layout_width="112dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_searchdistrict"
                 android:background="#ffffffff"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_weight="1" />
 
-            <AutoCompleteTextView
+            <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="店鋪名稱或地區"
-                android:id="@+id/autoComplete_searchlocation"
-                android:layout_gravity="center_vertical|right"
+                android:id="@+id/spinner_region"
                 android:layout_weight="1" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner_district"
+                android:layout_weight="1" />
+
             <Button
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"

@@ -28,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
         Button recommend = (Button) findViewById(R.id.button_recommend);
         Button member = (Button) findViewById(R.id.button_member);
         Button barcode = (Button) findViewById(R.id.button_barcode);
-        Button sugarlist = (Button) findViewById(R.id.button_sugar);
+        final Button sugarlist = (Button) findViewById(R.id.button_sugar);
         Button dairylist = (Button) findViewById(R.id.button_dairy);
         Button dailylist = (Button) findViewById(R.id.button_daily);
         Button ricelist = (Button) findViewById(R.id.button_rice);
@@ -69,11 +69,12 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(myintent4);
             }
         });
-        sugarlist.setOnClickListener(new View.OnClickListener() {
 
+        sugarlist.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myintent5 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
-                startActivity(myintent5);
+                Intent intent = new Intent(MainActivity.this, sugarlist.class);
+                intent.putExtra("Category", "sugar");
+                startActivity(intent);
 
             }
         });
@@ -81,7 +82,9 @@ public class MainActivity extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent myintent6 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
-                startActivity(myintent6);
+                Intent intent = new Intent(MainActivity.this, sugarlist.class);
+                intent.putExtra("Category", "alcohol");
+                startActivity(intent);
 
             }
         });
@@ -89,7 +92,9 @@ public class MainActivity extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent myintent7 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
-                startActivity(myintent7);
+                Intent intent = new Intent(MainActivity.this, sugarlist.class);
+                intent.putExtra("Category", "bread");
+                startActivity(intent);
 
             }
         });
@@ -97,7 +102,9 @@ public class MainActivity extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent myintent8 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
-                startActivity(myintent8);
+                Intent intent = new Intent(MainActivity.this, sugarlist.class);
+                intent.putExtra("Category", "candy");
+                startActivity(intent);
 
             }
         });
@@ -105,7 +112,9 @@ public class MainActivity extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent myintent9 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
-                startActivity(myintent9);
+                Intent intent = new Intent(MainActivity.this, sugarlist.class);
+                intent.putExtra("Category", "daily");
+                startActivity(intent);
 
             }
         });
@@ -113,7 +122,9 @@ public class MainActivity extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent myintent10 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
-                startActivity(myintent10);
+                Intent intent = new Intent(MainActivity.this, sugarlist.class);
+                intent.putExtra("Category", "dairy");
+                startActivity(intent);
 
             }
         });
@@ -121,15 +132,19 @@ public class MainActivity extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent myintent11 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
-                startActivity(myintent11);
+                Intent intent = new Intent(MainActivity.this, sugarlist.class);
+                intent.putExtra("Category", "rice");
+                startActivity(intent);
 
             }
         });
         cleaninglist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent5 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
-                startActivity(myintent5);
+                Intent myintent13 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
+                Intent intent = new Intent(MainActivity.this, sugarlist.class);
+                intent.putExtra("Category", "cleaning");
+                startActivity(intent);
 
             }
         });
@@ -137,7 +152,9 @@ public class MainActivity extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent myintent12 = TabManager.getInstance().getIntent(MainActivity.this, sugarlist.class);
-                startActivity(myintent12);
+                Intent intent = new Intent(MainActivity.this, sugarlist.class);
+                intent.putExtra("Category", "drink");
+                startActivity(intent);
 
             }
         });
