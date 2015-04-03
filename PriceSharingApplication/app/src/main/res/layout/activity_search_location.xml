@@ -30,7 +30,8 @@
         android:background="#ffffffff"
         android:layout_alignParentEnd="false"
         android:layout_alignParentBottom="false"
-        >
+        android:layout_below="@+id/search_title"
+        android:weightSum="1">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -73,15 +74,7 @@
             android:layout_gravity="center_horizontal">
 
             <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner_searchdistrict"
-                android:background="#ffffffff"
-                android:textAlignment="center"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_region"
                 android:layout_weight="1" />
@@ -103,7 +96,7 @@
             android:id="@+id/map"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.google.android.gms.maps.MapFragment"/>
+            android:name="com.google.android.gms.maps.MapFragment" />
         <!--<fragment-->
             <!--android:id="@+id/streetView"-->
             <!--android:layout_width="match_parent"-->

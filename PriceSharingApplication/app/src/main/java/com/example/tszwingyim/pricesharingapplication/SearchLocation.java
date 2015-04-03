@@ -121,21 +121,16 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
 
         //set center of the map
       //  googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(22.294698, 114.200783), 5));
-        Spinner districtnewt = (Spinner) findViewById(R.id.spinner_district);
-        Spinner districtkowloon = (Spinner) findViewById(R.id.spinner_district);
+
         Spinner districthk = (Spinner) findViewById(R.id.spinner_district);
         Spinner place = (Spinner) findViewById(R.id.spinner_region);
-        Spinner searchdistrict = (Spinner) findViewById(R.id.spinner_searchdistrict);
-        districtnewt.setOnItemSelectedListener(this);
-        districtkowloon.setOnItemSelectedListener(this);
         districthk.setOnItemSelectedListener(this);
         place.setOnItemSelectedListener(this);
 
 
-        String[] shopStr = { "所有商店","百佳","惠康","MarketPlace","永旺","大昌" };
-        String[] districtStr = {"港島區","銅鑼灣","炮台山","北角","鰂魚涌","筲箕灣","金鐘","中環","西環","太平山","薄扶林","灣仔","柴灣","香港仔","鴨脷洲","淺水灣","赤柱","九龍區","九龍城","九龍塘","觀塘","荔枝角","美孚","旺角","深水埗",
-                "石硤尾", "大角咀", "土瓜灣","將軍澳","油塘", "黃大仙","油麻地", "油塘","鑽石山","新界區","北區","西貢","大埔","沙田","西貢","荃灣","屯門","元朗","葵青","離島"};
-
+        String[] shopStr = { "選擇商店","所有商店","百佳","惠康","MarketPlace","永旺","大昌" };
+        String[] districtStr = {"選擇地區","港島區","銅鑼灣","炮台山","北角","鰂魚涌","筲箕灣","金鐘","中環","西環","太平山","薄扶林","灣仔","柴灣","香港仔","鴨脷洲","淺水灣","赤柱",
+                "九龍區","九龍城","九龍塘","觀塘","荔枝角","美孚","深水埗","石硤尾", "大角咀","油塘", "黃大仙","油尖旺", "油塘","鑽石山","新界區","北區","將軍澳","西貢","大埔","沙田","西貢","荃灣","屯門","元朗","葵青","離島"};
 
         // add spinner
 
@@ -146,11 +141,10 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Apply the adapter to the spinner
-        searchdistrict.setAdapter(adapter);
+
         place.setAdapter(adapter);
-        districthk.setAdapter(adapter);
-        districtnewt.setAdapter(adapter);
-        districtkowloon.setAdapter(adapter);
+        districthk.setAdapter(adapter2);
+
 //        // Get a reference to the AutoCompleteTextView in the layout
 //        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autoComplete_searchlocation);
 
