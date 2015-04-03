@@ -16,7 +16,7 @@ interface QueryCallBack {
 }
 
 public class DBManager{
-    private static final String url = "jdbc:mysql://10.0.2.2:3306/fyp_db?useUnicode=yes&characterEncoding=UTF-8";
+    private static final String url = "jdbc:mysql://10.0.2.2:3306/fyp_database?useUnicode=yes&characterEncoding=UTF-8";
     private static final String user = "root";
     private static final String password = null;
     public QueryCallBack queryCallBack;
@@ -27,13 +27,14 @@ public class DBManager{
             new queryOperation().execute(sql);
         } catch (Exception e) {
             e.printStackTrace();
+            queryCallBack.queryResult(null);
         }
     }
 
     private class queryOperation extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            String result = "";
+            String result = null;
             try {
                 Connection con = DriverManager.getConnection(url, user, password);
 
@@ -41,6 +42,7 @@ public class DBManager{
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
                 ResultSetMetaData rsmd = rs.getMetaData();
+                result = "";
                 while(rs.next()) {
                     for (int i = 1; i <= rsmd.getColumnCount(); i++) {
                         result +=  rs.getString(i) + "|";
