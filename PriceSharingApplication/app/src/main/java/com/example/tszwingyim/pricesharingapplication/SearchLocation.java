@@ -130,19 +130,19 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
         districtkowloon.setOnItemSelectedListener(this);
         districthk.setOnItemSelectedListener(this);
         place.setOnItemSelectedListener(this);
-        String[] searchdistrictStr = { "地區", "商店" };
-        String[] shopStr = { "百佳","惠康","MarketPlace","永旺","大昌" };
-        String[] placeStr = { "港島", "九龍", "新界" };
-        String[] districthkStr = { "北區","大埔","沙田","西貢","荃灣","屯門","元朗","葵青","離島", "紅磡","九龍城","九龍塘","觀塘","荔枝角","美孚","旺角","西貢","深水埗",
-                "石硤尾", "大角咀", "土瓜灣","將軍澳","油塘", "黃大仙","油麻地", "油塘","鑽石山","銅鑼灣","炮台山","北角","鰂魚涌","筲箕灣","金鐘","中環","西環","太平山","薄扶林","灣仔","柴灣","香港仔","鴨脷洲","淺水灣","赤柱"};
-        String[] districtkowloonStr = { };
-        String[] districtnewtStr = {  };
+
+
+        String[] shopStr = { "所有商店","百佳","惠康","MarketPlace","永旺","大昌" };
+        String[] districtStr = {"港島區","銅鑼灣","炮台山","北角","鰂魚涌","筲箕灣","金鐘","中環","西環","太平山","薄扶林","灣仔","柴灣","香港仔","鴨脷洲","淺水灣","赤柱","九龍區","九龍城","九龍塘","觀塘","荔枝角","美孚","旺角","深水埗",
+                "石硤尾", "大角咀", "土瓜灣","將軍澳","油塘", "黃大仙","油麻地", "油塘","鑽石山","新界區","北區","西貢","大埔","沙田","西貢","荃灣","屯門","元朗","葵青","離島"};
+
+
         // add spinner
 
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, searchdistrictStr); //selected item will look like a spinner set from XML
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, shopStr); //selected item will look like a spinner set from XML
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, placeStr); //selected item will look like a spinner set from XML
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, districtStr); //selected item will look like a spinner set from XML
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Apply the adapter to the spinner
