@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Dialog;
 
@@ -51,7 +52,13 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_search_location);
-
+        Spinner spinnerOsversions;
+        TextView selVersion;
+        String[] place = { "港島", "九龍", "新界" };
+        String[] districthk = { "銅鑼灣","炮台山","北角","鰂魚涌","筲箕灣","金鐘","中環","西環","太平山","薄扶林","灣仔","柴灣","香港仔","鴨脷洲","淺水灣","赤柱"};
+        String[] districtkowloon = {  "紅磡","九龍城","九龍塘","官塘","荔枝角","美孚","旺角","西貢","深水埗",
+                "石硤尾", "大角咀", "土瓜灣","將軍澳","尖沙咀", "黃大仙","油麻地", "油塘","鑽石山"};
+        String[] districtnewt = { "北區","大埔","沙田","西貢","荃灣","屯門","元朗","葵青","離島" };
         //declare buttons
         Button recommendation = (Button) findViewById(R.id.button_recommend);
         Button category = (Button) findViewById(R.id.button_category);
@@ -167,11 +174,11 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
     // Adds a marker to the map
     public void onMapReady(GoogleMap map) {
         map.addMarker(new MarkerOptions()
-                .position(new LatLng(22.192295, 114.130359))
+                .position(new LatLng(22.387844,114.19492))
                 .title("Lantau")
                 .snippet("Population: 4,137,400"));
         map.addMarker(new MarkerOptions()
-                .position(new LatLng(22.220664, 114.209022))
+                .position(new LatLng(22.26821,114.1515451))
                 .title("Stanley")
                 .snippet("Population: 4,137,400"));
     }
