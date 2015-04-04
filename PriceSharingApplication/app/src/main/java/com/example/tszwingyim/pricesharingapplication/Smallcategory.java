@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,17 +11,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 
-public class sugarlist extends ActionBarActivity {
+public class Smallcategory extends ActionBarActivity {
     //int num = 0;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        setContentView(R.layout.activity_sugarlist);
+        setContentView(R.layout.activity_smallcategory);
         Button search = (Button)findViewById(R.id.button_search);
         Button recommend = (Button)findViewById(R.id.button_recommend);
         Button member = (Button)findViewById(R.id.button_member);
@@ -31,7 +29,7 @@ public class sugarlist extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = TabManager.getInstance().getIntent(sugarlist.this, Member.class);
+                Intent myintent1 = TabManager.getInstance().getIntent(Smallcategory.this, Member.class);
                 startActivity(myintent1);
 
             }
@@ -39,7 +37,7 @@ public class sugarlist extends ActionBarActivity {
         search.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = TabManager.getInstance().getIntent(sugarlist.this, Search.class);
+                Intent myintent2 = TabManager.getInstance().getIntent(Smallcategory.this, Search.class);
                 startActivity(myintent2);
 
             }
@@ -47,7 +45,7 @@ public class sugarlist extends ActionBarActivity {
         recommend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = TabManager.getInstance().getIntent(sugarlist.this, Recommendation.class);
+                Intent myintent3 = TabManager.getInstance().getIntent(Smallcategory.this, Recommendation.class);
                 startActivity(myintent3);
 
             }
@@ -55,7 +53,7 @@ public class sugarlist extends ActionBarActivity {
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = TabManager.getInstance().getIntent(sugarlist.this, Barcode.class);
+                Intent myintent4 = TabManager.getInstance().getIntent(Smallcategory.this, Barcode.class);
                 startActivity(myintent4);
             }
         });
@@ -74,7 +72,7 @@ public class sugarlist extends ActionBarActivity {
             items = new String[]{"米","食用油","罐頭食品","無菌紙盒包裝食品","新鮮蔬菜","新鮮水果","冰鮮/新鮮肉類","經急凍/解凍處理肉類","急凍肉類","急凍海產"};
         }else if (category.equalsIgnoreCase("drink")) {
             items = new String[]{"汽水","咖啡 / 茶包 / 即沖奶茶","果汁類飲品","東方特色飲品","樽裝水 / 運動飲品 / 能量飲品","麥片飲品 / 麥芽飲品 / 朱古力飲品"};
-        }else if (category.equalsIgnoreCase("clean")) {
+        }else if (category.equalsIgnoreCase("cleaning")) {
             items = new String[]{"洗衣用品","清潔用品","紙品","保鮮紙 / 食物袋 / 錫紙","吸濕防霉","電器","寵物食品"};
         }else if (category.equalsIgnoreCase("daily")) {
             items = new String[]{"口腔護理","女士衛生用品","沐浴露 / 皂液 / 肥皂","頭髮護理","皮膚護理","女士脫毛用品 / 除毛用品","男士護理","香體用品","藥品","避孕","成人紙尿片 / 紙尿褲"};
@@ -91,7 +89,8 @@ public class sugarlist extends ActionBarActivity {
         searcharray.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent myintent4 = TabManager.getInstance().getIntent(Smallcategory.this, goodlist.class);
+                startActivity(myintent4);
             }
         });
     }
@@ -99,7 +98,7 @@ public class sugarlist extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sugarlist, menu);
+        getMenuInflater().inflate(R.menu.menu_smallcategory, menu);
         return true;
     }
 
