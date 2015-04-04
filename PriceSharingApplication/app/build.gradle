@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
     // Supports Android 4.0.3 and later (API level 15)
     compile 'com.journeyapps:zxing-android-embedded:2.0.1@aar'
@@ -45,6 +45,6 @@ dependencies {
     compile 'com.google.zxing:core:3.0.1'
     compile 'com.google.android.gms:play-services:6.5.87'
     // JDBC Driver
-    compile files('/Users/tszwingyim/FYP-Client_android/PriceSharingApplication/libs/mysql-connector-java-5.1.34-bin.jar')
+    compile files('D:/Work/github/Android-Price_Sharing/FYP-Client_android/PriceSharingApplication/libs/mysql-connector-java-5.1.34-bin.jar')
 }
 
