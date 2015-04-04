@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.app.Activity;
 
-public class goodlist extends ActionBarActivity {
+public class SearchGoodlist extends ActionBarActivity {
     ListView list;
     String[] web = {
             "Google Plus",
@@ -49,7 +49,7 @@ public class goodlist extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = TabManager.getInstance().getIntent(goodlist.this, Member.class);
+                Intent myintent1 = TabManager.getInstance().getIntent(SearchGoodlist.this, Member.class);
                 startActivity(myintent1);
 
             }
@@ -57,7 +57,7 @@ public class goodlist extends ActionBarActivity {
         search.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = TabManager.getInstance().getIntent(goodlist.this, Search.class);
+                Intent myintent2 = TabManager.getInstance().getIntent(SearchGoodlist.this, Search.class);
                 startActivity(myintent2);
 
             }
@@ -65,7 +65,7 @@ public class goodlist extends ActionBarActivity {
         recommend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = TabManager.getInstance().getIntent(goodlist.this, Recommendation.class);
+                Intent myintent3 = TabManager.getInstance().getIntent(SearchGoodlist.this, Recommendation.class);
                 startActivity(myintent3);
 
             }
@@ -73,18 +73,18 @@ public class goodlist extends ActionBarActivity {
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = TabManager.getInstance().getIntent(goodlist.this, Barcode.class);
+                Intent myintent4 = TabManager.getInstance().getIntent(SearchGoodlist.this, Barcode.class);
                 startActivity(myintent4);
             }
         });
         CustomList adapter = new
-                CustomList(goodlist.this, web,imageId);
+                CustomList(SearchGoodlist.this, web,imageId);
         list=(ListView)findViewById(R.id.listView_good);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent myintent4 = TabManager.getInstance().getIntent(goodlist.this,Itempage.class);
+                Intent myintent4 = TabManager.getInstance().getIntent(SearchGoodlist.this,Itempage.class);
                 startActivity(myintent4);
             }
         });
@@ -94,7 +94,7 @@ public class goodlist extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_goodlist, menu);
+        getMenuInflater().inflate(R.menu.menu_search_goodlist, menu);
         return true;
     }
 

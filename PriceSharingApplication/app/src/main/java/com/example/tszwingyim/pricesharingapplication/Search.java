@@ -26,7 +26,7 @@ public class Search extends ActionBarActivity {
         Button member = (Button) findViewById(R.id.button_member);
         Button barcode = (Button) findViewById(R.id.button_barcode);
         Button location = (Button) findViewById(R.id.button_location);
-        Button itemPage = (Button) findViewById(R.id.button_itempage);
+        Button Searchgoodlist = (Button) findViewById(R.id.button_itempage);
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -67,10 +67,10 @@ public class Search extends ActionBarActivity {
 
             }
         });
-        itemPage.setOnClickListener(new View.OnClickListener() {
+        Searchgoodlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Search.this, Itempage.class);
+                Intent intent = TabManager.getInstance().getIntent(Search.this, SearchGoodlist.class);
                 startActivity(intent);
 
             }
