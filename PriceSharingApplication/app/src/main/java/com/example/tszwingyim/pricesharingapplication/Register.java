@@ -124,8 +124,8 @@ public class Register extends ActionBarActivity {
                                 }
                             }
                         };
-                        String sql = "INSERT INTO `members`(`email`, `password`) VALUES ('" + emailStr + "','" + passwordStr + "')";
-                        dbManager.querySql(sql);
+                        String sql = "INSERT INTO members (email, password) VALUES ('" + emailStr + "','" + passwordStr + "')";
+                        dbManager.insertSql(sql);
                     } else {
                         emailvalid.setText("Password must be less than 10 digits");
                     }
