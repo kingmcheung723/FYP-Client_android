@@ -1,18 +1,30 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
+
+import java.util.Locale;
 
 
 public class Member extends ActionBarActivity {
-
+    Spinner spinnerctrl;
+    Button btn;
+    Locale myLocale;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide the action bar
@@ -87,9 +99,52 @@ public class Member extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+        spinnerctrl = (Spinner) findViewById(R.id.spinner_language);
+        String[] langStr = { "Select Language","中文","English" };
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, langStr);
+        //selected item will look like a spinner set from XML
+        spinnerctrl.setAdapter(adapter);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerctrl.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+
+                if (pos == 1) {
+
+                    Toast.makeText(parent.getContext(),
+                            "You have selected Chinese", Toast.LENGTH_SHORT)
+                            .show();
+                    setLocale("");
+                } else if (pos == 2) {
+
+                    Toast.makeText(parent.getContext(),
+                            "You have selected English", Toast.LENGTH_SHORT)
+                            .show();
+                    setLocale("en");
+                }
+
+            }
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+
+        });
     }
 
+    public void setLocale(String lang) {
 
+        myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(this, Member.class);
+        startActivity(refresh);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -223,7 +223,7 @@ ADDED from AndroidManifest.xml:119:9
 		ADDED from AndroidManifest.xml:121:13
 	android:name
 		ADDED from AndroidManifest.xml:120:13
-activity#com.example.tszwingyim.pricesharingapplication.sugarlist
+activity#com.example.tszwingyim.pricesharingapplication.Smallcategory
 ADDED from AndroidManifest.xml:123:9
 	android:label
 		ADDED from AndroidManifest.xml:125:13
