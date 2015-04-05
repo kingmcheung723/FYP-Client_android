@@ -76,7 +76,7 @@ public class MainActivity extends ActionBarActivity {
         alcohollist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent6 = TabManager.getInstance().getIntent(MainActivity.this, Smallcategory.class);
+                Intent myintent6 =  new Intent(MainActivity.this, Smallcategory.class);
                 Intent intent = new Intent(MainActivity.this, Smallcategory.class);
                 intent.putExtra("Category", "alcohol");
                 startActivity(intent);
@@ -86,7 +86,7 @@ public class MainActivity extends ActionBarActivity {
         breadlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent7 = TabManager.getInstance().getIntent(MainActivity.this, Smallcategory.class);
+                Intent myintent7 =  new Intent(MainActivity.this, Smallcategory.class);
                 Intent intent = new Intent(MainActivity.this, Smallcategory.class);
                 intent.putExtra("Category", "bread");
                 startActivity(intent);
@@ -96,7 +96,7 @@ public class MainActivity extends ActionBarActivity {
         candylist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent8 = TabManager.getInstance().getIntent(MainActivity.this, Smallcategory.class);
+                Intent myintent8 =  new Intent(MainActivity.this, Smallcategory.class);
                 Intent intent = new Intent(MainActivity.this, Smallcategory.class);
                 intent.putExtra("Category", "candy");
                 startActivity(intent);
@@ -106,7 +106,7 @@ public class MainActivity extends ActionBarActivity {
         dailylist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent9 = TabManager.getInstance().getIntent(MainActivity.this, Smallcategory.class);
+                Intent myintent9 =  new Intent(MainActivity.this, Smallcategory.class);
                 Intent intent = new Intent(MainActivity.this, Smallcategory.class);
                 intent.putExtra("Category", "daily");
                 startActivity(intent);
@@ -116,7 +116,7 @@ public class MainActivity extends ActionBarActivity {
         dairylist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent10 = TabManager.getInstance().getIntent(MainActivity.this, Smallcategory.class);
+                Intent myintent10 =  new Intent(MainActivity.this, Smallcategory.class);
                 Intent intent = new Intent(MainActivity.this, Smallcategory.class);
                 intent.putExtra("Category", "dairy");
                 startActivity(intent);
@@ -126,7 +126,7 @@ public class MainActivity extends ActionBarActivity {
         ricelist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent11 = TabManager.getInstance().getIntent(MainActivity.this, Smallcategory.class);
+                Intent myintent11 =  new Intent(MainActivity.this, Smallcategory.class);
                 Intent intent = new Intent(MainActivity.this, Smallcategory.class);
                 intent.putExtra("Category", "rice");
                 startActivity(intent);
@@ -136,7 +136,7 @@ public class MainActivity extends ActionBarActivity {
         cleaninglist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent13 = TabManager.getInstance().getIntent(MainActivity.this, Smallcategory.class);
+                Intent myintent13 =  new Intent(MainActivity.this, Smallcategory.class);
                 Intent intent = new Intent(MainActivity.this, Smallcategory.class);
                 intent.putExtra("Category", "cleaning");
                 startActivity(intent);
@@ -146,7 +146,7 @@ public class MainActivity extends ActionBarActivity {
         drinklist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent12 = TabManager.getInstance().getIntent(MainActivity.this, Smallcategory.class);
+                Intent myintent12 =  new Intent(MainActivity.this, Smallcategory.class);
                 Intent intent = new Intent(MainActivity.this, Smallcategory.class);
                 intent.putExtra("Category", "drink");
                 startActivity(intent);

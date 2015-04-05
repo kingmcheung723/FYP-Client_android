@@ -8,14 +8,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 public class CustomList extends ArrayAdapter<String>{
     private final Activity context;
-    private final String[] web;
+    private final String[] contentString;
     private final Integer[] imageId;
     public CustomList(Activity context,
-                      String[] web, Integer[] imageId) {
-        super(context, R.layout.list_single, web);
+                      String[] contentString, Integer[] imageId) {
+        super(context, R.layout.list_single, contentString);
         this.context = context;
-        this.web = web;
+        this.contentString = contentString;
         this.imageId = imageId;
+    }
+    public CustomList(Activity context,
+                      String[] contentString) {
+        super(context, R.layout.list_single, contentString);
+        this.context = context;
+        this.contentString = contentString;
+        this.imageId = null;
     }
     @Override
     public View getView(int position, View view, ViewGroup parent) {
@@ -23,8 +30,10 @@ public class CustomList extends ArrayAdapter<String>{
         View rowView= inflater.inflate(R.layout.list_single, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
-        txtTitle.setText(web[position]);
-        imageView.setImageResource(imageId[position]);
+        txtTitle.setText(this.contentString[position]);
+        if (this.imageId != null) {
+            imageView.setImageResource(this.imageId[position]);
+        }
         return rowView;
     }
 }

@@ -115,7 +115,7 @@ public class Itempage extends ActionBarActivity {
                     String itemNameEn = token.nextToken().toString();
                     String itemNameZh = token.nextToken().toString();
                     TextView textView = (TextView)findViewById(R.id.editText_name);
-                    textView.setText(itemNameEn);
+                    textView.setText(itemNameZh);
 
                     // Brand name
                     String brandId = token.nextToken().toString();
@@ -127,7 +127,7 @@ public class Itempage extends ActionBarActivity {
                             String brandNameEn = token.nextToken().toString();
                             String brandNameZh = token.nextToken().toString();
                             TextView textView1 = (TextView)findViewById(R.id.editText_brand);
-                            textView1.setText(brandNameEn);
+                            textView1.setText(brandNameZh);
                         }
                     };
                     String brandSql = "SELECT brands.name_en, brands.name_zh FROM brands WHERE brands.id = " + brandId;
@@ -143,7 +143,7 @@ public class Itempage extends ActionBarActivity {
                             String categoryNameEn = token.nextToken().toString();
                             String categoryNameZh = token.nextToken().toString();
                             TextView textView2 = (TextView)findViewById(R.id.editText_category);
-                            textView2.setText(categoryNameEn);
+                            textView2.setText(categoryNameZh);
                         }
                     };
                     String categorySql = "SELECT categories.name_en, categories.name_zh FROM categories WHERE categories.id = " + categoryId;
@@ -158,8 +158,13 @@ public class Itempage extends ActionBarActivity {
                                 String price = token.nextToken().toString();
                                 String discountPriceEn = token.nextToken().toString();
                                 String discountPriceZH = token.nextToken().toString();
+                                String priceString = price;
+                                if (!discountPriceZH.equalsIgnoreCase("null")) {
+                                    priceString += " " + discountPriceZH;
+                                }
+
                                 TextView textView4 = (TextView)findViewById(R.id.editText_wellcome);
-                                textView4.setText(price);
+                                textView4.setText(priceString);
                             }
                         }
                     };
@@ -175,8 +180,12 @@ public class Itempage extends ActionBarActivity {
                                 String price = token.nextToken().toString();
                                 String discountPriceEn = token.nextToken().toString();
                                 String discountPriceZH = token.nextToken().toString();
+                                String priceString = price;
+                                if (!discountPriceZH.equalsIgnoreCase("null")) {
+                                    priceString += " " + discountPriceZH;
+                                }
                                 TextView textView3 = (TextView)findViewById(R.id.editText_parknshop);
-                                textView3.setText(price);
+                                textView3.setText(priceString);
                             }
                         }
                     };
@@ -192,9 +201,12 @@ public class Itempage extends ActionBarActivity {
                                 String price = token.nextToken().toString();
                                 String discountPriceEn = token.nextToken().toString();
                                 String discountPriceZH = token.nextToken().toString();
-
+                                String priceString = price;
+                                if (!discountPriceZH.equalsIgnoreCase("null")) {
+                                    priceString += " " + discountPriceZH;
+                                }
                                 TextView textView7 = (TextView)findViewById(R.id.editText_marketplace);
-                                textView7.setText(price);
+                                textView7.setText(priceString);
                             }
                         }
                     };
@@ -210,8 +222,12 @@ public class Itempage extends ActionBarActivity {
                                 String price = token.nextToken().toString();
                                 String discountPriceEn = token.nextToken().toString();
                                 String discountPriceZH = token.nextToken().toString();
+                                String priceString = price;
+                                if (!discountPriceZH.equalsIgnoreCase("null")) {
+                                    priceString += " " + discountPriceZH;
+                                }
                                 TextView textView5 = (TextView)findViewById(R.id.editText_aeon);
-                                textView5.setText(price);
+                                textView5.setText(priceString);
                             }
                         }
                     };
@@ -227,26 +243,38 @@ public class Itempage extends ActionBarActivity {
                                 String price = token.nextToken().toString();
                                 String discountPriceEn = token.nextToken().toString();
                                 String discountPriceZH = token.nextToken().toString();
+                                String priceString = price;
+                                if (!discountPriceZH.equalsIgnoreCase("null")) {
+                                    priceString += " " + discountPriceZH;
+                                }
                                 TextView textView6 = (TextView)findViewById(R.id.editText_daicheong);
-                                textView6.setText(price);
+                                textView6.setText(priceString);
                             }
                         }
                     };
                     String dhcSql = "SELECT shop_goods.price,  shop_goods.discount_details_en, shop_goods.discount_details_zh FROM shop_goods WHERE shop_goods.shop_id = 5 AND  shop_goods.good_id = " + itemId;
                     dbManager7.querySql(dhcSql);
+
+                    DBManager dbManager8 = new DBManager();
+                    dbManager8.queryCallBack = new QueryCallBack() {
+                        @Override
+                        public void queryResult(String result) {
+                            if (result != null  && result.length() > 0) {
+                                StringTokenizer token = new StringTokenizer(result, "|");
+                                String likes = token.nextToken().toString();
+                                TextView textView6 = (TextView)findViewById(R.id.textView_numoflike);
+                                textView6.setText(likes);
+                            }
+                        }
+                    };
+                    String likeSql = "SELECT COUNT(*) FROM likes WHERE likes.good_id = '" + itemId + "'";
+                    dbManager8.querySql(likeSql);
                 }
             };
             String itemSql = "SELECT id, name_en, name_zh, brand_id, category_id FROM goods WHERE goods.name_zh = '" + itemName + "' OR goods.name_en = '" + itemName + "'";
             dbManager.querySql(itemSql);
         }
-
-        String nooflike = "hihi1"; // scanResult.getContents();
-        //this.Itempage= itemname;
-        TextView textView8 = (TextView)this.findViewById(R.id.textView_numoflike);
-        textView8.setText(nooflike);
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
