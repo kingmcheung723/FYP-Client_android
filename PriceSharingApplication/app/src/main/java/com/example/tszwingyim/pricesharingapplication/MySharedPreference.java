@@ -1,7 +1,8 @@
 package com.example.tszwingyim.pricesharingapplication;
 
-import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 
 class MySharedPreference {
@@ -21,5 +22,19 @@ class MySharedPreference {
     public static String getMemberName(Context context) {
         SharedPreferences preference = context.getSharedPreferences(MyPreferenceName, 0);
         return preference.getString(MemberName, null);
+    }
+
+    public static void displayDialog(String message, Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("Alert")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }
