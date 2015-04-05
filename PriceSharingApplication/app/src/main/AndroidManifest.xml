@@ -142,7 +142,7 @@
             android:label="@string/title_activity_loading_page" >
         </activity>
         <activity
-            android:name=".goodlist"
+            android:name=".GoodList"
             android:label="@string/title_activity_goodlist" >
         </activity>
         <activity

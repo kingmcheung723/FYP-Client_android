@@ -1,39 +1,19 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.app.Activity;
+import java.util.StringTokenizer;
 
-public class goodlist extends ActionBarActivity {
-    ListView list;
-    String[] web = {
-            "Google Plus",
-            "Twitter",
-            "Windows",
-            "Bing",
-            "Itunes",
-            "Wordpress",
-            "Drupal"
-    } ;
+public class GoodList extends ActionBarActivity {
 
-    Integer[] imageId = {
-            R.drawable.tea5,
-            R.drawable.tea6,
-            R.drawable.tea7,
-            R.drawable.tea8,
-            R.drawable.tea22,
-            R.drawable.tea8,
-            R.drawable.tea22
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,15 +21,15 @@ public class goodlist extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_goodlist);
-        Button search = (Button)findViewById(R.id.button_search);
-        Button recommend = (Button)findViewById(R.id.button_recommend);
-        Button member = (Button)findViewById(R.id.button_member);
-        Button barcode = (Button)findViewById(R.id.button_barcode);
+        Button search = (Button) findViewById(R.id.button_search);
+        Button recommend = (Button) findViewById(R.id.button_recommend);
+        Button member = (Button) findViewById(R.id.button_member);
+        Button barcode = (Button) findViewById(R.id.button_barcode);
 
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = TabManager.getInstance().getIntent(goodlist.this, Member.class);
+                Intent myintent1 = TabManager.getInstance().getIntent(GoodList.this, Member.class);
                 startActivity(myintent1);
 
             }
@@ -57,7 +37,7 @@ public class goodlist extends ActionBarActivity {
         search.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent2 = TabManager.getInstance().getIntent(goodlist.this, Search.class);
+                Intent myintent2 = TabManager.getInstance().getIntent(GoodList.this, Search.class);
                 startActivity(myintent2);
 
             }
@@ -65,7 +45,7 @@ public class goodlist extends ActionBarActivity {
         recommend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = TabManager.getInstance().getIntent(goodlist.this, Recommendation.class);
+                Intent myintent3 = TabManager.getInstance().getIntent(GoodList.this, Recommendation.class);
                 startActivity(myintent3);
 
             }
@@ -73,21 +53,74 @@ public class goodlist extends ActionBarActivity {
         barcode.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent4 = TabManager.getInstance().getIntent(goodlist.this, Barcode.class);
+                Intent myintent4 = TabManager.getInstance().getIntent(GoodList.this, Barcode.class);
                 startActivity(myintent4);
             }
         });
-        CustomList adapter = new
-                CustomList(goodlist.this, web,imageId);
-        list=(ListView)findViewById(R.id.listView_good);
-        list.setAdapter(adapter);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent myintent4 = TabManager.getInstance().getIntent(goodlist.this,Itempage.class);
-                startActivity(myintent4);
-            }
-        });
+
+        final String category = this.getIntent().getExtras().getString("Category");
+        if (category != null) {
+            final DBManager categoryIdDbManager = new DBManager();
+            categoryIdDbManager.queryCallBack = new QueryCallBack() {
+                @Override
+                public void queryResult(String result) {
+                    if (result != null) {
+                        StringTokenizer token = new StringTokenizer(result, "|");
+                        if (token.hasMoreTokens()) {
+                            String categoryId = token.nextToken();
+                            if (categoryId != null) {
+                                DBManager goodsDbManager = new DBManager();
+                                goodsDbManager.queryCallBack = new QueryCallBack() {
+                                    @Override
+                                    public void queryResult(String result) {
+                                        if (result != null) {
+                                            StringTokenizer token = new StringTokenizer(result, "|");
+                                            String[] goodNames = new String[token.countTokens()];
+                                            int count = 0;
+                                            while (token.hasMoreTokens()) {
+                                                String goodName = token.nextToken();
+                                                if (goodName != null) {
+                                                    goodNames[count] = goodName;
+                                                    count++;
+                                                }
+                                            }
+                                            CustomList adapter = new
+                                                    CustomList(GoodList.this, goodNames);
+                                            ListView list = (ListView) findViewById(R.id.listView_good);
+                                            list.setAdapter(adapter);
+                                            list.setOnItemClickListener(new MyOnItemClickListener(goodNames));
+                                        }
+                                    }
+                                };
+                                String goodsSQL = "SELECT name_zh FROM goods WHERE goods.category_id = '" + categoryId + "'";
+                                goodsDbManager.querySql(goodsSQL);
+                            }
+                        }
+                    }
+                }
+            };
+            String categorySQL = "SELECT id FROM categories WHERE categories.name_zh =  '" + category + "' OR categories.name_en = '" + category + "'";
+            categoryIdDbManager.querySql(categorySQL);
+
+            String[] web = {
+                    "Google Plus",
+                    "Twitter",
+                    "Windows",
+                    "Bing",
+                    "Itunes",
+                    "Wordpress",
+                    "Drupal"
+            };
+            Integer[] imageId = {
+                    R.drawable.tea5,
+                    R.drawable.tea6,
+                    R.drawable.tea7,
+                    R.drawable.tea8,
+                    R.drawable.tea22,
+                    R.drawable.tea8,
+                    R.drawable.tea22
+            };
+        }
     }
 
 
@@ -112,4 +145,25 @@ public class goodlist extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public class MyOnItemClickListener implements AdapterView.OnItemClickListener {
+
+        String[] goodNames;
+
+        public MyOnItemClickListener(String[] goodNames) {
+            this.goodNames = goodNames;
+        }
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (position <= goodNames.length && position >= 0) {
+                String goodName = this.goodNames[position];
+                if (goodName != null) {
+                    Intent myintent4 = new Intent(GoodList.this, Itempage.class);
+                    myintent4.putExtra("ItemName", goodName);
+                    startActivity(myintent4);
+                }
+            }
+        }
+    };
 }

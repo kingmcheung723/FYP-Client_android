@@ -8,9 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 
 public class Search extends ActionBarActivity {
@@ -70,9 +72,13 @@ public class Search extends ActionBarActivity {
         Searchgoodlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Search.this, SearchGoodlist.class);
-                startActivity(intent);
-
+                AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.autocomplete_searchitem);
+                String itemName = textView.getText().toString();
+                if (itemName != null && itemName.length() > 0) {
+                    Intent intent = new Intent(Search.this, Itempage.class);
+                    intent.putExtra("ItemName", itemName);
+                    startActivity(intent);
+                }
             }
         });
 
