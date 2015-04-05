@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.StringTokenizer;
+
 
 public class Login extends ActionBarActivity {
 
@@ -99,29 +101,32 @@ public class Login extends ActionBarActivity {
                 EditText passwordEditText = (EditText) activity.findViewById(R.id.EditText_Login_Password);
                 String passwordStr = passwordEditText.getText().toString();
                 if (passwordStr.length() >= 6) if (passwordStr.length() <= 10) {
-                    String sql = "SELECT email FROM members WHERE email = " + "'" + emailStr + "'";
                     DBManager dbManager = new DBManager();
                     dbManager.queryCallBack = new QueryCallBack() {
                         @Override
                         public void queryResult(String result) {
                             if (result != null) {
-                                Intent intent = TabManager.getInstance().getIntent(Login.this, Memberpage.class);
-                                startActivity(intent);
+                                StringTokenizer token = new StringTokenizer(result, "|");
+                                if (token.hasMoreTokens()) {
+                                    String memberName = token.nextToken();
+                                    MySharedPreference.saveMemberName(memberName, Login.this);
+                                    Intent intent = TabManager.getInstance().getIntent(Login.this, Memberpage.class);
+                                    startActivity(intent);
+                                }
                             }
                         }
                     };
+                    String sql = "SELECT email FROM members WHERE email = " + "'" + emailStr + "' AND password = '" + passwordStr + "'";
                     dbManager.querySql(sql);
                 } else {
-                    emailvalid.setText("Password must be less than 10 digits");
+                    MySharedPreference.displayDialog("Password must be less than 10 digits", Login.this);
                 }
                 else {
-                    emailvalid.setText("Password must be more than 6 digits");
+                    MySharedPreference.displayDialog("Password must be more than 6 digits", Login.this);
                 }
             } else {
-                emailvalid.setText(" The Email is not valid");
+                MySharedPreference.displayDialog("The Email is not valid", Login.this);
             }
-//            Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
-//            startActivity(intent);
         }
 
         private boolean isValidEmail(CharSequence target) {
