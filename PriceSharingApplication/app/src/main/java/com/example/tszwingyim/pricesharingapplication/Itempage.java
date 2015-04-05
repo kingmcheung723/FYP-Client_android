@@ -1,5 +1,6 @@
 package com.example.tszwingyim.pricesharingapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -271,8 +272,7 @@ public class Itempage extends ActionBarActivity {
                     String likeSql = "SELECT COUNT(*) FROM likes WHERE likes.good_id = '" + itemId + "'";
                     dbManager8.querySql(likeSql);
 
-                    ImageView likeView = (ImageView) findViewById(R.id.imageView_like);
-                    likeView.setOnClickListener(new View.OnClickListener() {
+                    View.OnClickListener onLikeClickListener = new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             final String memberName = MySharedPreference.getMemberName(Itempage.this);
@@ -321,7 +321,11 @@ public class Itempage extends ActionBarActivity {
                                 MySharedPreference.displayDialog("You are not yet registered.", Itempage.this);
                             }
                         }
-                    });
+                    };
+                    Button likeButton = (Button) findViewById(R.id.button_like);
+                    ImageView likeView = (ImageView) findViewById(R.id.imageView_like);
+                    likeButton.setOnClickListener(onLikeClickListener);
+                    likeView.setOnClickListener(onLikeClickListener);
                 }
             };
             String itemSql = "SELECT id, name_en, name_zh, brand_id, category_id FROM goods WHERE goods.name_zh = '" + itemName + "' OR goods.name_en = '" + itemName + "'";

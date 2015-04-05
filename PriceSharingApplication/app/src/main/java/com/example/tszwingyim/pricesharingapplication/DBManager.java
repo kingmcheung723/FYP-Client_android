@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
+import java.util.StringTokenizer;
 
 
 interface QueryCallBack {
@@ -71,7 +72,6 @@ public class DBManager{
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d("", result);
             queryCallBack.queryResult(result);
             // might want to change "executed" for the returned string passed
             // into onPostExecute() but that is upto you
@@ -113,7 +113,6 @@ public class DBManager{
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d("", result);
             queryCallBack.queryResult(result);
             // might want to change "executed" for the returned string passed
             // into onPostExecute() but that is upto you
