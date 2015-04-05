@@ -56,8 +56,12 @@ public class DBManager{
                 Connection con = DriverManager.getConnection(url, user, password);
                 String sql = params[0];
                 Statement st = con.createStatement();
-                st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                return null;
+                int result = st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+                if (result == 1) {
+                    return "Success";
+                } else {
+                    return null;
+                }
             }
             catch(Exception e) {
                 e.printStackTrace();

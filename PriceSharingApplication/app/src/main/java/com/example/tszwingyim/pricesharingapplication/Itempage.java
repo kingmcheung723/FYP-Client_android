@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -24,7 +25,7 @@ public class Itempage extends ActionBarActivity {
         setContentView(R.layout.activity_itempage);
         Button recommend = (Button)findViewById(R.id.button_recommend);
         Button category = (Button)findViewById(R.id.button_category);
-        Button member = (Button)findViewById(R.id.button_member);
+        final Button member = (Button)findViewById(R.id.button_member);
         Button barcode = (Button)findViewById(R.id.button_barcode);
         Button pricechart = (Button)findViewById(R.id.button_pricechart);
         Button sharepricelist = (Button)findViewById(R.id.button_shareprice);
@@ -100,7 +101,7 @@ public class Itempage extends ActionBarActivity {
             }
         });
 
-        String itemName = getIntent().getExtras().getString("ItemName");
+        final String itemName = getIntent().getExtras().getString("ItemName");
         if (itemName != null && itemName.length() > 0) {
             final DBManager dbManager = new DBManager();
             dbManager.queryCallBack = new QueryCallBack() {
@@ -109,7 +110,7 @@ public class Itempage extends ActionBarActivity {
                     Locale locale = getResources().getConfiguration().locale;
                     StringTokenizer token = new StringTokenizer(result, "|");
 
-                    String itemId = token.nextToken().toString();
+                    final String itemId = token.nextToken().toString();
 
                     // Item name
                     String itemNameEn = token.nextToken().toString();
@@ -269,6 +270,58 @@ public class Itempage extends ActionBarActivity {
                     };
                     String likeSql = "SELECT COUNT(*) FROM likes WHERE likes.good_id = '" + itemId + "'";
                     dbManager8.querySql(likeSql);
+
+                    ImageView likeView = (ImageView) findViewById(R.id.imageView_like);
+                    likeView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final String memberName = MySharedPreference.getMemberName(Itempage.this);
+                            if (memberName != null) {
+                                final QueryCallBack queryTotalLikesCallBack = new QueryCallBack() {
+                                    @Override
+                                    public void queryResult(String result) {
+                                        if (result != null  && result.length() > 0) {
+                                            StringTokenizer token = new StringTokenizer(result, "|");
+                                            String likes = token.nextToken().toString();
+                                            TextView textView6 = (TextView)findViewById(R.id.textView_numoflike);
+                                            textView6.setText(likes);
+                                        }
+                                    }
+                                };
+
+                                final QueryCallBack queryInsertLikeCallBack = new QueryCallBack() {
+                                    @Override
+                                    public void queryResult(String result) {
+                                        if (result != null) {
+                                            DBManager queryTotalLikes = new DBManager();
+                                            queryTotalLikes.queryCallBack = queryTotalLikesCallBack;
+                                            String likeSql = "SELECT COUNT(*) FROM likes WHERE likes.good_id = '" + itemId + "'";
+                                            queryTotalLikes.querySql(likeSql);
+                                        }
+                                    }
+                                };
+                                QueryCallBack queryIsLikedCallBack = new QueryCallBack() {
+                                    @Override
+                                    public void queryResult(String result) {
+                                        if (result == null || result.equalsIgnoreCase("")) {
+                                            DBManager queryInsertLike = new DBManager();
+                                            queryInsertLike.queryCallBack = queryInsertLikeCallBack;
+                                            String insertLikeSQL = "INSERT INTO likes (member_email, good_id, likedislike) VALUES ( '" + memberName + "','" + itemId +"'," + "'1')";
+                                            queryInsertLike.insertSql(insertLikeSQL);
+                                        } else {
+                                            MySharedPreference.displayDialog("You have liked this item", Itempage.this);
+                                        }
+                                    }
+                                };
+                                DBManager queryIsLiked = new DBManager();
+                                queryIsLiked.queryCallBack = queryIsLikedCallBack;
+                                String queryIsLikedSQL = "SELECT * FROM likes WHERE likes.good_id = '" + itemId + "' AND likes.member_email = '" + memberName + "'";
+                                queryIsLiked.querySql(queryIsLikedSQL);
+                            } else {
+                                MySharedPreference.displayDialog("You are not yet registered.", Itempage.this);
+                            }
+                        }
+                    });
                 }
             };
             String itemSql = "SELECT id, name_en, name_zh, brand_id, category_id FROM goods WHERE goods.name_zh = '" + itemName + "' OR goods.name_en = '" + itemName + "'";
