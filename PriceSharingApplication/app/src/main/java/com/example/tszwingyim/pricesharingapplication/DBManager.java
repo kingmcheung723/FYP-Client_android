@@ -17,11 +17,13 @@ interface QueryCallBack {
 }
 
 public class DBManager{
+    public QueryCallBack queryCallBack;
+    public static final String SUCCESS = "Success";
+
     private static final String url = "jdbc:mysql://10.0.2.2:3306/fyp_database?useUnicode=yes&characterEncoding=UTF-8";
     private static final String user = "root";
     private static final String password = null;
     private static final String JDBCDriverName = "com.mysql.jdbc.Driver";
-    public QueryCallBack queryCallBack;
 
     public DBManager() {
         try {
@@ -59,7 +61,7 @@ public class DBManager{
                 Statement st = con.createStatement();
                 int result = st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
                 if (result == 1) {
-                    return "Success";
+                    return DBManager.SUCCESS;
                 } else {
                     return null;
                 }

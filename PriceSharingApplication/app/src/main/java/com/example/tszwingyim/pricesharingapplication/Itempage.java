@@ -70,9 +70,22 @@ public class Itempage extends ActionBarActivity {
         commentlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Commentlist.class);
-                startActivity(intent);
+                DBManager dbManager = new DBManager();
+                dbManager.queryCallBack = new QueryCallBack() {
+                    @Override
+                    public void queryResult(String result) {
+                        StringTokenizer token = new StringTokenizer(result, "|");
+                        if (token != null && token.countTokens() >= 1) {
+                            String itemId = token.nextToken().toString();
 
+                            Intent intent = new Intent(Itempage.this, Commentlist.class);
+                            intent.putExtra("ITEM_ID", itemId);
+                            startActivity(intent);
+                        }
+                    }
+                };
+                String itemSql = "SELECT id FROM goods WHERE goods.name_zh = '" + itemName + "' OR goods.name_en = '" + itemName + "'";
+                dbManager.querySql(itemSql);
             }
         });
         pricechart.setOnClickListener(new View.OnClickListener() {

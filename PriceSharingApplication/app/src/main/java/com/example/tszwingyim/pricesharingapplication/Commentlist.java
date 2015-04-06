@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.StringTokenizer;
 
 
 public class Commentlist extends ActionBarActivity {
@@ -79,9 +82,33 @@ public class Commentlist extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        String goodId = this.getIntent().getExtras().getString("ITEM_ID");
+        DBManager dbManager = new DBManager();
+        dbManager.queryCallBack = new QueryCallBack() {
+            @Override
+            public void queryResult(String result) {
+                if (result != null) {
+                    StringTokenizer token = new StringTokenizer(result, "|");
+                    String[] comments = new String[token.countTokens()];
+                    int count  = 0;
+                    while (token.hasMoreTokens()) {
+                        comments[count] = token.nextToken().toString();
+                        count ++;
+                    }
+                    CustomList adapter = new
+                            CustomList(Commentlist.this, comments);
+                    ListView list = (ListView) findViewById(R.id.listView3);
+                    if (list != null) {
+                        list.setAdapter(adapter);
+                    }
+                }
+            }
+        };
+        String queryCommentsSQL = "SELECT comment FROM good_comments WHERE good_id = '" + goodId + "'";
+//        String queryCommentsSQL = "SELECT comment, member_email, createddate FROM good_comments WHERE good_id = '" + goodId + "'";
+        dbManager.querySql(queryCommentsSQL);
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

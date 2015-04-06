@@ -102,24 +102,24 @@ public class GoodList extends ActionBarActivity {
             String categorySQL = "SELECT id FROM categories WHERE categories.name_zh =  '" + category + "' OR categories.name_en = '" + category + "'";
             categoryIdDbManager.querySql(categorySQL);
 
-            String[] web = {
-                    "Google Plus",
-                    "Twitter",
-                    "Windows",
-                    "Bing",
-                    "Itunes",
-                    "Wordpress",
-                    "Drupal"
-            };
-            Integer[] imageId = {
-                    R.drawable.tea5,
-                    R.drawable.tea6,
-                    R.drawable.tea7,
-                    R.drawable.tea8,
-                    R.drawable.tea22,
-                    R.drawable.tea8,
-                    R.drawable.tea22
-            };
+//            String[] web = {
+//                    "Google Plus",
+//                    "Twitter",
+//                    "Windows",
+//                    "Bing",
+//                    "Itunes",
+//                    "Wordpress",
+//                    "Drupal"
+//            };
+//            Integer[] imageId = {
+//                    R.drawable.tea5,
+//                    R.drawable.tea6,
+//                    R.drawable.tea7,
+//                    R.drawable.tea8,
+//                    R.drawable.tea22,
+//                    R.drawable.tea8,
+//                    R.drawable.tea22
+//            };
         }
     }
 

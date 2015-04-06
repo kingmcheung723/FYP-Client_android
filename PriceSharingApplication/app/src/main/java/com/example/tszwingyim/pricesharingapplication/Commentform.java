@@ -110,6 +110,7 @@ public class Commentform extends ActionBarActivity {
                                 public void queryResult(String result) {
                                     if (result.equalsIgnoreCase(DBManager.SUCCESS)) {
                                         Intent intent = new Intent(Commentform.this, Commentlist.class);
+                                        intent.putExtra("ITEM_ID", goodId);
                                         startActivity(intent);
                                     }
                                 }
