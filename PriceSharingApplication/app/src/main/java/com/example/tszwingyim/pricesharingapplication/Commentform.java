@@ -1,13 +1,14 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class Commentform extends ActionBarActivity {
@@ -19,15 +20,19 @@ public class Commentform extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_commentform);
-        Button recommend = (Button)findViewById(R.id.button_recommend);
-        Button category = (Button)findViewById(R.id.button_category);
-        Button member = (Button)findViewById(R.id.button_member);
-        Button barcode = (Button)findViewById(R.id.button_barcode);
-        Button pricechart = (Button)findViewById(R.id.button_pricechart);
-        Button sharepricelist = (Button)findViewById(R.id.button_shareprice);
-        Button commentlist = (Button)findViewById(R.id.button_comment);
-        Button itempage = (Button)findViewById(R.id.button_priceinfo);
-        Button confirm = (Button)findViewById(R.id.button_confirm);
+        Button recommend = (Button) findViewById(R.id.button_recommend);
+        Button category = (Button) findViewById(R.id.button_category);
+        Button member = (Button) findViewById(R.id.button_member);
+        Button barcode = (Button) findViewById(R.id.button_barcode);
+        Button pricechart = (Button) findViewById(R.id.button_pricechart);
+        Button sharepricelist = (Button) findViewById(R.id.button_shareprice);
+        Button commentlist = (Button) findViewById(R.id.button_comment);
+        Button itempage = (Button) findViewById(R.id.button_priceinfo);
+        Button confirm = (Button) findViewById(R.id.button_confirm);
+
+        final String goodId = this.getIntent().getExtras().getString("ITEM_ID");
+        String goodNameEn = this.getIntent().getExtras().getString("ITEM_NAME_EN");
+        String goodNameZh = this.getIntent().getExtras().getString("ITEM_NAME_ZH");
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -93,10 +98,34 @@ public class Commentform extends ActionBarActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Commentlist.class);
-                startActivity(intent);
+                EditText commentEditText = (EditText) findViewById(R.id.editText_usercomment);
+                if (commentEditText != null) {
+                    String comment = commentEditText.getText().toString();
+                    if (comment != null && comment.length() > 0) {
+                        String memberEmail = MySharedPreference.getMemberName(Commentform.this);
+                        if (memberEmail != null) {
+                            DBManager dbManager = new DBManager();
+                            dbManager.queryCallBack = new QueryCallBack() {
+                                @Override
+                                public void queryResult(String result) {
+                                    if (result.equalsIgnoreCase(DBManager.SUCCESS)) {
+                                        Intent intent = new Intent(Commentform.this, Commentlist.class);
+                                        startActivity(intent);
+                                    }
+                                }
+                            };
+                            String insertCommentSQL = "INSERT INTO good_comments (good_id, comment, member_email) VALUES ('" +
+                                    goodId + "','" + comment + "','" + memberEmail + "')";
+                            dbManager.insertSql(insertCommentSQL);
+                        } else {
+                            MySharedPreference.displayDialog("You have not yet registered", Commentform.this);
+                        }
+                    }
+                }
             }
         });
+
+
     }
 
 

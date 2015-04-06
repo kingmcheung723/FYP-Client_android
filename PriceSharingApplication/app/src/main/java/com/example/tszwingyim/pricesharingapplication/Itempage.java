@@ -26,13 +26,15 @@ public class Itempage extends ActionBarActivity {
         setContentView(R.layout.activity_itempage);
         Button recommend = (Button)findViewById(R.id.button_recommend);
         Button category = (Button)findViewById(R.id.button_category);
-        final Button member = (Button)findViewById(R.id.button_member);
+        Button member = (Button)findViewById(R.id.button_member);
         Button barcode = (Button)findViewById(R.id.button_barcode);
         Button pricechart = (Button)findViewById(R.id.button_pricechart);
         Button sharepricelist = (Button)findViewById(R.id.button_shareprice);
         Button commentlist = (Button)findViewById(R.id.button_comment);
         Button sharepriceform = (Button)findViewById(R.id.button_goshareprice);
         Button commentform = (Button)findViewById(R.id.button_givecomment);
+
+        final String itemName = getIntent().getExtras().getString("ItemName");
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -97,12 +99,29 @@ public class Itempage extends ActionBarActivity {
         commentform.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Commentform.class);
-                startActivity(intent);
+                DBManager dbManager = new DBManager();
+                dbManager.queryCallBack = new QueryCallBack() {
+                    @Override
+                    public void queryResult(String result) {
+                        StringTokenizer token = new StringTokenizer(result, "|");
+                        if (token != null && token.countTokens() >= 3) {
+                            String itemId = token.nextToken().toString();
+                            String itemNameEn = token.nextToken().toString();
+                            String itemNameZh = token.nextToken().toString();
+
+                            Intent intent = new Intent(Itempage.this, Commentform.class);
+                            intent.putExtra("ITEM_ID", itemId);
+                            intent.putExtra("ITEM_NAME_EN", itemNameEn);
+                            intent.putExtra("ITEM_NAME_ZH", itemNameZh);
+                            startActivity(intent);
+                        }
+                    }
+                };
+                String itemSql = "SELECT id, name_en, name_zh FROM goods WHERE goods.name_zh = '" + itemName + "' OR goods.name_en = '" + itemName + "'";
+                dbManager.querySql(itemSql);
             }
         });
 
-        final String itemName = getIntent().getExtras().getString("ItemName");
         if (itemName != null && itemName.length() > 0) {
             final DBManager dbManager = new DBManager();
             dbManager.queryCallBack = new QueryCallBack() {
