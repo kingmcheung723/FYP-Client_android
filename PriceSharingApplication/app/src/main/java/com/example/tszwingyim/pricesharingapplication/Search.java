@@ -12,8 +12,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import java.util.StringTokenizer;
-
 
 public class Search extends ActionBarActivity {
 
@@ -89,7 +87,7 @@ public class Search extends ActionBarActivity {
                                         @Override
                                         public void queryResult(String result) {
                                             if (result != null && result.length() > 0) {
-                                                StringTokenizer token = new StringTokenizer(result, "|");
+                                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
                                                 if (token != null && token.countTokens() >= 1) {
                                                     String itemId = token.nextToken().toString();
                                                     Intent intent = new Intent(Search.this, Itempage.class);
@@ -109,7 +107,7 @@ public class Search extends ActionBarActivity {
                                         @Override
                                         public void queryResult(String result) {
                                             if (result != null) {
-                                                StringTokenizer token = new StringTokenizer(result, "|");
+                                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
                                                 String[] goodNames = new String[token.countTokens()];
                                                 int count = 0;
                                                 while (token.hasMoreTokens()) {

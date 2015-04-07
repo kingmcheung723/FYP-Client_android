@@ -30,10 +30,6 @@ public class Commentform extends ActionBarActivity {
         Button itempage = (Button) findViewById(R.id.button_priceinfo);
         Button confirm = (Button) findViewById(R.id.button_confirm);
 
-        final String goodId = this.getIntent().getExtras().getString("ITEM_ID");
-        String goodNameEn = this.getIntent().getExtras().getString("ITEM_NAME_EN");
-        String goodNameZh = this.getIntent().getExtras().getString("ITEM_NAME_ZH");
-
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -95,38 +91,40 @@ public class Commentform extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-        confirm.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
-                EditText commentEditText = (EditText) findViewById(R.id.editText_usercomment);
-                if (commentEditText != null) {
-                    String comment = commentEditText.getText().toString();
-                    if (comment != null && comment.length() > 0) {
-                        String memberEmail = MySharedPreference.getMemberName(Commentform.this);
-                        if (memberEmail != null) {
-                            DBManager dbManager = new DBManager();
-                            dbManager.queryCallBack = new QueryCallBack() {
-                                @Override
-                                public void queryResult(String result) {
-                                    if (result.equalsIgnoreCase(DBManager.SUCCESS)) {
-                                        Intent intent = new Intent(Commentform.this, Commentlist.class);
-                                        intent.putExtra("ITEM_ID", goodId);
-                                        startActivity(intent);
+        final String goodId = this.getIntent().getExtras().getString("ITEM_ID");
+        if (goodId != null && goodId.length() > 0) {
+            confirm.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    EditText commentEditText = (EditText) findViewById(R.id.editText_usercomment);
+                    if (commentEditText != null) {
+                        String comment = commentEditText.getText().toString();
+                        if (comment != null && comment.length() > 0) {
+                            String memberEmail = MySharedPreference.getMemberName(Commentform.this);
+                            if (memberEmail != null) {
+                                DBManager dbManager = new DBManager();
+                                dbManager.queryCallBack = new QueryCallBack() {
+                                    @Override
+                                    public void queryResult(String result) {
+                                        if (result.equalsIgnoreCase(DBManager.SUCCESS)) {
+                                            Intent intent = new Intent(Commentform.this, Commentlist.class);
+                                            intent.putExtra("ITEM_ID", goodId);
+                                            startActivity(intent);
+                                        }
                                     }
-                                }
-                            };
-                            String insertCommentSQL = "INSERT INTO good_comments (good_id, comment, member_email) VALUES ('" +
-                                    goodId + "','" + comment + "','" + memberEmail + "')";
-                            dbManager.insertSql(insertCommentSQL);
-                        } else {
-                            MySharedPreference.displayDialog("You have not yet registered", Commentform.this);
+                                };
+                                String insertCommentSQL = "INSERT INTO good_comments (good_id, comment, member_email) VALUES ('" +
+                                        goodId + "','" + comment + "','" + memberEmail + "')";
+                                dbManager.insertSql(insertCommentSQL);
+                            } else {
+                                MySharedPreference.displayDialog("You have not yet registered", Commentform.this);
+                            }
                         }
                     }
                 }
-            }
-        });
-
-
+            });
+        }
     }
 
 

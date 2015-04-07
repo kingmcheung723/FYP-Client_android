@@ -1,13 +1,11 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.app.Activity;
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,8 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.util.StringTokenizer;
 
 
 public class Login extends ActionBarActivity {
@@ -106,7 +102,7 @@ public class Login extends ActionBarActivity {
                         @Override
                         public void queryResult(String result) {
                             if (result != null) {
-                                StringTokenizer token = new StringTokenizer(result, "|");
+                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
                                 if (token.hasMoreTokens()) {
                                     String memberName = token.nextToken();
                                     MySharedPreference.saveMemberName(memberName, Login.this);
@@ -137,20 +133,21 @@ public class Login extends ActionBarActivity {
             }
         }
     }
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
 
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
-                return true;
-            }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-            return super.onOptionsItemSelected(item);
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }
 

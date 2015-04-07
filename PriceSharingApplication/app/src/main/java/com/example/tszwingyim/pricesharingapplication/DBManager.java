@@ -1,22 +1,19 @@
 package com.example.tszwingyim.pricesharingapplication;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
-import java.util.StringTokenizer;
 
 
 interface QueryCallBack {
     void queryResult(String result);
 }
 
-public class DBManager{
+public class DBManager {
     public QueryCallBack queryCallBack;
     public static final String SUCCESS = "Success";
 
@@ -65,8 +62,7 @@ public class DBManager{
                 } else {
                     return null;
                 }
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
@@ -80,10 +76,12 @@ public class DBManager{
         }
 
         @Override
-        protected void onPreExecute() {}
+        protected void onPreExecute() {
+        }
 
         @Override
-        protected void onProgressUpdate(Void... values) {}
+        protected void onProgressUpdate(Void... values) {
+        }
     }
 
     private class queryOperation extends AsyncTask<String, Void, String> {
@@ -97,17 +95,16 @@ public class DBManager{
                 ResultSet rs = st.executeQuery(sql);
                 ResultSetMetaData rsmd = rs.getMetaData();
                 String result = "";
-                while(rs.next()) {
+                while (rs.next()) {
                     for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                        result +=  rs.getString(i) + "|";
+                        result += rs.getString(i) + "|";
                     }
                 }
                 if (result.equalsIgnoreCase("")) {
                     result = "";
                 }
                 return result;
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
@@ -121,9 +118,11 @@ public class DBManager{
         }
 
         @Override
-        protected void onPreExecute() {}
+        protected void onPreExecute() {
+        }
 
         @Override
-        protected void onProgressUpdate(Void... values) {}
+        protected void onProgressUpdate(Void... values) {
+        }
     }
 }
