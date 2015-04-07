@@ -72,17 +72,6 @@ public class Search extends ActionBarActivity {
         Searchgoodlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-<<<<<<< HEAD
-                AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.autocomplete_searchitem);
-                String itemName = textView.getText().toString();
-                if (itemName != null && itemName.length() > 0) {
-                    Intent intent = new Intent(Search.this, Itempage.class);
-                    intent.putExtra("ItemName", itemName);
-                    startActivity(intent);
-                } else {
-
-                    MySharedPreference.displayDialog("Incorrect Itemname", Search.this);
-=======
                 AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autocomplete_searchitem);
                 if (textView != null) {
                     String searchText = textView.getText().toString();
@@ -161,7 +150,6 @@ public class Search extends ActionBarActivity {
                     } else {
                         MySharedPreference.displayDialog("Please enter the name you want to search.", Search.this);
                     }
->>>>>>> 281450e4866eb0c37d3befecbbcfbfa4b81d9a3c
                 }
             }
         });

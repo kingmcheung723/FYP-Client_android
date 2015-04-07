@@ -1,29 +1,21 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Environment;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.app.Activity;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.WindowManager;
 import android.view.View;
-import com.androidplot.xy.*;
+import android.view.WindowManager;
+import android.widget.Button;
+
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
-import android.widget.Button;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import com.androidplot.xy.XYStepMode;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -111,11 +103,11 @@ public class Pricechart extends ActionBarActivity {
         // initialize our XYPlot reference:
         plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
         // Create a couple arrays of y-values to plot:
-        Number[] series1Numbers = {8.10, 8.20,8.30, 8.40, 8.50,8.60,8.70,8.80,8.90,9.00,9.10};
-        Number[] series2Numbers = {8.20, 8.30,8.40, 8.50, 8.60,8.70,8.80,8.90,9.00,9.10,9.20};
-        Number[] series3Numbers = {8.30, 8.40,8.50, 8.60, 8.70,8.80,8.90,9.00,9.10,9.20,9.30};
-        Number[] series4Numbers = {8.40, 8.50,8.60, 8.70, 8.80,8.90,9.00,9.10,9.20,9.30,9.40};
-        Number[] series5Numbers = {8.50, 8.60,8.70, 8.80, 8.90,9.00,9.10,9.20,9.30,9.40,9.50};
+        Number[] series1Numbers = {8.10, 8.20, 8.30, 8.40, 8.50, 8.60, 8.70, 8.80, 8.90, 9.00, 9.10};
+        Number[] series2Numbers = {8.20, 8.30, 8.40, 8.50, 8.60, 8.70, 8.80, 8.90, 9.00, 9.10, 9.20};
+        Number[] series3Numbers = {8.30, 8.40, 8.50, 8.60, 8.70, 8.80, 8.90, 9.00, 9.10, 9.20, 9.30};
+        Number[] series4Numbers = {8.40, 8.50, 8.60, 8.70, 8.80, 8.90, 9.00, 9.10, 9.20, 9.30, 9.40};
+        Number[] series5Numbers = {8.50, 8.60, 8.70, 8.80, 8.90, 9.00, 9.10, 9.20, 9.30, 9.40, 9.50};
         //final String[] xLabels = {"Jan", "Feb", "Mar", "Apr", "May"};
 //        Number[] timeseriesNumbers = {978307200,// 2001
 //                1009843200, // 2002
@@ -153,7 +145,7 @@ public class Pricechart extends ActionBarActivity {
         XYSeries series2 = new SimpleXYSeries(Arrays.asList(series2Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Wellcome");
         XYSeries series3 = new SimpleXYSeries(Arrays.asList(series3Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Aeon");
         XYSeries series4 = new SimpleXYSeries(Arrays.asList(series4Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "大昌");
-       XYSeries series5 = new SimpleXYSeries(Arrays.asList(series5Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Market Place");
+        XYSeries series5 = new SimpleXYSeries(Arrays.asList(series5Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Market Place");
 
         // Create a formatter to use for drawing a series using LineAndPointRenderer
         // and configure it from xml:
@@ -200,7 +192,8 @@ public class Pricechart extends ActionBarActivity {
 
         // reduce the number of range labels
         plot.setTicksPerRangeLabel(1);
-        plot.getGraphWidget().setDomainLabelOrientation(90);}
+        plot.getGraphWidget().setDomainLabelOrientation(90);
+    }
 
     private List getSeries(int count, int max) {
         List series = new ArrayList();
@@ -218,8 +211,6 @@ public class Pricechart extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_pricechart, menu);
         return true;
     }
-
-
 
 
 }
