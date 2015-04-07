@@ -28,7 +28,7 @@ public class Search extends ActionBarActivity {
         Button member = (Button) findViewById(R.id.button_member);
         Button barcode = (Button) findViewById(R.id.button_barcode);
         Button location = (Button) findViewById(R.id.button_location);
-        Button itemPage = (Button) findViewById(R.id.button_itempage);
+        Button Searchgoodlist = (Button) findViewById(R.id.button_itempage);
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -69,9 +69,20 @@ public class Search extends ActionBarActivity {
 
             }
         });
-        itemPage.setOnClickListener(new View.OnClickListener() {
+        Searchgoodlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+<<<<<<< HEAD
+                AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.autocomplete_searchitem);
+                String itemName = textView.getText().toString();
+                if (itemName != null && itemName.length() > 0) {
+                    Intent intent = new Intent(Search.this, Itempage.class);
+                    intent.putExtra("ItemName", itemName);
+                    startActivity(intent);
+                } else {
+
+                    MySharedPreference.displayDialog("Incorrect Itemname", Search.this);
+=======
                 AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autocomplete_searchitem);
                 if (textView != null) {
                     String searchText = textView.getText().toString();
@@ -150,6 +161,7 @@ public class Search extends ActionBarActivity {
                     } else {
                         MySharedPreference.displayDialog("Please enter the name you want to search.", Search.this);
                     }
+>>>>>>> 281450e4866eb0c37d3befecbbcfbfa4b81d9a3c
                 }
             }
         });

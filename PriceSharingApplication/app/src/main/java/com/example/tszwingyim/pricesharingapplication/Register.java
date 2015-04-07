@@ -127,16 +127,21 @@ public class Register extends ActionBarActivity {
                         String sql = "INSERT INTO members (email, password) VALUES ('" + emailStr + "','" + passwordStr + "')";
                         dbManager.insertSql(sql);
                     } else {
-                        emailvalid.setText("Password must be less than 10 digits");
+                       // emailvalid.setText("Password must be less than 10 digits");
+
+                        MySharedPreference.displayDialog("Password must be less than 10 digits", Register.this);
                     }
                     else {
-                        emailvalid.setText("Password must be more than 6 digits");
+                       // emailvalid.setText("Password must be more than 6 digits");
+                        MySharedPreference.displayDialog("Password must be less than 6 digits", Register.this);
                     }
                 } else {
-                    emailvalid.setText("Confirm password does not match password");
+                    //emailvalid.setText("Confirm password does not match password");
+                    MySharedPreference.displayDialog("Confirm password does not match password", Register.this);
                 }
             } else {
-                emailvalid.setText(" The Email is not valid");
+               // emailvalid.setText(" The Email is not valid");
+                MySharedPreference.displayDialog(" The Email is not valid", Register.this);
             }
 //            Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
 //            startActivity(intent);
