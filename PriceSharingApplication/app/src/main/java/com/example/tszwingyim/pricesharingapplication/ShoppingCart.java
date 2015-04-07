@@ -73,9 +73,7 @@ public class ShoppingCart extends ActionBarActivity {
                         String[] goods = new String[token.countTokens()];
                         int count = 0;
                         while (token.hasMoreTokens()) {
-                            String goodId = token.nextToken().toString();
-                            String goodName  = token.nextToken().toString();
-                            goods[count] = goodId + " : " + goodName;
+                            goods[count] = token.nextToken().toString();
                             count++;
                         }
                         CustomList adapter = new
@@ -87,7 +85,7 @@ public class ShoppingCart extends ActionBarActivity {
                     }
                 }
             };
-            String sql = "SELECT id, name_zh FROM goods WHERE goods.id IN (SELECT good_id FROM shopping_carts WHERE shopping_carts.member_email = '" + memberEmail + "')";
+            String sql = "SELECT name_zh FROM goods WHERE goods.id IN (SELECT good_id FROM shopping_carts WHERE shopping_carts.member_email = '" + memberEmail + "')";
             dbManager.querySql(sql);
         }
 
