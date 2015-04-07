@@ -1,5 +1,6 @@
 package com.example.tszwingyim.pricesharingapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -31,6 +33,8 @@ public class Itempage extends ActionBarActivity {
         Button commentlist = (Button)findViewById(R.id.button_comment);
         Button sharepriceform = (Button)findViewById(R.id.button_goshareprice);
         Button commentform = (Button)findViewById(R.id.button_givecomment);
+
+        final String itemId = getIntent().getExtras().getString("ITEM_ID");
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -66,9 +70,9 @@ public class Itempage extends ActionBarActivity {
         commentlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Commentlist.class);
+                Intent intent = new Intent(Itempage.this, Commentlist.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
-
             }
         });
         pricechart.setOnClickListener(new View.OnClickListener() {
@@ -95,21 +99,37 @@ public class Itempage extends ActionBarActivity {
         commentform.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Commentform.class);
-                startActivity(intent);
+                if (itemId != null && itemId.length() > 0) {
+                    DBManager dbManager = new DBManager();
+                    dbManager.queryCallBack = new QueryCallBack() {
+                        @Override
+                        public void queryResult(String result) {
+                            StringTokenizer token = new StringTokenizer(result, "|");
+                            if (token != null && token.countTokens() >= 2) {
+                                String itemNameEn = token.nextToken().toString();
+                                String itemNameZh = token.nextToken().toString();
+
+                                Intent intent = new Intent(Itempage.this, Commentform.class);
+                                intent.putExtra("ITEM_ID", itemId);
+                                intent.putExtra("ITEM_NAME_EN", itemNameEn);
+                                intent.putExtra("ITEM_NAME_ZH", itemNameZh);
+                                startActivity(intent);
+                            }
+                        }
+                    };
+                    String itemSql = "SELECT name_en, name_zh FROM goods WHERE goods.id =  '" + itemId + "'";
+                    dbManager.querySql(itemSql);
+                }
             }
         });
 
-        String itemName = getIntent().getExtras().getString("ItemName");
-        if (itemName != null && itemName.length() > 0) {
+        if (itemId != null && itemId.length() > 0) {
             final DBManager dbManager = new DBManager();
             dbManager.queryCallBack = new QueryCallBack() {
                 @Override
                 public void queryResult(String result) {
                     Locale locale = getResources().getConfiguration().locale;
                     StringTokenizer token = new StringTokenizer(result, "|");
-
-                    String itemId = token.nextToken().toString();
 
                     // Item name
                     String itemNameEn = token.nextToken().toString();
@@ -269,9 +289,64 @@ public class Itempage extends ActionBarActivity {
                     };
                     String likeSql = "SELECT COUNT(*) FROM likes WHERE likes.good_id = '" + itemId + "'";
                     dbManager8.querySql(likeSql);
+
+                    View.OnClickListener onLikeClickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final String memberName = MySharedPreference.getMemberName(Itempage.this);
+                            if (memberName != null) {
+                                final QueryCallBack queryTotalLikesCallBack = new QueryCallBack() {
+                                    @Override
+                                    public void queryResult(String result) {
+                                        if (result != null  && result.length() > 0) {
+                                            StringTokenizer token = new StringTokenizer(result, "|");
+                                            String likes = token.nextToken().toString();
+                                            TextView textView6 = (TextView)findViewById(R.id.textView_numoflike);
+                                            textView6.setText(likes);
+                                        }
+                                    }
+                                };
+
+                                final QueryCallBack queryInsertLikeCallBack = new QueryCallBack() {
+                                    @Override
+                                    public void queryResult(String result) {
+                                        if (result != null) {
+                                            DBManager queryTotalLikes = new DBManager();
+                                            queryTotalLikes.queryCallBack = queryTotalLikesCallBack;
+                                            String likeSql = "SELECT COUNT(*) FROM likes WHERE likes.good_id = '" + itemId + "'";
+                                            queryTotalLikes.querySql(likeSql);
+                                        }
+                                    }
+                                };
+                                QueryCallBack queryIsLikedCallBack = new QueryCallBack() {
+                                    @Override
+                                    public void queryResult(String result) {
+                                        if (result == null || result.equalsIgnoreCase("")) {
+                                            DBManager queryInsertLike = new DBManager();
+                                            queryInsertLike.queryCallBack = queryInsertLikeCallBack;
+                                            String insertLikeSQL = "INSERT INTO likes (member_email, good_id, likedislike) VALUES ( '" + memberName + "','" + itemId +"'," + "'1')";
+                                            queryInsertLike.insertSql(insertLikeSQL);
+                                        } else {
+                                            MySharedPreference.displayDialog("You have liked this item", Itempage.this);
+                                        }
+                                    }
+                                };
+                                DBManager queryIsLiked = new DBManager();
+                                queryIsLiked.queryCallBack = queryIsLikedCallBack;
+                                String queryIsLikedSQL = "SELECT * FROM likes WHERE likes.good_id = '" + itemId + "' AND likes.member_email = '" + memberName + "'";
+                                queryIsLiked.querySql(queryIsLikedSQL);
+                            } else {
+                                MySharedPreference.displayDialog("You are not yet registered.", Itempage.this);
+                            }
+                        }
+                    };
+                    Button likeButton = (Button) findViewById(R.id.button_like);
+                    ImageView likeView = (ImageView) findViewById(R.id.imageView_like);
+                    likeButton.setOnClickListener(onLikeClickListener);
+                    likeView.setOnClickListener(onLikeClickListener);
                 }
             };
-            String itemSql = "SELECT id, name_en, name_zh, brand_id, category_id FROM goods WHERE goods.name_zh = '" + itemName + "' OR goods.name_en = '" + itemName + "'";
+            String itemSql = "SELECT name_en, name_zh, brand_id, category_id FROM goods WHERE goods.id = '" + itemId + "'";
             dbManager.querySql(itemSql);
         }
     }

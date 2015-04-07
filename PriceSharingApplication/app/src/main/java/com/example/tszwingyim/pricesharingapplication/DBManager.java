@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
+import java.util.StringTokenizer;
 
 
 interface QueryCallBack {
@@ -16,11 +17,13 @@ interface QueryCallBack {
 }
 
 public class DBManager{
+    public QueryCallBack queryCallBack;
+    public static final String SUCCESS = "Success";
+
     private static final String url = "jdbc:mysql://10.0.2.2:3306/fyp_database?useUnicode=yes&characterEncoding=UTF-8";
     private static final String user = "root";
     private static final String password = null;
     private static final String JDBCDriverName = "com.mysql.jdbc.Driver";
-    public QueryCallBack queryCallBack;
 
     public DBManager() {
         try {
@@ -56,8 +59,12 @@ public class DBManager{
                 Connection con = DriverManager.getConnection(url, user, password);
                 String sql = params[0];
                 Statement st = con.createStatement();
-                st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                return null;
+                int result = st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+                if (result == 1) {
+                    return DBManager.SUCCESS;
+                } else {
+                    return null;
+                }
             }
             catch(Exception e) {
                 e.printStackTrace();
@@ -67,7 +74,6 @@ public class DBManager{
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d("", result);
             queryCallBack.queryResult(result);
             // might want to change "executed" for the returned string passed
             // into onPostExecute() but that is upto you
@@ -109,7 +115,6 @@ public class DBManager{
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d("", result);
             queryCallBack.queryResult(result);
             // might want to change "executed" for the returned string passed
             // into onPostExecute() but that is upto you
