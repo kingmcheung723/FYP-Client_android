@@ -1,10 +1,9 @@
 package com.example.tszwingyim.pricesharingapplication;
 
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Locale;
-import java.util.StringTokenizer;
 
 
 public class Itempage extends ActionBarActivity {
@@ -24,15 +22,16 @@ public class Itempage extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_itempage);
-        Button recommend = (Button)findViewById(R.id.button_recommend);
-        Button category = (Button)findViewById(R.id.button_category);
-        Button member = (Button)findViewById(R.id.button_member);
-        Button barcode = (Button)findViewById(R.id.button_barcode);
-        Button pricechart = (Button)findViewById(R.id.button_pricechart);
-        Button sharepricelist = (Button)findViewById(R.id.button_shareprice);
-        Button commentlist = (Button)findViewById(R.id.button_comment);
-        Button sharepriceform = (Button)findViewById(R.id.button_goshareprice);
-        Button commentform = (Button)findViewById(R.id.button_givecomment);
+        Button recommend = (Button) findViewById(R.id.button_recommend);
+        Button category = (Button) findViewById(R.id.button_category);
+        Button member = (Button) findViewById(R.id.button_member);
+        Button barcode = (Button) findViewById(R.id.button_barcode);
+        Button pricechart = (Button) findViewById(R.id.button_pricechart);
+        Button sharepricelist = (Button) findViewById(R.id.button_shareprice);
+        Button commentlist = (Button) findViewById(R.id.button_comment);
+        Button sharepriceform = (Button) findViewById(R.id.button_goshareprice);
+        Button commentform = (Button) findViewById(R.id.button_givecomment);
+        Button saveToShoppingCart = (Button) this.findViewById(R.id.button_save);
 
         final String itemId = getIntent().getExtras().getString("ITEM_ID");
 
@@ -100,25 +99,33 @@ public class Itempage extends ActionBarActivity {
 
             public void onClick(View v) {
                 if (itemId != null && itemId.length() > 0) {
-                    DBManager dbManager = new DBManager();
-                    dbManager.queryCallBack = new QueryCallBack() {
-                        @Override
-                        public void queryResult(String result) {
-                            StringTokenizer token = new StringTokenizer(result, "|");
-                            if (token != null && token.countTokens() >= 2) {
-                                String itemNameEn = token.nextToken().toString();
-                                String itemNameZh = token.nextToken().toString();
-
-                                Intent intent = new Intent(Itempage.this, Commentform.class);
-                                intent.putExtra("ITEM_ID", itemId);
-                                intent.putExtra("ITEM_NAME_EN", itemNameEn);
-                                intent.putExtra("ITEM_NAME_ZH", itemNameZh);
-                                startActivity(intent);
+                    Intent intent = new Intent(Itempage.this, Commentform.class);
+                    intent.putExtra("ITEM_ID", itemId);
+                    startActivity(intent);
+                }
+            }
+        });
+        saveToShoppingCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemId != null && itemId.length() > 0) {
+                    String memberEmail = MySharedPreference.getMemberName(Itempage.this);
+                    if (memberEmail != null && memberEmail.length() > 0) {
+                        DBManager dbManager = new DBManager();
+                        dbManager.queryCallBack = new QueryCallBack() {
+                            @Override
+                            public void queryResult(String result) {
+                                if (result.equalsIgnoreCase(DBManager.SUCCESS)) {
+                                    MySharedPreference.displayDialog("Added to shopping cart", Itempage.this);
+                                }
                             }
-                        }
-                    };
-                    String itemSql = "SELECT name_en, name_zh FROM goods WHERE goods.id =  '" + itemId + "'";
-                    dbManager.querySql(itemSql);
+                        };
+                        String insertCommentSQL = "INSERT INTO shopping_carts (good_id, member_email) VALUES ('" +
+                                itemId + "','" + memberEmail + "')";
+                        dbManager.insertSql(insertCommentSQL);
+                    } else {
+                        MySharedPreference.displayDialog("You have not yet registered", Itempage.this);
+                    }
                 }
             }
         });
@@ -129,12 +136,12 @@ public class Itempage extends ActionBarActivity {
                 @Override
                 public void queryResult(String result) {
                     Locale locale = getResources().getConfiguration().locale;
-                    StringTokenizer token = new StringTokenizer(result, "|");
+                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
 
                     // Item name
                     String itemNameEn = token.nextToken().toString();
                     String itemNameZh = token.nextToken().toString();
-                    TextView textView = (TextView)findViewById(R.id.editText_name);
+                    TextView textView = (TextView) findViewById(R.id.editText_name);
                     textView.setText(itemNameZh);
 
                     // Brand name
@@ -143,10 +150,10 @@ public class Itempage extends ActionBarActivity {
                     dbManager1.queryCallBack = new QueryCallBack() {
                         @Override
                         public void queryResult(String result) {
-                            StringTokenizer token = new StringTokenizer(result, "|");
+                            MyStringTokenizer token = new MyStringTokenizer(result, "|");
                             String brandNameEn = token.nextToken().toString();
                             String brandNameZh = token.nextToken().toString();
-                            TextView textView1 = (TextView)findViewById(R.id.editText_brand);
+                            TextView textView1 = (TextView) findViewById(R.id.editText_brand);
                             textView1.setText(brandNameZh);
                         }
                     };
@@ -159,10 +166,10 @@ public class Itempage extends ActionBarActivity {
                     dbManager2.queryCallBack = new QueryCallBack() {
                         @Override
                         public void queryResult(String result) {
-                            StringTokenizer token = new StringTokenizer(result, "|");
+                            MyStringTokenizer token = new MyStringTokenizer(result, "|");
                             String categoryNameEn = token.nextToken().toString();
                             String categoryNameZh = token.nextToken().toString();
-                            TextView textView2 = (TextView)findViewById(R.id.editText_category);
+                            TextView textView2 = (TextView) findViewById(R.id.editText_category);
                             textView2.setText(categoryNameZh);
                         }
                     };
@@ -173,8 +180,8 @@ public class Itempage extends ActionBarActivity {
                     dbManager3.queryCallBack = new QueryCallBack() {
                         @Override
                         public void queryResult(String result) {
-                            if (result != null  && result.length() > 0) {
-                                StringTokenizer token = new StringTokenizer(result, "|");
+                            if (result != null && result.length() > 0) {
+                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
                                 String price = token.nextToken().toString();
                                 String discountPriceEn = token.nextToken().toString();
                                 String discountPriceZH = token.nextToken().toString();
@@ -183,7 +190,7 @@ public class Itempage extends ActionBarActivity {
                                     priceString += " " + discountPriceZH;
                                 }
 
-                                TextView textView4 = (TextView)findViewById(R.id.editText_wellcome);
+                                TextView textView4 = (TextView) findViewById(R.id.editText_wellcome);
                                 textView4.setText(priceString);
                             }
                         }
@@ -195,8 +202,8 @@ public class Itempage extends ActionBarActivity {
                     dbManager4.queryCallBack = new QueryCallBack() {
                         @Override
                         public void queryResult(String result) {
-                            if (result != null  && result.length() > 0) {
-                                StringTokenizer token = new StringTokenizer(result, "|");
+                            if (result != null && result.length() > 0) {
+                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
                                 String price = token.nextToken().toString();
                                 String discountPriceEn = token.nextToken().toString();
                                 String discountPriceZH = token.nextToken().toString();
@@ -204,7 +211,7 @@ public class Itempage extends ActionBarActivity {
                                 if (!discountPriceZH.equalsIgnoreCase("null")) {
                                     priceString += " " + discountPriceZH;
                                 }
-                                TextView textView3 = (TextView)findViewById(R.id.editText_parknshop);
+                                TextView textView3 = (TextView) findViewById(R.id.editText_parknshop);
                                 textView3.setText(priceString);
                             }
                         }
@@ -216,8 +223,8 @@ public class Itempage extends ActionBarActivity {
                     dbManager5.queryCallBack = new QueryCallBack() {
                         @Override
                         public void queryResult(String result) {
-                            if (result != null  && result.length() > 0) {
-                                StringTokenizer token = new StringTokenizer(result, "|");
+                            if (result != null && result.length() > 0) {
+                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
                                 String price = token.nextToken().toString();
                                 String discountPriceEn = token.nextToken().toString();
                                 String discountPriceZH = token.nextToken().toString();
@@ -225,7 +232,7 @@ public class Itempage extends ActionBarActivity {
                                 if (!discountPriceZH.equalsIgnoreCase("null")) {
                                     priceString += " " + discountPriceZH;
                                 }
-                                TextView textView7 = (TextView)findViewById(R.id.editText_marketplace);
+                                TextView textView7 = (TextView) findViewById(R.id.editText_marketplace);
                                 textView7.setText(priceString);
                             }
                         }
@@ -237,8 +244,8 @@ public class Itempage extends ActionBarActivity {
                     dbManager6.queryCallBack = new QueryCallBack() {
                         @Override
                         public void queryResult(String result) {
-                            if (result != null  && result.length() > 0) {
-                                StringTokenizer token = new StringTokenizer(result, "|");
+                            if (result != null && result.length() > 0) {
+                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
                                 String price = token.nextToken().toString();
                                 String discountPriceEn = token.nextToken().toString();
                                 String discountPriceZH = token.nextToken().toString();
@@ -246,7 +253,7 @@ public class Itempage extends ActionBarActivity {
                                 if (!discountPriceZH.equalsIgnoreCase("null")) {
                                     priceString += " " + discountPriceZH;
                                 }
-                                TextView textView5 = (TextView)findViewById(R.id.editText_aeon);
+                                TextView textView5 = (TextView) findViewById(R.id.editText_aeon);
                                 textView5.setText(priceString);
                             }
                         }
@@ -258,8 +265,8 @@ public class Itempage extends ActionBarActivity {
                     dbManager7.queryCallBack = new QueryCallBack() {
                         @Override
                         public void queryResult(String result) {
-                            if (result != null  && result.length() > 0) {
-                                StringTokenizer token = new StringTokenizer(result, "|");
+                            if (result != null && result.length() > 0) {
+                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
                                 String price = token.nextToken().toString();
                                 String discountPriceEn = token.nextToken().toString();
                                 String discountPriceZH = token.nextToken().toString();
@@ -267,7 +274,7 @@ public class Itempage extends ActionBarActivity {
                                 if (!discountPriceZH.equalsIgnoreCase("null")) {
                                     priceString += " " + discountPriceZH;
                                 }
-                                TextView textView6 = (TextView)findViewById(R.id.editText_daicheong);
+                                TextView textView6 = (TextView) findViewById(R.id.editText_daicheong);
                                 textView6.setText(priceString);
                             }
                         }
@@ -279,10 +286,10 @@ public class Itempage extends ActionBarActivity {
                     dbManager8.queryCallBack = new QueryCallBack() {
                         @Override
                         public void queryResult(String result) {
-                            if (result != null  && result.length() > 0) {
-                                StringTokenizer token = new StringTokenizer(result, "|");
+                            if (result != null && result.length() > 0) {
+                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
                                 String likes = token.nextToken().toString();
-                                TextView textView6 = (TextView)findViewById(R.id.textView_numoflike);
+                                TextView textView6 = (TextView) findViewById(R.id.textView_numoflike);
                                 textView6.setText(likes);
                             }
                         }
@@ -298,10 +305,10 @@ public class Itempage extends ActionBarActivity {
                                 final QueryCallBack queryTotalLikesCallBack = new QueryCallBack() {
                                     @Override
                                     public void queryResult(String result) {
-                                        if (result != null  && result.length() > 0) {
-                                            StringTokenizer token = new StringTokenizer(result, "|");
+                                        if (result != null && result.length() > 0) {
+                                            MyStringTokenizer token = new MyStringTokenizer(result, "|");
                                             String likes = token.nextToken().toString();
-                                            TextView textView6 = (TextView)findViewById(R.id.textView_numoflike);
+                                            TextView textView6 = (TextView) findViewById(R.id.textView_numoflike);
                                             textView6.setText(likes);
                                         }
                                     }
@@ -324,7 +331,7 @@ public class Itempage extends ActionBarActivity {
                                         if (result == null || result.equalsIgnoreCase("")) {
                                             DBManager queryInsertLike = new DBManager();
                                             queryInsertLike.queryCallBack = queryInsertLikeCallBack;
-                                            String insertLikeSQL = "INSERT INTO likes (member_email, good_id, likedislike) VALUES ( '" + memberName + "','" + itemId +"'," + "'1')";
+                                            String insertLikeSQL = "INSERT INTO likes (member_email, good_id, likedislike) VALUES ( '" + memberName + "','" + itemId + "'," + "'1')";
                                             queryInsertLike.insertSql(insertLikeSQL);
                                         } else {
                                             MySharedPreference.displayDialog("You have liked this item", Itempage.this);

@@ -1,16 +1,14 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-
-import java.util.StringTokenizer;
 
 
 public class Commentlist extends ActionBarActivity {
@@ -22,13 +20,13 @@ public class Commentlist extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_commentlist);
-        Button recommend = (Button)findViewById(R.id.button_recommend);
-        Button category = (Button)findViewById(R.id.button_category);
-        Button member = (Button)findViewById(R.id.button_member);
-        Button barcode = (Button)findViewById(R.id.button_barcode);
-        Button pricechart = (Button)findViewById(R.id.button_pricechart);
-        Button sharepricelist = (Button)findViewById(R.id.button_shareprice);
-        Button itempage = (Button)findViewById(R.id.button_priceinfo);
+        Button recommend = (Button) findViewById(R.id.button_recommend);
+        Button category = (Button) findViewById(R.id.button_category);
+        Button member = (Button) findViewById(R.id.button_member);
+        Button barcode = (Button) findViewById(R.id.button_barcode);
+        Button pricechart = (Button) findViewById(R.id.button_pricechart);
+        Button sharepricelist = (Button) findViewById(R.id.button_shareprice);
+        Button itempage = (Button) findViewById(R.id.button_priceinfo);
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -89,12 +87,12 @@ public class Commentlist extends ActionBarActivity {
             @Override
             public void queryResult(String result) {
                 if (result != null) {
-                    StringTokenizer token = new StringTokenizer(result, "|");
+                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
                     String[] comments = new String[token.countTokens()];
-                    int count  = 0;
+                    int count = 0;
                     while (token.hasMoreTokens()) {
                         comments[count] = token.nextToken().toString();
-                        count ++;
+                        count++;
                     }
                     CustomList adapter = new
                             CustomList(Commentlist.this, comments);

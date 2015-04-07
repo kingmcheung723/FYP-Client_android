@@ -12,8 +12,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import java.util.StringTokenizer;
-
 
 public class Search extends ActionBarActivity {
 
@@ -72,17 +70,6 @@ public class Search extends ActionBarActivity {
         Searchgoodlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-<<<<<<< HEAD
-                AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.autocomplete_searchitem);
-                String itemName = textView.getText().toString();
-                if (itemName != null && itemName.length() > 0) {
-                    Intent intent = new Intent(Search.this, Itempage.class);
-                    intent.putExtra("ItemName", itemName);
-                    startActivity(intent);
-                } else {
-
-                    MySharedPreference.displayDialog("Incorrect Itemname", Search.this);
-=======
                 AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autocomplete_searchitem);
                 if (textView != null) {
                     String searchText = textView.getText().toString();
@@ -100,7 +87,7 @@ public class Search extends ActionBarActivity {
                                         @Override
                                         public void queryResult(String result) {
                                             if (result != null && result.length() > 0) {
-                                                StringTokenizer token = new StringTokenizer(result, "|");
+                                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
                                                 if (token != null && token.countTokens() >= 1) {
                                                     String itemId = token.nextToken().toString();
                                                     Intent intent = new Intent(Search.this, Itempage.class);
@@ -120,7 +107,7 @@ public class Search extends ActionBarActivity {
                                         @Override
                                         public void queryResult(String result) {
                                             if (result != null) {
-                                                StringTokenizer token = new StringTokenizer(result, "|");
+                                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
                                                 String[] goodNames = new String[token.countTokens()];
                                                 int count = 0;
                                                 while (token.hasMoreTokens()) {
@@ -161,7 +148,6 @@ public class Search extends ActionBarActivity {
                     } else {
                         MySharedPreference.displayDialog("Please enter the name you want to search.", Search.this);
                     }
->>>>>>> 281450e4866eb0c37d3befecbbcfbfa4b81d9a3c
                 }
             }
         });
