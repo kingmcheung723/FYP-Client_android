@@ -95,9 +95,9 @@ public class Search extends ActionBarActivity {
                                                     Intent intent = new Intent(Search.this, Itempage.class);
                                                     intent.putExtra("ITEM_ID", itemId);
                                                     startActivity(intent);
-                                                } else {
-                                                    MySharedPreference.displayDialog("No such item.", Search.this);
                                                 }
+                                            } else {
+                                                MySharedPreference.displayDialog("No such item.", Search.this);
                                             }
                                         }
                                     };
