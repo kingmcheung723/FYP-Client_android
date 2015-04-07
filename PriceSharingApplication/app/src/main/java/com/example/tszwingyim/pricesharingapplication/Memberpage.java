@@ -39,6 +39,7 @@ public class Memberpage extends ActionBarActivity {
         Button logout = (Button)findViewById(R.id.button_logout);
         Button about = (Button)findViewById(R.id.button_about);
         Button setting = (Button)findViewById(R.id.button_setting);
+        Button shoppingCart = (Button)findViewById(R.id.button_shoppingcart);
 
         search.setOnClickListener(new View.OnClickListener() {
 
@@ -93,13 +94,23 @@ public class Memberpage extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-     //   Intent mIntent = getIntent();
-      //  String email = mIntent.getStringExtra("Email");
-      //  TextView showemail = (TextView) findViewById(R.id.textView_email1);
-      //  showemail.setText(email);
+
+        shoppingCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Memberpage.this, ShoppingCart.class);
+                startActivity(intent);
+            }
+        });
+
+        String memberEmail = MySharedPreference.getMemberName(this);
+        if (memberEmail != null && memberEmail.length() > 0) {
+            TextView memberEmailTextView = (TextView) findViewById(R.id.textView_email1);
+            memberEmailTextView.setText(memberEmail);
+        }
+
         spinnerctrl = (Spinner) findViewById(R.id.spinner_language);
         String[] langStr = { "Select Language","中文","English" };
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, langStr);
         //selected item will look like a spinner set from XML

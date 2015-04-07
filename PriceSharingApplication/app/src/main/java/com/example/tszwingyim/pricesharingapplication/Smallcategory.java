@@ -28,9 +28,14 @@ public class Smallcategory extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = TabManager.getInstance().getIntent(Smallcategory.this, Member.class);
-                startActivity(myintent1);
-
+                String memberEmail = MySharedPreference.getMemberName(Smallcategory.this);
+                if (memberEmail != null && memberEmail.length() > 0) {
+                    Intent intent = TabManager.getInstance().getIntent(Smallcategory.this, Memberpage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = TabManager.getInstance().getIntent(Smallcategory.this, Member.class);
+                    startActivity(intent);
+                }
             }
         });
         search.setOnClickListener(new View.OnClickListener() {

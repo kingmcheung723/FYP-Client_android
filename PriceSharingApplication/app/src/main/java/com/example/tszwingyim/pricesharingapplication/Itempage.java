@@ -38,9 +38,14 @@ public class Itempage extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Member.class);
-                startActivity(intent);
-
+                String memberEmail = MySharedPreference.getMemberName(Itempage.this);
+                if (memberEmail != null && memberEmail.length() > 0) {
+                    Intent intent = TabManager.getInstance().getIntent(Itempage.this, Memberpage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = TabManager.getInstance().getIntent(Itempage.this, Member.class);
+                    startActivity(intent);
+                }
             }
         });
         recommend.setOnClickListener(new View.OnClickListener() {

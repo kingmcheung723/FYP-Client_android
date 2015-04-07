@@ -31,9 +31,14 @@ public class Search extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Search.this, Member.class);
-                startActivity(intent);
-
+                String memberEmail = MySharedPreference.getMemberName(Search.this);
+                if (memberEmail != null && memberEmail.length() > 0) {
+                    Intent intent = TabManager.getInstance().getIntent(Search.this, Memberpage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = TabManager.getInstance().getIntent(Search.this, Member.class);
+                    startActivity(intent);
+                }
             }
         });
         category.setOnClickListener(new View.OnClickListener() {

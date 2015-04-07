@@ -66,9 +66,14 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(SearchLocation.this, Member.class);
-                startActivity(intent);
-
+                String memberEmail = MySharedPreference.getMemberName(SearchLocation.this);
+                if (memberEmail != null && memberEmail.length() > 0) {
+                    Intent intent = TabManager.getInstance().getIntent(SearchLocation.this, Memberpage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = TabManager.getInstance().getIntent(SearchLocation.this, Member.class);
+                    startActivity(intent);
+                }
             }
         });
         category.setOnClickListener(new View.OnClickListener() {

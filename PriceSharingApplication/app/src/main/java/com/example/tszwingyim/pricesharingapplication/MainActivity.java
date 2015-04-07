@@ -21,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         Button search = (Button) findViewById(R.id.button_search);
         Button recommend = (Button) findViewById(R.id.button_recommend);
-        Button member = (Button) findViewById(R.id.button_member);
+        final Button member = (Button) findViewById(R.id.button_member);
         Button barcode = (Button) findViewById(R.id.button_barcode);
         final Button sugarlist = (Button) findViewById(R.id.button_sugar);
         Button dairylist = (Button) findViewById(R.id.button_dairy);
@@ -36,9 +36,14 @@ public class MainActivity extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = TabManager.getInstance().getIntent(MainActivity.this, Member.class);
-                startActivity(myintent1);
-
+                String memberEmail = MySharedPreference.getMemberName(MainActivity.this);
+                if (memberEmail != null && memberEmail.length() > 0) {
+                    Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Memberpage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Member.class);
+                    startActivity(intent);
+                }
             }
         });
         search.setOnClickListener(new View.OnClickListener() {

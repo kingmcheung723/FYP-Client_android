@@ -49,9 +49,14 @@ public class SearchGoodlist extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent1 = TabManager.getInstance().getIntent(SearchGoodlist.this, Member.class);
-                startActivity(myintent1);
-
+                String memberEmail = MySharedPreference.getMemberName(SearchGoodlist.this);
+                if (memberEmail != null && memberEmail.length() > 0) {
+                    Intent intent = TabManager.getInstance().getIntent(SearchGoodlist.this, Memberpage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = TabManager.getInstance().getIntent(SearchGoodlist.this, Member.class);
+                    startActivity(intent);
+                }
             }
         });
         search.setOnClickListener(new View.OnClickListener() {

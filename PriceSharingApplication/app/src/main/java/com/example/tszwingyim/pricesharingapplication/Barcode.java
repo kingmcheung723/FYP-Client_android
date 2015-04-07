@@ -58,8 +58,14 @@ public class Barcode extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Barcode.this, Member.class);
-                startActivity(intent);
+                String memberEmail = MySharedPreference.getMemberName(Barcode.this);
+                if (memberEmail != null && memberEmail.length() > 0) {
+                    Intent intent = TabManager.getInstance().getIntent(Barcode.this, Memberpage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = TabManager.getInstance().getIntent(Barcode.this, Member.class);
+                    startActivity(intent);
+                }
             }
         });
 

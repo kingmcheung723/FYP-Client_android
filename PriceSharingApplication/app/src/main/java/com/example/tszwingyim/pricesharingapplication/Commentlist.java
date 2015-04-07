@@ -31,9 +31,14 @@ public class Commentlist extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentlist.this, Member.class);
-                startActivity(intent);
-
+                String memberEmail = MySharedPreference.getMemberName(Commentlist.this);
+                if (memberEmail != null && memberEmail.length() > 0) {
+                    Intent intent = TabManager.getInstance().getIntent(Commentlist.this, Memberpage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = TabManager.getInstance().getIntent(Commentlist.this, Member.class);
+                    startActivity(intent);
+                }
             }
         });
         recommend.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +109,6 @@ public class Commentlist extends ActionBarActivity {
             }
         };
         String queryCommentsSQL = "SELECT comment FROM good_comments WHERE good_id = '" + goodId + "'";
-//        String queryCommentsSQL = "SELECT comment, member_email, createddate FROM good_comments WHERE good_id = '" + goodId + "'";
         dbManager.querySql(queryCommentsSQL);
     }
 

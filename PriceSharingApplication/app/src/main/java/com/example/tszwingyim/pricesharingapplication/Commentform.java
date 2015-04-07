@@ -33,9 +33,14 @@ public class Commentform extends ActionBarActivity {
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Member.class);
-                startActivity(intent);
-
+                String memberEmail = MySharedPreference.getMemberName(Commentform.this);
+                if (memberEmail != null && memberEmail.length() > 0) {
+                    Intent intent = TabManager.getInstance().getIntent(Commentform.this, Memberpage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = TabManager.getInstance().getIntent(Commentform.this, Member.class);
+                    startActivity(intent);
+                }
             }
         });
         recommend.setOnClickListener(new View.OnClickListener() {
