@@ -58,68 +58,13 @@ public class GoodList extends ActionBarActivity {
             }
         });
 
-        final String category = this.getIntent().getExtras().getString("Category");
-        if (category != null) {
-            final DBManager categoryIdDbManager = new DBManager();
-            categoryIdDbManager.queryCallBack = new QueryCallBack() {
-                @Override
-                public void queryResult(String result) {
-                    if (result != null) {
-                        StringTokenizer token = new StringTokenizer(result, "|");
-                        if (token.hasMoreTokens()) {
-                            String categoryId = token.nextToken();
-                            if (categoryId != null) {
-                                DBManager goodsDbManager = new DBManager();
-                                goodsDbManager.queryCallBack = new QueryCallBack() {
-                                    @Override
-                                    public void queryResult(String result) {
-                                        if (result != null) {
-                                            StringTokenizer token = new StringTokenizer(result, "|");
-                                            String[] goodNames = new String[token.countTokens()];
-                                            int count = 0;
-                                            while (token.hasMoreTokens()) {
-                                                String goodName = token.nextToken();
-                                                if (goodName != null) {
-                                                    goodNames[count] = goodName;
-                                                    count++;
-                                                }
-                                            }
-                                            CustomList adapter = new
-                                                    CustomList(GoodList.this, goodNames);
-                                            ListView list = (ListView) findViewById(R.id.listView_good);
-                                            list.setAdapter(adapter);
-                                            list.setOnItemClickListener(new MyOnItemClickListener(goodNames));
-                                        }
-                                    }
-                                };
-                                String goodsSQL = "SELECT name_zh FROM goods WHERE goods.category_id = '" + categoryId + "'";
-                                goodsDbManager.querySql(goodsSQL);
-                            }
-                        }
-                    }
-                }
-            };
-            String categorySQL = "SELECT id FROM categories WHERE categories.name_zh =  '" + category + "' OR categories.name_en = '" + category + "'";
-            categoryIdDbManager.querySql(categorySQL);
-
-//            String[] web = {
-//                    "Google Plus",
-//                    "Twitter",
-//                    "Windows",
-//                    "Bing",
-//                    "Itunes",
-//                    "Wordpress",
-//                    "Drupal"
-//            };
-//            Integer[] imageId = {
-//                    R.drawable.tea5,
-//                    R.drawable.tea6,
-//                    R.drawable.tea7,
-//                    R.drawable.tea8,
-//                    R.drawable.tea22,
-//                    R.drawable.tea8,
-//                    R.drawable.tea22
-//            };
+        final String[] goodNamesArray = this.getIntent().getExtras().getStringArray("GOOD_NAMES");
+        if (goodNamesArray != null && goodNamesArray.length > 0) {
+            CustomList adapter = new
+                    CustomList(GoodList.this, goodNamesArray);
+            ListView list = (ListView) findViewById(R.id.listView_good);
+            list.setAdapter(adapter);
+            list.setOnItemClickListener(new MyOnItemClickListener(goodNamesArray));
         }
     }
 
@@ -159,11 +104,29 @@ public class GoodList extends ActionBarActivity {
             if (position <= goodNames.length && position >= 0) {
                 String goodName = this.goodNames[position];
                 if (goodName != null) {
-                    Intent myintent4 = new Intent(GoodList.this, Itempage.class);
-                    myintent4.putExtra("ItemName", goodName);
-                    startActivity(myintent4);
+                    DBManager dbManager = new DBManager();
+                    dbManager.queryCallBack = new QueryCallBack() {
+                        @Override
+                        public void queryResult(String result) {
+                            if (result != null && result.length() > 0) {
+                                StringTokenizer token = new StringTokenizer(result, "|");
+                                if (token != null && token.countTokens() >= 1) {
+                                    String itemId = token.nextToken().toString();
+                                    Intent intent = new Intent(GoodList.this, Itempage.class);
+                                    intent.putExtra("ITEM_ID", itemId);
+                                    startActivity(intent);
+                                } else {
+                                    MySharedPreference.displayDialog("No such item.", GoodList.this);
+                                }
+                            }
+                        }
+                    };
+                    String itemSql = "SELECT id FROM goods WHERE goods.name_zh = '" + goodName + "' OR goods.name_en = '" + goodName + "'";
+                    dbManager.querySql(itemSql);
                 }
             }
         }
-    };
+    }
+
+    ;
 }

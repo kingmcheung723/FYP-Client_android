@@ -102,7 +102,7 @@
             <AutoCompleteTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New AutoCompleteTextView"
+                android:text=""
                 android:id="@+id/autocomplete_searchitem"
                 android:layout_weight="1" />
 

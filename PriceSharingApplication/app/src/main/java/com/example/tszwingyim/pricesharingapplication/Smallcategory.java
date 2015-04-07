@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.StringTokenizer;
+
 
 public class Smallcategory extends ActionBarActivity {
     //int num = 0;
@@ -107,10 +109,47 @@ public class Smallcategory extends ActionBarActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if (position <= categories.length && position >= 0) {
                 String category = this.categories[position];
+
                 if (category != null) {
-                    Intent myintent4 = new Intent(Smallcategory.this, GoodList.class);
-                    myintent4.putExtra("Category", category);
-                    startActivity(myintent4);
+                    final DBManager categoryIdDbManager = new DBManager();
+                    categoryIdDbManager.queryCallBack = new QueryCallBack() {
+                        @Override
+                        public void queryResult(String result) {
+                            if (result != null) {
+                                StringTokenizer token = new StringTokenizer(result, "|");
+                                if (token.hasMoreTokens()) {
+                                    String categoryId = token.nextToken();
+                                    if (categoryId != null) {
+                                        DBManager goodsDbManager = new DBManager();
+                                        goodsDbManager.queryCallBack = new QueryCallBack() {
+                                            @Override
+                                            public void queryResult(String result) {
+                                                if (result != null) {
+                                                    StringTokenizer token = new StringTokenizer(result, "|");
+                                                    String[] goodNames = new String[token.countTokens()];
+                                                    int count = 0;
+                                                    while (token.hasMoreTokens()) {
+                                                        String goodName = token.nextToken();
+                                                        if (goodName != null) {
+                                                            goodNames[count] = goodName;
+                                                            count++;
+                                                        }
+                                                    }
+                                                    Intent intent = new Intent(Smallcategory.this, GoodList.class);
+                                                    intent.putExtra("GOOD_NAMES", goodNames);
+                                                    startActivity(intent);
+                                                }
+                                            }
+                                        };
+                                        String goodsSQL = "SELECT name_zh FROM goods WHERE goods.category_id = '" + categoryId + "'";
+                                        goodsDbManager.querySql(goodsSQL);
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    String categorySQL = "SELECT id FROM categories WHERE categories.name_zh =  '" + category + "' OR categories.name_en = '" + category + "'";
+                    categoryIdDbManager.querySql(categorySQL);
                 }
             }
         }

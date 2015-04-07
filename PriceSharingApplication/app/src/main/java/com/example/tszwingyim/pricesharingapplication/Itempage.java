@@ -34,7 +34,7 @@ public class Itempage extends ActionBarActivity {
         Button sharepriceform = (Button)findViewById(R.id.button_goshareprice);
         Button commentform = (Button)findViewById(R.id.button_givecomment);
 
-        final String itemName = getIntent().getExtras().getString("ItemName");
+        final String itemId = getIntent().getExtras().getString("ITEM_ID");
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -70,22 +70,9 @@ public class Itempage extends ActionBarActivity {
         commentlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                DBManager dbManager = new DBManager();
-                dbManager.queryCallBack = new QueryCallBack() {
-                    @Override
-                    public void queryResult(String result) {
-                        StringTokenizer token = new StringTokenizer(result, "|");
-                        if (token != null && token.countTokens() >= 1) {
-                            String itemId = token.nextToken().toString();
-
-                            Intent intent = new Intent(Itempage.this, Commentlist.class);
-                            intent.putExtra("ITEM_ID", itemId);
-                            startActivity(intent);
-                        }
-                    }
-                };
-                String itemSql = "SELECT id FROM goods WHERE goods.name_zh = '" + itemName + "' OR goods.name_en = '" + itemName + "'";
-                dbManager.querySql(itemSql);
+                Intent intent = new Intent(Itempage.this, Commentlist.class);
+                intent.putExtra("ITEM_ID", itemId);
+                startActivity(intent);
             }
         });
         pricechart.setOnClickListener(new View.OnClickListener() {
@@ -112,38 +99,37 @@ public class Itempage extends ActionBarActivity {
         commentform.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                DBManager dbManager = new DBManager();
-                dbManager.queryCallBack = new QueryCallBack() {
-                    @Override
-                    public void queryResult(String result) {
-                        StringTokenizer token = new StringTokenizer(result, "|");
-                        if (token != null && token.countTokens() >= 3) {
-                            String itemId = token.nextToken().toString();
-                            String itemNameEn = token.nextToken().toString();
-                            String itemNameZh = token.nextToken().toString();
+                if (itemId != null && itemId.length() > 0) {
+                    DBManager dbManager = new DBManager();
+                    dbManager.queryCallBack = new QueryCallBack() {
+                        @Override
+                        public void queryResult(String result) {
+                            StringTokenizer token = new StringTokenizer(result, "|");
+                            if (token != null && token.countTokens() >= 2) {
+                                String itemNameEn = token.nextToken().toString();
+                                String itemNameZh = token.nextToken().toString();
 
-                            Intent intent = new Intent(Itempage.this, Commentform.class);
-                            intent.putExtra("ITEM_ID", itemId);
-                            intent.putExtra("ITEM_NAME_EN", itemNameEn);
-                            intent.putExtra("ITEM_NAME_ZH", itemNameZh);
-                            startActivity(intent);
+                                Intent intent = new Intent(Itempage.this, Commentform.class);
+                                intent.putExtra("ITEM_ID", itemId);
+                                intent.putExtra("ITEM_NAME_EN", itemNameEn);
+                                intent.putExtra("ITEM_NAME_ZH", itemNameZh);
+                                startActivity(intent);
+                            }
                         }
-                    }
-                };
-                String itemSql = "SELECT id, name_en, name_zh FROM goods WHERE goods.name_zh = '" + itemName + "' OR goods.name_en = '" + itemName + "'";
-                dbManager.querySql(itemSql);
+                    };
+                    String itemSql = "SELECT name_en, name_zh FROM goods WHERE goods.id =  '" + itemId + "'";
+                    dbManager.querySql(itemSql);
+                }
             }
         });
 
-        if (itemName != null && itemName.length() > 0) {
+        if (itemId != null && itemId.length() > 0) {
             final DBManager dbManager = new DBManager();
             dbManager.queryCallBack = new QueryCallBack() {
                 @Override
                 public void queryResult(String result) {
                     Locale locale = getResources().getConfiguration().locale;
                     StringTokenizer token = new StringTokenizer(result, "|");
-
-                    final String itemId = token.nextToken().toString();
 
                     // Item name
                     String itemNameEn = token.nextToken().toString();
@@ -360,7 +346,7 @@ public class Itempage extends ActionBarActivity {
                     likeView.setOnClickListener(onLikeClickListener);
                 }
             };
-            String itemSql = "SELECT id, name_en, name_zh, brand_id, category_id FROM goods WHERE goods.name_zh = '" + itemName + "' OR goods.name_en = '" + itemName + "'";
+            String itemSql = "SELECT name_en, name_zh, brand_id, category_id FROM goods WHERE goods.id = '" + itemId + "'";
             dbManager.querySql(itemSql);
         }
     }

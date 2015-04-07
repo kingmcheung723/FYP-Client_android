@@ -10,9 +10,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
+
+import java.util.StringTokenizer;
 
 
 public class Search extends ActionBarActivity {
@@ -72,34 +72,98 @@ public class Search extends ActionBarActivity {
         itemPage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                AutoCompleteTextView textView = (AutoCompleteTextView)findViewById(R.id.autocomplete_searchitem);
-                String itemName = textView.getText().toString();
-                if (itemName != null && itemName.length() > 0) {
-                    Intent intent = new Intent(Search.this, Itempage.class);
-                    intent.putExtra("ItemName", itemName);
-                    startActivity(intent);
+                AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autocomplete_searchitem);
+                if (textView != null) {
+                    String searchText = textView.getText().toString();
+                    if (searchText != null && searchText.length() > 0) {
+                        Spinner searchingCategorySpinner = (Spinner) findViewById(R.id.spinner_search);
+                        if (searchingCategorySpinner != null) {
+                            String selectedSearchCategory = searchingCategorySpinner.getSelectedItem().toString();
+                            int selectedSearchCategoryPosition = searchingCategorySpinner.getSelectedItemPosition();
+                            if (selectedSearchCategory != null && selectedSearchCategory.length() > 0 &&
+                                    selectedSearchCategoryPosition >= 0 && selectedSearchCategoryPosition < searchingCategorySpinner.getCount())
+                                if (selectedSearchCategoryPosition == 0) {
+                                    String itemName = searchText;
+                                    DBManager dbManager = new DBManager();
+                                    dbManager.queryCallBack = new QueryCallBack() {
+                                        @Override
+                                        public void queryResult(String result) {
+                                            if (result != null && result.length() > 0) {
+                                                StringTokenizer token = new StringTokenizer(result, "|");
+                                                if (token != null && token.countTokens() >= 1) {
+                                                    String itemId = token.nextToken().toString();
+                                                    Intent intent = new Intent(Search.this, Itempage.class);
+                                                    intent.putExtra("ITEM_ID", itemId);
+                                                    startActivity(intent);
+                                                } else {
+                                                    MySharedPreference.displayDialog("No such item.", Search.this);
+                                                }
+                                            }
+                                        }
+                                    };
+                                    String itemSql = "SELECT id FROM goods WHERE goods.name_zh = '" + itemName + "' OR goods.name_en = '" + itemName + "'";
+                                    dbManager.querySql(itemSql);
+                                } else {
+                                    DBManager dbManager = new DBManager();
+                                    dbManager.queryCallBack = new QueryCallBack() {
+                                        @Override
+                                        public void queryResult(String result) {
+                                            if (result != null) {
+                                                StringTokenizer token = new StringTokenizer(result, "|");
+                                                String[] goodNames = new String[token.countTokens()];
+                                                int count = 0;
+                                                while (token.hasMoreTokens()) {
+                                                    String goodName = token.nextToken();
+                                                    if (goodName != null) {
+                                                        goodNames[count] = goodName;
+                                                        count++;
+                                                    }
+                                                }
+                                                Intent intent = new Intent(Search.this, GoodList.class);
+                                                intent.putExtra("GOOD_NAMES", goodNames);
+                                                startActivity(intent);
+                                            }
+                                        }
+                                    };
+                                    String sql = null;
+                                    switch (selectedSearchCategoryPosition) {
+                                        case 1:
+                                            // Search by good category
+                                            sql = "SELECT name_zh FROM goods WHERE goods.category_id IN " +
+                                                    "(SELECT id FROM categories WHERE categories.name_zh like '%" + searchText + "%' OR categories.name_en like '%" + searchText + "%')";
+                                            break;
+                                        case 2:
+                                            // Search by good brand
+                                            sql = "SELECT name_zh FROM goods WHERE goods.brand_id IN " +
+                                                    "(SELECT id FROM brands WHERE brands.name_zh like '%" + searchText + "%' OR brands.name_en like '%" + searchText + "%')";
+                                            break;
+                                        case 3:
+                                            // Search by shop name
+                                            sql = "SELECT name_zh FROM goods WHERE goods.id IN (SELECT good_id FROM shop_goods WHERE shop_goods.shop_id = (SELECT id FROM shops WHERE shops.name_en like '%" + searchText + "%' OR shops.name_zh like '% + searchText + %'))";
+                                            break;
+                                    }
+                                    if (sql != null) {
+                                        dbManager.querySql(sql);
+                                    }
+                                }
+                        }
+                    } else {
+                        MySharedPreference.displayDialog("Please enter the name you want to search.", Search.this);
+                    }
                 }
             }
         });
 
-        Spinner goods = (Spinner) findViewById(R.id.spinner_search);
+        Spinner searchingCategorySpinner = (Spinner) findViewById(R.id.spinner_search);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.searchgoods_array, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        goods.setAdapter(adapter);
-
-      //  Spinner choosecategory = (Spinner) findViewById(R.id.spinner_category);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        //ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
-             //   R.array.searchbread_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-       // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-       // choosecategory.setAdapter(adapter1);
+        searchingCategorySpinner.setAdapter(adapter);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
