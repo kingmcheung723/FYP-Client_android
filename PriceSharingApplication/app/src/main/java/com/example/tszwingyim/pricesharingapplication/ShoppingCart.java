@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 
 public class ShoppingCart extends ActionBarActivity {
@@ -23,16 +24,18 @@ public class ShoppingCart extends ActionBarActivity {
         Button category = (Button)findViewById(R.id.button_category);
         Button member = (Button)findViewById(R.id.button_member);
         Button barcode = (Button)findViewById(R.id.button_barcode);
-        Button pricechart = (Button)findViewById(R.id.button_pricechart);
-        Button commentlist = (Button)findViewById(R.id.button_comment);
-        Button itempage = (Button)findViewById(R.id.button_priceinfo);
 
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, Member.class);
-                startActivity(intent);
-
+                String memberEmail = MySharedPreference.getMemberName(ShoppingCart.this);
+                if (memberEmail != null && memberEmail.length() > 0) {
+                    Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, Memberpage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, Member.class);
+                    startActivity(intent);
+                }
             }
         });
         recommend.setOnClickListener(new View.OnClickListener() {
@@ -58,27 +61,34 @@ public class ShoppingCart extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-        pricechart.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, Pricechart.class);
-                startActivity(intent);
-            }
-        });
-        commentlist.setOnClickListener(new View.OnClickListener() {
+        String memberEmail = MySharedPreference.getMemberName(this);
+        if (memberEmail != null && memberEmail.length() > 0) {
+            DBManager dbManager = new DBManager();
+            dbManager.queryCallBack = new QueryCallBack() {
+                @Override
+                public void queryResult(String result) {
+                    if (result != null) {
+                        MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                        String[] goods = new String[token.countTokens()];
+                        int count = 0;
+                        while (token.hasMoreTokens()) {
+                            goods[count] = token.nextToken().toString();
+                            count++;
+                        }
+                        CustomList adapter = new
+                                CustomList(ShoppingCart.this, goods);
+                        ListView list = (ListView) findViewById(R.id.listView3);
+                        if (list != null) {
+                            list.setAdapter(adapter);
+                        }
+                    }
+                }
+            };
+            String sql = "SELECT name_zh FROM goods WHERE goods.id IN (SELECT good_id FROM shopping_carts WHERE shopping_carts.member_email = '" + memberEmail + "')";
+            dbManager.querySql(sql);
+        }
 
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, Commentlist.class);
-                startActivity(intent);
-            }
-        });
-        itempage.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(ShoppingCart.this, Itempage.class);
-                startActivity(intent);
-            }
-        });
     }
 
 
