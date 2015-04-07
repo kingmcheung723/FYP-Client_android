@@ -78,6 +78,9 @@ public class Search extends ActionBarActivity {
                     Intent intent = new Intent(Search.this, Itempage.class);
                     intent.putExtra("ItemName", itemName);
                     startActivity(intent);
+                } else {
+
+                    MySharedPreference.displayDialog("Incorrect Itemname", Search.this);
                 }
             }
         });

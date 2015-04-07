@@ -251,7 +251,7 @@
     <string name="Total">總共 $</string>
     <string name="Watch_comment">用家評語</string>
     <string name="logout">登出</string>
-    <string name="title_activity_goodlist">goodlist</string>
+    <string name="title_activity_goodlist">Goodlist</string>
     <string name="title_activity_search_goodlist">SearchGoodlist</string>
 
 </resources>
