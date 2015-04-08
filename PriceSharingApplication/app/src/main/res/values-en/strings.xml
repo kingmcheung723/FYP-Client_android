@@ -59,7 +59,8 @@
     <string name="Total">Total $</string>
     <string name="Watch_comment">Comments</string>
     <string name="logout">Logout</string>
-
+    <string name="title_activity_goodlist">Goodlist</string>
+    <string name="title_activity_search_goodlist">SearchGoodlist</string>
     <string-array name="searchgoods_array">
         <item>貨品分類</item>
         <item>貨品名稱</item>
