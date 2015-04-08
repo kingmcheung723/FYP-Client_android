@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity {
         recommend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent myintent3 = TabManager.getInstance().getIntent(MainActivity.this, Recommendation.class);
+                Intent myintent3 = TabManager.getInstance().getIntent(MainActivity.this, Itempage.class);
                 startActivity(myintent3);
 
             }
