@@ -61,7 +61,9 @@
     <string name="logout">Logout</string>
     <string name="title_activity_goodlist">Goodlist</string>
     <string name="title_activity_search_goodlist">SearchGoodlist</string>
+    <string name="facebook_app_id">pricesharingapplication</string>
     <string-array name="searchgoods_array">
+
         <item>貨品分類</item>
         <item>貨品名稱</item>
         <item>超市名稱</item>
