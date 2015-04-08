@@ -66,21 +66,21 @@ public class SharePricelist extends ActionBarActivity {
         pricechart.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(SharePricelist.this, Pricechart.class);
+                Intent intent = new Intent(SharePricelist.this, Pricechart.class);
                 startActivity(intent);
             }
         });
         commentlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(SharePricelist.this, Commentlist.class);
+                Intent intent = new Intent(SharePricelist.this, Commentlist.class);
                 startActivity(intent);
             }
         });
         itempage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(SharePricelist.this, Itempage.class);
+                Intent intent = new Intent(SharePricelist.this, Itempage.class);
                 startActivity(intent);
             }
         });

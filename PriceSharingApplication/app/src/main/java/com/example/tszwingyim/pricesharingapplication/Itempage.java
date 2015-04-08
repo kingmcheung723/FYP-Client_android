@@ -82,21 +82,21 @@ public class Itempage extends ActionBarActivity {
         pricechart.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Pricechart.class);
+                Intent intent = new Intent(Itempage.this, Pricechart.class);
                 startActivity(intent);
             }
         });
         sharepricelist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Itempage.this, SharePricelist.class);
+                Intent intent = new Intent(Itempage.this, SharePricelist.class);
                 startActivity(intent);
             }
         });
         sharepriceform.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Itempage.this, Sharepriceform.class);
+                Intent intent = new Intent(Itempage.this, Sharepriceform.class);
                 startActivity(intent);
             }
         });

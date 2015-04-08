@@ -69,7 +69,8 @@ public class Commentform extends ActionBarActivity {
         commentlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Commentlist.class);
+                Intent intent = new Intent(Commentform.this, Commentlist.class);
+                //Intent intent = TabManager.getInstance().getIntent(Commentform.this, Commentlist.class);
                 startActivity(intent);
 
             }
@@ -77,7 +78,7 @@ public class Commentform extends ActionBarActivity {
         pricechart.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Pricechart.class);
+                Intent intent = new Intent(Commentform.this, Pricechart.class);
                 startActivity(intent);
 
             }
@@ -85,14 +86,14 @@ public class Commentform extends ActionBarActivity {
         sharepricelist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, SharePricelist.class);
+                Intent intent = new Intent(Commentform.this, SharePricelist.class);
                 startActivity(intent);
             }
         });
         itempage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Itempage.class);
+                Intent intent = new Intent(Commentform.this, Itempage.class);
                 startActivity(intent);
             }
         });

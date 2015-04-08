@@ -74,28 +74,28 @@ public class Member extends ActionBarActivity {
         login.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Member.this, Login.class);
+                Intent intent = new Intent(Member.this, Login.class);
                 startActivity(intent);
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Member.this, Register.class);
+                Intent intent = new Intent(Member.this, Register.class);
                 startActivity(intent);
             }
         });
         setting.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Member.this, Setting.class);
+                Intent intent = new Intent(Member.this, Setting.class);
                 startActivity(intent);
             }
         });
         about.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Member.this, About.class);
+                Intent intent = new Intent(Member.this, About.class);
                 startActivity(intent);
             }
         });

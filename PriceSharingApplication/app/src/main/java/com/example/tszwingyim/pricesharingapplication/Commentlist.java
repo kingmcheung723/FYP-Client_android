@@ -67,21 +67,21 @@ public class Commentlist extends ActionBarActivity {
         pricechart.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentlist.this, Pricechart.class);
+                Intent intent = new Intent(Commentlist.this, Pricechart.class);
                 startActivity(intent);
             }
         });
         sharepricelist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentlist.this, SharePricelist.class);
+                Intent intent = new Intent(Commentlist.this, SharePricelist.class);
                 startActivity(intent);
             }
         });
         itempage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentlist.this, Itempage.class);
+                Intent intent = new Intent(Commentlist.this, Itempage.class);
                 startActivity(intent);
             }
         });

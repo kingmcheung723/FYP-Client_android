@@ -85,7 +85,7 @@ public class Pricechart extends ActionBarActivity {
         itempage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Pricechart.this, Itempage.class);
+                Intent intent = new Intent(Pricechart.this, Itempage.class);
                 startActivity(intent);
 
             }
@@ -93,7 +93,7 @@ public class Pricechart extends ActionBarActivity {
         commentlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Pricechart.this, Commentlist.class);
+                Intent intent = new Intent(Pricechart.this, Commentlist.class);
                 startActivity(intent);
 
             }
@@ -101,7 +101,7 @@ public class Pricechart extends ActionBarActivity {
         sharepricelist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Pricechart.this, SharePricelist.class);
+                Intent intent = new Intent(Pricechart.this, SharePricelist.class);
                 startActivity(intent);
             }
         });

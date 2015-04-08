@@ -103,7 +103,7 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
         goods.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(SearchLocation.this, Search.class);
+                Intent intent = new Intent(SearchLocation.this, Search.class);
                 startActivity(intent);
 
             }
