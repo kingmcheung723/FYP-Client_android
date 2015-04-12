@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 
 public class SharePricelist extends ActionBarActivity {
@@ -26,6 +27,8 @@ public class SharePricelist extends ActionBarActivity {
         Button pricechart = (Button)findViewById(R.id.button_pricechart);
         Button commentlist = (Button)findViewById(R.id.button_comment);
         Button itempage = (Button)findViewById(R.id.button_priceinfo);
+
+        final String itemId = getIntent().getExtras().getString("ITEM_ID");
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -67,6 +70,7 @@ public class SharePricelist extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(SharePricelist.this, Pricechart.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
             }
         });
@@ -74,6 +78,7 @@ public class SharePricelist extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(SharePricelist.this, Commentlist.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
             }
         });
@@ -81,9 +86,34 @@ public class SharePricelist extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(SharePricelist.this, Itempage.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
             }
         });
+
+        DBManager dbManager = new DBManager();
+        dbManager.queryCallBack = new QueryCallBack() {
+            @Override
+            public void queryResult(String result) {
+                if (result != null) {
+                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                    String[] comments = new String[token.countTokens()];
+                    int count = 0;
+                    while (token.hasMoreTokens()) {
+                        comments[count] = token.nextToken().toString();
+                        count++;
+                    }
+                    CustomList adapter = new
+                            CustomList(SharePricelist.this, comments);
+                    ListView list = (ListView) findViewById(R.id.listView);
+                    if (list != null) {
+                        list.setAdapter(adapter);
+                    }
+                }
+            }
+        };
+        String queryCommentsSQL = "SELECT comment FROM good_comments WHERE good_id = '" + itemId + "'";
+        dbManager.querySql(queryCommentsSQL);
     }
 
 

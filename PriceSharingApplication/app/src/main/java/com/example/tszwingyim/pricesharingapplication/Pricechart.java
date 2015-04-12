@@ -46,6 +46,8 @@ public class Pricechart extends ActionBarActivity {
         Button sharepricelist = (Button) findViewById(R.id.button_shareprice);
         Button itempage = (Button) findViewById(R.id.button_priceinfo);
 
+        final String itemId = getIntent().getExtras().getString("ITEM_ID");
+
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -86,6 +88,7 @@ public class Pricechart extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(Pricechart.this, Itempage.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
 
             }
@@ -94,6 +97,7 @@ public class Pricechart extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(Pricechart.this, Commentlist.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
 
             }
@@ -102,6 +106,7 @@ public class Pricechart extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(Pricechart.this, SharePricelist.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
             }
         });

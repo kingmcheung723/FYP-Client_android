@@ -67,7 +67,6 @@ public class Itempage extends ActionBarActivity {
 //        }
 
         final String itemId = getIntent().getExtras().getString("ITEM_ID");
-
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -94,7 +93,6 @@ public class Itempage extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = TabManager.getInstance().getIntent(Itempage.this, MainActivity.class);
                 startActivity(intent);
-
             }
         });
         barcode.setOnClickListener(new View.OnClickListener() {
@@ -113,23 +111,23 @@ public class Itempage extends ActionBarActivity {
             }
         });
         pricechart.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
                 Intent intent = new Intent(Itempage.this, Pricechart.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
             }
         });
         sharepricelist.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
                 Intent intent = new Intent(Itempage.this, SharePricelist.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
             }
         });
         sharepriceform.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
                 Intent intent = new Intent(Itempage.this, Sharepriceform.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
             }
         });
@@ -400,14 +398,14 @@ public class Itempage extends ActionBarActivity {
         super.onResume();
 
         // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(this);
+//        AppEventsLogger.activateApp(this);
     }
     @Override
     protected void onPause() {
         super.onPause();
 
         // Logs 'app deactivate' App Event.
-        AppEventsLogger.deactivateApp(this);
+//        AppEventsLogger.deactivateApp(this);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
