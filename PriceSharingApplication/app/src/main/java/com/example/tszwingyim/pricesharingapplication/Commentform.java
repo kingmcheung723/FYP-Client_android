@@ -30,6 +30,8 @@ public class Commentform extends ActionBarActivity {
         Button itempage = (Button) findViewById(R.id.button_priceinfo);
         Button confirm = (Button) findViewById(R.id.button_confirm);
 
+        final String itemId = getIntent().getExtras().getString("ITEM_ID");
+
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -70,7 +72,7 @@ public class Commentform extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(Commentform.this, Commentlist.class);
-                //Intent intent = TabManager.getInstance().getIntent(Commentform.this, Commentlist.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
 
             }
@@ -79,6 +81,7 @@ public class Commentform extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(Commentform.this, Pricechart.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
 
             }
@@ -87,6 +90,7 @@ public class Commentform extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(Commentform.this, SharePricelist.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
             }
         });
@@ -94,12 +98,12 @@ public class Commentform extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = new Intent(Commentform.this, Itempage.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
             }
         });
 
-        final String goodId = this.getIntent().getExtras().getString("ITEM_ID");
-        if (goodId != null && goodId.length() > 0) {
+        if (itemId != null && itemId.length() > 0) {
             confirm.setOnClickListener(new View.OnClickListener() {
 
                 public void onClick(View v) {
@@ -115,13 +119,13 @@ public class Commentform extends ActionBarActivity {
                                     public void queryResult(String result) {
                                         if (result.equalsIgnoreCase(DBManager.SUCCESS)) {
                                             Intent intent = new Intent(Commentform.this, Commentlist.class);
-                                            intent.putExtra("ITEM_ID", goodId);
+                                            intent.putExtra("ITEM_ID", itemId);
                                             startActivity(intent);
                                         }
                                     }
                                 };
                                 String insertCommentSQL = "INSERT INTO good_comments (good_id, comment, member_email) VALUES ('" +
-                                        goodId + "','" + comment + "','" + memberEmail + "')";
+                                        itemId + "','" + comment + "','" + memberEmail + "')";
                                 dbManager.insertSql(insertCommentSQL);
                             } else {
                                 MySharedPreference.displayDialog("You have not yet registered", Commentform.this);

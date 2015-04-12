@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class Sharepriceform extends ActionBarActivity {
@@ -21,13 +22,15 @@ public class Sharepriceform extends ActionBarActivity {
         setContentView(R.layout.activity_sharepriceform);
         Button recommend = (Button)findViewById(R.id.button_recommend);
         Button category = (Button)findViewById(R.id.button_category);
-        Button member = (Button)findViewById(R.id.button_member);
+        final Button member = (Button)findViewById(R.id.button_member);
         Button barcode = (Button)findViewById(R.id.button_barcode);
         Button pricechart = (Button)findViewById(R.id.button_pricechart);
         Button sharepricelist = (Button)findViewById(R.id.button_shareprice);
         Button commentlist = (Button)findViewById(R.id.button_comment);
         Button confirm = (Button)findViewById(R.id.button_confirm);
         Button itempage = (Button)findViewById(R.id.button_priceinfo);
+
+        final String itemId = getIntent().getExtras().getString("ITEM_ID");
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -68,7 +71,8 @@ public class Sharepriceform extends ActionBarActivity {
         commentlist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, Commentlist.class);
+                Intent intent = new Intent(Sharepriceform.this, Commentlist.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
 
             }
@@ -76,14 +80,16 @@ public class Sharepriceform extends ActionBarActivity {
         itempage.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, Itempage.class);
+                Intent intent = new Intent(Sharepriceform.this, Itempage.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
             }
         });
         pricechart.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, Pricechart.class);
+                Intent intent = new Intent(Sharepriceform.this, Pricechart.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
 
             }
@@ -91,19 +97,80 @@ public class Sharepriceform extends ActionBarActivity {
         sharepricelist.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, SharePricelist.class);
+                Intent intent = new Intent(Sharepriceform.this, SharePricelist.class);
+                intent.putExtra("ITEM_ID", itemId);
                 startActivity(intent);
             }
         });
         confirm.setOnClickListener(new View.OnClickListener() {
 
+            private boolean isFieldsValid() {
+                boolean isValid = false;
+                EditText shopName = (EditText)findViewById(R.id.editText_shopname);
+                EditText shopAddress = (EditText)findViewById(R.id.editText_shopaddress);
+                EditText price = (EditText)findViewById(R.id.editText_latestprice);
+                if (shopName != null && shopAddress != null && price != null) {
+                    if (shopName.getText().toString().length() <= 0) {
+                        MySharedPreference.displayDialog("Shop name cannot leave blank.", Sharepriceform.this);
+                        return isValid;
+                    }
+                    if (shopAddress.getText().toString().length() <= 0) {
+                        MySharedPreference.displayDialog("Shop address cannot leave blank.", Sharepriceform.this);
+                        return isValid;
+                    }
+                    if (price.getText().toString().length() <= 0) {
+                        MySharedPreference.displayDialog("Price cannot leave blank.", Sharepriceform.this);
+                        return isValid;
+                    }
+                    isValid = true;
+                }
+                return isValid;
+            }
+
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Sharepriceform.this, SharePricelist.class);
-                startActivity(intent);
+                EditText shopNameEditText = (EditText)findViewById(R.id.editText_shopname);
+                EditText shopAddressEditText = (EditText)findViewById(R.id.editText_shopaddress);
+                EditText priceEditText = (EditText)findViewById(R.id.editText_latestprice);
+                if (shopNameEditText != null && shopAddressEditText != null && priceEditText != null) {
+                    String shopName = shopNameEditText.getText().toString();
+                    String shopAddress = shopAddressEditText.getText().toString();
+                    String price = priceEditText.getText().toString();
+                    if (shopName.length() <= 0) {
+                        MySharedPreference.displayDialog("Shop name cannot leave blank.", Sharepriceform.this);
+                        return;
+                    }
+                    if (shopAddress.length() <= 0) {
+                        MySharedPreference.displayDialog("Shop address cannot leave blank.", Sharepriceform.this);
+                        return;
+                    }
+                    if (price.length() <= 0) {
+                        MySharedPreference.displayDialog("Price cannot leave blank.", Sharepriceform.this);
+                        return;
+                    }
+
+                    String memberEmail = MySharedPreference.getMemberName(Sharepriceform.this);
+                    if (memberEmail != null) {
+                        DBManager dbManager = new DBManager();
+                        dbManager.queryCallBack = new QueryCallBack() {
+                            @Override
+                            public void queryResult(String result) {
+                                if (result != null && result.equalsIgnoreCase(DBManager.SUCCESS)) {
+                                    Intent intent = new Intent(Sharepriceform.this, SharePricelist.class);
+                                    intent.putExtra("ITEM_ID", itemId);
+                                    startActivity(intent);
+                                } else {
+                                    MySharedPreference.displayDialog("Try again", Sharepriceform.this);
+                                }
+                            }
+                        };
+                        String sql = "INSERT INTO share_prices (member_email, shop_location, price, shop_name) VALUES ('" +
+                                memberEmail + "','" + shopAddress + "','" + price + "','" + shopName + "')";
+                        dbManager.insertSql(sql);
+                    }
+                }
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
