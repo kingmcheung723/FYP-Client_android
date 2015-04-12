@@ -18,8 +18,6 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class Barcode extends ActionBarActivity {
 
-    private String barcode;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide the action bar
@@ -70,25 +68,44 @@ public class Barcode extends ActionBarActivity {
         });
 
         // Tap scan to trigger barcode scanner
-        scan.setOnClickListener(new MyOnClickListener(this)//{
-          //  @Override
-           // public void onClick(View v) {
-           //     Intent intent = TabManager.getInstance().getIntent(Barcode.this,Itempage.class);
-            //    startActivity(intent);
-          //  }
-        //}
-    );
+        scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator integrator = new IntentIntegrator(Barcode.this);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+                integrator.autoWide();
+                integrator.initiateScan();
+            }
+        });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null) {
             String barcode = scanResult.getContents();
-            this.barcode = barcode;
 
             TextView view = (TextView)this.findViewById(R.id.barcode);
             view.setText(barcode);
 
+            DBManager dbManager = new DBManager();
+            dbManager.queryCallBack = new QueryCallBack() {
+                @Override
+                public void queryResult(String result) {
+                    if (result != null && result.length() > 0) {
+                        MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                        if (token != null && token.countTokens() >= 1) {
+                            String itemId = token.nextToken().toString();
+                            Intent intent = new Intent(Barcode.this, Itempage.class);
+                            intent.putExtra("ITEM_ID", itemId);
+                            startActivity(intent);
+                        } else {
+                            MySharedPreference.displayDialog("No such item.", Barcode.this);
+                        }
+                    }
+                }
+            };
+            String sql = "SELECT id FROM goods WHERE barcode = '" + barcode + "'";
+            dbManager.querySql(sql);
         }
         // else continue with any other code you need in the method
         super.onActivityResult(requestCode, resultCode, intent);
@@ -115,22 +132,5 @@ public class Barcode extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-
-    public class MyOnClickListener implements View.OnClickListener {
-        Activity activity;
-
-        public MyOnClickListener(Activity activity) {
-            this.activity = activity;
-        }
-
-        @Override
-        public void onClick(View v) {
-            IntentIntegrator integrator = new IntentIntegrator(activity);
-            integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-            integrator.autoWide();
-            integrator.initiateScan();
-        }
     }
 }

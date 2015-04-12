@@ -32,15 +32,6 @@ public class SharePriceCustomList extends ArrayAdapter <String> {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView= inflater.inflate(R.layout.share_price_list_single, null, true);
         TextView shopNameTextView = (TextView) rowView.findViewById(R.id.textView_shopname);
-<<<<<<< HEAD
-        TextView addressTextView = (TextView) rowView.findViewById(R.id.textView_address);
-        TextView priceTextView = (TextView) rowView.findViewById(R.id.textView_price);
-        TextView dateTextView = (TextView) rowView.findViewById(R.id.textView_sharedate);
-  //      txtTitle.setText(this.contentString[position]);
-//        if (this.imageId != null) {
-//            imageView.setImageResource(this.imageId[position]);
-//        }
-=======
         TextView shopAddressTextView = (TextView) rowView.findViewById(R.id.textView_address);
         TextView priceTextView = (TextView) rowView.findViewById(R.id.textView_price);
         TextView dateTextView = (TextView) rowView.findViewById(R.id.textView_sharedate);
@@ -50,8 +41,6 @@ public class SharePriceCustomList extends ArrayAdapter <String> {
         shopNameTextView.setText(this.contentString[min + 1]);
         shopAddressTextView.setText(this.contentString[min + 2]);
         dateTextView.setText(this.contentString[min + 3]);
-
->>>>>>> 75b6cc9427740162a381b33f65c0ba7301185a7c
         return rowView;
     }
 }
