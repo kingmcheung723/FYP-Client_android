@@ -61,7 +61,7 @@
     <string name="logout">Logout</string>
     <string name="title_activity_goodlist">Goodlist</string>
     <string name="title_activity_search_goodlist">SearchGoodlist</string>
-    <string name="facebook_app_id">pricesharingapplication</string>
+    <string name="facebook_app_id">1139037869455914</string>
     <string-array name="searchgoods_array">
 
         <item>貨品分類</item>
