@@ -103,8 +103,8 @@ public class SharePricelist extends ActionBarActivity {
                         comments[count] = token.nextToken().toString();
                         count++;
                     }
-                    CustomList adapter = new
-                            CustomList(SharePricelist.this, comments);
+                    SharePriceCustomList adapter = new
+                            SharePriceCustomList(SharePricelist.this, comments);
                     ListView list = (ListView) findViewById(R.id.listView);
                     if (list != null) {
                         list.setAdapter(adapter);
@@ -112,7 +112,7 @@ public class SharePricelist extends ActionBarActivity {
                 }
             }
         };
-        String queryCommentsSQL = "SELECT price, shop_location, shop_nane, createddate FROM share_prices WHERE good_id = '" + itemId + "'";
+        String queryCommentsSQL = "SELECT price, shop_location, shop_name, createddate FROM share_prices WHERE good_id = '" + itemId + "'";
         dbManager.querySql(queryCommentsSQL);
     }
 

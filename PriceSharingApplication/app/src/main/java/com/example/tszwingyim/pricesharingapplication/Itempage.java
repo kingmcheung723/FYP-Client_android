@@ -5,34 +5,29 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
 import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
-import com.facebook.share.widget.ShareDialog;
-//import com.facebook.share.callbackManager;
 
 import java.util.Locale;
 
-
 public class Itempage extends ActionBarActivity {
     CallbackManager callbackManager;
+
     //    ShareDialog shareDialog;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       FacebookSdk.sdkInitialize(getApplicationContext());
-       // callbackManager = CallbackManager.Factory.create();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        // callbackManager = CallbackManager.Factory.create();
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -47,7 +42,7 @@ public class Itempage extends ActionBarActivity {
         Button sharepriceform = (Button) findViewById(R.id.button_goshareprice);
         Button commentform = (Button) findViewById(R.id.button_givecomment);
         Button saveToShoppingCart = (Button) this.findViewById(R.id.button_save);
-        ShareButton shareButton = (ShareButton)findViewById(R.id.fb_share_button);
+        ShareButton shareButton = (ShareButton) findViewById(R.id.fb_share_button);
         ShareLinkContent content = new ShareLinkContent.Builder()
                 .setContentTitle("Cheapest!!")
                 .setContentDescription(
@@ -72,7 +67,6 @@ public class Itempage extends ActionBarActivity {
 //
 //            shareDialog.show(linkContent);
 //        } });
-
 
 
         final String itemId = getIntent().getExtras().getString("ITEM_ID");
@@ -402,6 +396,7 @@ public class Itempage extends ActionBarActivity {
             dbManager.querySql(itemSql);
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -409,6 +404,7 @@ public class Itempage extends ActionBarActivity {
         // Logs 'install' and 'app activate' App Events.
 //        AppEventsLogger.activateApp(this);
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -416,6 +412,7 @@ public class Itempage extends ActionBarActivity {
         // Logs 'app deactivate' App Event.
 //        AppEventsLogger.deactivateApp(this);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -423,17 +420,12 @@ public class Itempage extends ActionBarActivity {
         return true;
     }
 
-//    @Override
-//    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        callbackManager.onActivityResult(requestCode, resultCode, data);
-//    }
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    callbackManager.onActivityResult(requestCode, resultCode, data);
-    Log.e("Test", "Yes, Uuu bitch!!!");
-}
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
