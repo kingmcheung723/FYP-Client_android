@@ -254,5 +254,6 @@
     <string name="logout">登出</string>
     <string name="title_activity_goodlist">Goodlist</string>
     <string name="title_activity_search_goodlist">SearchGoodlist</string>
+    <string name="facebook_app_id">1139037869455914</string>
 
 </resources>
