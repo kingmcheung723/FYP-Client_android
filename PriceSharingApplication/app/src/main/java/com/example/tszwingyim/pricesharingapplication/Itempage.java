@@ -27,7 +27,6 @@ public class Itempage extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
-        // callbackManager = CallbackManager.Factory.create();
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -42,34 +41,10 @@ public class Itempage extends ActionBarActivity {
         Button sharepriceform = (Button) findViewById(R.id.button_goshareprice);
         Button commentform = (Button) findViewById(R.id.button_givecomment);
         Button saveToShoppingCart = (Button) this.findViewById(R.id.button_save);
-        ShareButton shareButton = (ShareButton) findViewById(R.id.fb_share_button);
-        ShareLinkContent content = new ShareLinkContent.Builder()
-                .setContentTitle("Cheapest!!")
-                .setContentDescription(
-                        "I found a cheap goods through Price Sharing Application")
-                .setContentUrl(Uri.parse("http://www.tvb.com"))
-                .build();
-        shareButton.setShareContent(content);
-//        ShareDialog.show(MainActivity.this, content);
-        callbackManager = CallbackManager.Factory.create();
-//        ShareDialog.show(activityOrFragment, content);
-//
-//        ShareDialog shareDialog = new ShareDialog(this);
-//        // this part is optional
-//        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-//            if (ShareDialog.canShow(ShareLinkContent.class)) {
-//            ShareLinkContent linkContent = new ShareLinkContent.Builder()
-//                    .setContentTitle("Hello Facebook")
-//                    .setContentDescription(
-//                            "The 'Hello Facebook' sample  showcases simple Facebook integration")
-//                    .setContentUrl(Uri.parse("http://developers.facebook.com/android"))
-//                    .build();
-//
-//            shareDialog.show(linkContent);
-//        } });
-
+        final ShareButton shareButton = (ShareButton) findViewById(R.id.fb_share_button);
 
         final String itemId = getIntent().getExtras().getString("ITEM_ID");
+
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -182,6 +157,17 @@ public class Itempage extends ActionBarActivity {
                     String itemNameZh = token.nextToken().toString();
                     TextView textView = (TextView) findViewById(R.id.editText_name);
                     textView.setText(itemNameZh);
+
+                    // Share
+                    ShareLinkContent content = new ShareLinkContent.Builder()
+                            .setContentTitle("Cheapest!!")
+                            .setContentDescription(
+                                    "I found a cheap good " + itemNameEn + " through Price Sharing Application")
+                            .setContentUrl(Uri.parse("http://www.tvb.com"))
+                            .build();
+                    shareButton.setShareContent(content);
+                    callbackManager = CallbackManager.Factory.create();
+
 
                     // Brand name
                     String brandId = token.nextToken().toString();
