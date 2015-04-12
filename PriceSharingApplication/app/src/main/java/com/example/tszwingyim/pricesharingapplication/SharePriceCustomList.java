@@ -17,7 +17,7 @@ public class SharePriceCustomList extends ArrayAdapter <String> {
 
     public SharePriceCustomList(Activity context,
                       String[] contentString) {
-        super(context, R.layout.list_single, contentString);
+        super(context, R.layout.share_price_list_single, contentString);
         this.context = context;
         this.contentString = contentString;
     }
@@ -26,14 +26,14 @@ public class SharePriceCustomList extends ArrayAdapter <String> {
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView= inflater.inflate(R.layout.share_price_list_single, null, true);
-        TextView shopNameTextView = (TextView) rowView.findViewById(R.id.txt);
-        TextView memberNameTextView = (TextView) rowView.findViewById(R.id.txt);
-        TextView priceTextView = (TextView) rowView.findViewById(R.id.txt);
-        TextView dateTextView = (TextView) rowView.findViewById(R.id.txt);
-        txtTitle.setText(this.contentString[position]);
-        if (this.imageId != null) {
-            imageView.setImageResource(this.imageId[position]);
-        }
+        TextView shopNameTextView = (TextView) rowView.findViewById(R.id.textView_shopname);
+        TextView addressTextView = (TextView) rowView.findViewById(R.id.textView_address);
+        TextView priceTextView = (TextView) rowView.findViewById(R.id.textView_price);
+        TextView dateTextView = (TextView) rowView.findViewById(R.id.textView_sharedate);
+  //      txtTitle.setText(this.contentString[position]);
+//        if (this.imageId != null) {
+//            imageView.setImageResource(this.imageId[position]);
+//        }
         return rowView;
     }
 }
