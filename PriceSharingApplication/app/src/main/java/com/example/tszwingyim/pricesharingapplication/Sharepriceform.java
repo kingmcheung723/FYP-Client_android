@@ -163,8 +163,8 @@ public class Sharepriceform extends ActionBarActivity {
                                 }
                             }
                         };
-                        String sql = "INSERT INTO share_prices (member_email, shop_location, price, shop_name) VALUES ('" +
-                                memberEmail + "','" + shopAddress + "','" + price + "','" + shopName + "')";
+                        String sql = "INSERT INTO share_prices (member_email, good_id, shop_location, price, shop_name) VALUES ('" +
+                                memberEmail + "','" + itemId + "','" + shopAddress + "','" + price + "','" + shopName + "')";
                         dbManager.insertSql(sql);
                     }
                 }

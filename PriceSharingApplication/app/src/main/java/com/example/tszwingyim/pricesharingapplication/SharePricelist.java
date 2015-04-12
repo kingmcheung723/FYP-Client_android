@@ -112,7 +112,7 @@ public class SharePricelist extends ActionBarActivity {
                 }
             }
         };
-        String queryCommentsSQL = "SELECT comment FROM good_comments WHERE good_id = '" + itemId + "'";
+        String queryCommentsSQL = "SELECT price, shop_location, shop_nane, createddate FROM share_prices WHERE good_id = '" + itemId + "'";
         dbManager.querySql(queryCommentsSQL);
     }
 

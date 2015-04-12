@@ -14,27 +14,22 @@ import android.widget.TextView;
 public class SharePriceCustomList extends ArrayAdapter <String> {
     private final Activity context;
     private final String[] contentString;
-    private final Integer[] imageId;
-    public SharePriceCustomList(Activity context,
-                      String[] contentString, Integer[] imageId) {
-        super(context, R.layout.list_single, contentString);
-        this.context = context;
-        this.contentString = contentString;
-        this.imageId = imageId;
-    }
+
     public SharePriceCustomList(Activity context,
                       String[] contentString) {
         super(context, R.layout.list_single, contentString);
         this.context = context;
         this.contentString = contentString;
-        this.imageId = null;
     }
+    
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView= inflater.inflate(R.layout.list_single, null, true);
-        TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
+        View rowView= inflater.inflate(R.layout.share_price_list_single, null, true);
+        TextView shopNameTextView = (TextView) rowView.findViewById(R.id.txt);
+        TextView memberNameTextView = (TextView) rowView.findViewById(R.id.txt);
+        TextView priceTextView = (TextView) rowView.findViewById(R.id.txt);
+        TextView dateTextView = (TextView) rowView.findViewById(R.id.txt);
         txtTitle.setText(this.contentString[position]);
         if (this.imageId != null) {
             imageView.setImageResource(this.imageId[position]);
