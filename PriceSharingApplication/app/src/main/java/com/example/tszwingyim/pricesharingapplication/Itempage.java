@@ -43,8 +43,6 @@ public class Itempage extends ActionBarActivity {
         Button saveToShoppingCart = (Button) this.findViewById(R.id.button_save);
         final ShareButton shareButton = (ShareButton) findViewById(R.id.fb_share_button);
 
-        final String itemId = getIntent().getExtras().getString("ITEM_ID");
-
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -80,306 +78,311 @@ public class Itempage extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-        commentlist.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
-                Intent intent = new Intent(Itempage.this, Commentlist.class);
-                intent.putExtra("ITEM_ID", itemId);
-                startActivity(intent);
-            }
-        });
-        pricechart.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(Itempage.this, Pricechart.class);
-                intent.putExtra("ITEM_ID", itemId);
-                startActivity(intent);
-            }
-        });
-        sharepricelist.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(Itempage.this, SharePricelist.class);
-                intent.putExtra("ITEM_ID", itemId);
-                startActivity(intent);
-            }
-        });
-        sharepriceform.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(Itempage.this, Sharepriceform.class);
-                intent.putExtra("ITEM_ID", itemId);
-                startActivity(intent);
-            }
-        });
-        commentform.setOnClickListener(new View.OnClickListener() {
+        final String itemId = getIntent().getExtras().getString("ITEM_ID");
+        if (itemId != null) {
 
-            public void onClick(View v) {
-                if (itemId != null && itemId.length() > 0) {
-                    Intent intent = new Intent(Itempage.this, Commentform.class);
+            commentlist.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    Intent intent = new Intent(Itempage.this, Commentlist.class);
                     intent.putExtra("ITEM_ID", itemId);
                     startActivity(intent);
                 }
-            }
-        });
-        saveToShoppingCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (itemId != null && itemId.length() > 0) {
-                    String memberEmail = MySharedPreference.getMemberName(Itempage.this);
-                    if (memberEmail != null && memberEmail.length() > 0) {
-                        DBManager dbManager = new DBManager();
-                        dbManager.queryCallBack = new QueryCallBack() {
+            });
+            pricechart.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(Itempage.this, Pricechart.class);
+                    intent.putExtra("ITEM_ID", itemId);
+                    startActivity(intent);
+                }
+            });
+            sharepricelist.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(Itempage.this, SharePricelist.class);
+                    intent.putExtra("ITEM_ID", itemId);
+                    startActivity(intent);
+                }
+            });
+            sharepriceform.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(Itempage.this, Sharepriceform.class);
+                    intent.putExtra("ITEM_ID", itemId);
+                    startActivity(intent);
+                }
+            });
+            commentform.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    if (itemId != null && itemId.length() > 0) {
+                        Intent intent = new Intent(Itempage.this, Commentform.class);
+                        intent.putExtra("ITEM_ID", itemId);
+                        startActivity(intent);
+                    }
+                }
+            });
+            saveToShoppingCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemId != null && itemId.length() > 0) {
+                        String memberEmail = MySharedPreference.getMemberName(Itempage.this);
+                        if (memberEmail != null && memberEmail.length() > 0) {
+                            DBManager dbManager = new DBManager();
+                            dbManager.queryCallBack = new QueryCallBack() {
+                                @Override
+                                public void queryResult(String result) {
+                                    if (result.equalsIgnoreCase(DBManager.SUCCESS)) {
+                                        MySharedPreference.displayDialog("Added to shopping cart", Itempage.this);
+                                    }
+                                }
+                            };
+                            String insertCommentSQL = "INSERT INTO shopping_carts (good_id, member_email) VALUES ('" +
+                                    itemId + "','" + memberEmail + "')";
+                            dbManager.insertSql(insertCommentSQL);
+                        } else {
+                            MySharedPreference.displayDialog("You have not yet registered", Itempage.this);
+                        }
+                    }
+                }
+            });
+
+            if (itemId != null && itemId.length() > 0) {
+                final DBManager dbManager = new DBManager();
+                dbManager.queryCallBack = new QueryCallBack() {
+                    @Override
+                    public void queryResult(String result) {
+                        Locale locale = getResources().getConfiguration().locale;
+                        MyStringTokenizer token = new MyStringTokenizer(result, "|");
+
+                        // Item name
+                        String itemNameEn = token.nextToken().toString();
+                        String itemNameZh = token.nextToken().toString();
+                        TextView textView = (TextView) findViewById(R.id.editText_name);
+                        textView.setText(itemNameZh);
+
+                        // Share
+                        ShareLinkContent content = new ShareLinkContent.Builder()
+                                .setContentTitle("Cheapest!!")
+                                .setContentDescription(
+                                        "I found a cheap good " + itemNameEn + " through Price Sharing Application")
+                                .setContentUrl(Uri.parse("http://www.tvb.com"))
+                                .build();
+                        shareButton.setShareContent(content);
+                        callbackManager = CallbackManager.Factory.create();
+
+
+                        // Brand name
+                        String brandId = token.nextToken().toString();
+                        DBManager dbManager1 = new DBManager();
+                        dbManager1.queryCallBack = new QueryCallBack() {
                             @Override
                             public void queryResult(String result) {
-                                if (result.equalsIgnoreCase(DBManager.SUCCESS)) {
-                                    MySharedPreference.displayDialog("Added to shopping cart", Itempage.this);
+                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                String brandNameEn = token.nextToken().toString();
+                                String brandNameZh = token.nextToken().toString();
+                                TextView textView1 = (TextView) findViewById(R.id.editText_brand);
+                                textView1.setText(brandNameZh);
+                            }
+                        };
+                        String brandSql = "SELECT brands.name_en, brands.name_zh FROM brands WHERE brands.id = " + brandId;
+                        dbManager1.querySql(brandSql);
+
+                        // Category name
+                        String categoryId = token.nextToken().toString();
+                        DBManager dbManager2 = new DBManager();
+                        dbManager2.queryCallBack = new QueryCallBack() {
+                            @Override
+                            public void queryResult(String result) {
+                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                String categoryNameEn = token.nextToken().toString();
+                                String categoryNameZh = token.nextToken().toString();
+                                TextView textView2 = (TextView) findViewById(R.id.editText_category);
+                                textView2.setText(categoryNameZh);
+                            }
+                        };
+                        String categorySql = "SELECT categories.name_en, categories.name_zh FROM categories WHERE categories.id = " + categoryId;
+                        dbManager2.querySql(categorySql);
+
+                        DBManager dbManager3 = new DBManager();
+                        dbManager3.queryCallBack = new QueryCallBack() {
+                            @Override
+                            public void queryResult(String result) {
+                                if (result != null && result.length() > 0) {
+                                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                    String price = token.nextToken().toString();
+                                    String discountPriceEn = token.nextToken().toString();
+                                    String discountPriceZH = token.nextToken().toString();
+                                    String priceString = price;
+                                    if (!discountPriceZH.equalsIgnoreCase("null")) {
+                                        priceString += " " + discountPriceZH;
+                                    }
+
+                                    TextView textView4 = (TextView) findViewById(R.id.editText_wellcome);
+                                    textView4.setText(priceString);
                                 }
                             }
                         };
-                        String insertCommentSQL = "INSERT INTO shopping_carts (good_id, member_email) VALUES ('" +
-                                itemId + "','" + memberEmail + "')";
-                        dbManager.insertSql(insertCommentSQL);
-                    } else {
-                        MySharedPreference.displayDialog("You have not yet registered", Itempage.this);
+                        String wellcomeSql = "SELECT shop_goods.price,  shop_goods.discount_details_en, shop_goods.discount_details_zh FROM shop_goods WHERE shop_goods.shop_id = 1 AND shop_goods.good_id = " + itemId;
+                        dbManager3.querySql(wellcomeSql);
+
+                        DBManager dbManager4 = new DBManager();
+                        dbManager4.queryCallBack = new QueryCallBack() {
+                            @Override
+                            public void queryResult(String result) {
+                                if (result != null && result.length() > 0) {
+                                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                    String price = token.nextToken().toString();
+                                    String discountPriceEn = token.nextToken().toString();
+                                    String discountPriceZH = token.nextToken().toString();
+                                    String priceString = price;
+                                    if (!discountPriceZH.equalsIgnoreCase("null")) {
+                                        priceString += " " + discountPriceZH;
+                                    }
+                                    TextView textView3 = (TextView) findViewById(R.id.editText_parknshop);
+                                    textView3.setText(priceString);
+                                }
+                            }
+                        };
+                        String parknShopSql = "SELECT shop_goods.price,  shop_goods.discount_details_en, shop_goods.discount_details_zh FROM shop_goods WHERE shop_goods.shop_id = 2 AND  shop_goods.good_id = " + itemId;
+                        dbManager4.querySql(parknShopSql);
+
+                        DBManager dbManager5 = new DBManager();
+                        dbManager5.queryCallBack = new QueryCallBack() {
+                            @Override
+                            public void queryResult(String result) {
+                                if (result != null && result.length() > 0) {
+                                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                    String price = token.nextToken().toString();
+                                    String discountPriceEn = token.nextToken().toString();
+                                    String discountPriceZH = token.nextToken().toString();
+                                    String priceString = price;
+                                    if (!discountPriceZH.equalsIgnoreCase("null")) {
+                                        priceString += " " + discountPriceZH;
+                                    }
+                                    TextView textView7 = (TextView) findViewById(R.id.editText_marketplace);
+                                    textView7.setText(priceString);
+                                }
+                            }
+                        };
+                        String marketPlaceSql = "SELECT shop_goods.price,  shop_goods.discount_details_en, shop_goods.discount_details_zh FROM shop_goods WHERE shop_goods.shop_id = 3 AND  shop_goods.good_id = " + itemId;
+                        dbManager5.querySql(marketPlaceSql);
+
+                        DBManager dbManager6 = new DBManager();
+                        dbManager6.queryCallBack = new QueryCallBack() {
+                            @Override
+                            public void queryResult(String result) {
+                                if (result != null && result.length() > 0) {
+                                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                    String price = token.nextToken().toString();
+                                    String discountPriceEn = token.nextToken().toString();
+                                    String discountPriceZH = token.nextToken().toString();
+                                    String priceString = price;
+                                    if (!discountPriceZH.equalsIgnoreCase("null")) {
+                                        priceString += " " + discountPriceZH;
+                                    }
+                                    TextView textView5 = (TextView) findViewById(R.id.editText_aeon);
+                                    textView5.setText(priceString);
+                                }
+                            }
+                        };
+                        String aeonSql = "SELECT shop_goods.price,  shop_goods.discount_details_en, shop_goods.discount_details_zh FROM shop_goods WHERE shop_goods.shop_id = 4 AND  shop_goods.good_id = " + itemId;
+                        dbManager6.querySql(aeonSql);
+
+                        DBManager dbManager7 = new DBManager();
+                        dbManager7.queryCallBack = new QueryCallBack() {
+                            @Override
+                            public void queryResult(String result) {
+                                if (result != null && result.length() > 0) {
+                                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                    String price = token.nextToken().toString();
+                                    String discountPriceEn = token.nextToken().toString();
+                                    String discountPriceZH = token.nextToken().toString();
+                                    String priceString = price;
+                                    if (!discountPriceZH.equalsIgnoreCase("null")) {
+                                        priceString += " " + discountPriceZH;
+                                    }
+                                    TextView textView6 = (TextView) findViewById(R.id.editText_daicheong);
+                                    textView6.setText(priceString);
+                                }
+                            }
+                        };
+                        String dhcSql = "SELECT shop_goods.price,  shop_goods.discount_details_en, shop_goods.discount_details_zh FROM shop_goods WHERE shop_goods.shop_id = 5 AND  shop_goods.good_id = " + itemId;
+                        dbManager7.querySql(dhcSql);
+
+                        DBManager dbManager8 = new DBManager();
+                        dbManager8.queryCallBack = new QueryCallBack() {
+                            @Override
+                            public void queryResult(String result) {
+                                if (result != null && result.length() > 0) {
+                                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                    String likes = token.nextToken().toString();
+                                    TextView textView6 = (TextView) findViewById(R.id.textView_numoflike);
+                                    textView6.setText(likes);
+                                }
+                            }
+                        };
+                        String likeSql = "SELECT COUNT(*) FROM likes WHERE likes.good_id = '" + itemId + "'";
+                        dbManager8.querySql(likeSql);
+
+                        View.OnClickListener onLikeClickListener = new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                final String memberName = MySharedPreference.getMemberName(Itempage.this);
+                                if (memberName != null) {
+                                    final QueryCallBack queryTotalLikesCallBack = new QueryCallBack() {
+                                        @Override
+                                        public void queryResult(String result) {
+                                            if (result != null && result.length() > 0) {
+                                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                                String likes = token.nextToken().toString();
+                                                TextView textView6 = (TextView) findViewById(R.id.textView_numoflike);
+                                                textView6.setText(likes);
+                                            }
+                                        }
+                                    };
+
+                                    final QueryCallBack queryInsertLikeCallBack = new QueryCallBack() {
+                                        @Override
+                                        public void queryResult(String result) {
+                                            if (result != null) {
+                                                DBManager queryTotalLikes = new DBManager();
+                                                queryTotalLikes.queryCallBack = queryTotalLikesCallBack;
+                                                String likeSql = "SELECT COUNT(*) FROM likes WHERE likes.good_id = '" + itemId + "'";
+                                                queryTotalLikes.querySql(likeSql);
+                                            }
+                                        }
+                                    };
+                                    QueryCallBack queryIsLikedCallBack = new QueryCallBack() {
+                                        @Override
+                                        public void queryResult(String result) {
+                                            if (result == null || result.equalsIgnoreCase("")) {
+                                                DBManager queryInsertLike = new DBManager();
+                                                queryInsertLike.queryCallBack = queryInsertLikeCallBack;
+                                                String insertLikeSQL = "INSERT INTO likes (member_email, good_id, likedislike) VALUES ( '" + memberName + "','" + itemId + "'," + "'1')";
+                                                queryInsertLike.insertSql(insertLikeSQL);
+                                            } else {
+                                                MySharedPreference.displayDialog("You have liked this item", Itempage.this);
+                                            }
+                                        }
+                                    };
+                                    DBManager queryIsLiked = new DBManager();
+                                    queryIsLiked.queryCallBack = queryIsLikedCallBack;
+                                    String queryIsLikedSQL = "SELECT * FROM likes WHERE likes.good_id = '" + itemId + "' AND likes.member_email = '" + memberName + "'";
+                                    queryIsLiked.querySql(queryIsLikedSQL);
+                                } else {
+                                    MySharedPreference.displayDialog("You are not yet registered.", Itempage.this);
+                                }
+                            }
+                        };
+                        Button likeButton = (Button) findViewById(R.id.button_like);
+                        ImageView likeView = (ImageView) findViewById(R.id.imageView_like);
+                        likeButton.setOnClickListener(onLikeClickListener);
+                        likeView.setOnClickListener(onLikeClickListener);
                     }
-                }
+                };
+                String itemSql = "SELECT name_en, name_zh, brand_id, category_id FROM goods WHERE goods.id = '" + itemId + "'";
+                dbManager.querySql(itemSql);
             }
-        });
-
-        if (itemId != null && itemId.length() > 0) {
-            final DBManager dbManager = new DBManager();
-            dbManager.queryCallBack = new QueryCallBack() {
-                @Override
-                public void queryResult(String result) {
-                    Locale locale = getResources().getConfiguration().locale;
-                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
-
-                    // Item name
-                    String itemNameEn = token.nextToken().toString();
-                    String itemNameZh = token.nextToken().toString();
-                    TextView textView = (TextView) findViewById(R.id.editText_name);
-                    textView.setText(itemNameZh);
-
-                    // Share
-                    ShareLinkContent content = new ShareLinkContent.Builder()
-                            .setContentTitle("Cheapest!!")
-                            .setContentDescription(
-                                    "I found a cheap good " + itemNameEn + " through Price Sharing Application")
-                            .setContentUrl(Uri.parse("http://www.tvb.com"))
-                            .build();
-                    shareButton.setShareContent(content);
-                    callbackManager = CallbackManager.Factory.create();
-
-
-                    // Brand name
-                    String brandId = token.nextToken().toString();
-                    DBManager dbManager1 = new DBManager();
-                    dbManager1.queryCallBack = new QueryCallBack() {
-                        @Override
-                        public void queryResult(String result) {
-                            MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                            String brandNameEn = token.nextToken().toString();
-                            String brandNameZh = token.nextToken().toString();
-                            TextView textView1 = (TextView) findViewById(R.id.editText_brand);
-                            textView1.setText(brandNameZh);
-                        }
-                    };
-                    String brandSql = "SELECT brands.name_en, brands.name_zh FROM brands WHERE brands.id = " + brandId;
-                    dbManager1.querySql(brandSql);
-
-                    // Category name
-                    String categoryId = token.nextToken().toString();
-                    DBManager dbManager2 = new DBManager();
-                    dbManager2.queryCallBack = new QueryCallBack() {
-                        @Override
-                        public void queryResult(String result) {
-                            MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                            String categoryNameEn = token.nextToken().toString();
-                            String categoryNameZh = token.nextToken().toString();
-                            TextView textView2 = (TextView) findViewById(R.id.editText_category);
-                            textView2.setText(categoryNameZh);
-                        }
-                    };
-                    String categorySql = "SELECT categories.name_en, categories.name_zh FROM categories WHERE categories.id = " + categoryId;
-                    dbManager2.querySql(categorySql);
-
-                    DBManager dbManager3 = new DBManager();
-                    dbManager3.queryCallBack = new QueryCallBack() {
-                        @Override
-                        public void queryResult(String result) {
-                            if (result != null && result.length() > 0) {
-                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                                String price = token.nextToken().toString();
-                                String discountPriceEn = token.nextToken().toString();
-                                String discountPriceZH = token.nextToken().toString();
-                                String priceString = price;
-                                if (!discountPriceZH.equalsIgnoreCase("null")) {
-                                    priceString += " " + discountPriceZH;
-                                }
-
-                                TextView textView4 = (TextView) findViewById(R.id.editText_wellcome);
-                                textView4.setText(priceString);
-                            }
-                        }
-                    };
-                    String wellcomeSql = "SELECT shop_goods.price,  shop_goods.discount_details_en, shop_goods.discount_details_zh FROM shop_goods WHERE shop_goods.shop_id = 1 AND shop_goods.good_id = " + itemId;
-                    dbManager3.querySql(wellcomeSql);
-
-                    DBManager dbManager4 = new DBManager();
-                    dbManager4.queryCallBack = new QueryCallBack() {
-                        @Override
-                        public void queryResult(String result) {
-                            if (result != null && result.length() > 0) {
-                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                                String price = token.nextToken().toString();
-                                String discountPriceEn = token.nextToken().toString();
-                                String discountPriceZH = token.nextToken().toString();
-                                String priceString = price;
-                                if (!discountPriceZH.equalsIgnoreCase("null")) {
-                                    priceString += " " + discountPriceZH;
-                                }
-                                TextView textView3 = (TextView) findViewById(R.id.editText_parknshop);
-                                textView3.setText(priceString);
-                            }
-                        }
-                    };
-                    String parknShopSql = "SELECT shop_goods.price,  shop_goods.discount_details_en, shop_goods.discount_details_zh FROM shop_goods WHERE shop_goods.shop_id = 2 AND  shop_goods.good_id = " + itemId;
-                    dbManager4.querySql(parknShopSql);
-
-                    DBManager dbManager5 = new DBManager();
-                    dbManager5.queryCallBack = new QueryCallBack() {
-                        @Override
-                        public void queryResult(String result) {
-                            if (result != null && result.length() > 0) {
-                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                                String price = token.nextToken().toString();
-                                String discountPriceEn = token.nextToken().toString();
-                                String discountPriceZH = token.nextToken().toString();
-                                String priceString = price;
-                                if (!discountPriceZH.equalsIgnoreCase("null")) {
-                                    priceString += " " + discountPriceZH;
-                                }
-                                TextView textView7 = (TextView) findViewById(R.id.editText_marketplace);
-                                textView7.setText(priceString);
-                            }
-                        }
-                    };
-                    String marketPlaceSql = "SELECT shop_goods.price,  shop_goods.discount_details_en, shop_goods.discount_details_zh FROM shop_goods WHERE shop_goods.shop_id = 3 AND  shop_goods.good_id = " + itemId;
-                    dbManager5.querySql(marketPlaceSql);
-
-                    DBManager dbManager6 = new DBManager();
-                    dbManager6.queryCallBack = new QueryCallBack() {
-                        @Override
-                        public void queryResult(String result) {
-                            if (result != null && result.length() > 0) {
-                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                                String price = token.nextToken().toString();
-                                String discountPriceEn = token.nextToken().toString();
-                                String discountPriceZH = token.nextToken().toString();
-                                String priceString = price;
-                                if (!discountPriceZH.equalsIgnoreCase("null")) {
-                                    priceString += " " + discountPriceZH;
-                                }
-                                TextView textView5 = (TextView) findViewById(R.id.editText_aeon);
-                                textView5.setText(priceString);
-                            }
-                        }
-                    };
-                    String aeonSql = "SELECT shop_goods.price,  shop_goods.discount_details_en, shop_goods.discount_details_zh FROM shop_goods WHERE shop_goods.shop_id = 4 AND  shop_goods.good_id = " + itemId;
-                    dbManager6.querySql(aeonSql);
-
-                    DBManager dbManager7 = new DBManager();
-                    dbManager7.queryCallBack = new QueryCallBack() {
-                        @Override
-                        public void queryResult(String result) {
-                            if (result != null && result.length() > 0) {
-                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                                String price = token.nextToken().toString();
-                                String discountPriceEn = token.nextToken().toString();
-                                String discountPriceZH = token.nextToken().toString();
-                                String priceString = price;
-                                if (!discountPriceZH.equalsIgnoreCase("null")) {
-                                    priceString += " " + discountPriceZH;
-                                }
-                                TextView textView6 = (TextView) findViewById(R.id.editText_daicheong);
-                                textView6.setText(priceString);
-                            }
-                        }
-                    };
-                    String dhcSql = "SELECT shop_goods.price,  shop_goods.discount_details_en, shop_goods.discount_details_zh FROM shop_goods WHERE shop_goods.shop_id = 5 AND  shop_goods.good_id = " + itemId;
-                    dbManager7.querySql(dhcSql);
-
-                    DBManager dbManager8 = new DBManager();
-                    dbManager8.queryCallBack = new QueryCallBack() {
-                        @Override
-                        public void queryResult(String result) {
-                            if (result != null && result.length() > 0) {
-                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                                String likes = token.nextToken().toString();
-                                TextView textView6 = (TextView) findViewById(R.id.textView_numoflike);
-                                textView6.setText(likes);
-                            }
-                        }
-                    };
-                    String likeSql = "SELECT COUNT(*) FROM likes WHERE likes.good_id = '" + itemId + "'";
-                    dbManager8.querySql(likeSql);
-
-                    View.OnClickListener onLikeClickListener = new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            final String memberName = MySharedPreference.getMemberName(Itempage.this);
-                            if (memberName != null) {
-                                final QueryCallBack queryTotalLikesCallBack = new QueryCallBack() {
-                                    @Override
-                                    public void queryResult(String result) {
-                                        if (result != null && result.length() > 0) {
-                                            MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                                            String likes = token.nextToken().toString();
-                                            TextView textView6 = (TextView) findViewById(R.id.textView_numoflike);
-                                            textView6.setText(likes);
-                                        }
-                                    }
-                                };
-
-                                final QueryCallBack queryInsertLikeCallBack = new QueryCallBack() {
-                                    @Override
-                                    public void queryResult(String result) {
-                                        if (result != null) {
-                                            DBManager queryTotalLikes = new DBManager();
-                                            queryTotalLikes.queryCallBack = queryTotalLikesCallBack;
-                                            String likeSql = "SELECT COUNT(*) FROM likes WHERE likes.good_id = '" + itemId + "'";
-                                            queryTotalLikes.querySql(likeSql);
-                                        }
-                                    }
-                                };
-                                QueryCallBack queryIsLikedCallBack = new QueryCallBack() {
-                                    @Override
-                                    public void queryResult(String result) {
-                                        if (result == null || result.equalsIgnoreCase("")) {
-                                            DBManager queryInsertLike = new DBManager();
-                                            queryInsertLike.queryCallBack = queryInsertLikeCallBack;
-                                            String insertLikeSQL = "INSERT INTO likes (member_email, good_id, likedislike) VALUES ( '" + memberName + "','" + itemId + "'," + "'1')";
-                                            queryInsertLike.insertSql(insertLikeSQL);
-                                        } else {
-                                            MySharedPreference.displayDialog("You have liked this item", Itempage.this);
-                                        }
-                                    }
-                                };
-                                DBManager queryIsLiked = new DBManager();
-                                queryIsLiked.queryCallBack = queryIsLikedCallBack;
-                                String queryIsLikedSQL = "SELECT * FROM likes WHERE likes.good_id = '" + itemId + "' AND likes.member_email = '" + memberName + "'";
-                                queryIsLiked.querySql(queryIsLikedSQL);
-                            } else {
-                                MySharedPreference.displayDialog("You are not yet registered.", Itempage.this);
-                            }
-                        }
-                    };
-                    Button likeButton = (Button) findViewById(R.id.button_like);
-                    ImageView likeView = (ImageView) findViewById(R.id.imageView_like);
-                    likeButton.setOnClickListener(onLikeClickListener);
-                    likeView.setOnClickListener(onLikeClickListener);
-                }
-            };
-            String itemSql = "SELECT name_en, name_zh, brand_id, category_id FROM goods WHERE goods.id = '" + itemId + "'";
-            dbManager.querySql(itemSql);
         }
     }
 

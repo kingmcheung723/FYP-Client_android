@@ -18,7 +18,7 @@ public class DBManager {
     public static final String SUCCESS = "Success";
 
     private static final String url = "jdbc:mysql://10.0.2.2:3306/fyp_database?useUnicode=yes&characterEncoding=UTF-8";
-    private static final String user = "fyp_admin";
+    private static final String user = "root";
     private static final String password = null;
     private static final String JDBCDriverName = "com.mysql.jdbc.Driver";
 
