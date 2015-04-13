@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 
 
 public class Recommendation extends ActionBarActivity {
@@ -17,7 +19,7 @@ public class Recommendation extends ActionBarActivity {
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_recommendation);
         Button search = (Button)findViewById(R.id.button_search);
         Button recommend = (Button)findViewById(R.id.button_recommend);
         Button member = (Button)findViewById(R.id.button_member);
@@ -59,10 +61,38 @@ public class Recommendation extends ActionBarActivity {
                 startActivity(myintent4);
             }
         });
+
+        final ListView listView = (ListView)findViewById(R.id.listView2);
+        if (listView != null) {
+            DBManager dbManager = new DBManager();
+            dbManager.queryCallBack = new QueryCallBack() {
+                @Override
+                public void queryResult(String result) {
+                    if (result != null && result.length() > 0) {
+                        MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                        if (token != null && token.countTokens() >= 1) {
+                            String[] itemNames = new String[token.countTokens()];
+                            int count = 0;
+                            while (token.hasMoreTokens()) {
+                                String goodName = token.nextToken();
+                                if (goodName != null) {
+                                    itemNames[count] = goodName;
+                                    count++;
+                                }
+                            }
+                            CustomList adapter = new
+                                    CustomList(Recommendation.this, itemNames);
+                            listView.setAdapter(adapter);
+                        } else {
+                            MySharedPreference.displayDialog("No such item.", Recommendation.this);
+                        }
+                    }
+                }
+            };
+            String itemSql = "SELECT name_zh FROM goods WHERE category_id = 1 ORDER BY RAND() limit 10";
+            dbManager.querySql(itemSql);
+        }
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

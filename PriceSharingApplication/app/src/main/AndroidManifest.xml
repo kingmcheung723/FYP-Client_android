@@ -113,7 +113,6 @@
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/app_name">
-h
         </activity>
         <provider android:authorities="com.facebook.app.FacebookContentProvider1139037869455914"
             android:name="com.facebook.FacebookContentProvider"

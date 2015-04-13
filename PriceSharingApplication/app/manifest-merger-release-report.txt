@@ -1,6 +1,8 @@
 -- Merging decision tree log ---
 manifest
 ADDED from AndroidManifest.xml:2:1
+	xmlns:android
+		ADDED from AndroidManifest.xml:2:11
 	package
 		ADDED from AndroidManifest.xml:3:5
 		INJECTED from AndroidManifest.xml:0:0
@@ -13,8 +15,6 @@ ADDED from AndroidManifest.xml:2:1
 		ADDED from AndroidManifest.xml:4:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
-	xmlns:android
-		ADDED from AndroidManifest.xml:2:11
 uses-sdk
 ADDED from AndroidManifest.xml:7:5
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5
@@ -26,11 +26,11 @@ MERGED from com.google.android.gms:play-services:6.5.87:18:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 MERGED from com.facebook.android:facebook-android-sdk:4.0.0:24:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
+	android:minSdkVersion
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:7:15
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
-	android:minSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
 uses-permission#android.permission.CAMERA
@@ -91,10 +91,10 @@ MERGED from com.journeyapps:zxing-android-legacy:2.0.1:37:5
 		ADDED from AndroidManifest.xml:32:19
 uses-feature#0x00020000
 ADDED from AndroidManifest.xml:34:5
-	android:glEsVersion
-		ADDED from AndroidManifest.xml:35:9
 	android:required
 		ADDED from AndroidManifest.xml:36:9
+	android:glEsVersion
+		ADDED from AndroidManifest.xml:35:9
 uses-permission#android.permission.READ_PHONE_STATE
 ADDED from AndroidManifest.xml:38:5
 	android:name
@@ -131,14 +131,12 @@ ADDED from AndroidManifest.xml:47:9
 meta-data#com.google.android.gms.version
 ADDED from AndroidManifest.xml:49:9
 MERGED from com.google.android.gms:play-services:6.5.87:21:9
-	android:value
-		ADDED from AndroidManifest.xml:51:13
 	android:name
 		ADDED from AndroidManifest.xml:50:13
+	android:value
+		ADDED from AndroidManifest.xml:51:13
 meta-data#com.google.android.maps.v2.API_KEY
 ADDED from AndroidManifest.xml:52:9
-	android:value
-		ADDED from AndroidManifest.xml:54:13
 	android:name
 		ADDED from AndroidManifest.xml:53:13
 meta-data#com.facebook.sdk.ApplicationId
@@ -350,26 +348,26 @@ ADDED from com.journeyapps:zxing-android-embedded:2.0.1:52:5
 MERGED from com.journeyapps:zxing-android-legacy:2.0.1:53:5
 	android:largeScreens
 		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:54:9
-	android:smallScreens
-		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:56:9
+	android:anyDensity
+		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:53:9
 	android:normalScreens
 		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:55:9
 	android:xlargeScreens
 		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:57:9
-	android:anyDensity
-		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:53:9
+	android:smallScreens
+		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:56:9
 activity#com.google.zxing.client.android.CaptureActivity
 ADDED from com.journeyapps:zxing-android-embedded:2.0.1:60:9
-	android:clearTaskOnLaunch
-		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:62:13
-	android:screenOrientation
-		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:63:13
-	android:stateNotNeeded
-		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:64:13
 	android:windowSoftInputMode
 		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:66:13
+	android:screenOrientation
+		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:63:13
 	android:theme
 		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:65:13
+	android:stateNotNeeded
+		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:64:13
+	android:clearTaskOnLaunch
+		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:62:13
 	android:name
 		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:61:13
 activity#com.google.zxing.client.android.HelpActivity
@@ -390,18 +388,18 @@ ADDED from com.journeyapps:zxing-android-embedded:2.0.1:72:9
 		ADDED from com.journeyapps:zxing-android-embedded:2.0.1:73:13
 activity#com.google.zxing.client.androidlegacy.CaptureActivity
 ADDED from com.journeyapps:zxing-android-legacy:2.0.1:61:9
-	android:clearTaskOnLaunch
-		ADDED from com.journeyapps:zxing-android-legacy:2.0.1:63:13
-	android:screenOrientation
-		ADDED from com.journeyapps:zxing-android-legacy:2.0.1:65:13
-	android:stateNotNeeded
-		ADDED from com.journeyapps:zxing-android-legacy:2.0.1:66:13
 	android:windowSoftInputMode
 		ADDED from com.journeyapps:zxing-android-legacy:2.0.1:68:13
+	android:screenOrientation
+		ADDED from com.journeyapps:zxing-android-legacy:2.0.1:65:13
 	android:configChanges
 		ADDED from com.journeyapps:zxing-android-legacy:2.0.1:64:13
 	android:theme
 		ADDED from com.journeyapps:zxing-android-legacy:2.0.1:67:13
+	android:stateNotNeeded
+		ADDED from com.journeyapps:zxing-android-legacy:2.0.1:66:13
+	android:clearTaskOnLaunch
+		ADDED from com.journeyapps:zxing-android-legacy:2.0.1:63:13
 	android:name
 		ADDED from com.journeyapps:zxing-android-legacy:2.0.1:62:13
 activity#com.google.zxing.client.androidlegacy.HelpActivity
