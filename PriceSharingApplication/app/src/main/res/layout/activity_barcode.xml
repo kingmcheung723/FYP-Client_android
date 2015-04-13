@@ -19,21 +19,22 @@
         android:clickable="false"
         android:textSize="25dp" />
 
-    <TextView
-        android:id="@+id/barcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
     <Button
         android:id="@+id/button_scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/scan"
-        android:layout_above="@+id/linearLayout"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/barcode"
+        android:layout_above="@+id/button_scan"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/scan_content" />
 
     <LinearLayout
         android:orientation="horizontal"
