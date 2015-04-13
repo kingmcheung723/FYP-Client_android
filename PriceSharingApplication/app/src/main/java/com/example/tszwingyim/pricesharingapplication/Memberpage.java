@@ -150,9 +150,46 @@ public class Memberpage extends ActionBarActivity {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, Memberpage.class);
+        Intent refresh = new Intent(this, Member.class);
+        Intent refresh1 = new Intent(this, Barcode.class);
+        Intent refresh2 = new Intent(this, MainActivity.class);
+        Intent refresh3 = new Intent(this, Recommendation.class);
+        Intent refresh4 = new Intent(this, Search.class);
+        Intent refresh5 = new Intent(this, Commentlist.class);
+        Intent refresh6 = new Intent(this, Commentform.class);
+        Intent refresh7 = new Intent(this, GoodList.class);
+        Intent refresh8 = new Intent(this, Itempage.class);
+        Intent refresh9 = new Intent(this, loadingPage.class);
+        Intent refresh10 = new Intent(this, Memberpage.class);
+        Intent refresh11= new Intent(this, Pricechart.class);
+        Intent refresh12 = new Intent(this, Register.class);
+        Intent refresh13 = new Intent(this, SearchGoodlist.class);
+        Intent refresh14 = new Intent(this, SearchLocation.class);
+        Intent refresh15 = new Intent(this, Setting.class);
+        Intent refresh16= new Intent(this, Sharepriceform.class);
+        Intent refresh17 = new Intent(this, SharePricelist.class);
         startActivity(refresh);
+        startActivity(refresh1);
+        startActivity(refresh2);
+        startActivity(refresh3);
+        startActivity(refresh4);
+        startActivity(refresh5);
+        startActivity(refresh6);
+        startActivity(refresh7);
+        startActivity(refresh8);
+        startActivity(refresh9);
+        startActivity(refresh10);
+        startActivity(refresh11);
+        startActivity(refresh12);
+        startActivity(refresh13);
+        startActivity(refresh14);
+        startActivity(refresh15);
+        startActivity(refresh16);
+        startActivity(refresh17);
+
+
     }
+
 
 
     @Override
