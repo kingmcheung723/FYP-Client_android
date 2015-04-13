@@ -62,6 +62,7 @@
     <string name="title_activity_goodlist">Goodlist</string>
     <string name="title_activity_search_goodlist">SearchGoodlist</string>
     <string name="facebook_app_id">1139037869455914</string>
+    <!--<string name="google_maps_key" >AIzaSyCS8NGPmyJCxJo7GwVOv1J7VrXPKrpUz6Q</string>-->
     <string-array name="searchgoods_array">
 
         <item>貨品分類</item>

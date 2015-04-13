@@ -41,7 +41,6 @@ public class SharePriceCustomList extends ArrayAdapter <String> {
         shopNameTextView.setText(this.contentString[min + 1]);
         shopAddressTextView.setText(this.contentString[min + 2]);
         dateTextView.setText(this.contentString[min + 3]);
-
         return rowView;
     }
 }

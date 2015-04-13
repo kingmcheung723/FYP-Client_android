@@ -56,9 +56,7 @@
     <!-- spinner -->
     <string-array name="searchgoods_array">
         <item>貨品名稱</item>
-        <item>貨品分類</item>
         <item>貨品品牌</item>
-        <item>超市名稱</item>
     </string-array>
 
     <!-- spinner -->
@@ -255,5 +253,5 @@
     <string name="title_activity_goodlist">Goodlist</string>
     <string name="title_activity_search_goodlist">SearchGoodlist</string>
     <string name="facebook_app_id">1139037869455914</string>
- <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">AIzaSyBDlMxIYXbUQK21w6RmwHjq8UWQM0uSbuU</string>
+    <!--<string name="google_maps_key" >AIzaSyCS8NGPmyJCxJo7GwVOv1J7VrXPKrpUz6Q</string>-->
 </resources>

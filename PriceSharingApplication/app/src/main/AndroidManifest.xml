@@ -51,7 +51,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyCS8NGPmyJCxJo7GwVOv1J7VrXPKrpUz6Q" />
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <activity
@@ -108,7 +108,6 @@
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/app_name">
-
         </activity>
         <provider android:authorities="com.facebook.app.FacebookContentProvider1139037869455914"
             android:name="com.facebook.FacebookContentProvider"
