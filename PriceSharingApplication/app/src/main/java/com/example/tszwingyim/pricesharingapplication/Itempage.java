@@ -165,7 +165,7 @@ public class Itempage extends ActionBarActivity {
                                 .setContentTitle("Cheapest!!")
                                 .setContentDescription(
                                         "I found a cheap good " + itemNameEn + " through Price Sharing Application")
-                                .setContentUrl(Uri.parse("http://www.tvb.com"))
+
                                 .build();
                         shareButton.setShareContent(content);
                         callbackManager = CallbackManager.Factory.create();
