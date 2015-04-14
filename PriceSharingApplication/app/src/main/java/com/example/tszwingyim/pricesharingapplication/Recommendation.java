@@ -1,21 +1,27 @@
 package com.example.tszwingyim.pricesharingapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 
 public class Recommendation extends ActionBarActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Spinner spinnerrecomm;
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -61,6 +67,48 @@ public class Recommendation extends ActionBarActivity {
                 startActivity(myintent4);
             }
         });
+
+        spinnerrecomm = (Spinner) findViewById(R.id.spinner_recommend);
+        String[] cateStr = { "Select Category","媽媽之選","生活品味","潮流之選","女性推介","甜心推介" };
+        //媽媽之選:18,2,6,19,20
+        //生活品味:64,66,67,36,9
+        //潮流之選:29,16,17,35,37
+        //女性推介:47,48,49,50,51
+        //甜心推介:40,13,14,1,9
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cateStr);
+        //selected item will look like a spinner set from XML
+        spinnerrecomm.setAdapter(adapter);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerrecomm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+
+                if (pos == 1) {
+
+                    Toast.makeText(parent.getContext(),
+                            "You have selected Chinese", Toast.LENGTH_SHORT)
+                            .show();
+
+                } else if (pos == 2) {
+
+                    Toast.makeText(parent.getContext(),
+                            "You have selected English", Toast.LENGTH_SHORT)
+                            .show();
+
+                }
+
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+
+        });
+
+
 
         final ListView listView = (ListView)findViewById(R.id.listView2);
         if (listView != null) {
