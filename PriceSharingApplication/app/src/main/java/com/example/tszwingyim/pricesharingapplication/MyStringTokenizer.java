@@ -11,7 +11,7 @@ public class MyStringTokenizer extends java.util.StringTokenizer {
         if (this.hasMoreTokens()) {
             return super.nextToken();
         } else {
-            return "";
+            return null;
         }
     }
 }

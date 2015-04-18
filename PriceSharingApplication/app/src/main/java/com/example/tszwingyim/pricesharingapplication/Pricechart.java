@@ -23,11 +23,14 @@ import java.util.Random;
 
 public class Pricechart extends ActionBarActivity {
     private XYPlot plot;
-
+    private List<Number> WelcomeGoodPrices;
+    private List<Number> ParknShopGoodPrices;
+    private List<Number> AeonGoodPrice;
+    private List<Number> DchGoodPrices;
+    private List<Number> MarketPlaceGoodPrices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
@@ -110,7 +113,32 @@ public class Pricechart extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-        // initialize our XYPlot reference:
+
+        DBManager welcomeDBManager = new DBManager();
+        welcomeDBManager.queryCallBack = new QueryCallBack() {
+            @Override
+            public void queryResult(String result) {
+                if (result != null) {
+                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                    if (token != null && token.countTokens() >= 1) {
+                        String price = null;
+                        while (token.hasMoreTokens()) {
+                            price = token.nextToken();
+                            if (price != null) {
+                                Number a = 0;
+                            }
+                        }
+                    }
+                    drawChart();
+                }
+            }
+        };
+        String welcomeSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '1' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-12' ORDER BY `lastmoddate` ASC  ";
+        welcomeDBManager.querySql(welcomeSQL);
+
+    }
+
+    private void drawChart() {        // initialize our XYPlot reference:
         plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
         // Create a couple arrays of y-values to plot:
         Number[] series1Numbers = {8.10, 8.20, 8.30, 8.40, 8.50, 8.60, 8.70, 8.80, 8.90, 9.00, 9.10};
@@ -118,40 +146,12 @@ public class Pricechart extends ActionBarActivity {
         Number[] series3Numbers = {8.30, 8.40, 8.50, 8.60, 8.70, 8.80, 8.90, 9.00, 9.10, 9.20, 9.30};
         Number[] series4Numbers = {8.40, 8.50, 8.60, 8.70, 8.80, 8.90, 9.00, 9.10, 9.20, 9.30, 9.40};
         Number[] series5Numbers = {8.50, 8.60, 8.70, 8.80, 8.90, 9.00, 9.10, 9.20, 9.30, 9.40, 9.50};
-        //final String[] xLabels = {"Jan", "Feb", "Mar", "Apr", "May"};
-//        Number[] timeseriesNumbers = {978307200,// 2001
-//                1009843200, // 2002
-//                1041379200, // 2003
-//                1072915200, // 2004
-//                1104537600};  // 2005
-
 
         // Turn the above arrays into XYSeries':
-        XYSeries series1 = new SimpleXYSeries(
-                Arrays.asList(series1Numbers),          // SimpleXYSeries takes a List so turn our array into a List
-                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
-                "百佳");                             // Set the display title of the series
-//        XYSeries series1 = new SimpleXYSeries(
-//                Arrays.asList(timeseriesNumbers),
-//                Arrays.asList(series1Numbers),
-//                "Sightings in USA");
-//        XYSeries series2 = new SimpleXYSeries(
-//                Arrays.asList(timeseriesNumbers),
-//                Arrays.asList(series2Numbers),
-//                "Sightings in USA");
-//        XYSeries series3 = new SimpleXYSeries(
-//                Arrays.asList(timeseriesNumbers),
-//                Arrays.asList(series3Numbers),
-//                "Sightings in USA");
-//        XYSeries series4 = new SimpleXYSeries(
-//                Arrays.asList(timeseriesNumbers),
-//                Arrays.asList(series4Numbers),
-//                "Sightings in USA");
-//        XYSeries series5 = new SimpleXYSeries(
-//                Arrays.asList(timeseriesNumbers),
-//                Arrays.asList(series5Numbers),
-//                "Sightings in USA");
-        // same as above
+        // SimpleXYSeries takes a List so turn our array into a List
+        // Y_VALS_ONLY means use the element index as the x value
+        // Set the display title of the series
+        XYSeries series1 = new SimpleXYSeries(Arrays.asList(series1Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "百佳");
         XYSeries series2 = new SimpleXYSeries(Arrays.asList(series2Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Wellcome");
         XYSeries series3 = new SimpleXYSeries(Arrays.asList(series3Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Aeon");
         XYSeries series4 = new SimpleXYSeries(Arrays.asList(series4Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "大昌");
@@ -193,7 +193,7 @@ public class Pricechart extends ActionBarActivity {
                 R.xml.line_point_formatter_with_plf5);
         plot.addSeries(series5, series5Format);
 
-// thin out domain tick labels so they dont overlap each other:
+        // thin out domain tick labels so they dont overlap each other:
         plot.setDomainStepMode(XYStepMode.INCREMENT_BY_VAL);
         plot.setDomainStepValue(1);
 
