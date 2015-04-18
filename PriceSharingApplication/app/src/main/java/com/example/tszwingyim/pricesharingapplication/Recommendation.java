@@ -69,6 +69,10 @@ public class Recommendation extends ActionBarActivity {
             }
         });
 
+        recommendation();
+    }
+
+    private void recommendation() {
         Spinner spinnerrecomm = (Spinner) findViewById(R.id.spinner_recommend);
         String[] cateStr = {"媽媽之選","生活品味","潮流之選","女性推介","甜心推介"};
         //媽媽之選:18,2,6,19,20
