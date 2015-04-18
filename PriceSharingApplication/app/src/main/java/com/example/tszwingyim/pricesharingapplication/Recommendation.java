@@ -31,6 +31,7 @@ public class Recommendation extends ActionBarActivity {
         Button recommend = (Button)findViewById(R.id.button_recommend);
         Button member = (Button)findViewById(R.id.button_member);
         Button barcode = (Button)findViewById(R.id.button_barcode);
+        Button refresh = (Button)findViewById(R.id.button_refresh);
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -68,8 +69,13 @@ public class Recommendation extends ActionBarActivity {
                 startActivity(myintent4);
             }
         });
+        refresh.setOnClickListener(new View.OnClickListener() {
 
-        recommendation();
+            public void onClick(View v) {
+                recommendation();
+            }
+        });
+
     }
 
     private void recommendation() {
