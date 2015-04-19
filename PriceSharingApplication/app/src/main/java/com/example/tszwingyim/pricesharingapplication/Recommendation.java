@@ -88,19 +88,19 @@ public class Recommendation extends ActionBarActivity {
         spinnerrecomm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,  int pos, long id) {
                 String itemSql = "SELECT name_zh FROM goods WHERE category_id = 2 OR category_id = 6 OR category_id = 18 OR category_id = 19 OR category_id = 20 ORDER BY RAND() limit 10";
-                if (pos == 1) {
+                if (pos == 0) {
                     //媽媽之選:18,2,6,19,20
                     itemSql = "SELECT name_zh FROM goods WHERE category_id = 2 OR category_id = 6 OR category_id = 18 OR category_id = 19 OR category_id = 20 ORDER BY RAND() limit 10";
-                } else if (pos == 2) {
+                } else if (pos == 1) {
                     //生活品味:64,66,67,36,9
                     itemSql = "SELECT name_zh FROM goods WHERE category_id = 9 OR category_id = 36 OR category_id = 66 OR category_id = 64 OR category_id = 67 ORDER BY RAND() limit 10";
-                } else if (pos == 3) {
+                } else if (pos == 2) {
                     //潮流之選:29,16,17,35,37
                     itemSql = "SELECT name_zh FROM goods WHERE category_id = 16 OR category_id = 17 OR category_id = 29 OR category_id = 35 OR category_id = 37 ORDER BY RAND() limit 10";
-                } else if (pos == 4) {
+                } else if (pos == 3) {
                     //女性推介:47,48,49,50,51
                     itemSql = "SELECT name_zh FROM goods WHERE category_id = 47 OR category_id = 48 OR category_id = 49 OR category_id = 50 OR category_id = 251 ORDER BY RAND() limit 10";
-                } else if (pos == 5) {
+                } else if (pos == 4) {
                     //甜心推介:40,13,14,1,9
                     itemSql = "SELECT name_zh FROM goods WHERE category_id = 1 OR category_id = 9 OR category_id = 13 OR category_id = 14 OR category_id = 40 ORDER BY RAND() limit 10";
                 }
