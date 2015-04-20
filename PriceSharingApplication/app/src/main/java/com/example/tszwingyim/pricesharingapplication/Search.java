@@ -104,7 +104,7 @@ public class Search extends ActionBarActivity {
                                             }
                                         }
                                     };
-                                    String itemSql = "SELECT id FROM goods WHERE goods.name_zh like '%" + itemName + "%' OR goods.name_en = '%" + itemName + "%'";
+                                    String itemSql = "SELECT id FROM goods WHERE goods.name_zh like '%" + itemName + "%' OR goods.name_en like '%" + itemName + "%'";
                                     dbManager.querySql(itemSql);
                                 } else {
                                     DBManager dbManager = new DBManager();
