@@ -23,11 +23,11 @@ import java.util.Random;
 
 public class Pricechart extends ActionBarActivity {
     private XYPlot plot;
-    private List<Number> WelcomeGoodPrices;
-    private List<Number> ParknShopGoodPrices;
-    private List<Number> AeonGoodPrice;
-    private List<Number> DchGoodPrices;
-    private List<Number> MarketPlaceGoodPrices;
+    private List<Number> WelcomeGoodPrices = new ArrayList<Number>();
+    private List<Number> ParknShopGoodPrices = new ArrayList<Number>();
+    private List<Number> AeonGoodPrice = new ArrayList<Number>();
+    private List<Number> DchGoodPrices = new ArrayList<Number>();
+    private List<Number> MarketPlaceGoodPrices = new ArrayList<Number>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,31 +114,34 @@ public class Pricechart extends ActionBarActivity {
             }
         });
 
-        DBManager welcomeDBManager = new DBManager();
-        welcomeDBManager.queryCallBack = new QueryCallBack() {
-            @Override
-            public void queryResult(String result) {
-                if (result != null) {
-                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                    if (token != null && token.countTokens() >= 1) {
-                        String price = null;
-                        while (token.hasMoreTokens()) {
-                            price = token.nextToken();
-                            if (price != null) {
-                                Number a = 0;
-                            }
-                        }
-                    }
-                    drawChart();
-                }
-            }
-        };
-        String welcomeSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '1' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-12' ORDER BY `lastmoddate` ASC  ";
-        welcomeDBManager.querySql(welcomeSQL);
-
+        drawChart();
     }
 
-    private void drawChart() {        // initialize our XYPlot reference:
+    private Number[] toNumberArray(List<Number> listNumber) {
+        if (listNumber != null) {
+            Number[] numberArray = new Number[listNumber.size()];
+            for (int i = 0; i < numberArray.length; i++) {
+                Number n = listNumber.get(i);
+                numberArray[i] = n;
+            }
+            return numberArray;
+        }
+        return new Number[0];
+    }
+
+    private List<Number> toNumberList(float[] floatArray) {
+        if (floatArray != null) {
+            List<Number> numberList = new ArrayList<Number>();
+            for (int i = 0; i < floatArray.length; i++) {
+                numberList.add(floatArray[i]);
+            }
+            return numberList;
+        }
+        return new ArrayList<Number>();
+    }
+
+    private void drawChart() {
+        // initialize our XYPlot reference:
         plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
         // Create a couple arrays of y-values to plot:
         Number[] series1Numbers = {8.10, 8.20, 8.30, 8.40, 8.50, 8.60, 8.70, 8.80, 8.90, 9.00, 9.10};
@@ -147,15 +150,33 @@ public class Pricechart extends ActionBarActivity {
         Number[] series4Numbers = {8.40, 8.50, 8.60, 8.70, 8.80, 8.90, 9.00, 9.10, 9.20, 9.30, 9.40};
         Number[] series5Numbers = {8.50, 8.60, 8.70, 8.80, 8.90, 9.00, 9.10, 9.20, 9.30, 9.40, 9.50};
 
+        float[] welcomePriaces = getIntent().getExtras().getFloatArray("welcomePriaces");
+        float[] parkNShopPrices = getIntent().getExtras().getFloatArray("parkNShopPrices");
+        float[] aeonPrices = getIntent().getExtras().getFloatArray("aeonPrices");
+        float[] dchPrices = getIntent().getExtras().getFloatArray("dchPrices");
+        float[] marketPlasePrices = getIntent().getExtras().getFloatArray("marketPlasePrices");
+
+        WelcomeGoodPrices = Arrays.asList(series1Numbers);
+        ParknShopGoodPrices = Arrays.asList(series2Numbers);
+        AeonGoodPrice = Arrays.asList(series3Numbers);
+        DchGoodPrices = Arrays.asList(series4Numbers);
+        MarketPlaceGoodPrices = Arrays.asList(series5Numbers);
+
         // Turn the above arrays into XYSeries':
         // SimpleXYSeries takes a List so turn our array into a List
         // Y_VALS_ONLY means use the element index as the x value
         // Set the display title of the series
-        XYSeries series1 = new SimpleXYSeries(Arrays.asList(series1Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "百佳");
-        XYSeries series2 = new SimpleXYSeries(Arrays.asList(series2Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Wellcome");
-        XYSeries series3 = new SimpleXYSeries(Arrays.asList(series3Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Aeon");
-        XYSeries series4 = new SimpleXYSeries(Arrays.asList(series4Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "大昌");
-        XYSeries series5 = new SimpleXYSeries(Arrays.asList(series5Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Market Place");
+//        XYSeries series1 = new SimpleXYSeries(Arrays.asList(series1Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "百佳");
+//        XYSeries series2 = new SimpleXYSeries(Arrays.asList(series2Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Wellcome");
+//        XYSeries series3 = new SimpleXYSeries(Arrays.asList(series3Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Aeon");
+//        XYSeries series4 = new SimpleXYSeries(Arrays.asList(series4Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "大昌");
+//        XYSeries series5 = new SimpleXYSeries(Arrays.asList(series5Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Market Place");
+
+        XYSeries series1 = new SimpleXYSeries(toNumberList(parkNShopPrices), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "百佳");
+        XYSeries series2 = new SimpleXYSeries(toNumberList(welcomePriaces), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Wellcome");
+        XYSeries series3 = new SimpleXYSeries(toNumberList(aeonPrices), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Aeon");
+        XYSeries series4 = new SimpleXYSeries(toNumberList(dchPrices), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "大昌");
+        XYSeries series5 = new SimpleXYSeries(toNumberList(marketPlasePrices), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Market Place");
 
         // Create a formatter to use for drawing a series using LineAndPointRenderer
         // and configure it from xml:

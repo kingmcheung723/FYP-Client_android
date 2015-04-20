@@ -1,7 +1,6 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -17,6 +16,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class Itempage extends ActionBarActivity {
@@ -92,9 +93,129 @@ public class Itempage extends ActionBarActivity {
             });
             pricechart.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent intent = new Intent(Itempage.this, Pricechart.class);
-                    intent.putExtra("ITEM_ID", itemId);
-                    startActivity(intent);
+                    final List<Float> WelcomeGoodPrices = new ArrayList<Float>();
+                    final List<Float> ParknShopGoodPrices = new ArrayList<Float>();
+                    final List<Float> AeonGoodPrice = new ArrayList<Float>();
+                    final List<Float> DchGoodPrices = new ArrayList<Float>();
+                    final List<Float> MarketPlaceGoodPrices = new ArrayList<Float>();
+
+                    DBManager welcomeDBManager = new DBManager();
+                    welcomeDBManager.queryCallBack = new QueryCallBack() {
+                        @Override
+                        public void queryResult(String result) {
+                            if (result != null) {
+                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                if (token != null && token.countTokens() >= 1) {
+                                    String price = null;
+                                    while (token.hasMoreTokens()) {
+                                        price = token.nextToken();
+                                        if (price != null) {
+                                            Float priceNumber = Float.parseFloat(price);
+                                            WelcomeGoodPrices.add(priceNumber);
+                                        }
+                                    }
+                                }
+
+                                // ParknShop
+                                DBManager parkNShopDBManager = new DBManager();
+                                parkNShopDBManager.queryCallBack = new QueryCallBack() {
+                                    @Override
+                                    public void queryResult(String result) {
+                                        MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                        if (token != null && token.countTokens() >= 1) {
+                                            String price = null;
+                                            while (token.hasMoreTokens()) {
+                                                price = token.nextToken();
+                                                if (price != null) {
+                                                    Float priceNumber = Float.parseFloat(price);
+                                                    ParknShopGoodPrices.add(priceNumber);
+                                                }
+                                            }
+                                        }
+                                        // Market Place
+                                        DBManager marketPlaceDBManager = new DBManager();
+                                        marketPlaceDBManager.queryCallBack = new QueryCallBack() {
+                                            @Override
+                                            public void queryResult(String result) {
+                                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                                if (token != null && token.countTokens() >= 1) {
+                                                    String price = null;
+                                                    while (token.hasMoreTokens()) {
+                                                        price = token.nextToken();
+                                                        if (price != null) {
+                                                            Float priceNumber = Float.parseFloat(price);
+                                                            MarketPlaceGoodPrices.add(priceNumber);
+                                                        }
+                                                    }
+                                                }
+
+                                                //  Aeon
+                                                DBManager aeonDBManager = new DBManager();
+                                                aeonDBManager.queryCallBack = new QueryCallBack() {
+                                                    @Override
+                                                    public void queryResult(String result) {
+                                                        MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                                        if (token != null && token.countTokens() >= 1) {
+                                                            String price = null;
+                                                            while (token.hasMoreTokens()) {
+                                                                price = token.nextToken();
+                                                                if (price != null) {
+                                                                    Float priceNumber = Float.parseFloat(price);
+                                                                    AeonGoodPrice.add(priceNumber);
+                                                                }
+                                                            }
+                                                        }
+                                                        //  DCH
+                                                        DBManager dchDBManager = new DBManager();
+                                                        dchDBManager.queryCallBack = new QueryCallBack() {
+                                                            @Override
+                                                            public void queryResult(String result) {
+                                                                MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                                                if (token != null && token.countTokens() >= 1) {
+                                                                    String price = null;
+                                                                    while (token.hasMoreTokens()) {
+                                                                        price = token.nextToken();
+                                                                        if (price != null) {
+                                                                            Float priceNumber = Float.parseFloat(price);
+                                                                            DchGoodPrices.add(priceNumber);
+                                                                        }
+                                                                    }
+                                                                }
+
+                                                                float[] welcomePrices = toFloatArray(WelcomeGoodPrices);
+                                                                float[] parkNShopPrices = toFloatArray(ParknShopGoodPrices);
+                                                                float[] aeonPrices = toFloatArray(AeonGoodPrice);
+                                                                float[] dchPrices = toFloatArray(DchGoodPrices);
+                                                                float[] marketPlasePrices = toFloatArray(MarketPlaceGoodPrices);
+                                                                Intent intent = new Intent(Itempage.this, Pricechart.class);
+                                                                intent.putExtra("ITEM_ID", itemId);
+                                                                intent.putExtra("welcomePrices", welcomePrices);
+                                                                intent.putExtra("parkNShopPrices", parkNShopPrices);
+                                                                intent.putExtra("aeonPrices", aeonPrices);
+                                                                intent.putExtra("dchPrices", dchPrices);
+                                                                intent.putExtra("marketPlasePrices", marketPlasePrices);
+                                                                startActivity(intent);
+                                                            }
+                                                        };
+                                                        String dchSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '5' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-12' ORDER BY `lastmoddate` ASC  ";
+                                                        dchDBManager.querySql(dchSQL);
+                                                    }
+                                                };
+                                                String aeonSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '4' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-12' ORDER BY `lastmoddate` ASC  ";
+                                                aeonDBManager.querySql(aeonSQL);
+                                            }
+                                        };
+                                        String marketPlaceSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '3' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-12' ORDER BY `lastmoddate` ASC  ";
+                                        marketPlaceDBManager.querySql(marketPlaceSQL);
+                                    }
+                                };
+                                String parkNShopSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '2' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-12' ORDER BY `lastmoddate` ASC  ";
+                                parkNShopDBManager.querySql(parkNShopSQL);
+                            }
+                        }
+                    };
+                    String welcomeSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '1' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-12' ORDER BY `lastmoddate` ASC  ";
+                    welcomeDBManager.querySql(welcomeSQL);
                 }
             });
             sharepricelist.setOnClickListener(new View.OnClickListener() {
@@ -385,6 +506,31 @@ public class Itempage extends ActionBarActivity {
             }
         }
     }
+
+    private float[] toFloatArray(List<Float> listFloat) {
+        if (listFloat != null) {
+            float[] floatArray = new float[listFloat.size()];
+            for (int i = 0; i < floatArray.length; i++) {
+                float f = listFloat.get(i);
+                floatArray[i] = f;
+            }
+            return floatArray;
+        }
+        return new float[0];
+    }
+
+    private Number[] toNumberArray(List<Number> listNumber) {
+        if (listNumber != null) {
+            Number[] numberArray = new Number[listNumber.size()];
+            for (int i = 0; i < numberArray.length; i++) {
+                Number n = listNumber.get(i);
+                numberArray[i] = n;
+            }
+            return numberArray;
+        }
+        return new Number[0];
+    }
+
 
     @Override
     protected void onResume() {
