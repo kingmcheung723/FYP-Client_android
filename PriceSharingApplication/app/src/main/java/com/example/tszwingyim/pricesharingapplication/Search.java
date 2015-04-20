@@ -104,7 +104,7 @@ public class Search extends ActionBarActivity {
                                             }
                                         }
                                     };
-                                    String itemSql = "SELECT id FROM goods WHERE goods.name_zh = '" + itemName + "' OR goods.name_en = '" + itemName + "'";
+                                    String itemSql = "SELECT id FROM goods WHERE goods.name_zh like '%" + itemName + "%' OR goods.name_en = '%" + itemName + "%'";
                                     dbManager.querySql(itemSql);
                                 } else {
                                     DBManager dbManager = new DBManager();
@@ -139,10 +139,6 @@ public class Search extends ActionBarActivity {
                                             // Search by good brand
                                             sql = "SELECT name_zh FROM goods WHERE goods.brand_id IN " +
                                                     "(SELECT id FROM brands WHERE brands.name_zh like '%" + searchText + "%' OR brands.name_en like '%" + searchText + "%')";
-                                            break;
-                                        case 3:
-                                            // Search by shop name
-                                            sql = "SELECT name_zh FROM goods WHERE goods.id IN (SELECT good_id FROM shop_goods WHERE shop_goods.shop_id = (SELECT id FROM shops WHERE shops.name_en like '%" + searchText + "%' OR shops.name_zh like '% + searchText + %'))";
                                             break;
                                     }
                                     if (sql != null) {
