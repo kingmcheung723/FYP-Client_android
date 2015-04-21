@@ -193,40 +193,7 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
 
     // Adds a marker to the map
     public void onMapReady(GoogleMap map) {
-<<<<<<< HEAD
-        map.addMarker(new MarkerOptions()
-                .position(new LatLng(22.37713,114.19744))
-                .title("惠康")
-                .snippet("08:00-23:00"));
-        map.addMarker(new MarkerOptions()
-                .position(new LatLng(22.379825,114.229959))
-                .title("惠康")
-                .snippet("08:00-23:00"));
-        map.addMarker(new MarkerOptions()
-                .position(new LatLng(22.417319,114.225701))
-                .title("大昌")
-                .snippet("8:00AM - 8:30PM"));
-        map.addMarker(new MarkerOptions()
-                .position(new LatLng(22.426994,114.241818))
-                .title("百佳")
-                .snippet("0800 - 2200"));
-    }
-
-    @Override
-    public void onItemSelected(AdapterView <?> parent, View view,
-                               int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-        Log.d("","");
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-        Log.d("", "");
-=======
         googleMap = map;
->>>>>>> 659cb6cc39f3b14733642a590b2e39f4ad2b5ec4
     }
 
     @Override
