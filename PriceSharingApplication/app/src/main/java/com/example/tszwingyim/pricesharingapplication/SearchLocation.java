@@ -193,7 +193,10 @@ public class SearchLocation extends ActionBarActivity implements OnMapReadyCallb
 
     // Adds a marker to the map
     public void onMapReady(GoogleMap map) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 70cd66da86ddc8f4f0725e08a9d932bfa7d81071
         googleMap = map;
     }
 
