@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/share_price"
+            android:text="給評語"
             android:textColor="#ffffffff"
             android:id="@+id/Category_title"
             style="@style/TextAppearance.AppCompat.Title"

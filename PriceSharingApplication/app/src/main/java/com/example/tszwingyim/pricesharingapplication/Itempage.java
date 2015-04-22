@@ -1,6 +1,8 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -308,6 +310,8 @@ public class Itempage extends ActionBarActivity {
                         String brandSql = "SELECT brands.name_en, brands.name_zh FROM brands WHERE brands.id = " + brandId;
                         dbManager1.querySql(brandSql);
 
+
+
                         // Category name
                         String categoryId = token.nextToken().toString();
                         DBManager dbManager2 = new DBManager();
@@ -444,6 +448,34 @@ public class Itempage extends ActionBarActivity {
                         };
                         String likeSql = "SELECT COUNT(*) FROM likes WHERE likes.good_id = '" + itemId + "'";
                         dbManager8.querySql(likeSql);
+
+                        // ImageID
+
+
+                        DBManager dbManager9 = new DBManager();
+
+                        dbManager9.queryCallBack = new QueryCallBack() {
+                            @Override
+                            public void queryResult(String result) {
+                                if (result != null && result.length() > 0) {
+                                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                    String likes = token.nextToken().toString();
+                                    String uri = "@drawable/"+likes;
+                                    int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+                                    Drawable drawable = getResources().getDrawable(imageResource);
+                                    ImageView imageView1 = (ImageView) findViewById(R.id.imageView_like);
+                                    imageView1.setImageDrawable(drawable);
+                                }
+//                                else{ImageView imageView1 = (ImageView) findViewById(R.id.imageView_like);
+////                                    String uri = "@drawable/ic_launcher.png";
+////                                    int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+//                                    Drawable drawable = getResources().getDrawable(R.drawable.ic_launcher);
+//                                    imageView1.setImageDrawable(drawable);}
+                            }
+                        };
+                        String imageSql = "SELECT image_link FROM goods WHERE id = " + itemId;
+                        dbManager9.querySql(imageSql);
+
 
                         View.OnClickListener onLikeClickListener = new View.OnClickListener() {
                             @Override
