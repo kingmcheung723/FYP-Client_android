@@ -73,8 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="222dp"
             android:id="@+id/listView"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.90" />
+            android:layout_weight="1.01" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -150,5 +149,10 @@
         </LinearLayout>
 
     </LinearLayout>
-
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 </RelativeLayout>

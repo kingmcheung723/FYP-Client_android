@@ -9,10 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 
 public class About extends ActionBarActivity {
-
+    private ProgressBar spinner;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Hide the action bar
@@ -23,7 +24,8 @@ public class About extends ActionBarActivity {
         Button category = (Button) findViewById(R.id.button_category);
         Button search = (Button) findViewById(R.id.button_search);
         Button barcode = (Button) findViewById(R.id.button_barcode);
-
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        spinner.setVisibility(View.GONE);
         search.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -74,7 +76,9 @@ public class About extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_about, menu);
         return true;
     }
-
+    public void load(View view){
+        spinner.setVisibility(View.VISIBLE);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

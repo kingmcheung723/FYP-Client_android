@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.facebook.CallbackManager;
@@ -24,7 +25,7 @@ import java.util.Locale;
 
 public class Itempage extends ActionBarActivity {
     CallbackManager callbackManager;
-
+    private ProgressBar spinner;
     //    ShareDialog shareDialog;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,7 @@ public class Itempage extends ActionBarActivity {
         Button commentform = (Button) findViewById(R.id.button_givecomment);
         Button saveToShoppingCart = (Button) this.findViewById(R.id.button_save);
         final ShareButton shareButton = (ShareButton) findViewById(R.id.fb_share_button);
-
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -459,20 +460,22 @@ public class Itempage extends ActionBarActivity {
                             public void queryResult(String result) {
                                 if (result != null && result.length() > 0) {
                                     MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                                    String likes = token.nextToken().toString();
-                                    String uri = "@drawable/"+likes;
+
+                                    if (token != null && token.countTokens() >= 1) {
+                                        String imageId = token.nextToken().toString();
+//                                        if(imageId != null){
+                                    String uri = "@drawable/"+imageId;
                                     int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+                                            if(imageResource!=0){
                                     Drawable drawable = getResources().getDrawable(imageResource);
                                     ImageView imageView1 = (ImageView) findViewById(R.id.imageView_like);
-                                    imageView1.setImageDrawable(drawable);
-                                }
-//                                else{ImageView imageView1 = (ImageView) findViewById(R.id.imageView_like);
-////                                    String uri = "@drawable/ic_launcher.png";
-////                                    int imageResource = getResources().getIdentifier(uri, null, getPackageName());
-//                                    Drawable drawable = getResources().getDrawable(R.drawable.ic_launcher);
-//                                    imageView1.setImageDrawable(drawable);}
-                            }
-                        };
+                                    imageView1.setImageDrawable(drawable);}
+
+                                else {ImageView imageView1 = (ImageView) findViewById(R.id.imageView_like);
+                                            Drawable drawable = getResources().getDrawable(R.drawable.ic_launcher);
+                                            imageView1.setImageDrawable(drawable);}}}
+
+                                }};
                         String imageSql = "SELECT image_link FROM goods WHERE id = " + itemId;
                         dbManager9.querySql(imageSql);
 
@@ -592,7 +595,9 @@ public class Itempage extends ActionBarActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
-
+    public void load(View view){
+        spinner.setVisibility(View.VISIBLE);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

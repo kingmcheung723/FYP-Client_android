@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:baselineAligned="false"
-            android:layout_weight="0.78">
+            android:layout_weight="1">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -164,7 +164,8 @@
             android:id="@+id/linearLayout"
             android:baselineAligned="false"
             android:gravity="bottom"
-            android:layout_gravity="bottom">
+            android:layout_gravity="bottom"
+            android:layout_weight="1">
 
             <Button
                 android:layout_width="65dp"
@@ -230,5 +231,10 @@
         </LinearLayout>
 
     </LinearLayout>
-
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 </RelativeLayout>
