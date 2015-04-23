@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +27,7 @@ import java.util.Locale;
 
 public class Itempage extends ActionBarActivity {
     CallbackManager callbackManager;
-    private ProgressBar spinner;
+
     //    ShareDialog shareDialog;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +48,9 @@ public class Itempage extends ActionBarActivity {
         Button commentform = (Button) findViewById(R.id.button_givecomment);
         Button saveToShoppingCart = (Button) this.findViewById(R.id.button_save);
         final ShareButton shareButton = (ShareButton) findViewById(R.id.fb_share_button);
-        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+
+
+
         member.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -539,6 +543,7 @@ public class Itempage extends ActionBarActivity {
                 String itemSql = "SELECT name_en, name_zh, brand_id, category_id FROM goods WHERE goods.id = '" + itemId + "'";
                 dbManager.querySql(itemSql);
             }
+
         }
     }
 
@@ -583,6 +588,28 @@ public class Itempage extends ActionBarActivity {
 //        AppEventsLogger.deactivateApp(this);
     }
 
+    ;
+
+    int i=0;
+   ProgressBar mProgressBar=(ProgressBar)findViewById(R.id.progressBar1);
+    CountDownTimer mCountDownTimer= new CountDownTimer(5000,1000) {
+
+        public void onTick(long millisUntilFinished) {
+
+            mProgressBar.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        public void onFinish() {
+            //Do what you want
+            i++;
+            mProgressBar.setVisibility(View.GONE);
+        }
+    };
+    mCountDownTimer.start();
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -595,9 +622,11 @@ public class Itempage extends ActionBarActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
-    public void load(View view){
-        spinner.setVisibility(View.VISIBLE);
-    }
+
+
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
