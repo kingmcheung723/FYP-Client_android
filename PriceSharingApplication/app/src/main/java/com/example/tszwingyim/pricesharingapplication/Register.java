@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -125,7 +124,7 @@ public class Register extends ActionBarActivity {
                             }
                         };
                         String sql = "INSERT INTO members (email, password) VALUES ('" + emailStr + "','" + passwordStr + "')";
-                        dbManager.insertSql(sql);
+                        dbManager.updateSql(sql);
                     } else {
                        // emailvalid.setText("Password must be less than 10 digits");
 

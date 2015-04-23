@@ -1,29 +1,34 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
 
 public class ShoppingCart extends ActionBarActivity {
 
+    private boolean isDeleting = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_shopping_cart);
-        Button recommend = (Button)findViewById(R.id.button_recommend);
-        Button category = (Button)findViewById(R.id.button_category);
-        Button member = (Button)findViewById(R.id.button_member);
-        Button barcode = (Button)findViewById(R.id.button_barcode);
+        Button recommend = (Button) findViewById(R.id.button_recommend);
+        Button category = (Button) findViewById(R.id.button_category);
+        Button member = (Button) findViewById(R.id.button_member);
+        Button barcode = (Button) findViewById(R.id.button_barcode);
+        final Button delete = (Button) findViewById(R.id.button_delete);
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -61,8 +66,25 @@ public class ShoppingCart extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isDeleting = !isDeleting;
+                if (isDeleting) {
+                    delete.setText("Select To Delete");
+                } else {
+                    delete.setText("Delete");
+                }
+            }
+        });
 
-        String memberEmail = MySharedPreference.getMemberName(this);
+
+
+        displayShoppintCartItems();
+    }
+
+    private void displayShoppintCartItems() {
+        final String memberEmail = MySharedPreference.getMemberName(this);
         if (memberEmail != null && memberEmail.length() > 0) {
             DBManager dbManager = new DBManager();
             dbManager.queryCallBack = new QueryCallBack() {
@@ -70,9 +92,12 @@ public class ShoppingCart extends ActionBarActivity {
                 public void queryResult(String result) {
                     if (result != null) {
                         MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                        String[] goods = new String[token.countTokens()];
+
+                        final String[] ids = new String[token.countTokens() / 2];
+                        String[] goods = new String[token.countTokens() / 2];
                         int count = 0;
                         while (token.hasMoreTokens()) {
+                            ids[count] = token.nextToken().toString();
                             goods[count] = token.nextToken().toString();
                             count++;
                         }
@@ -82,10 +107,27 @@ public class ShoppingCart extends ActionBarActivity {
                         if (list != null) {
                             list.setAdapter(adapter);
                         }
+                        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                if (isDeleting) {
+                                    String itemId = ids[position];
+                                    DBManager deleteDBManager = new DBManager();
+                                    deleteDBManager.queryCallBack = new QueryCallBack() {
+                                        @Override
+                                        public void queryResult(String result) {
+                                            displayShoppintCartItems();
+                                        }
+                                    };
+                                    String sql = "DELETE FROM shopping_carts WHERE member_email = '" + memberEmail + "' AND good_id = '" + itemId + "'";
+                                    deleteDBManager.updateSql(sql);
+                                }
+                            }
+                        });
                     }
                 }
             };
-            String sql = "SELECT name_zh FROM goods WHERE goods.id IN (SELECT good_id FROM shopping_carts WHERE shopping_carts.member_email = '" + memberEmail + "')";
+            String sql = "SELECT id, name_zh FROM goods WHERE goods.id IN (SELECT good_id FROM shopping_carts WHERE shopping_carts.member_email = '" + memberEmail + "')";
             dbManager.querySql(sql);
         }
     }

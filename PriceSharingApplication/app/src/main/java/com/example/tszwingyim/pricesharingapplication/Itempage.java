@@ -1,13 +1,11 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,11 +24,13 @@ import java.util.List;
 import java.util.Locale;
 
 public class Itempage extends ActionBarActivity {
-    CallbackManager callbackManager;
+    private CallbackManager callbackManager;
 
     //    ShareDialog shareDialog;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        mCountDownTimer.start();
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         //Hide the action bar
@@ -48,7 +48,6 @@ public class Itempage extends ActionBarActivity {
         Button commentform = (Button) findViewById(R.id.button_givecomment);
         Button saveToShoppingCart = (Button) this.findViewById(R.id.button_save);
         final ShareButton shareButton = (ShareButton) findViewById(R.id.fb_share_button);
-
 
 
         member.setOnClickListener(new View.OnClickListener() {
@@ -266,7 +265,7 @@ public class Itempage extends ActionBarActivity {
                             };
                             String insertCommentSQL = "INSERT INTO shopping_carts (good_id, member_email) VALUES ('" +
                                     itemId + "','" + memberEmail + "')";
-                            dbManager.insertSql(insertCommentSQL);
+                            dbManager.updateSql(insertCommentSQL);
                         } else {
                             MySharedPreference.displayDialog("You have not yet registered", Itempage.this);
                         }
@@ -314,7 +313,6 @@ public class Itempage extends ActionBarActivity {
                         };
                         String brandSql = "SELECT brands.name_en, brands.name_zh FROM brands WHERE brands.id = " + brandId;
                         dbManager1.querySql(brandSql);
-
 
 
                         // Category name
@@ -467,19 +465,22 @@ public class Itempage extends ActionBarActivity {
 
                                     if (token != null && token.countTokens() >= 1) {
                                         String imageId = token.nextToken().toString();
-//                                        if(imageId != null){
-                                    String uri = "@drawable/"+imageId;
-                                    int imageResource = getResources().getIdentifier(uri, null, getPackageName());
-                                            if(imageResource!=0){
-                                    Drawable drawable = getResources().getDrawable(imageResource);
-                                    ImageView imageView1 = (ImageView) findViewById(R.id.imageView_like);
-                                    imageView1.setImageDrawable(drawable);}
-
-                                else {ImageView imageView1 = (ImageView) findViewById(R.id.imageView_like);
+                                        String uri = "@drawable/" + imageId;
+                                        int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+                                        if (imageResource != 0) {
+                                            Drawable drawable = getResources().getDrawable(imageResource);
+                                            ImageView imageView1 = (ImageView) findViewById(R.id.imageView_like);
+                                            imageView1.setImageDrawable(drawable);
+                                        } else {
+                                            ImageView imageView1 = (ImageView) findViewById(R.id.imageView_like);
                                             Drawable drawable = getResources().getDrawable(R.drawable.ic_launcher);
-                                            imageView1.setImageDrawable(drawable);}}}
+                                            imageView1.setImageDrawable(drawable);
+                                        }
+                                    }
+                                }
 
-                                }};
+                            }
+                        };
                         String imageSql = "SELECT image_link FROM goods WHERE id = " + itemId;
                         dbManager9.querySql(imageSql);
 
@@ -519,7 +520,7 @@ public class Itempage extends ActionBarActivity {
                                                 DBManager queryInsertLike = new DBManager();
                                                 queryInsertLike.queryCallBack = queryInsertLikeCallBack;
                                                 String insertLikeSQL = "INSERT INTO likes (member_email, good_id, likedislike) VALUES ( '" + memberName + "','" + itemId + "'," + "'1')";
-                                                queryInsertLike.insertSql(insertLikeSQL);
+                                                queryInsertLike.updateSql(insertLikeSQL);
                                             } else {
                                                 MySharedPreference.displayDialog("You have liked this item", Itempage.this);
                                             }
@@ -545,6 +546,20 @@ public class Itempage extends ActionBarActivity {
             }
 
         }
+
+        final ProgressBar mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
+        mProgressBar.setVisibility(View.VISIBLE);
+
+         new CountDownTimer(5000, 1000) {
+             @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+            @Override
+            public void onFinish() {
+                mProgressBar.setVisibility(View.GONE);
+            }
+        }.start();
     }
 
     private float[] toFloatArray(List<Float> listFloat) {
@@ -588,26 +603,6 @@ public class Itempage extends ActionBarActivity {
 //        AppEventsLogger.deactivateApp(this);
     }
 
-    ;
-
-    int i=0;
-   ProgressBar mProgressBar=(ProgressBar)findViewById(R.id.progressBar1);
-    CountDownTimer mCountDownTimer= new CountDownTimer(5000,1000) {
-
-        public void onTick(long millisUntilFinished) {
-
-            mProgressBar.setVisibility(View.VISIBLE);
-
-        }
-
-        @Override
-        public void onFinish() {
-            //Do what you want
-            i++;
-            mProgressBar.setVisibility(View.GONE);
-        }
-    };
-    mCountDownTimer.start();
 
 
     @Override
@@ -622,9 +617,6 @@ public class Itempage extends ActionBarActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
-
-
-
 
 
     @Override

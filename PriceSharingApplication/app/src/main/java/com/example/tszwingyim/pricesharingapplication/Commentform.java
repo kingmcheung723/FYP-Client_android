@@ -126,7 +126,7 @@ public class Commentform extends ActionBarActivity {
                                 };
                                 String insertCommentSQL = "INSERT INTO good_comments (good_id, comment, member_email) VALUES ('" +
                                         itemId + "','" + comment + "','" + memberEmail + "')";
-                                dbManager.insertSql(insertCommentSQL);
+                                dbManager.updateSql(insertCommentSQL);
                             } else {
                                 MySharedPreference.displayDialog("You have not yet registered", Commentform.this);
                             }
