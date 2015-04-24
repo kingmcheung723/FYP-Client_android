@@ -93,18 +93,24 @@ public class Search extends ActionBarActivity {
                                         public void queryResult(String result) {
                                             if (result != null && result.length() > 0) {
                                                 MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                                                if (token != null && token.countTokens() >= 1) {
-                                                    String itemId = token.nextToken().toString();
-                                                    Intent intent = new Intent(Search.this, Itempage.class);
-                                                    intent.putExtra("ITEM_ID", itemId);
-                                                    startActivity(intent);
+                                                String[] goodNames = new String[token.countTokens()];
+                                                int count = 0;
+                                                while (token.hasMoreTokens()) {
+                                                    String goodName = token.nextToken();
+                                                    if (goodName != null) {
+                                                        goodNames[count] = goodName;
+                                                        count++;
+                                                    }
                                                 }
+                                                Intent intent = new Intent(Search.this, GoodList.class);
+                                                intent.putExtra("GOOD_NAMES", goodNames);
+                                                startActivity(intent);
                                             } else {
-                                                MySharedPreference.displayDialog("No such item.", Search.this);
+                                                MySharedPreference.displayDialog("No such items.", Search.this);
                                             }
                                         }
                                     };
-                                    String itemSql = "SELECT id FROM goods WHERE goods.name_zh like '%" + itemName + "%' OR goods.name_en like '%" + itemName + "%'";
+                                    String itemSql = "SELECT name_zh FROM goods WHERE goods.name_zh like '%" + itemName + "%' OR goods.name_en like '%" + itemName + "%'";
                                     dbManager.querySql(itemSql);
                                 } else {
                                     DBManager dbManager = new DBManager();

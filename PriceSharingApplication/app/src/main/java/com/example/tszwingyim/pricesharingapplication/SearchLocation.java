@@ -33,13 +33,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class SearchLocation extends ActionBarActivity implements LocationListener {
+public class SearchLocation extends ActionBarActivity {
     private String[] shopStr = {"選擇商店", "惠康", "百佳", "MarketPlace", "永旺", "大昌", "所有商店"};
     private String[] districtStr = {"選擇地區", "港島區", "銅鑼灣", "炮台山", "北角", "鰂魚涌", "筲箕灣", "金鐘", "中環", "西環", "太平山", "薄扶林", "灣仔", "柴灣", "香港仔", "鴨脷洲", "淺水灣", "赤柱",
             "九龍區", "九龍城", "九龍塘", "觀塘", "荔枝角", "美孚", "深水埗", "石硤尾", "大角咀", "油塘", "黃大仙", "油尖旺", "油塘", "鑽石山", "新界區", "北區", "將軍澳", "西貢", "大埔", "沙田", "西貢", "荃灣", "屯門", "元朗", "葵青", "離島"};
     private int selectedShopId = -1;
     private int selectedDistrictPosition = -1;
     private GoogleMap googleMap = null;
+    private long MIN_TIME_BW_UPDATES = 5000;
+    private float MIN_DISTANCE_CHANGE_FOR_UPDATES = 1000;
 
     
     // GoogleMap googleMap;
@@ -67,19 +69,42 @@ public class SearchLocation extends ActionBarActivity implements LocationListene
             Criteria criteria = new Criteria();
             String bestProvider = locationManager.getBestProvider(criteria, true);
             Location location = locationManager.getLastKnownLocation(bestProvider);
-            if(location!=null)
-
-            {
-                onLocationChanged(location);
-            }
 
 //            locationManager.requestLocationUpdates(locationProvider,0,0,locationListener);
+        boolean isNetworkEnabled = true;
         if (isNetworkEnabled) {
-            locationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER,
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                     MIN_TIME_BW_UPDATES,
-                    MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    MIN_DISTANCE_CHANGE_FOR_UPDATES,
+                    new android.location.LocationListener() {
+                        @Override
+                        public void onLocationChanged(Location location) {
+                            TextView locationTv = (TextView) findViewById(R.id.textView3);
+                            double latitude = location.getLatitude();
+                            double longitude = location.getLongitude();
+                            LatLng latLng = new LatLng(latitude, longitude);
+                            googleMap.addMarker(new MarkerOptions().position(latLng));
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                            googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                            locationTv.setText("Latitude:" + latitude + ", Longitude:" + longitude);
+                        }
 
+                        @Override
+                        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                        }
+
+                        @Override
+                        public void onProviderEnabled(String provider) {
+
+                        }
+
+                        @Override
+                        public void onProviderDisabled(String provider) {
+
+                        }
+                    });
+        }
 
         //declare buttons
         Button recommendation = (Button) findViewById(R.id.button_recommend);
@@ -240,31 +265,17 @@ public class SearchLocation extends ActionBarActivity implements LocationListene
 
     // Adds a marker to the map
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_search_location, menu);
         return true;
     }
-
 //    public void onMapReady(GoogleMap map) {
 //
 //googleMap = map;
 //    }
 
-
-    public void onLocationChanged(Location location) {
-        TextView locationTv = (TextView) findViewById(R.id.textView3);
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
-        LatLng latLng = new LatLng(latitude, longitude);
-        googleMap.addMarker(new MarkerOptions().position(latLng));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        locationTv.setText("Latitude:" + latitude + ", Longitude:" + longitude);
-    }
 
     private boolean isGooglePlayServicesAvailable() {
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
