@@ -41,6 +41,7 @@ public class SearchLocation extends ActionBarActivity implements LocationListene
     private int selectedDistrictPosition = -1;
     private GoogleMap googleMap = null;
 
+    
     // GoogleMap googleMap;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,8 +73,12 @@ public class SearchLocation extends ActionBarActivity implements LocationListene
                 onLocationChanged(location);
             }
 
-            locationManager.requestLocationUpdates(locationProvider,0,0,locationListener);
-
+//            locationManager.requestLocationUpdates(locationProvider,0,0,locationListener);
+        if (isNetworkEnabled) {
+            locationManager.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER,
+                    MIN_TIME_BW_UPDATES,
+                    MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
 
 
         //declare buttons
