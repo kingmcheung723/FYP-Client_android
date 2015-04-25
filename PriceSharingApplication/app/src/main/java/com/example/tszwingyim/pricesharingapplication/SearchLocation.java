@@ -34,11 +34,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class SearchLocation extends ActionBarActivity {
-    private String[] shopStr = {"選擇商店", "惠康", "百佳", "MarketPlace", "永旺", "大昌", "所有商店"};
-    private String[] districtStr = {"選擇地區", "港島區", "銅鑼灣", "炮台山", "北角", "鰂魚涌", "筲箕灣", "金鐘", "中環", "西環", "太平山", "薄扶林", "灣仔", "柴灣", "香港仔", "鴨脷洲", "淺水灣", "赤柱",
-            "九龍區", "九龍城", "九龍塘", "觀塘", "荔枝角", "美孚", "深水埗", "石硤尾", "大角咀", "油塘", "黃大仙", "油尖旺", "油塘", "鑽石山", "新界區", "北區", "將軍澳", "西貢", "大埔", "沙田", "西貢", "荃灣", "屯門", "元朗", "葵青", "離島"};
+    private String[] shopStr = {"所有商店", "惠康", "百佳", "MarketPlace", "永旺", "大昌"};
+    private String[] districtStr = {"所有地區", "銅鑼灣", "炮台山", "北角", "鰂魚涌", "筲箕灣", "金鐘", "中環", "西環", "太平山", "薄扶林", "灣仔", "柴灣", "香港仔", "鴨脷洲", "淺水灣", "赤柱",
+            "九龍城", "九龍塘", "觀塘", "荔枝角", "美孚", "深水埗", "石硤尾", "大角咀", "油塘", "黃大仙", "油尖旺", "油塘", "鑽石山", "北區", "將軍澳", "西貢", "大埔", "沙田", "西貢", "荃灣", "屯門", "元朗", "葵青", "離島"};
     private int selectedShopId = -1;
     private int selectedDistrictPosition = -1;
+    private int ALL = 1000;
     private GoogleMap googleMap = null;
     private long MIN_TIME_BW_UPDATES = 5000;
     private float MIN_DISTANCE_CHANGE_FOR_UPDATES = 1000;
@@ -79,14 +80,12 @@ public class SearchLocation extends ActionBarActivity {
                     new android.location.LocationListener() {
                         @Override
                         public void onLocationChanged(Location location) {
-                            TextView locationTv = (TextView) findViewById(R.id.textView3);
                             double latitude = location.getLatitude();
                             double longitude = location.getLongitude();
                             LatLng latLng = new LatLng(latitude, longitude);
                             googleMap.addMarker(new MarkerOptions().position(latLng));
                             googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                             googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-                            locationTv.setText("Latitude:" + latitude + ", Longitude:" + longitude);
                         }
 
                         @Override
@@ -173,27 +172,58 @@ public class SearchLocation extends ActionBarActivity {
                         public void queryResult(String result) {
                             if (result != null) {
                                 MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                                googleMap.clear();
+
                                 while (token.hasMoreTokens()) {
-                                    String shopNameZH = token.nextToken();
+                                    String shopId = token.nextToken();
+                                    String locationNameZH = token.nextToken();
                                     String latitude = token.nextToken();
                                     String longtitude = token.nextToken();
                                     double lat = Double.parseDouble(latitude);
                                     double longt = Double.parseDouble(longtitude);
 
+                                    String shopName = "";
+                                    int shopIdInt = Integer.parseInt(shopId);
+                                    switch (shopIdInt) {
+                                        case 1:
+                                            shopName = "惠康";
+                                            break;
+                                        case 2:
+                                            shopName = "百佳";
+                                            break;
+                                        case 3:
+                                            shopName = "Market Place";
+                                            break;
+                                        case 4:
+                                            shopName = "永旺";
+                                            break;
+                                        case 5:
+                                            shopName = "大昌食品";
+                                            break;
+                                    }
+
                                     googleMap.addMarker(new MarkerOptions()
                                             .position(new LatLng(lat, longt))
-                                            .title(shopNameZH));
+                                            .title(shopName + ":" + locationNameZH));
                                 }
                             }
                         }
                     };
                     String sql = null;
                     if (selectedDistrictPosition != -1 && selectedShopId != -1) {
-                        String district = districtStr[selectedDistrictPosition];
-                        if (selectedShopId == 1000) {
-                            sql = "SELECT latitude,longitude FROM locations WHERE district_zh like '%" + district + "%'";
-                        } else if (selectedShopId >= 1 && selectedShopId <= 5) {
-                            sql = "SELECT shop_name_zh, latitude,longitude FROM locations WHERE shop_id = " + Integer.toString(selectedShopId) + " AND district_zh like '%" + district + "%'";
+                        String district = null;
+                        if (selectedDistrictPosition != 1000) {
+                            district = districtStr[selectedDistrictPosition];
+                        }
+
+                        if (selectedDistrictPosition == ALL && selectedShopId == ALL) {
+                            sql = "SELECT shop_id, location_zh, latitude,longitude FROM locations";
+                        } else if (selectedDistrictPosition == ALL && selectedShopId != ALL) {
+                            sql = "SELECT shop_id, location_zh, latitude,longitude FROM locations WHERE shop_id = '" + Integer.toString(selectedShopId) + "'";
+                        } else if (selectedDistrictPosition != ALL && selectedShopId == ALL) {
+                            sql = "SELECT shop_id, location_zh, latitude,longitude FROM locations WHERE district_zh like '%" + district + "%'";
+                        } else if (selectedDistrictPosition != ALL && selectedShopId != ALL) {
+                            sql = "SELECT shop_id, location_zh, latitude,longitude FROM locations WHERE shop_id = " + Integer.toString(selectedShopId) + " AND district_zh like '%" + district + "%'";
                         }
                         if (sql != null) {
                             dbManager.querySql(sql);
@@ -225,11 +255,9 @@ public class SearchLocation extends ActionBarActivity {
         shop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedShopId = -1;
+                selectedShopId = 1000;
                 switch (position) {
                     case 0:
-                        break;
-                    case 6:
                         selectedShopId = 1000;
                         break;
                     default:
@@ -249,6 +277,7 @@ public class SearchLocation extends ActionBarActivity {
                 selectedDistrictPosition = -1;
                 switch (position) {
                     case 0:
+                        selectedDistrictPosition = 1000;
                         break;
                     default:
                         selectedDistrictPosition = position;
