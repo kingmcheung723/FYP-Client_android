@@ -101,7 +101,7 @@ public class Register extends ActionBarActivity {
         @Override
         public void onClick(View v) {
             EditText emailEditText = (EditText) activity.findViewById(R.id.EditText_Register_Email);
-            String emailStr = emailEditText.getText().toString();
+            final String emailStr = emailEditText.getText().toString();
             TextView emailvalid = (TextView) activity.findViewById(R.id.textView_emailvalid);
             if (this.isValidEmail(emailStr)) {
                 EditText passwordEditText = (EditText) activity.findViewById(R.id.EditText_Register_Password);
@@ -117,7 +117,7 @@ public class Register extends ActionBarActivity {
                             @Override
                             public void queryResult(String result) {
                                 if (result != null) {
-                                    MySharedPreference.saveMemberName(result, Register.this);
+                                    MySharedPreference.saveMemberName(emailStr, Register.this);
                                     Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
                                     startActivity(intent);
                                 }
