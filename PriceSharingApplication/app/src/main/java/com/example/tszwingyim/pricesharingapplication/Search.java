@@ -134,22 +134,10 @@ public class Search extends ActionBarActivity {
                                             }
                                         }
                                     };
-                                    String sql = null;
-                                    switch (selectedSearchCategoryPosition) {
-                                        case 1:
-                                            // Search by good category
-                                            sql = "SELECT name_zh FROM goods WHERE goods.category_id IN " +
-                                                    "(SELECT id FROM categories WHERE categories.name_zh like '%" + searchText + "%' OR categories.name_en like '%" + searchText + "%')";
-                                            break;
-                                        case 2:
-                                            // Search by good brand
-                                            sql = "SELECT name_zh FROM goods WHERE goods.brand_id IN " +
-                                                    "(SELECT id FROM brands WHERE brands.name_zh like '%" + searchText + "%' OR brands.name_en like '%" + searchText + "%')";
-                                            break;
-                                    }
-                                    if (sql != null) {
-                                        dbManager.querySql(sql);
-                                    }
+                                    String sql = "SELECT name_zh FROM goods WHERE goods.brand_id IN " +
+                                            "(SELECT id FROM brands WHERE brands.name_zh like '%" + searchText + "%' OR brands.name_en like '%" + searchText + "%')";
+
+                                    dbManager.querySql(sql);
                                 }
                         }
                     } else {
