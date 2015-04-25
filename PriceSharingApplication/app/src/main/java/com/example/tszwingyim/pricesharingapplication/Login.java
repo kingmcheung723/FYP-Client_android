@@ -92,7 +92,6 @@ public class Login extends ActionBarActivity {
         public void onClick(View v) {
             EditText emailEditText = (EditText) activity.findViewById(R.id.EditText_Login_Email);
             String emailStr = emailEditText.getText().toString();
-            TextView emailvalid = (TextView) activity.findViewById(R.id.textView_checkvalid);
             if (this.isValidEmail(emailStr)) {
                 EditText passwordEditText = (EditText) activity.findViewById(R.id.EditText_Login_Password);
                 String passwordStr = passwordEditText.getText().toString();

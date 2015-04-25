@@ -1,23 +1,24 @@
 package com.example.tszwingyim.pricesharingapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -25,21 +26,23 @@ public class Memberpage extends ActionBarActivity {
     Spinner spinnerctrl;
     Button btn;
     Locale myLocale;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_memberpage);
 
-        Button recommendation = (Button)findViewById(R.id.button_recommend);
-        Button category = (Button)findViewById(R.id.button_category);
-        Button search = (Button)findViewById(R.id.button_search);
-        Button barcode = (Button)findViewById(R.id.button_barcode);
-        Button logout = (Button)findViewById(R.id.button_logout);
-        Button about = (Button)findViewById(R.id.button_about);
-        Button setting = (Button)findViewById(R.id.button_setting);
-        Button shoppingCart = (Button)findViewById(R.id.button_shoppingcart);
+        Button recommendation = (Button) findViewById(R.id.button_recommend);
+        Button category = (Button) findViewById(R.id.button_category);
+        Button search = (Button) findViewById(R.id.button_search);
+        Button barcode = (Button) findViewById(R.id.button_barcode);
+        Button logout = (Button) findViewById(R.id.button_logout);
+        Button about = (Button) findViewById(R.id.button_about);
+        Button setting = (Button) findViewById(R.id.button_setting);
+        Button shoppingCart = (Button) findViewById(R.id.button_shoppingcart);
 
         search.setOnClickListener(new View.OnClickListener() {
 
@@ -75,6 +78,12 @@ public class Memberpage extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+                String memberEmail = MySharedPreference.getMemberName(Memberpage.this);
+                if (memberEmail != null) {
+                    MySharedPreference.clearMemberName(Memberpage.this);
+                }
+
+
                 Intent intent = TabManager.getInstance().getIntent(Memberpage.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -110,7 +119,7 @@ public class Memberpage extends ActionBarActivity {
         }
 
         spinnerctrl = (Spinner) findViewById(R.id.spinner_language);
-        String[] langStr = { "Select Language","中文","English" };
+        String[] langStr = {"Select Language", "中文", "English"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, langStr);
         //selected item will look like a spinner set from XML
@@ -126,70 +135,49 @@ public class Memberpage extends ActionBarActivity {
                     Toast.makeText(parent.getContext(),
                             "You have selected Chinese", Toast.LENGTH_SHORT)
                             .show();
+//                    MySharedPreference.setLocale("en", Memberpage.this);
                     setLocale("");
                 } else if (pos == 2) {
 
                     Toast.makeText(parent.getContext(),
                             "You have selected English", Toast.LENGTH_SHORT)
                             .show();
+//                    MySharedPreference.setLocale("en", Memberpage.this);
                     setLocale("en");
                 }
-
             }
+
             public void onNothingSelected(AdapterView<?> arg0) {
                 // TODO Auto-generated method stub
             }
 
         });
     }
-    public void setLocale(String lang) {
 
-        myLocale = new Locale(lang);
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
-        res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, Member.class);
-        Intent refresh1 = new Intent(this, Barcode.class);
-        Intent refresh2 = new Intent(this, MainActivity.class);
-        Intent refresh3 = new Intent(this, Recommendation.class);
-        Intent refresh4 = new Intent(this, Search.class);
-        Intent refresh5 = new Intent(this, Commentlist.class);
-        Intent refresh6 = new Intent(this, Commentform.class);
-        Intent refresh7 = new Intent(this, GoodList.class);
-        Intent refresh8 = new Intent(this, Itempage.class);
-        Intent refresh9 = new Intent(this, loadingPage.class);
-        Intent refresh10 = new Intent(this, Memberpage.class);
-        Intent refresh11= new Intent(this, Pricechart.class);
-        Intent refresh12 = new Intent(this, Register.class);
-        Intent refresh13 = new Intent(this, SearchGoodlist.class);
-        Intent refresh14 = new Intent(this, SearchLocation.class);
-        Intent refresh15 = new Intent(this, Setting.class);
-        Intent refresh16= new Intent(this, Sharepriceform.class);
-        Intent refresh17 = new Intent(this, SharePricelist.class);
-        startActivity(refresh);
-        startActivity(refresh1);
-        startActivity(refresh2);
-        startActivity(refresh3);
-        startActivity(refresh4);
-        startActivity(refresh5);
-        startActivity(refresh6);
-        startActivity(refresh7);
-        startActivity(refresh8);
-        startActivity(refresh9);
-        startActivity(refresh10);
-        startActivity(refresh11);
-        startActivity(refresh12);
-        startActivity(refresh13);
-        startActivity(refresh14);
-        startActivity(refresh15);
-        startActivity(refresh16);
-        startActivity(refresh17);
+    public void setLocale(String lo) {
 
+//        String localeStr = MySharedPreference.getLocale(this);
+        Locale locale = new Locale(lo);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+
+
+        new AlertDialog.Builder(this)
+                .setTitle("Alert")
+                .setMessage("Please re-launch the app to change language")
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                        dialog.dismiss();;
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
 
     }
-
 
 
     @Override
@@ -212,5 +200,11 @@ public class Memberpage extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 }
