@@ -17,10 +17,12 @@ public class DBManager {
     public QueryCallBack queryCallBack;
     public static final String SUCCESS = "Success";
 
-    private static final String url = "jdbc:mysql://192.168.1.104:3306/fyp_database?useUnicode=yes&characterEncoding=UTF-8";
+    private static final String url = "jdbc:mysql://172.20.10.4:8889/fyp_database?useUnicode=yes&characterEncoding=UTF-8";
     private static final String user = "fyp_admin";
     private static final String password = null;
     private static final String JDBCDriverName = "com.mysql.jdbc.Driver";
+
+    private boolean isQueryingDB = false;
 
     public DBManager() {
         try {
@@ -32,20 +34,32 @@ public class DBManager {
     }
 
     public void querySql(String sql) {
-        try {
-            new queryOperation().execute(sql);
-        } catch (Exception e) {
-            e.printStackTrace();
-            queryCallBack.queryResult(null);
+        if (!this.isQueryingDB) {
+            this.isQueryingDB = true;
+            try {
+                new queryOperation().execute(sql);
+            } catch (Exception e) {
+
+                isQueryingDB = false;
+                
+                e.printStackTrace();
+                queryCallBack.queryResult(null);
+            }
         }
     }
 
     public void updateSql(String sql) {
-        try {
-            new updateIperation().execute(sql);
-        } catch (Exception e) {
-            e.printStackTrace();
-            queryCallBack.queryResult(null);
+        if (!this.isQueryingDB) {
+            try {
+                this.isQueryingDB = true;
+                new updateIperation().execute(sql);
+            } catch (Exception e) {
+
+                isQueryingDB = false;
+
+                e.printStackTrace();
+                queryCallBack.queryResult(null);
+            }
         }
     }
 
@@ -57,6 +71,9 @@ public class DBManager {
                 String sql = params[0];
                 Statement st = con.createStatement();
                 int result = st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+
+                isQueryingDB = false;
+
                 if (result == 1) {
                     return DBManager.SUCCESS;
                 } else {
@@ -64,6 +81,9 @@ public class DBManager {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+
+                isQueryingDB = false;
+
                 return null;
             }
         }
@@ -103,9 +123,15 @@ public class DBManager {
                 if (result.equalsIgnoreCase("")) {
                     result = "";
                 }
+
+                isQueryingDB = false;
+
                 return result;
             } catch (Exception e) {
                 e.printStackTrace();
+
+                isQueryingDB = false;
+
                 return null;
             }
         }
