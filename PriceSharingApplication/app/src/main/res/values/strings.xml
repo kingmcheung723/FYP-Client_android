@@ -55,7 +55,7 @@
 
     <!-- spinner -->
     <string-array name="searchgoods_array">
-        <item>貨品名稱</item>
+        <item>貨品關鍵字</item>
         <item>貨品品牌</item>
     </string-array>
 

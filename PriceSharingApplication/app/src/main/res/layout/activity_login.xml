@@ -83,23 +83,6 @@
 
         </LinearLayout>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_back"
-            android:src="@drawable/ic_action_back"
-            android:layout_alignBottom="@+id/Category_title"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@null"
-            android:layout_alignParentTop="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/textView_checkvalid" />
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
