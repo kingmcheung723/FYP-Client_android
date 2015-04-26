@@ -30,8 +30,6 @@ public class Itempage extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        mCountDownTimer.start();
-
         FacebookSdk.sdkInitialize(getApplicationContext());
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
@@ -48,6 +46,9 @@ public class Itempage extends ActionBarActivity {
         Button commentform = (Button) findViewById(R.id.button_givecomment);
         Button saveToShoppingCart = (Button) this.findViewById(R.id.button_save);
         final ShareButton shareButton = (ShareButton) findViewById(R.id.fb_share_button);
+
+        final ProgressBar mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
+        mProgressBar.setVisibility(View.VISIBLE);
 
 
         member.setOnClickListener(new View.OnClickListener() {
@@ -460,6 +461,7 @@ public class Itempage extends ActionBarActivity {
                         dbManager9.queryCallBack = new QueryCallBack() {
                             @Override
                             public void queryResult(String result) {
+                                mProgressBar.setVisibility(View.GONE);
                                 if (result != null && result.length() > 0) {
                                     MyStringTokenizer token = new MyStringTokenizer(result, "|");
 
@@ -546,20 +548,6 @@ public class Itempage extends ActionBarActivity {
             }
 
         }
-
-        final ProgressBar mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
-        mProgressBar.setVisibility(View.VISIBLE);
-
-         new CountDownTimer(5000, 1000) {
-             @Override
-            public void onTick(long millisUntilFinished) {
-
-            }
-            @Override
-            public void onFinish() {
-                mProgressBar.setVisibility(View.GONE);
-            }
-        }.start();
     }
 
     private float[] toFloatArray(List<Float> listFloat) {
