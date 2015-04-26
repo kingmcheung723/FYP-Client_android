@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.PointLabelFormatter;
@@ -23,6 +24,7 @@ import java.util.Random;
 
 public class Pricechart extends ActionBarActivity {
     private XYPlot plot;
+    private ProgressBar mProgressBar = null;
     private List<Number> WelcomeGoodPrices = new ArrayList<Number>();
     private List<Number> ParknShopGoodPrices = new ArrayList<Number>();
     private List<Number> AeonGoodPrice = new ArrayList<Number>();
@@ -48,6 +50,9 @@ public class Pricechart extends ActionBarActivity {
         Button commentlist = (Button) findViewById(R.id.button_comment);
         Button sharepricelist = (Button) findViewById(R.id.button_shareprice);
         Button itempage = (Button) findViewById(R.id.button_priceinfo);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
+        mProgressBar.setVisibility(View.VISIBLE);
 
         final String itemId = getIntent().getExtras().getString("ITEM_ID");
 

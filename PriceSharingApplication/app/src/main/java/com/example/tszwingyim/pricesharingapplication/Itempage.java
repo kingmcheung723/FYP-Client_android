@@ -25,10 +25,11 @@ import java.util.Locale;
 
 public class Itempage extends ActionBarActivity {
     private CallbackManager callbackManager;
-
+    private ProgressBar mProgressBar = null;
     //    ShareDialog shareDialog;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
 //        mCountDownTimer.start();
 
@@ -49,6 +50,8 @@ public class Itempage extends ActionBarActivity {
         Button saveToShoppingCart = (Button) this.findViewById(R.id.button_save);
         final ShareButton shareButton = (ShareButton) findViewById(R.id.fb_share_button);
 
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
+        mProgressBar.setVisibility(View.VISIBLE);
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -460,6 +463,7 @@ public class Itempage extends ActionBarActivity {
                         dbManager9.queryCallBack = new QueryCallBack() {
                             @Override
                             public void queryResult(String result) {
+                                mProgressBar.setVisibility(View.GONE);
                                 if (result != null && result.length() > 0) {
                                     MyStringTokenizer token = new MyStringTokenizer(result, "|");
 
@@ -547,19 +551,7 @@ public class Itempage extends ActionBarActivity {
 
         }
 
-        final ProgressBar mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
-        mProgressBar.setVisibility(View.VISIBLE);
 
-         new CountDownTimer(5000, 1000) {
-             @Override
-            public void onTick(long millisUntilFinished) {
-
-            }
-            @Override
-            public void onFinish() {
-                mProgressBar.setVisibility(View.GONE);
-            }
-        }.start();
     }
 
     private float[] toFloatArray(List<Float> listFloat) {
