@@ -17,7 +17,7 @@ public class DBManager {
     public QueryCallBack queryCallBack;
     public static final String SUCCESS = "Success";
 
-    private static final String url = "jdbc:mysql://192.168.1.104:8889/fyp_database?useUnicode=yes&characterEncoding=UTF-8";
+    private static final String url = "jdbc:mysql://192.168.1.106:8889/fyp_database?useUnicode=yes&characterEncoding=UTF-8";
     private static final String user = "fyp_admin";
     private static final String password = null;
     private static final String JDBCDriverName = "com.mysql.jdbc.Driver";
