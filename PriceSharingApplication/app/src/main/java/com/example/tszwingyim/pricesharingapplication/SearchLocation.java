@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,8 @@ public class SearchLocation extends ActionBarActivity {
     private long MIN_TIME_BW_UPDATES = 5000;
     private float MIN_DISTANCE_CHANGE_FOR_UPDATES = 1000;
 
+    private ProgressBar mProgressBar;
+
     
     // GoogleMap googleMap;
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,8 @@ public class SearchLocation extends ActionBarActivity {
         setContentView(R.layout.activity_search_location);
         Spinner spinnerOsversions;
         TextView selVersion;
+
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
 
             MapFragment mapFragment = (MapFragment) getFragmentManager()
                     .findFragmentById(R.id.map);
@@ -165,6 +170,7 @@ public class SearchLocation extends ActionBarActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgressBar.setVisibility(View.VISIBLE);
                 if (googleMap != null) {
                     DBManager dbManager = new DBManager();
                     dbManager.queryCallBack = new QueryCallBack() {
@@ -206,6 +212,8 @@ public class SearchLocation extends ActionBarActivity {
                                             .position(new LatLng(lat, longt))
                                             .title(shopName + ":" + locationNameZH));
                                 }
+
+                                mProgressBar.setVisibility(View.INVISIBLE);
                             }
                         }
                     };

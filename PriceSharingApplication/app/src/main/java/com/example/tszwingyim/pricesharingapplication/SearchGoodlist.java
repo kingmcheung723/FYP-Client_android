@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.app.Activity;
 
@@ -45,6 +46,9 @@ public class SearchGoodlist extends ActionBarActivity {
         Button recommend = (Button)findViewById(R.id.button_recommend);
         Button member = (Button)findViewById(R.id.button_member);
         Button barcode = (Button)findViewById(R.id.button_barcode);
+
+
+
 
         member.setOnClickListener(new View.OnClickListener() {
 

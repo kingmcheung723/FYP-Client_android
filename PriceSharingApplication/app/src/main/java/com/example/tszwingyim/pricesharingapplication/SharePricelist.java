@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 
 public class SharePricelist extends ActionBarActivity {
@@ -90,11 +91,13 @@ public class SharePricelist extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-
+        final ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar1);
+        progressBar.setVisibility(View.VISIBLE);
         DBManager dbManager = new DBManager();
         dbManager.queryCallBack = new QueryCallBack() {
             @Override
             public void queryResult(String result) {
+                progressBar.setVisibility(View.GONE);
                 if (result != null) {
                     MyStringTokenizer token = new MyStringTokenizer(result, "|");
                     String[] comments = new String[token.countTokens()];

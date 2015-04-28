@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 
 public class Commentlist extends ActionBarActivity {
@@ -91,11 +92,15 @@ public class Commentlist extends ActionBarActivity {
             }
         });
 
+        final ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar1);
+        progressBar.setVisibility(View.VISIBLE);
+
         String goodId = this.getIntent().getExtras().getString("ITEM_ID");
         DBManager dbManager = new DBManager();
         dbManager.queryCallBack = new QueryCallBack() {
             @Override
             public void queryResult(String result) {
+                progressBar.setVisibility(View.GONE);
                 if (result != null) {
                     MyStringTokenizer token = new MyStringTokenizer(result, "|");
                     String[] comments = new String[token.countTokens()];

@@ -2,6 +2,7 @@ package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
@@ -15,9 +16,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
+import com.facebook.share.widget.ShareDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,19 +30,20 @@ import java.util.Locale;
 
 public class Itempage extends ActionBarActivity {
     private CallbackManager callbackManager;
-    private ProgressBar mProgressBar = null;
-    //    ShareDialog shareDialog;
+    ShareDialog shareDialog;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-//        mCountDownTimer.start();
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         setContentView(R.layout.activity_itempage);
+
+        final ProgressBar mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
+        mProgressBar.setVisibility(View.VISIBLE);
+
         Button recommend = (Button) findViewById(R.id.button_recommend);
         Button category = (Button) findViewById(R.id.button_category);
         Button member = (Button) findViewById(R.id.button_member);
@@ -49,23 +55,43 @@ public class Itempage extends ActionBarActivity {
         Button commentform = (Button) findViewById(R.id.button_givecomment);
         Button saveToShoppingCart = (Button) this.findViewById(R.id.button_save);
         final ShareButton shareButton = (ShareButton) findViewById(R.id.fb_share_button);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
+        shareDialog = new ShareDialog(this);
+        // this part is optional
+        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+                    @Override
+                    public void onSuccess(Sharer.Result result) {
+                        if (result != null) {
 
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
-        mProgressBar.setVisibility(View.VISIBLE);
+                        }
+                    }
 
-        member.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onCancel() {
 
-            public void onClick(View v) {
-                String memberEmail = MySharedPreference.getMemberName(Itempage.this);
-                if (memberEmail != null && memberEmail.length() > 0) {
-                    Intent intent = TabManager.getInstance().getIntent(Itempage.this, Memberpage.class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = TabManager.getInstance().getIntent(Itempage.this, Member.class);
-                    startActivity(intent);
-                }
-            }
-        });
+                    }
+
+                    @Override
+                    public void onError(FacebookException e) {
+
+                    }
+                });
+
+
+                member.setOnClickListener(new View.OnClickListener() {
+
+                    public void onClick(View v) {
+                        String memberEmail = MySharedPreference.getMemberName(Itempage.this);
+                        if (memberEmail != null && memberEmail.length() > 0) {
+                            Intent intent = TabManager.getInstance().getIntent(Itempage.this, Memberpage.class);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = TabManager.getInstance().getIntent(Itempage.this, Member.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
         recommend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -276,6 +302,8 @@ public class Itempage extends ActionBarActivity {
                 }
             });
 
+
+
             if (itemId != null && itemId.length() > 0) {
                 final DBManager dbManager = new DBManager();
                 dbManager.queryCallBack = new QueryCallBack() {
@@ -295,7 +323,7 @@ public class Itempage extends ActionBarActivity {
                                 .setContentTitle("Cheapest!!")
                                 .setContentDescription(
                                         "I found a cheap good " + itemNameEn + " through Price Sharing Application")
-
+                                .setContentUrl(Uri.parse("http://www.facebook.com"))
                                 .build();
                         shareButton.setShareContent(content);
                         callbackManager = CallbackManager.Factory.create();
@@ -314,7 +342,7 @@ public class Itempage extends ActionBarActivity {
                                 textView1.setText(brandNameZh);
                             }
                         };
-                        String brandSql = "SELECT brands.name_en, brands.name_zh FROM brands WHERE brands.id = " + brandId;
+                                                                                                    String brandSql = "SELECT brands.name_en, brands.name_zh FROM brands WHERE brands.id = " + brandId;
                         dbManager1.querySql(brandSql);
 
 
@@ -550,8 +578,6 @@ public class Itempage extends ActionBarActivity {
             }
 
         }
-
-
     }
 
     private float[] toFloatArray(List<Float> listFloat) {

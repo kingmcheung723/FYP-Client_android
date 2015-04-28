@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 
@@ -18,6 +19,9 @@ public class Recommendation extends ActionBarActivity {
 
     private String[] itemNames;
     private int selectedPosition = 0;
+    private ProgressBar mProgressBar;
+
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,8 @@ public class Recommendation extends ActionBarActivity {
         Button member = (Button) findViewById(R.id.button_member);
         Button barcode = (Button) findViewById(R.id.button_barcode);
         Button refresh = (Button) findViewById(R.id.button_refresh);
+
+
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -73,10 +79,12 @@ public class Recommendation extends ActionBarActivity {
                 doRecommendation(getSql(selectedPosition));
             }
         });
-
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
+        mProgressBar.setVisibility(View.VISIBLE);
         setUpDropdownList();
 
         doRecommendation(getSql(selectedPosition));
+
     }
 
     private String getSql(int position) {
@@ -161,6 +169,7 @@ public class Recommendation extends ActionBarActivity {
             dbManager.queryCallBack = new QueryCallBack() {
                 @Override
                 public void queryResult(String result) {
+                    mProgressBar.setVisibility(View.GONE);
                     if (result != null && result.length() > 0) {
                         MyStringTokenizer token = new MyStringTokenizer(result, "|");
                         if (token != null && token.countTokens() >= 1) {

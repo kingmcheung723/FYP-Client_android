@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 
 public class ShoppingCart extends ActionBarActivity {
 
     private boolean isDeleting = false;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,11 @@ public class ShoppingCart extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+//        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
+//        progressBar.setVisibility(View.VISIBLE);
+
+
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +86,10 @@ public class ShoppingCart extends ActionBarActivity {
         });
 
 
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
+        mProgressBar.setVisibility(View.VISIBLE);
+
+
 
         displayShoppintCartItems();
     }
@@ -90,6 +101,7 @@ public class ShoppingCart extends ActionBarActivity {
             dbManager.queryCallBack = new QueryCallBack() {
                 @Override
                 public void queryResult(String result) {
+                    mProgressBar.setVisibility(View.GONE);
                     if (result != null) {
                         MyStringTokenizer token = new MyStringTokenizer(result, "|");
 

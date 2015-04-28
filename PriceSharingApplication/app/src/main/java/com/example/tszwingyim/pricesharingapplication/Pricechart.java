@@ -51,8 +51,7 @@ public class Pricechart extends ActionBarActivity {
         Button sharepricelist = (Button) findViewById(R.id.button_shareprice);
         Button itempage = (Button) findViewById(R.id.button_priceinfo);
 
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
-        mProgressBar.setVisibility(View.VISIBLE);
+
 
         final String itemId = getIntent().getExtras().getString("ITEM_ID");
 
