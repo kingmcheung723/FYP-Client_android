@@ -11,12 +11,16 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 public class ShoppingCart extends ActionBarActivity {
 
     private boolean isDeleting = false;
     private ProgressBar mProgressBar;
+    private double totalPrice = 0;
+    private TextView totalPriceTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,7 @@ public class ShoppingCart extends ActionBarActivity {
         Button member = (Button) findViewById(R.id.button_member);
         Button barcode = (Button) findViewById(R.id.button_barcode);
         final Button delete = (Button) findViewById(R.id.button_delete);
+        totalPriceTextView = (TextView)findViewById(R.id.textView_sumofgoods);
 
         member.setOnClickListener(new View.OnClickListener() {
 
@@ -89,8 +94,6 @@ public class ShoppingCart extends ActionBarActivity {
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
         mProgressBar.setVisibility(View.VISIBLE);
 
-
-
         displayShoppintCartItems();
     }
 
@@ -101,7 +104,6 @@ public class ShoppingCart extends ActionBarActivity {
             dbManager.queryCallBack = new QueryCallBack() {
                 @Override
                 public void queryResult(String result) {
-                    mProgressBar.setVisibility(View.GONE);
                     if (result != null) {
                         MyStringTokenizer token = new MyStringTokenizer(result, "|");
 
@@ -113,6 +115,9 @@ public class ShoppingCart extends ActionBarActivity {
                             goods[count] = token.nextToken().toString();
                             count++;
                         }
+                        // Set total price
+                        sumShoppingCartPrice(ids);
+
                         CustomList adapter = new
                                 CustomList(ShoppingCart.this, goods);
                         ListView list = (ListView) findViewById(R.id.listView3);
@@ -133,6 +138,11 @@ public class ShoppingCart extends ActionBarActivity {
                                     };
                                     String sql = "DELETE FROM shopping_carts WHERE member_email = '" + memberEmail + "' AND good_id = '" + itemId + "'";
                                     deleteDBManager.updateSql(sql);
+                                } else {
+                                    String itemId = ids[position].toString();
+                                    Intent intent = new Intent(ShoppingCart.this, Itempage.class);
+                                    intent.putExtra("ITEM_ID", itemId);
+                                    startActivity(intent);
                                 }
                             }
                         });
@@ -141,6 +151,33 @@ public class ShoppingCart extends ActionBarActivity {
             };
             String sql = "SELECT id, name_zh FROM goods WHERE goods.id IN (SELECT good_id FROM shopping_carts WHERE shopping_carts.member_email = '" + memberEmail + "')";
             dbManager.querySql(sql);
+        }
+    }
+
+    private void sumShoppingCartPrice(final String[] itemIds) {
+        if (itemIds != null) {
+            for (int i = 0; i < itemIds.length; i++) {
+                DBManager dbManager = new DBManager();
+                dbManager.queryCallBack = new QueryCallBack() {
+                    @Override
+                    public void queryResult(String result) {
+                        mProgressBar.setVisibility(View.GONE);
+                        if (result != null) {
+                            MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                            String price = token.nextToken();
+                            if (price != null) {
+                                totalPrice += Double.parseDouble(price);
+                                if (totalPriceTextView != null) {
+                                    totalPriceTextView.setText(Double.toString(totalPrice));
+                                }
+                            }
+                        }
+                    }
+                };
+                String goodId = itemIds[i].toString();
+                String sql = "SELECT price FROM shop_goods WHERE good_id = '" + goodId + "' ORDER BY lastmoddate DESC limit 1";
+                dbManager.querySql(sql);
+            }
         }
     }
 
