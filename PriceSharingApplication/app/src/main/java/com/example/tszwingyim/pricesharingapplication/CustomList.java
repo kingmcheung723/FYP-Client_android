@@ -28,13 +28,39 @@ public class CustomList extends ArrayAdapter<String>{
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView= inflater.inflate(R.layout.list_single, null, true);
+        final View rowView= inflater.inflate(R.layout.list_single, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
-        txtTitle.setText(this.contentString[position]);
+        final ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
+
+        final String itemName = this.contentString[position];
+        txtTitle.setText(itemName);
         if (this.imageId != null) {
             imageView.setImageResource(this.imageId[position]);
         }
+        final DBManager dbManager = new DBManager();
+        dbManager.queryCallBack = new QueryCallBack() {
+            @Override
+            public void queryResult(String result) {
+                if (result != null && result.length() > 0) {
+                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                    String imageLink = token.nextToken();
+                    if (imageLink != null || imageLink.equalsIgnoreCase("null")) {
+                        String uri = "@drawable/" + imageLink;
+                        int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
+                        if (imageResource != 0) {
+                            Drawable drawable = context.getResources().getDrawable(imageResource);
+                            imageView.setImageDrawable(drawable);
+                        } else {
+                            Drawable drawable = context.getResources().getDrawable(R.drawable.ic_launcher);
+                            imageView.setImageDrawable(drawable);
+                        }
+                    }
+                }
+            }
+        };
+        String sql = "SELECT image_link FROM goods WHERE goods.name_zh = '" + itemName + "' OR goods.name_en = '" + itemName + "'";
+        dbManager.querySql(sql);
+
         return rowView;
     }
 }

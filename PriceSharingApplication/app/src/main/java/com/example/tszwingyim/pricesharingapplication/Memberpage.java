@@ -30,6 +30,13 @@ public class Memberpage extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Locale locale = new Locale(MySharedPreference.getLocale(this));
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+
         //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -156,13 +163,7 @@ public class Memberpage extends ActionBarActivity {
 
     public void setLocale(String lo) {
 
-//        String localeStr = MySharedPreference.getLocale(this);
-        Locale locale = new Locale(lo);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config,
-                getBaseContext().getResources().getDisplayMetrics());
+        MySharedPreference.setLocale(lo, this);
 
 
         new AlertDialog.Builder(this)
@@ -171,7 +172,7 @@ public class Memberpage extends ActionBarActivity {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
-                        dialog.dismiss();;
+                        dialog.dismiss();
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)

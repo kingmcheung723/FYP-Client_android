@@ -51,7 +51,7 @@ class MySharedPreference {
     }
 
     public static void setLocale(String localeStr, Context context) {
-        if (localeStr != null && localeStr.length() > 0) {
+        if (localeStr != null) {
             SharedPreferences preference = context.getSharedPreferences(MyPreferenceName, 0);
             SharedPreferences.Editor editor = preference.edit();
             editor.putString(LOCALE, localeStr);

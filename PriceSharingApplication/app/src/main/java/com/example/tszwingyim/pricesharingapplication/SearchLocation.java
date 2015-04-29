@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -34,6 +35,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Locale;
+
 public class SearchLocation extends ActionBarActivity {
     private String[] shopStr = {"所有商店", "惠康", "百佳", "MarketPlace", "永旺", "大昌"};
     private String[] districtStr = {"所有地區", "銅鑼灣", "炮台山", "北角", "鰂魚涌", "筲箕灣", "金鐘", "中環", "西環", "太平山", "薄扶林", "灣仔", "柴灣", "香港仔", "鴨脷洲", "淺水灣", "赤柱",
@@ -51,6 +54,16 @@ public class SearchLocation extends ActionBarActivity {
     // GoogleMap googleMap;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        Locale locale = new Locale(MySharedPreference.getLocale(this));
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+
+
 //        //Hide the action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();

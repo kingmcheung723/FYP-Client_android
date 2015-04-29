@@ -1,6 +1,7 @@
 package com.example.tszwingyim.pricesharingapplication;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,6 +35,16 @@ public class Itempage extends ActionBarActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        Locale locale = new Locale(MySharedPreference.getLocale(this));
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+
+
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         //Hide the action bar
@@ -228,28 +239,28 @@ public class Itempage extends ActionBarActivity {
                                                                 intent.putExtra("parkNShopPrices", parkNShopPrices);
                                                                 intent.putExtra("aeonPrices", aeonPrices);
                                                                 intent.putExtra("dchPrices", dchPrices);
-                                                                intent.putExtra("marketPlasePrices", marketPlasePrices);
+                                                                intent.putExtra("marketPlacePrices", marketPlasePrices);
                                                                 startActivity(intent);
                                                             }
                                                         };
-                                                        String dchSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '5' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-12' ORDER BY `lastmoddate` ASC  ";
+                                                        String dchSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '5' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-22' ORDER BY `lastmoddate` ASC  ";
                                                         dchDBManager.querySql(dchSQL);
                                                     }
                                                 };
-                                                String aeonSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '4' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-12' ORDER BY `lastmoddate` ASC  ";
+                                                String aeonSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '4' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-22' ORDER BY `lastmoddate` ASC  ";
                                                 aeonDBManager.querySql(aeonSQL);
                                             }
                                         };
-                                        String marketPlaceSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '3' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-12' ORDER BY `lastmoddate` ASC  ";
+                                        String marketPlaceSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '3' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-22' ORDER BY `lastmoddate` ASC  ";
                                         marketPlaceDBManager.querySql(marketPlaceSQL);
                                     }
                                 };
-                                String parkNShopSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '2' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-12' ORDER BY `lastmoddate` ASC  ";
+                                String parkNShopSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '2' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-22' ORDER BY `lastmoddate` ASC  ";
                                 parkNShopDBManager.querySql(parkNShopSQL);
                             }
                         }
                     };
-                    String welcomeSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '1' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-12' ORDER BY `lastmoddate` ASC  ";
+                    String welcomeSQL = "SELECT price FROM `shop_goods` WHERE shop_id = '1' AND good_id = '" + itemId + "' AND lastmoddate > '2015-4-22' ORDER BY `lastmoddate` ASC  ";
                     welcomeDBManager.querySql(welcomeSQL);
                 }
             });
