@@ -176,7 +176,7 @@ public class Pricechart extends ActionBarActivity {
 //        XYSeries series4 = new SimpleXYSeries(Arrays.asList(series4Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "大昌");
 //        XYSeries series5 = new SimpleXYSeries(Arrays.asList(series5Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Market Place");
 
-        XYSeries series1 = new SimpleXYSeries(toNumberList(parkNShopPrices), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "百佳");
+        XYSeries series1 = new SimpleXYSeries(toNumberList(parkNShopPrices), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Parknshop");
         XYSeries series2 = new SimpleXYSeries(toNumberList(welcomePriaces), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Wellcome");
         XYSeries series3 = new SimpleXYSeries(toNumberList(aeonPrices), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Aeon");
         XYSeries series4 = new SimpleXYSeries(toNumberList(dchPrices), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "大昌");
@@ -223,11 +223,11 @@ public class Pricechart extends ActionBarActivity {
         plot.setDomainStepValue(1);
 
         plot.setRangeStepMode(XYStepMode.INCREMENT_BY_VAL);
-        plot.setRangeStepValue(1);
+        plot.setRangeStepValue(0.1);
 
         // reduce the number of range labels
         plot.setTicksPerRangeLabel(1);
-        plot.getGraphWidget().setDomainLabelOrientation(90);
+        plot.getGraphWidget().setDomainLabelOrientation(0);
     }
 
     private List getSeries(int count, int max) {
