@@ -154,9 +154,9 @@ public class Commentform extends ActionBarActivity {
                                             }
                                         }
                                     };
-                                    String insertCommentSQL = "INSERT INTO Comments (FacilitiesID, Comment, Email, Rating) VALUES ((SELECT ID FROM Facilities WHERE NAME = " +
+                                    String insertCommentSQL = "INSERT INTO Comments (FacilitiesID, Comment, Email, Rating) VALUES ((SELECT ID FROM Facilities WHERE NAME = '" +
 
-                                            Facilities + ")," + comment + "','" + memberEmail + "'," + rating + ")";
+                                                Facilities + "),'" + comment + "','" + memberEmail + "'," + rating + ")";
                                     dbManager.updateSql(insertCommentSQL);
                                 } else {
                                     MySharedPreference.displayDialog("You have not yet registered", Commentform.this);
