@@ -24,10 +24,8 @@ public class Information extends ActionBarActivity {
         Button comment = (Button) findViewById(R.id.button_comment);
         Button login = (Button) findViewById(R.id.button_login);
         Button map = (Button) findViewById(R.id.button_map);
-        Button menu = (Button) findViewById(R.id.button_menu);
         Button promo = (Button) findViewById(R.id.button_promo);
         Button logout = (Button) findViewById(R.id.button_logout);
-        Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
 
         String facility = getIntent().getExtras().getString("Facilities");
@@ -36,29 +34,21 @@ public class Information extends ActionBarActivity {
             map.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Map.class);
+                    Intent intent  = new Intent(Information.this, Map.class);
                     startActivity(intent);
                 }
             });
             comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Comment.class);
+                    Intent intent  = new Intent(Information.this, Comment.class);
                     startActivity(intent);
-                }
-            });
-            menu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, CanteenFood.class);
-                    startActivity(intent);
-
                 }
             });
             info.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
+                    Intent intent  = new Intent(Information.this, Information.class);
                     startActivity(intent);
 
                 }
@@ -66,7 +56,7 @@ public class Information extends ActionBarActivity {
             promo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Promotion.class);
+                    Intent intent  = new Intent(Information.this, Promotion.class);
                     startActivity(intent);
 
                 }
@@ -74,8 +64,7 @@ public class Information extends ActionBarActivity {
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Login.class);
+                    Intent intent  = new Intent(Information.this, Login.class);
                     startActivity(intent);
 
                 }
@@ -83,15 +72,7 @@ public class Information extends ActionBarActivity {
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
-                    startActivity(intent);
-
-                }
-            });
-            howtogo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
+                    Intent intent  = new Intent(Information.this, MainActivity.class);
                     startActivity(intent);
 
                 }
@@ -99,8 +80,7 @@ public class Information extends ActionBarActivity {
             register.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Register.class);
+                    Intent intent  = new Intent(Information.this, Register.class);
                     startActivity(intent);
 
                 }
