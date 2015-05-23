@@ -91,10 +91,8 @@ public class Information extends ActionBarActivity {
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Information.this, Information.class);
-                    intent.putExtra("Facilities", facility);
-                    startActivity(intent);
-
+                    MySharedPreference.clearMemberName(Information.this);
+                    MySharedPreference.displayDialog("Logout success", Information.this);
                 }
             });
             howtogo.setOnClickListener(new View.OnClickListener() {
