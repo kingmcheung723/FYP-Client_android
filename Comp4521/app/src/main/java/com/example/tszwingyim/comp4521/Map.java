@@ -42,6 +42,7 @@ public class Map extends ActionBarActivity {
         Button register = (Button) findViewById(R.id.button4);
 
         final String facility = getIntent().getExtras().getString("Facilities");
+
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,12 +145,14 @@ public class Map extends ActionBarActivity {
                     new android.location.LocationListener() {
                         @Override
                         public void onLocationChanged(Location location) {
+                            // Currnet location
                             double latitude = location.getLatitude();
                             double longitude = location.getLongitude();
                             LatLng latLng = new LatLng(latitude, longitude);
-                            googleMap.addMarker(new MarkerOptions().position(latLng));
                             googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                             googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
+                            setGoogleMapLocation(facility);
                         }
 
                         @Override
@@ -168,7 +171,35 @@ public class Map extends ActionBarActivity {
                         }
                     });
         }
+    }
 
+    private void setGoogleMapLocation(final String name) {
+        DBManager dbManager = new DBManager();
+        dbManager.queryCallBack = new QueryCallBack() {
+            @Override
+            public void queryResult(String result) {
+                if (result != null) {
+                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                    if (token != null) {
+                        String lat = token.nextToken();
+                        String longi = token.nextToken();
+                        if (lat != null ||
+                                longi != null) {
+
+                            Double latDouble = Double.parseDouble(lat);
+                            Double longiDouble = Double.parseDouble(longi);
+                            googleMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(latDouble, longiDouble))
+                                    .title(name));
+                        }
+                    }
+                }
+
+            }
+        };
+
+        String sql = "SELECT LAT, LONGI FROM Facilities WHERE NAME = '" + name + "'";
+        dbManager.querySql(sql);
     }
 
 
