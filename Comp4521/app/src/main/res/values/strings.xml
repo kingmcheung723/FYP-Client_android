@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Comp4521</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_sports">Sports</string>
+    <string name="title_activity_map">Map</string>
+    <string name="title_activity_comment">Comment</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="title_activity_canteen_food">CanteenFood</string>
+    <string name="title_activity_promotion">Promotion</string>
+    <string name="title_activity_commentform">Commentform</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_register">Register</string>
+</resources>

@@ -333,7 +333,7 @@ public class Itempage extends ActionBarActivity {
                         ShareLinkContent content = new ShareLinkContent.Builder()
                                 .setContentTitle("Cheapest!!")
                                 .setContentDescription(
-                                        "I found a cheap good " + itemNameEn + " through Price Sharing Application")
+                                        "I found " + itemNameEn + " through Price Sharing Application")
                                 .setContentUrl(Uri.parse("http://www.facebook.com"))
                                 .build();
                         shareButton.setShareContent(content);

@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
@@ -210,11 +211,12 @@ public class Pricechart extends ActionBarActivity {
 
         // thin out domain tick labels so they dont overlap each other:
         plot.setDomainStepMode(XYStepMode.INCREMENT_BY_VAL);
+        plot.setRangeBoundaries(0, 100, BoundaryMode.GROW);
         plot.setDomainStepValue(1);
 
         plot.setRangeStepMode(XYStepMode.INCREMENT_BY_VAL);
         plot.setRangeStepValue(0.1);
-
+        plot.setDomainBoundaries(0, 5, BoundaryMode.GROW);
         // reduce the number of range labels
         plot.setTicksPerRangeLabel(1);
         plot.getGraphWidget().setDomainLabelOrientation(0);

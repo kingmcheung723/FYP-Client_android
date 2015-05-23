@@ -80,7 +80,7 @@ public class SearchLocation extends ActionBarActivity {
             MapFragment mapFragment = (MapFragment) getFragmentManager()
                     .findFragmentById(R.id.map);
             googleMap=mapFragment.getMap();
-//        mapFragment.getMapAsync(this);
+//       get current location
             googleMap.setMyLocationEnabled(true);
             String locationProvider = LocationManager.NETWORK_PROVIDER;
 
@@ -89,9 +89,10 @@ public class SearchLocation extends ActionBarActivity {
             String bestProvider = locationManager.getBestProvider(criteria, true);
             Location location = locationManager.getLastKnownLocation(bestProvider);
 
-//            locationManager.requestLocationUpdates(locationProvider,0,0,locationListener);
+
         boolean isNetworkEnabled = true;
         if (isNetworkEnabled) {
+            //update current location move
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                     MIN_TIME_BW_UPDATES,
                     MIN_DISTANCE_CHANGE_FOR_UPDATES,
@@ -102,6 +103,7 @@ public class SearchLocation extends ActionBarActivity {
                             double longitude = location.getLongitude();
                             LatLng latLng = new LatLng(latitude, longitude);
                             googleMap.addMarker(new MarkerOptions().position(latLng));
+                            //move to ur current location
                             googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                             googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
                         }
