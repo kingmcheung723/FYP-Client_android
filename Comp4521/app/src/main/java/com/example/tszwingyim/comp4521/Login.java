@@ -2,6 +2,7 @@ package com.example.tszwingyim.comp4521;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,6 +18,9 @@ public class Login extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         setContentView(R.layout.activity_login);
         Button info = (Button) findViewById(R.id.button_info);
         Button comment = (Button) findViewById(R.id.button_comment);
