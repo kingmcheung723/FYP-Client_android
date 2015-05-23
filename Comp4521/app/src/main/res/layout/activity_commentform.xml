@@ -150,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:ems="10"
-                    android:id="@+id/EditText_Login_Email"
+                    android:id="@+id/edittext_usercomment"
                     android:layout_weight="0.56" />
 
             </LinearLayout>
