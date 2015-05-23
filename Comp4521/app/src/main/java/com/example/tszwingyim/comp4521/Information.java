@@ -25,10 +25,8 @@ public class Information extends ActionBarActivity {
         Button comment = (Button) findViewById(R.id.button_comment);
         Button login = (Button) findViewById(R.id.button_login);
         Button map = (Button) findViewById(R.id.button_map);
-        Button menu = (Button) findViewById(R.id.button_menu);
         Button promo = (Button) findViewById(R.id.button_promo);
         Button logout = (Button) findViewById(R.id.button_logout);
-        Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
 
         final String facility = getIntent().getExtras().getString("Facilities");
@@ -50,15 +48,6 @@ public class Information extends ActionBarActivity {
                     Intent intent =  new Intent(Information.this, Comment.class);
                     intent.putExtra("Facilities", facility);
                     startActivity(intent);
-                }
-            });
-            menu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Information.this, CanteenFood.class);
-                    intent.putExtra("Facilities", facility);
-                    startActivity(intent);
-
                 }
             });
             info.setOnClickListener(new View.OnClickListener() {
@@ -108,15 +97,7 @@ public class Information extends ActionBarActivity {
 
                 }
             });
-            howtogo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent =new Intent(Information.this, Information.class);
-                    intent.putExtra("Facilities", facility);
-                    startActivity(intent);
 
-                }
-            });
             register.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -199,7 +180,6 @@ public class Information extends ActionBarActivity {
                 public void queryResult(String result) {
                     if (result != null && result.length() > 0) {
                         MyStringTokenizer token = new MyStringTokenizer(result, "|");
-
                         if (token != null && token.countTokens() >= 1) {
                             String imageId = token.nextToken().toString();
                             String uri = "@drawable/" + imageId;
@@ -218,7 +198,7 @@ public class Information extends ActionBarActivity {
 
                 }
             };
-            String imageSql = "SELECT IMAGE FROM Facilities WHERE NAME = " + facilityName;
+            String imageSql = "SELECT IMAGE FROM Facilities WHERE NAME = '" + facilityName + "'";
             dbManager9.querySql(imageSql);
 
 

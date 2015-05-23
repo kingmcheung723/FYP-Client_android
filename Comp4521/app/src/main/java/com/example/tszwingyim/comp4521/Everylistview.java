@@ -31,7 +31,7 @@ public class Everylistview extends ActionBarActivity {
                 setTitle("Dinning");
                 displayList("Dinning");
             } else if (category.equalsIgnoreCase(("sports"))) {
-                setTitle("Information");
+                setTitle("Sports");
                 displayList("SPORTS");
             }
         }

@@ -27,10 +27,8 @@ public class Comment extends ActionBarActivity {
         Button comment = (Button) findViewById(R.id.button_comment);
         Button login = (Button) findViewById(R.id.button_login);
         Button map = (Button) findViewById(R.id.button_map);
-        Button menu = (Button) findViewById(R.id.button_menu);
         Button promo = (Button) findViewById(R.id.button_promo);
         Button logout = (Button) findViewById(R.id.button_logout);
-        Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
 
         final String facility = getIntent().getExtras().getString("Facilities");
@@ -49,15 +47,6 @@ public class Comment extends ActionBarActivity {
                     Intent intent = new Intent(Comment.this, Comment.class);
                     intent.putExtra("Facilities", facility);
                     startActivity(intent);
-                }
-            });
-            menu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent =new Intent(Comment.this, CanteenFood.class);
-                    intent.putExtra("Facilities", facility);
-                    startActivity(intent);
-
                 }
             });
             info.setOnClickListener(new View.OnClickListener() {
@@ -106,15 +95,6 @@ public class Comment extends ActionBarActivity {
                         MySharedPreference.displayDialog("You haven't log in", Comment.this);
                     }
 
-
-                }
-            });
-            howtogo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent =new Intent(Comment.this, Information.class);
-                    intent.putExtra("Facilities", facility);
-                    startActivity(intent);
 
                 }
             });
