@@ -84,7 +84,7 @@ public class Comment extends ActionBarActivity {
             promo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Comment.this, Promotion.class);
+                    Intent intent = TabManager.getInstance().getIntent(Comment.this, Commentform.class);
                     startActivity(intent);
 
                 }

@@ -61,7 +61,7 @@ public class CanteenFood extends ActionBarActivity {
         promo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Promotion.class);
+                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Commentform.class);
                 startActivity(intent);
 
             }

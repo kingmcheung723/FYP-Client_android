@@ -75,7 +75,7 @@ public class Map extends ActionBarActivity {
         promo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Map.this, Promotion.class);
+                Intent intent = TabManager.getInstance().getIntent(Map.this, Commentform.class);
                 startActivity(intent);
 
             }

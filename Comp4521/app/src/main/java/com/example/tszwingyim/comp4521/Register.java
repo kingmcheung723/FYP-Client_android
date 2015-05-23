@@ -66,7 +66,7 @@ public class Register extends ActionBarActivity {
         promo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Promotion.class);
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Commentform.class);
                 startActivity(intent);
 
             }

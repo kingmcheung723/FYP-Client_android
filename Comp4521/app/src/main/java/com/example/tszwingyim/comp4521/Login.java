@@ -73,7 +73,7 @@ public class Login extends ActionBarActivity {
         promo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Promotion.class);
+                Intent intent = TabManager.getInstance().getIntent(Login.this, Commentform.class);
                 startActivity(intent);
 
             }
