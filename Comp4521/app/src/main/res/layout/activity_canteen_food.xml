@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="74dp"
-            android:text="Register"
+            android:text="Canteen Menu"
             android:textColor="#ffffffff"
             android:id="@+id/Category_title"
             style="@style/TextAppearance.AppCompat.Title"
@@ -56,7 +56,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="How to Go"
+                android:text="Login"
                 android:id="@+id/button_shareprice"
                 android:layout_weight="1" />
 
@@ -93,115 +93,31 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@+id/Category_title"
-            android:layout_above="@+id/linearLayout">
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/Category_title"
-                android:id="@+id/linearlayout3"
-                android:layout_alignLeft="@+id/linearLayout3"
-                android:layout_alignStart="@+id/linearLayout3"
-                android:layout_alignRight="@+id/linearLayout3"
-                android:layout_alignEnd="@+id/linearLayout3"
-                android:layout_centerHorizontal="true">
+                android:text="How To Go"
+                android:id="@+id/button3"
+                android:layout_weight="1" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Email"
-                    android:id="@+id/login_email" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:ems="10"
-                    android:id="@+id/EditText_Register_Email"
-                    android:layout_weight="0.56" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="top"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/Category_title"
-                android:weightSum="1"
-                android:layout_toRightOf="@+id/button_back"
-                android:id="@+id/linearLayout3"
-                android:layout_centerHorizontal="true">
+                android:text="Register"
+                android:id="@+id/button4"
+                android:layout_weight="1" />
 
-                <TextView
-                    android:layout_width="64dp"
-                    android:layout_height="wrap_content"
-                    android:text="Password"
-                    android:id="@+id/login_password" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="10"
-                    android:id="@+id/EditText_Register_Password" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/Category_title"
-                android:layout_alignRight="@+id/linearlayout3"
-                android:layout_alignEnd="@+id/linearlayout3"
-                android:layout_alignLeft="@+id/linearlayout3"
-                android:layout_alignStart="@+id/linearlayout3"
-                android:layout_centerHorizontal="true">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="53dp"
-                    android:text="ConfirmPassword"
-                    android:id="@+id/confirmpassword" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:ems="10"
-                    android:id="@+id/EditText_Register_ConfPassword"
-                    android:layout_weight="1.73" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_alignTop="@+id/linearlayout3"
-                android:layout_alignRight="@+id/linearlayout3"
-                android:layout_alignEnd="@+id/linearlayout3"
-                android:layout_alignLeft="@+id/linearlayout3"
-                android:layout_alignStart="@+id/linearlayout3"
-                android:layout_centerHorizontal="true">
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button_confirmreg"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    android:text="submit"
-                    android:elegantTextHeight="false" />
-
-            </LinearLayout>
+                android:text="LOGOUT"
+                android:id="@+id/button_logout"
+                android:layout_weight="1" />
         </LinearLayout>
 
     </LinearLayout>

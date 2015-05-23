@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="74dp"
-            android:text="Sport Facilities"
+            android:text="Login"
             android:textColor="#ffffffff"
             android:id="@+id/Category_title"
             style="@style/TextAppearance.AppCompat.Title"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="false"
-            android:layout_alignBottom="@+id/Category_title"
+
             android:layout_gravity="center_horizontal" >
 
             <Button
@@ -56,7 +56,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="How to Go"
+                android:text="Login"
                 android:id="@+id/button_shareprice"
                 android:layout_weight="1" />
 
@@ -89,31 +89,109 @@
                 android:text="Promotion"
                 android:id="@+id/button_comment"
                 android:layout_weight="1" />
+
         </LinearLayout>
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
 
-            <TextView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Comment:"
-                android:id="@+id/textView_feeling" />
+                android:text="How To Go"
+                android:id="@+id/button3"
+                android:layout_weight="1" />
 
-            <EditText
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText_usercomment"
-                android:layout_weight="0.92" />
+                android:text="Register"
+                android:id="@+id/button4"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LOGOUT"
+                android:id="@+id/button_logout"
+                android:layout_weight="1" />
         </LinearLayout>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Confirm"
-            android:id="@+id/button_confirm"
-            android:layout_gravity="center_horizontal" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/Category_title"
+            android:layout_above="@+id/linearLayout">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Category_title"
+                android:id="@+id/linearlayout3"
+                android:layout_alignLeft="@+id/linearLayout3"
+                android:layout_alignStart="@+id/linearLayout3"
+                android:layout_alignRight="@+id/linearLayout3"
+                android:layout_alignEnd="@+id/linearLayout3"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comment:"
+                    android:id="@+id/login_email" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:ems="10"
+                    android:id="@+id/EditText_Login_Email"
+                    android:layout_weight="0.56" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Category_title"
+                android:layout_alignRight="@+id/linearlayout3"
+                android:layout_alignEnd="@+id/linearlayout3"
+                android:layout_alignLeft="@+id/linearlayout3"
+                android:layout_alignStart="@+id/linearlayout3"
+                android:layout_centerHorizontal="true">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_alignTop="@+id/linearlayout3"
+                android:layout_alignRight="@+id/linearlayout3"
+                android:layout_alignEnd="@+id/linearlayout3"
+                android:layout_alignLeft="@+id/linearlayout3"
+                android:layout_alignStart="@+id/linearlayout3"
+                android:layout_centerHorizontal="true">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_confirm"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:text="Confirm"
+                    android:elegantTextHeight="false" />
+
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

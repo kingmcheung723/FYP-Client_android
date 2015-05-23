@@ -115,8 +115,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button5"
+                android:text="LOGOUT"
+                android:id="@+id/button_logout"
                 android:layout_weight="1" />
         </LinearLayout>
 
