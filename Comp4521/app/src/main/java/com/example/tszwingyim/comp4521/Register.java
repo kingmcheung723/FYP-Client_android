@@ -72,7 +72,6 @@ public class Register extends ActionBarActivity {
             }
         });
 
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,8 +107,54 @@ public class Register extends ActionBarActivity {
 
             }
         });
+        Confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {EditText emailEditText = (EditText) findViewById(R.id.EditText_Register_Email);
+                final String emailStr = emailEditText.getText().toString();
 
-        Confirm.setOnClickListener(new ConfirmButtonOnClickListener(this));
+                if (!emailStr.isEmpty()) {
+                    EditText passwordEditText = (EditText) findViewById(R.id.EditText_Register_Password);
+                    EditText confirmPasswordEditText = (EditText) findViewById(R.id.EditText_Register_ConfPassword);
+                    String passwordStr = passwordEditText.getText().toString();
+                    String confirmPasswordStr = passwordEditText.getText().toString();
+
+
+//                           if (passwordStr.equalsIgnoreCase(confirmPasswordStr)) {
+                    if (passwordStr.length() >= 6) if (passwordStr.length() <= 10) {
+                        DBManager dbManager = new DBManager();
+                        dbManager.queryCallBack = new QueryCallBack() {
+                            @Override
+                            public void queryResult(String result) {
+                                if (result != null) {
+                                    MySharedPreference.saveMemberName(emailStr, Register.this);
+                                    Intent intent = TabManager.getInstance().getIntent(Register.this, Commentform.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        };
+                        String sql = "INSERT INTO Members (Email, Password) VALUES ('" + emailStr + "','" + passwordStr + "')";
+                        dbManager.updateSql(sql);
+                    } else {
+                        // emailvalid.setText("Password must be less than 10 digits");
+
+                        MySharedPreference.displayDialog("Password must be less than 10 digits", Register.this);
+                    }
+                    else {
+                        // emailvalid.setText("Password must be more than 6 digits");
+                        MySharedPreference.displayDialog("Password must be less than 6 digits", Register.this);
+                    }
+                } else {
+                    //emailvalid.setText("Confirm password does not match password");
+                    MySharedPreference.displayDialog("Confirm password does not match password", Register.this);
+                }
+//        } else {
+//            // emailvalid.setText(" The Email is not valid");
+//            MySharedPreference.displayDialog(" The Email is not valid", Register.this);
+//        }
+//            Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
+//            startActivity(intent);
+            }
+        });
     }
 
 
