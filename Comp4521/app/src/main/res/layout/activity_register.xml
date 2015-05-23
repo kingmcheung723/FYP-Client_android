@@ -43,21 +43,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Information"
-                android:id="@+id/button_priceinfo"
+                android:id="@+id/button_info"
                 android:singleLine="false" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Comment"
-                android:id="@+id/button_pricechart"
+                android:id="@+id/button_comment"
                 android:layout_weight="1" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login"
-                android:id="@+id/button_shareprice"
+                android:id="@+id/button_login"
                 android:layout_weight="1" />
 
         </LinearLayout>
@@ -72,14 +72,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Menu"
-                android:id="@+id/button"
+                android:id="@+id/button_menu"
                 android:layout_weight="1" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MAP"
-                android:id="@+id/button2"
+                android:id="@+id/button_map"
                 android:singleLine="false"
                 android:layout_weight="1" />
 
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Promotion"
-                android:id="@+id/button_comment"
+                android:id="@+id/button_promo"
                 android:layout_weight="1" />
 
         </LinearLayout>

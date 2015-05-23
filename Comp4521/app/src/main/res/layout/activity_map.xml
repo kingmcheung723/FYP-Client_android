@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="74dp"
-            android:text="Sport Facilities"
+            android:text="Map"
             android:textColor="#ffffffff"
             android:id="@+id/Category_title"
             style="@style/TextAppearance.AppCompat.Title"
@@ -43,21 +43,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Information"
-                android:id="@+id/button_priceinfo"
+                android:id="@+id/button_info"
                 android:singleLine="false" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Comment"
-                android:id="@+id/button_pricechart"
+                android:id="@+id/button_comment"
                 android:layout_weight="1" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="How to Go"
-                android:id="@+id/button_shareprice"
+                android:text="Login"
+                android:id="@+id/button_login"
                 android:layout_weight="1" />
 
         </LinearLayout>
@@ -72,14 +72,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Menu"
-                android:id="@+id/button"
+                android:id="@+id/button_menu"
                 android:layout_weight="1" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MAP"
-                android:id="@+id/button2"
+                android:id="@+id/button_map"
                 android:singleLine="false"
                 android:layout_weight="1" />
 
@@ -87,9 +87,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Promotion"
-                android:id="@+id/button_comment"
+                android:id="@+id/button_promo"
                 android:layout_weight="1" />
         </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="How To Go"
+                android:id="@+id/button3"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:id="@+id/button4"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LOGOUT"
+                android:id="@+id/button_logout"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:id="@+id/map" />
+
         <TextView
             android:layout_width="229dp"
             android:layout_height="wrap_content"
@@ -98,35 +132,6 @@
             android:layout_weight="0.17"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="100dp" />
-
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="?android:attr/ratingBarStyleIndicator"
-            android:id="@+id/ratingbar_Indicator"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="100dp" />
-
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="?android:attr/ratingBarStyle"
-            android:id="@+id/ratingbar_default"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="60dp" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ratingbutton"
-            android:text="Rate It"
-            android:layout_marginLeft="140dp" />
-
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="com.google.android.gms.maps.MapFragment"
-            android:id="@+id/map"
-            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
 
