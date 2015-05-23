@@ -2,9 +2,10 @@ package com.example.tszwingyim.comp4521;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,13 +32,6 @@ public class Register extends ActionBarActivity {
         Button register = (Button) findViewById(R.id.button4);
         Button Confirm = (Button) findViewById(R.id.button_confirmreg);
 
-        Confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this,Register.class);
-                startActivity(intent);
-            }
-        });
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +43,7 @@ public class Register extends ActionBarActivity {
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this,Comment.class);
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Comment.class);
                 startActivity(intent);
             }
         });
@@ -115,7 +109,7 @@ public class Register extends ActionBarActivity {
             }
         });
 
-
+        Confirm.setOnClickListener(new ConfirmButtonOnClickListener(this));
     }
 
 
@@ -140,6 +134,7 @@ public class Register extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     private class ConfirmButtonOnClickListener implements View.OnClickListener {
         Activity activity;
 
@@ -159,43 +154,48 @@ public class Register extends ActionBarActivity {
                 String confirmPasswordStr = passwordEditText.getText().toString();
 
 
-//                if (passwordStr.equalsIgnoreCase(confirmPasswordStr)) {
-//                    if (passwordStr.length() >= 6) if (passwordStr.length() <= 10) {
-                DBManager dbManager = new DBManager();
-                dbManager.queryCallBack = new QueryCallBack() {
-                    @Override
-                    public void queryResult(String result) {
-                        if (result != null) {
-                            MySharedPreference.saveMemberName(emailStr, Register.this);
-                            Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
-                            startActivity(intent);
+//                           if (passwordStr.equalsIgnoreCase(confirmPasswordStr)) {
+                if (passwordStr.length() >= 6) if (passwordStr.length() <= 10) {
+                    DBManager dbManager = new DBManager();
+                    dbManager.queryCallBack = new QueryCallBack() {
+                        @Override
+                        public void queryResult(String result) {
+                            if (result != null) {
+                                MySharedPreference.saveMemberName(emailStr, Register.this);
+                                Intent intent = TabManager.getInstance().getIntent(Register.this, Commentform.class);
+                                startActivity(intent);
+                            }
                         }
-                    }
-                };
-                String sql = "INSERT INTO Members (Email, Password) VALUES ('" + emailStr + "','" + passwordStr + "')";
-                String sql1 ="SELECT MAX(MemberID) FROM Members";
+                    };
+                    String sql = "INSERT INTO Members (Email, Password) VALUES ('" + emailStr + "','" + passwordStr + "')";
+                    dbManager.updateSql(sql);
+                } else {
+                    // emailvalid.setText("Password must be less than 10 digits");
 
-                dbManager.updateSql(sql);
+                    MySharedPreference.displayDialog("Password must be less than 10 digits", Register.this);
+                }
+                else {
+                    // emailvalid.setText("Password must be more than 6 digits");
+                    MySharedPreference.displayDialog("Password must be less than 6 digits", Register.this);
+                }
+            } else {
+                //emailvalid.setText("Confirm password does not match password");
+                MySharedPreference.displayDialog("Confirm password does not match password", Register.this);
             }
-//                    } else {
-//                        // emailvalid.setText("Password must be less than 10 digits");
-//
-//                        MySharedPreference.displayDialog("Password must be less than 10 digits", Register.this);
-//                    }
-//                    else {
-//                        // emailvalid.setText("Password must be more than 6 digits");
-//                        MySharedPreference.displayDialog("Password must be less than 6 digits", Register.this);
-//                    }
-//                } else {
-//                    //emailvalid.setText("Confirm password does not match password");
-//                    MySharedPreference.displayDialog("Confirm password does not match password", Register.this);
-//                }
-//            } else {
-//                // emailvalid.setText(" The Email is not valid");
-//                MySharedPreference.displayDialog(" The Email is not valid", Register.this);
-//            }
+//        } else {
+//            // emailvalid.setText(" The Email is not valid");
+//            MySharedPreference.displayDialog(" The Email is not valid", Register.this);
+//        }
 //            Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
 //            startActivity(intent);
+        }
+
+        private boolean isValidEmail(CharSequence target) {
+            if (TextUtils.isEmpty(target)) {
+                return false;
+            } else {
+                return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class Map extends ActionBarActivity implements OnMapReadyCallback {
+public class Map extends ActionBarActivity {
     private GoogleMap googleMap = null;
     private long MIN_TIME_BW_UPDATES = 5000;
     private float MIN_DISTANCE_CHANGE_FOR_UPDATES = 1000;
@@ -170,18 +170,18 @@ public class Map extends ActionBarActivity implements OnMapReadyCallback {
         return true;
     }
 
-    @Override
-    public void onMapReady(GoogleMap map) {
-        LatLng sydney = new LatLng(-33.867, 151.206);
-
-        map.setMyLocationEnabled(true);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
-
-        map.addMarker(new MarkerOptions()
-                .title("Sydney")
-                .snippet("The most populous city in Australia.")
-                .position(sydney));
-    }
+//    @Override
+//    public void onMapReady(GoogleMap map) {
+//        LatLng sydney = new LatLng(-33.867, 151.206);
+//
+//        map.setMyLocationEnabled(true);
+//        map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+//
+//        map.addMarker(new MarkerOptions()
+//                .title("Sydney")
+//                .snippet("The most populous city in Australia.")
+//                .position(sydney));
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
