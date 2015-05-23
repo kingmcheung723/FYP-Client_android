@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 
 public class Comment extends ActionBarActivity {
@@ -12,6 +13,22 @@ public class Comment extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+
+        ListView commentList = (ListView) findViewById(R.id.listView);
+        if (commentList != null) {
+            DBManager dbManager = new DBManager();
+            dbManager.queryCallBack = new QueryCallBack() {
+                @Override
+                public void queryResult(String result) {
+                    if (result != null) {
+
+                    }
+                }
+            };
+            String sql = "SELECT * from Comments WHERE FacilitiesID = 1 AND ";
+            dbManager.querySql(sql);
+        }
+
     }
 
 

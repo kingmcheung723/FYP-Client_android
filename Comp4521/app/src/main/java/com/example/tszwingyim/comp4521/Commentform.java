@@ -23,6 +23,7 @@ public class Commentform extends ActionBarActivity {
             confirm.setOnClickListener(new View.OnClickListener() {
 
                 public void onClick(View v) {
+                    /*
                     EditText commentEditText = (EditText) findViewById(R.id.editText_usercomment);
                     if (commentEditText != null) {
                         String comment = commentEditText.getText().toString();
@@ -48,6 +49,7 @@ public class Commentform extends ActionBarActivity {
                             }
                         }
                     }
+                    */
                 }
             });
         }

@@ -19,60 +19,95 @@ public class Register extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         Button confirm = (Button) findViewById(R.id.button_confirmreg);
-//        Button info = (Button) findViewById(R.id.button_info);
-//        Button comment = (Button) findViewById(R.id.button_comment);
-//        //Button member = (Button) findViewById(R.id.button_login);
-//        Button map = (Button) findViewById(R.id.button_map);
-//        Button menu = (Button) findViewById(R.id.button_menu);
-//        Button promo = (Button) findViewById(R.id.button_promo);
-//        map.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Register.this, Map.class);
-//                startActivity(intent);
-//            }
-//        });
-//        comment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Register.this,Comment.class);
-//                startActivity(intent);
-//            }
-//        });
-//        menu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Register.this, CanteenFood.class);
-//                startActivity(intent);
-//
-//            }
-//        });
-//        info.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
-//                startActivity(intent);
-//
-//            }
-//        });
-//        promo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Register.this, Promotion.class);
-//                startActivity(intent);
-//
-//            }
-//        });
-//        member.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Register.this, Promotion.class);
-//                startActivity(intent);
-//
-//            }
-//        });
-        confirm.setOnClickListener(new ConfirmButtonOnClickListener(this));
+        Button info = (Button) findViewById(R.id.button_info);
+        Button comment = (Button) findViewById(R.id.button_comment);
+        Button member = (Button) findViewById(R.id.button_login);
+        Button map = (Button) findViewById(R.id.button_map);
+        Button menu = (Button) findViewById(R.id.button_menu);
+        Button promo = (Button) findViewById(R.id.button_promo);
+
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Map.class);
+                startActivity(intent);
+            }
+        });
+
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this,Comment.class);
+                startActivity(intent);
+            }
+        });
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, CanteenFood.class);
+                startActivity(intent);
+
+            }
+        });
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
+                startActivity(intent);
+
+            }
+        });
+        promo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Promotion.class);
+                startActivity(intent);
+
+            }
+        });
+        member.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Promotion.class);
+                startActivity(intent);
+
+            }
+        });
+//        confirm.setOnClickListener(new ConfirmButtonOnClickListener(this));
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {EditText emailEditText = (EditText) findViewById(R.id.EditText_Register_Email);
+                final String emailStr = emailEditText.getText().toString();
+
+                //    if (this.isValidEmail(emailStr)) {
+                EditText passwordEditText = (EditText) findViewById(R.id.EditText_Register_Password);
+                EditText confirmPasswordEditText = (EditText) findViewById(R.id.EditText_Register_ConfPassword);
+                String passwordStr = passwordEditText.getText().toString();
+                String confirmPasswordStr = passwordEditText.getText().toString();
+
+
+//                if (passwordStr.equalsIgnoreCase(confirmPasswordStr)) {
+//                    if (passwordStr.length() >= 6) if (passwordStr.length() <= 10) {
+                DBManager dbManager = new DBManager();
+                dbManager.queryCallBack = new QueryCallBack() {
+                    @Override
+                    public void queryResult(String result) {
+                        if (result != null) {
+                            MySharedPreference.saveMemberName(emailStr, Register.this);
+                            Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
+                            startActivity(intent);
+                        }
+                    }
+                };
+                String sql = "INSERT INTO Members (Email, Password) VALUES ('" + emailStr + "','" + passwordStr + "')";
+                String sql1 ="SELECT MAX(MemberID) FROM Members";
+
+                dbManager.updateSql(sql);
+            }
+        });
 
     }
 
@@ -110,7 +145,7 @@ public class Register extends ActionBarActivity {
             EditText emailEditText = (EditText) activity.findViewById(R.id.EditText_Register_Email);
             final String emailStr = emailEditText.getText().toString();
 
-        //    if (this.isValidEmail(emailStr)) {
+            if (this.isValidEmail(emailStr)) {
                 EditText passwordEditText = (EditText) activity.findViewById(R.id.EditText_Register_Password);
                 EditText confirmPasswordEditText = (EditText) activity.findViewById(R.id.EditText_Register_ConfPassword);
                 String passwordStr = passwordEditText.getText().toString();
@@ -134,7 +169,7 @@ public class Register extends ActionBarActivity {
                 String sql1 ="SELECT MAX(MemberID) FROM Members";
 
                 dbManager.updateSql(sql);
-   //         }
+            }
 //                    } else {
 //                        // emailvalid.setText("Password must be less than 10 digits");
 //
@@ -156,12 +191,12 @@ public class Register extends ActionBarActivity {
 //            startActivity(intent);
         }
 
-//        private boolean isValidEmail(CharSequence target) {
-//            if (TextUtils.isEmpty(target)) {
-//                return false;
-//            } else {
-//                return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-//            }
-//        }
+        private boolean isValidEmail(CharSequence target) {
+            if (TextUtils.isEmpty(target)) {
+                return false;
+            } else {
+                return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+            }
+        }
     }
 }
