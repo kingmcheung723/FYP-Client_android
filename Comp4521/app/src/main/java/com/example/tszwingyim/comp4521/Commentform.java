@@ -100,21 +100,12 @@ public class Commentform extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Commentform.this, Information.class);
-                intent.putExtra("Facilities", facility);
-                startActivity(intent);
+                MySharedPreference.clearMemberName(Commentform.this);
+                MySharedPreference.displayDialog("Logout success", Commentform.this);
 
             }
         });
-        howtogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Commentform.this, Information.class);
-                intent.putExtra("Facilities", facility);
-                startActivity(intent);
 
-            }
-        });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +132,6 @@ public class Commentform extends ActionBarActivity {
                             String comment = commentEditText.getText().toString();
                             if (comment != null && comment.length() > 0) {
                                 String memberEmail = MySharedPreference.getMemberName(Commentform.this);
-                                memberEmail = "kwokhh93@gmail.com";
                                 if (memberEmail != null) {
                                     DBManager dbManager = new DBManager();
                                     dbManager.queryCallBack = new QueryCallBack() {
@@ -154,9 +144,15 @@ public class Commentform extends ActionBarActivity {
                                             }
                                         }
                                     };
-                                    String insertCommentSQL = "INSERT INTO Comments (FacilitiesID, Comment, Email, Rating) VALUES ((SELECT ID FROM Facilities WHERE NAME = " +
 
-                                            Facilities + ")," + comment + "','" + memberEmail + "'," + rating + ")";
+                                   System.out.println("INSERT INTO Comments (FacilitiesID, Comment, Email, Rating) VALUES ((SELECT ID FROM Facilities WHERE NAME = '" +
+
+                                           Facilities + "'),'" + comment + "','" + memberEmail + "'," + rating + ")");
+
+                                    String insertCommentSQL = "INSERT INTO Comments (FacilitiesID, Comment, Email, Rating) VALUES ((SELECT ID FROM Facilities WHERE NAME = '" +
+
+                                            Facilities + "'),'" + comment + "','" + memberEmail + "'," + rating + ")";
+
                                     dbManager.updateSql(insertCommentSQL);
                                 } else {
                                     MySharedPreference.displayDialog("You have not yet registered", Commentform.this);

@@ -31,82 +31,81 @@ public class Register extends ActionBarActivity {
         Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
         Button Confirm = (Button) findViewById(R.id.button_confirmreg);
+        final String facility = getIntent().getExtras().getString("Facilities");
+        if (facility != null) {
 
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(Register.this, Map.class);
-                startActivity(intent);
-            }
-        });
+            map.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Register.this, Map.class);
+                    intent.putExtra("Facilities", facility);
 
-        comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Register.this, Comment.class);
-                startActivity(intent);
-            }
-        });
-        menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(Register.this, CanteenFood.class);
-                startActivity(intent);
+                    startActivity(intent);
+                }
+            });
 
-            }
-        });
-        info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(Register.this, Information.class);
-                startActivity(intent);
+            comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Register.this, Comment.class);
+                    intent.putExtra("Facilities", facility);
 
-            }
-        });
-        promo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Register.this, Commentform.class);
-                startActivity(intent);
+                    startActivity(intent);
+                }
+            });
 
-            }
-        });
+            info.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Register.this, Information.class);
+                    intent.putExtra("Facilities", facility);
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                    startActivity(intent);
 
-                Intent intent =new Intent(Register.this, Login.class);
-                startActivity(intent);
+                }
+            });
+            promo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Register.this, Commentform.class);
+                    intent.putExtra("Facilities", facility);
 
-            }
-        });
+                    startActivity(intent);
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(Register.this, Information.class);
-                startActivity(intent);
+                }
+            });
 
-            }
-        });
-        howtogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(Register.this, Information.class);
-                startActivity(intent);
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-            }
-        });
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                    Intent intent = new Intent(Register.this, Login.class);
 
-                Intent intent = new Intent(Register.this, Register.class);
-                startActivity(intent);
+                    startActivity(intent);
 
-            }
-        });
+                }
+            });
+
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MySharedPreference.clearMemberName(Register.this);
+                    MySharedPreference.displayDialog("Logout success", Register.this);
+
+
+                }
+            });
+
+            register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(Register.this, Register.class);
+                    startActivity(intent);
+
+                }
+            });
+        }
         Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {EditText emailEditText = (EditText) findViewById(R.id.EditText_Register_Email);
