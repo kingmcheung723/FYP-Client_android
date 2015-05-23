@@ -53,26 +53,29 @@ public class Everylistview extends ActionBarActivity {
                 public void queryResult(String result) {
                     if (result != null) {
                         MyStringTokenizer token = new MyStringTokenizer(result, "|");
-                        String[] names = new String[token.countTokens()];
+                        String[] nameDistances = new String[token.countTokens()];
+                        final String[] names = new String[token.countTokens()];
                         int count = 0;
                         while (token.hasMoreTokens()) {
                             String name = token.nextToken();
+                            names[count] = name;
+
                             String distance = token.nextToken();
                             String nameDistance = name + " (" + distance + "m)";
 
-                            names[count] = nameDistance;
+                            nameDistances[count] = nameDistance;
                             count++;
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Everylistview.this, android.R.layout.simple_list_item_1, names);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Everylistview.this, android.R.layout.simple_list_item_1, nameDistances);
                         listView.setAdapter(adapter);
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                 if (view != null) {
-                                    String text = (String) ((TextView)view).getText();
-                                    if (text != null) {
+                                    String name = names[i];
+                                    if (name != null) {
                                         Intent intent = new Intent(Everylistview.this, Information.class);
-                                        intent.putExtra("Facilities", text);
+                                        intent.putExtra("Facilities", name);
                                         startActivity(intent);
                                     }
                                 }
