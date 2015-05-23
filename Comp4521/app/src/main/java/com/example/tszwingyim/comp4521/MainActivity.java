@@ -24,21 +24,21 @@ public class MainActivity extends ActionBarActivity {
         others.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Information.class);
+                Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Everylistview.class);
                 startActivity(intent);
             }
         });
         canteens.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Information.class);
+                Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Everylistview.class);
                 startActivity(intent);
             }
         });
         sports.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Information.class);
+                Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Everylistview.class);
                 startActivity(intent);
 
             }

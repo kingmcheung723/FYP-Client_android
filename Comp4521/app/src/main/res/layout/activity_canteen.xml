@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="74dp"
-            android:text="Comment"
+            android:text="Canteen"
             android:textColor="#ffffffff"
             android:id="@+id/Category_title"
             style="@style/TextAppearance.AppCompat.Title"
@@ -90,7 +90,6 @@
                 android:id="@+id/button_promo"
                 android:layout_weight="1" />
         </LinearLayout>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -118,12 +117,13 @@
                 android:id="@+id/button_logout"
                 android:layout_weight="1" />
         </LinearLayout>
-
-        <ListView
-            android:layout_width="match_parent"
+        <RatingBar
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/listView"
-            android:layout_gravity="center_horizontal" />
-
+            style="?android:attr/ratingBarStyleIndicator"
+            android:id="@+id/ratingbar_Indicator"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="100dp" />
     </LinearLayout>
+
 </RelativeLayout>

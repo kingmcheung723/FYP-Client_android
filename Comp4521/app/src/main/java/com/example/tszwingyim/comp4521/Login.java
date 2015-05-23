@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 
@@ -17,6 +18,97 @@ public class Login extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Button info = (Button) findViewById(R.id.button_info);
+        Button comment = (Button) findViewById(R.id.button_comment);
+        Button login = (Button) findViewById(R.id.button_login);
+        Button map = (Button) findViewById(R.id.button_map);
+        Button menu = (Button) findViewById(R.id.button_menu);
+        Button promo = (Button) findViewById(R.id.button_promo);
+        Button logout = (Button) findViewById(R.id.button_logout);
+        Button howtogo = (Button) findViewById(R.id.button3);
+        Button register = (Button) findViewById(R.id.button4);
+        Button confirm = (Button) findViewById(R.id.button_confirm);
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Login.this, Canteen.class);
+                startActivity(intent);
+            }
+        });
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Login.this, Map.class);
+                startActivity(intent);
+            }
+        });
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Login.this,Comment.class);
+                startActivity(intent);
+            }
+        });
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Login.this, CanteenFood.class);
+                startActivity(intent);
+
+            }
+        });
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Login.this, Sports.class);
+                startActivity(intent);
+
+            }
+        });
+        promo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Login.this, Promotion.class);
+                startActivity(intent);
+
+            }
+        });
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = TabManager.getInstance().getIntent(Login.this, Login.class);
+                startActivity(intent);
+
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Login.this, Sports.class);
+                startActivity(intent);
+
+            }
+        });
+        howtogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Login.this, Sports.class);
+                startActivity(intent);
+
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = TabManager.getInstance().getIntent(Login.this, Register.class);
+                startActivity(intent);
+
+            }
+        });
+
     }
 
 
@@ -50,7 +142,7 @@ public class Login extends ActionBarActivity {
                                 if (token.hasMoreTokens()) {
                                     String memberName = token.nextToken();
                                     MySharedPreference.saveMemberName(memberName, Login.this);
-                                    Intent intent = TabManager.getInstance().getIntent(Login.this, Information.class);
+                                    Intent intent = TabManager.getInstance().getIntent(Login.this, Sports.class);
                                     startActivity(intent);
                                 }
                             }

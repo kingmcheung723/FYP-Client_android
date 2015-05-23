@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 
 public class Register extends ActionBarActivity {
@@ -19,18 +17,27 @@ public class Register extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        Button confirm = (Button) findViewById(R.id.button_confirmreg);
         Button info = (Button) findViewById(R.id.button_info);
         Button comment = (Button) findViewById(R.id.button_comment);
-        Button member = (Button) findViewById(R.id.button_login);
+        Button login = (Button) findViewById(R.id.button_login);
         Button map = (Button) findViewById(R.id.button_map);
         Button menu = (Button) findViewById(R.id.button_menu);
         Button promo = (Button) findViewById(R.id.button_promo);
+        Button logout = (Button) findViewById(R.id.button_logout);
+        Button howtogo = (Button) findViewById(R.id.button3);
+        Button register = (Button) findViewById(R.id.button4);
+        Button Confirm = (Button) findViewById(R.id.button_confirmreg);
 
+        Confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this,Register.class);
+                startActivity(intent);
+            }
+        });
         map.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent = TabManager.getInstance().getIntent(Register.this, Map.class);
                 startActivity(intent);
             }
@@ -54,7 +61,7 @@ public class Register extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Sports.class);
                 startActivity(intent);
 
             }
@@ -67,47 +74,44 @@ public class Register extends ActionBarActivity {
 
             }
         });
-        member.setOnClickListener(new View.OnClickListener() {
+
+
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Promotion.class);
+
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Login.class);
                 startActivity(intent);
 
             }
         });
-//        confirm.setOnClickListener(new ConfirmButtonOnClickListener(this));
 
-        confirm.setOnClickListener(new View.OnClickListener() {
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {EditText emailEditText = (EditText) findViewById(R.id.EditText_Register_Email);
-                final String emailStr = emailEditText.getText().toString();
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Sports.class);
+                startActivity(intent);
 
-                //    if (this.isValidEmail(emailStr)) {
-                EditText passwordEditText = (EditText) findViewById(R.id.EditText_Register_Password);
-                EditText confirmPasswordEditText = (EditText) findViewById(R.id.EditText_Register_ConfPassword);
-                String passwordStr = passwordEditText.getText().toString();
-                String confirmPasswordStr = passwordEditText.getText().toString();
-
-
-//                if (passwordStr.equalsIgnoreCase(confirmPasswordStr)) {
-//                    if (passwordStr.length() >= 6) if (passwordStr.length() <= 10) {
-                DBManager dbManager = new DBManager();
-                dbManager.queryCallBack = new QueryCallBack() {
-                    @Override
-                    public void queryResult(String result) {
-                        if (result != null) {
-                            MySharedPreference.saveMemberName(emailStr, Register.this);
-                            Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
-                            startActivity(intent);
-                        }
-                    }
-                };
-                String sql = "INSERT INTO Members (Email, Password) VALUES ('" + emailStr + "','" + passwordStr + "')";
-                String sql1 ="SELECT MAX(MemberID) FROM Members";
-
-                dbManager.updateSql(sql);
             }
         });
+        howtogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Sports.class);
+                startActivity(intent);
+
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Register.class);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 
@@ -145,7 +149,7 @@ public class Register extends ActionBarActivity {
             EditText emailEditText = (EditText) activity.findViewById(R.id.EditText_Register_Email);
             final String emailStr = emailEditText.getText().toString();
 
-            if (this.isValidEmail(emailStr)) {
+            if (!emailStr.isEmpty()) {
                 EditText passwordEditText = (EditText) activity.findViewById(R.id.EditText_Register_Password);
                 EditText confirmPasswordEditText = (EditText) activity.findViewById(R.id.EditText_Register_ConfPassword);
                 String passwordStr = passwordEditText.getText().toString();
@@ -160,7 +164,7 @@ public class Register extends ActionBarActivity {
                     public void queryResult(String result) {
                         if (result != null) {
                             MySharedPreference.saveMemberName(emailStr, Register.this);
-                            Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
+                            Intent intent = TabManager.getInstance().getIntent(Register.this, Sports.class);
                             startActivity(intent);
                         }
                     }
@@ -189,14 +193,6 @@ public class Register extends ActionBarActivity {
 //            }
 //            Intent intent = TabManager.getInstance().getIntent(Register.this, Memberpage.class);
 //            startActivity(intent);
-        }
-
-        private boolean isValidEmail(CharSequence target) {
-            if (TextUtils.isEmpty(target)) {
-                return false;
-            } else {
-                return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-            }
         }
     }
 }

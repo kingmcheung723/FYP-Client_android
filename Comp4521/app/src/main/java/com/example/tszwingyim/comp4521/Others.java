@@ -8,42 +8,41 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.maps.MapFragment;
 
-
-public class Information extends ActionBarActivity {
+public class Others extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_sports);
+        setContentView(R.layout.activity_others);
         Button info = (Button) findViewById(R.id.button_info);
         Button comment = (Button) findViewById(R.id.button_comment);
-        Button member = (Button) findViewById(R.id.button_login);
+        Button login = (Button) findViewById(R.id.button_login);
         Button map = (Button) findViewById(R.id.button_map);
         Button menu = (Button) findViewById(R.id.button_menu);
         Button promo = (Button) findViewById(R.id.button_promo);
-
+        Button logout = (Button) findViewById(R.id.button_logout);
+        Button howtogo = (Button) findViewById(R.id.button3);
+        Button register = (Button) findViewById(R.id.button4);
 
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this, Map.class);
+                Intent intent = TabManager.getInstance().getIntent(Others.this, Map.class);
                 startActivity(intent);
             }
         });
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this,Comment.class);
+                Intent intent = TabManager.getInstance().getIntent(Others.this,Comment.class);
                 startActivity(intent);
             }
         });
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this, CanteenFood.class);
+                Intent intent = TabManager.getInstance().getIntent(Others.this, CanteenFood.class);
                 startActivity(intent);
 
             }
@@ -51,7 +50,7 @@ public class Information extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
+                Intent intent = TabManager.getInstance().getIntent(Others.this, Sports.class);
                 startActivity(intent);
 
             }
@@ -59,21 +58,45 @@ public class Information extends ActionBarActivity {
         promo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this, Promotion.class);
+                Intent intent = TabManager.getInstance().getIntent(Others.this, Promotion.class);
                 startActivity(intent);
 
             }
         });
-        member.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Register.class);
-                    startActivity(intent);
+                Intent intent = TabManager.getInstance().getIntent(Others.this, Login.class);
+                startActivity(intent);
 
             }
         });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Others.this, Sports.class);
+                startActivity(intent);
 
+            }
+        });
+        howtogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Others.this, Sports.class);
+                startActivity(intent);
+
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = TabManager.getInstance().getIntent(Others.this, Register.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -81,7 +104,7 @@ public class Information extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sports, menu);
+        getMenuInflater().inflate(R.menu.menu_others, menu);
         return true;
     }
 

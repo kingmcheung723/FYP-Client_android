@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Information"
+            android:name=".Sports"
             android:label="@string/title_activity_sports" >
         </activity>
         <activity
@@ -82,6 +82,18 @@
         <activity
             android:name=".Register"
             android:label="@string/title_activity_register" >
+        </activity>
+        <activity
+            android:name=".Others"
+            android:label="@string/title_activity_others" >
+        </activity>
+        <activity
+            android:name=".Canteen"
+            android:label="@string/title_activity_canteen" >
+        </activity>
+        <activity
+            android:name=".Everylistview"
+            android:label="@string/title_activity_everylistview" >
         </activity>
     </application>
 
