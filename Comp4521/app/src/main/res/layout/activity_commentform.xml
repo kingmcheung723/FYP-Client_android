@@ -173,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="?android:attr/ratingBarStyle"
-                android:id="@+id/ratingbar_default"
+                android:id="@+id/ratingbar"
                 android:layout_marginBottom="30dp"
                 android:layout_marginLeft="60dp" />
 

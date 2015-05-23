@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RatingBar;
 
 
 public class Commentform extends ActionBarActivity {
@@ -31,10 +33,13 @@ public class Commentform extends ActionBarActivity {
         Button Confirm = (Button) findViewById(R.id.button_confirm);
         final String facility = getIntent().getExtras().getString("Facilities");
 
-       Confirm.setOnClickListener(new View.OnClickListener() {
+        final RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingbar);
+
+
+        Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Commentform.this,Canteen.class);
+                Intent intent = new Intent(Commentform.this, Canteen.class);
                 intent.putExtra("Facilities", facility);
                 startActivity(intent);
             }
@@ -50,7 +55,7 @@ public class Commentform extends ActionBarActivity {
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(Commentform.this,Comment.class);
+                Intent intent = new Intent(Commentform.this, Comment.class);
                 intent.putExtra("Facilities", facility);
                 startActivity(intent);
             }
@@ -58,7 +63,7 @@ public class Commentform extends ActionBarActivity {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(Commentform.this, CanteenFood.class);
+                Intent intent = new Intent(Commentform.this, CanteenFood.class);
                 intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
@@ -86,7 +91,7 @@ public class Commentform extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent =new Intent(Commentform.this, Login.class);
+                Intent intent = new Intent(Commentform.this, Login.class);
                 intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
@@ -95,7 +100,7 @@ public class Commentform extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(Commentform.this, Information.class);
+                Intent intent = new Intent(Commentform.this, Information.class);
                 intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
@@ -104,7 +109,7 @@ public class Commentform extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(Commentform.this, Information.class);
+                Intent intent = new Intent(Commentform.this, Information.class);
                 intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
@@ -114,7 +119,7 @@ public class Commentform extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent =new Intent(Commentform.this, Register.class);
+                Intent intent = new Intent(Commentform.this, Register.class);
                 intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
@@ -122,63 +127,69 @@ public class Commentform extends ActionBarActivity {
         });
 
 
-
         if (facility != null && facility.length() > 0) {
-            confirm.setOnClickListener(new View.OnClickListener() {
+            final String Facilities = getIntent().getExtras().getString("Facilities");
+            if (Facilities != null && Facilities.length() > 0) {
+                confirm.setOnClickListener(new View.OnClickListener() {
 
-                public void onClick(View v) {
-                    /*
-                    EditText commentEditText = (EditText) findViewById(R.id.editText_usercomment);
-                    if (commentEditText != null) {
-                        String comment = commentEditText.getText().toString();
-                        if (comment != null && comment.length() > 0) {
-                            String memberEmail = MySharedPreference.getMemberName(Commentform.this);
-                            if (memberEmail != null) {
-                                DBManager dbManager = new DBManager();
-                                dbManager.queryCallBack = new QueryCallBack() {
-                                    @Override
-                                    public void queryResult(String result) {
-                                        if (result.equalsIgnoreCase(DBManager.SUCCESS)) {
-                                            Intent intent = new Intent(Commentform.this, Comment.class);
-                                            intent.putExtra("ITEM_ID", itemId);
-                                            startActivity(intent);
+                    public void onClick(View v) {
+
+                        EditText commentEditText = (EditText) findViewById(R.id.edittext_usercomment);
+                        int rating = (int) ratingBar.getRating();
+
+                        if (commentEditText != null) {
+                            String comment = commentEditText.getText().toString();
+                            if (comment != null && comment.length() > 0) {
+                                String memberEmail = MySharedPreference.getMemberName(Commentform.this);
+                                memberEmail = "kwokhh93@gmail.com";
+                                if (memberEmail != null) {
+                                    DBManager dbManager = new DBManager();
+                                    dbManager.queryCallBack = new QueryCallBack() {
+                                        @Override
+                                        public void queryResult(String result) {
+                                            if (result.equalsIgnoreCase(DBManager.SUCCESS)) {
+                                                Intent intent = new Intent(Commentform.this, Information.class);
+                                                intent.putExtra("Facilities", Facilities);
+                                                startActivity(intent);
+                                            }
                                         }
-                                    }
-                                };
-                                String insertCommentSQL = "INSERT INTO good_comments (good_id, comment, member_email) VALUES ('" +
-                                        itemId + "','" + comment + "','" + memberEmail + "')";
-                                dbManager.updateSql(insertCommentSQL);
-                            } else {
-                                MySharedPreference.displayDialog("You have not yet registered", Commentform.this);
+                                    };
+                                    String insertCommentSQL = "INSERT INTO Comments (FacilitiesID, Comment, Email, Rating) VALUES ((SELECT ID FROM Facilities WHERE NAME = " +
+
+                                            Facilities + ")," + comment + "','" + memberEmail + "'," + rating + ")";
+                                    dbManager.updateSql(insertCommentSQL);
+                                } else {
+                                    MySharedPreference.displayDialog("You have not yet registered", Commentform.this);
+                                }
                             }
                         }
+
                     }
-                    */
-                }
-            });
+                });
+            }
         }
+
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_commentform, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        @Override
+        public boolean onCreateOptionsMenu (Menu menu){
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_commentform, menu);
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item){
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
+
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_settings) {
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
+        }
     }
-}
+
