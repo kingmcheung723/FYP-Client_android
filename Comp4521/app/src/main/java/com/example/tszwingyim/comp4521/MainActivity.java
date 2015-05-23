@@ -25,13 +25,15 @@ public class MainActivity extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Everylistview.class);
-                startActivity(intent);
+                intent.putExtra("category", "others");
+;                startActivity(intent);
             }
         });
         canteens.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Everylistview.class);
+                intent.putExtra("category", "canteens");
                 startActivity(intent);
             }
         });
@@ -39,6 +41,7 @@ public class MainActivity extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Everylistview.class);
+                intent.putExtra("category", "sports");
                 startActivity(intent);
 
             }

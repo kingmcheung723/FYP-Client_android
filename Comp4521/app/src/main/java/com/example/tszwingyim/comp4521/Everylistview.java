@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class Everylistview extends ActionBarActivity {
@@ -12,6 +13,28 @@ public class Everylistview extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_everylistview);
+
+        String category = getIntent().getExtras().getString("category");
+        if (category != null) {
+            if (category.equalsIgnoreCase("others")) {
+                setTitle("Others");
+            } else if (category.equalsIgnoreCase("canteens")) {
+                setTitle("Canteens");
+            } else if (category.equalsIgnoreCase(("sports"))) {
+                setTitle("Sprouts");
+            }
+        }
+    }
+
+    private void setTitle(String title) {
+        TextView textview = (TextView) findViewById(R.id.Category_title);
+        if (textview != null) {
+            textview.setText(title + " Facilities");
+        }
+    }
+
+    private void displayList() {
+
     }
 
 
