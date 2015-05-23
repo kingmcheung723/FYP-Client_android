@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 
 public class Commentform extends ActionBarActivity {
@@ -64,7 +63,7 @@ public class Commentform extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Information.class);
                 startActivity(intent);
 
             }
@@ -89,7 +88,7 @@ public class Commentform extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Information.class);
                 startActivity(intent);
 
             }
@@ -97,7 +96,7 @@ public class Commentform extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Information.class);
                 startActivity(intent);
 
             }

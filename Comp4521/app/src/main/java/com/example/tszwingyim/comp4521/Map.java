@@ -67,7 +67,7 @@ public class Map extends ActionBarActivity implements OnMapReadyCallback {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Map.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Map.this, Information.class);
                 startActivity(intent);
 
             }
@@ -92,7 +92,7 @@ public class Map extends ActionBarActivity implements OnMapReadyCallback {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Map.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Map.this, Information.class);
                 startActivity(intent);
 
             }
@@ -100,7 +100,7 @@ public class Map extends ActionBarActivity implements OnMapReadyCallback {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Map.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Map.this, Information.class);
                 startActivity(intent);
 
             }

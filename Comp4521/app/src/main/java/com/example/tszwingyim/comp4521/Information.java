@@ -10,14 +10,14 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class Sports extends ActionBarActivity {
+public class Information extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        setContentView(R.layout.activity_sports);
+        setContentView(R.layout.activity_information);
         Button info = (Button) findViewById(R.id.button_info);
         Button comment = (Button) findViewById(R.id.button_comment);
         Button login = (Button) findViewById(R.id.button_login);
@@ -31,21 +31,21 @@ public class Sports extends ActionBarActivity {
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Sports.this, Map.class);
+                Intent intent = TabManager.getInstance().getIntent(Information.this, Map.class);
                 startActivity(intent);
             }
         });
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Sports.this,Comment.class);
+                Intent intent = TabManager.getInstance().getIntent(Information.this,Comment.class);
                 startActivity(intent);
             }
         });
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Sports.this, CanteenFood.class);
+                Intent intent = TabManager.getInstance().getIntent(Information.this, CanteenFood.class);
                 startActivity(intent);
 
             }
@@ -53,7 +53,7 @@ public class Sports extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Sports.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
                 startActivity(intent);
 
             }
@@ -61,7 +61,7 @@ public class Sports extends ActionBarActivity {
         promo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Sports.this, Promotion.class);
+                Intent intent = TabManager.getInstance().getIntent(Information.this, Promotion.class);
                 startActivity(intent);
 
             }
@@ -70,7 +70,7 @@ public class Sports extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                    Intent intent = TabManager.getInstance().getIntent(Sports.this, Login.class);
+                    Intent intent = TabManager.getInstance().getIntent(Information.this, Login.class);
                     startActivity(intent);
 
             }
@@ -78,7 +78,7 @@ public class Sports extends ActionBarActivity {
        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Sports.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
                 startActivity(intent);
 
             }
@@ -86,7 +86,7 @@ public class Sports extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Sports.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
                 startActivity(intent);
 
             }
@@ -95,7 +95,7 @@ public class Sports extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = TabManager.getInstance().getIntent(Sports.this, Register.class);
+                Intent intent = TabManager.getInstance().getIntent(Information.this, Register.class);
                 startActivity(intent);
 
             }

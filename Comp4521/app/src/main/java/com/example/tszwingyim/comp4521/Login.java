@@ -65,7 +65,7 @@ public class Login extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Login.this, Information.class);
                 startActivity(intent);
 
             }
@@ -90,7 +90,7 @@ public class Login extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Login.this, Information.class);
                 startActivity(intent);
 
             }
@@ -98,7 +98,7 @@ public class Login extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Login.this, Information.class);
                 startActivity(intent);
 
             }
@@ -146,7 +146,7 @@ public class Login extends ActionBarActivity {
                                 if (token.hasMoreTokens()) {
                                     String memberName = token.nextToken();
                                     MySharedPreference.saveMemberName(memberName, Login.this);
-                                    Intent intent = TabManager.getInstance().getIntent(Login.this, Sports.class);
+                                    Intent intent = TabManager.getInstance().getIntent(Login.this, Information.class);
                                     startActivity(intent);
                                 }
                             }

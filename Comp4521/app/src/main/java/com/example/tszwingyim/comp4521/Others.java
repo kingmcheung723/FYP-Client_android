@@ -53,7 +53,7 @@ public class Others extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Others.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Others.this, Information.class);
                 startActivity(intent);
 
             }
@@ -78,7 +78,7 @@ public class Others extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Others.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Others.this, Information.class);
                 startActivity(intent);
 
             }
@@ -86,7 +86,7 @@ public class Others extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Others.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Others.this, Information.class);
                 startActivity(intent);
 
             }

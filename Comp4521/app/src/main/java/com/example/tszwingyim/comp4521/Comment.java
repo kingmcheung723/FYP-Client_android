@@ -71,7 +71,7 @@ public class Comment extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Comment.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Comment.this, Information.class);
                 startActivity(intent);
 
             }
@@ -96,7 +96,7 @@ public class Comment extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Comment.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Comment.this, Information.class);
                 startActivity(intent);
 
             }
@@ -104,7 +104,7 @@ public class Comment extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Comment.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Comment.this, Information.class);
                 startActivity(intent);
 
             }

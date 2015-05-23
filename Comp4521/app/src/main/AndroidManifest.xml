@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Sports"
+            android:name=".Information"
             android:label="@string/title_activity_sports" >
         </activity>
         <activity

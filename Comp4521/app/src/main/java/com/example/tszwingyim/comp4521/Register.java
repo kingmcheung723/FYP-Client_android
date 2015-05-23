@@ -64,7 +64,7 @@ public class Register extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
                 startActivity(intent);
 
             }
@@ -92,7 +92,7 @@ public class Register extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
                 startActivity(intent);
 
             }
@@ -100,7 +100,7 @@ public class Register extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
                 startActivity(intent);
 
             }
@@ -167,7 +167,7 @@ public class Register extends ActionBarActivity {
                     public void queryResult(String result) {
                         if (result != null) {
                             MySharedPreference.saveMemberName(emailStr, Register.this);
-                            Intent intent = TabManager.getInstance().getIntent(Register.this, Sports.class);
+                            Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
                             startActivity(intent);
                         }
                     }

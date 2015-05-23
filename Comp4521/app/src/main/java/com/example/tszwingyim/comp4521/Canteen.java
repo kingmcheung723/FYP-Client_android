@@ -53,7 +53,7 @@ public class Canteen extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Canteen.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Canteen.this, Information.class);
                 startActivity(intent);
 
             }
@@ -78,7 +78,7 @@ public class Canteen extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Canteen.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Canteen.this, Information.class);
                 startActivity(intent);
 
             }
@@ -86,7 +86,7 @@ public class Canteen extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Canteen.this, Sports.class);
+                Intent intent = TabManager.getInstance().getIntent(Canteen.this, Information.class);
                 startActivity(intent);
 
             }
