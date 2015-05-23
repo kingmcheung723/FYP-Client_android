@@ -173,8 +173,8 @@
                         android:textColor="#ff000000"
                         android:textSize="10dp"
                         android:layout_weight="1"
-                        android:layout_column="3"
-                        />
+                        android:layout_column="2"
+                        android:layout_span="2" />
 
                 </TableRow>
 
@@ -199,8 +199,8 @@
                         android:textColor="#ff000000"
                         android:textSize="10dp"
                         android:id="@+id/editText_info"
-                        android:layout_column="3"
-                        />
+                        android:layout_column="2"
+                        android:layout_span="2" />
                 </TableRow>
 
                 <TableRow
@@ -224,8 +224,8 @@
                         android:layout_weight="1"
                         android:textColor="#ff000000"
                         android:textSize="10dp"
-                        android:layout_column="3"
-                        />
+                        android:layout_column="2"
+                        android:layout_span="2" />
                 </TableRow>
                 <TableRow
                     android:layout_width="fill_parent"
