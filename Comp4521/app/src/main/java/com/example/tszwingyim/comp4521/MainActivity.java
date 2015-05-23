@@ -26,7 +26,6 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Information.class);
                 startActivity(intent);
-
             }
         });
         canteens.setOnClickListener(new View.OnClickListener() {
@@ -34,7 +33,6 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Information.class);
                 startActivity(intent);
-
             }
         });
         sports.setOnClickListener(new View.OnClickListener() {

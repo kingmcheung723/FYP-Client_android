@@ -1,9 +1,12 @@
 package com.example.tszwingyim.comp4521;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class CanteenFood extends ActionBarActivity {
@@ -12,6 +15,61 @@ public class CanteenFood extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canteen_food);
+        Button info = (Button) findViewById(R.id.button_info);
+        Button comment = (Button) findViewById(R.id.button_comment);
+        Button member = (Button) findViewById(R.id.button_login);
+        Button map = (Button) findViewById(R.id.button_map);
+        Button menu = (Button) findViewById(R.id.button_menu);
+        Button promo = (Button) findViewById(R.id.button_promo);
+
+
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Map.class);
+                startActivity(intent);
+            }
+        });
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this,Comment.class);
+                startActivity(intent);
+            }
+        });
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, CanteenFood.class);
+                startActivity(intent);
+
+            }
+        });
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Information.class);
+                startActivity(intent);
+
+            }
+        });
+        promo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Promotion.class);
+                startActivity(intent);
+
+            }
+        });
+        member.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Register.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
 

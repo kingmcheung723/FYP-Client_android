@@ -51,7 +51,7 @@ public class Information extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this, Login.class);
+                Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
                 startActivity(intent);
 
             }

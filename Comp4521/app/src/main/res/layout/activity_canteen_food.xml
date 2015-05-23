@@ -1,12 +1,209 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.tszwingyim.comp4521.CanteenFood">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity"
+    android:background="#ffffffff">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="74dp"
+            android:text="Register"
+            android:textColor="#ffffffff"
+            android:id="@+id/Category_title"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:background="#ffbbc1ff"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:clickable="false"
+            android:textSize="25dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="false"
+
+            android:layout_gravity="center_horizontal" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Information"
+                android:id="@+id/button_priceinfo"
+                android:singleLine="false" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comment"
+                android:id="@+id/button_pricechart"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="How to Go"
+                android:id="@+id/button_shareprice"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Menu"
+                android:id="@+id/button"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MAP"
+                android:id="@+id/button2"
+                android:singleLine="false"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Promotion"
+                android:id="@+id/button_comment"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/Category_title"
+            android:layout_above="@+id/linearLayout">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Category_title"
+                android:id="@+id/linearlayout3"
+                android:layout_alignLeft="@+id/linearLayout3"
+                android:layout_alignStart="@+id/linearLayout3"
+                android:layout_alignRight="@+id/linearLayout3"
+                android:layout_alignEnd="@+id/linearLayout3"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:id="@+id/login_email" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:ems="10"
+                    android:id="@+id/EditText_Register_Email"
+                    android:layout_weight="0.56" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/Category_title"
+                android:weightSum="1"
+                android:layout_toRightOf="@+id/button_back"
+                android:id="@+id/linearLayout3"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:text="Password"
+                    android:id="@+id/login_password" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/EditText_Register_Password" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Category_title"
+                android:layout_alignRight="@+id/linearlayout3"
+                android:layout_alignEnd="@+id/linearlayout3"
+                android:layout_alignLeft="@+id/linearlayout3"
+                android:layout_alignStart="@+id/linearlayout3"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="53dp"
+                    android:text="ConfirmPassword"
+                    android:id="@+id/confirmpassword" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/EditText_Register_ConfPassword"
+                    android:layout_weight="1.73" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_alignTop="@+id/linearlayout3"
+                android:layout_alignRight="@+id/linearlayout3"
+                android:layout_alignEnd="@+id/linearlayout3"
+                android:layout_alignLeft="@+id/linearlayout3"
+                android:layout_alignStart="@+id/linearlayout3"
+                android:layout_centerHorizontal="true">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_confirmreg"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:text="submit"
+                    android:elegantTextHeight="false" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
