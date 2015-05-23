@@ -1,9 +1,9 @@
 package com.example.tszwingyim.comp4521;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,8 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.StringTokenizer;
 
 
 public class Everylistview extends ActionBarActivity {
@@ -79,7 +77,27 @@ public class Everylistview extends ActionBarActivity {
                     }
                 }
             };
-            String sql = "SELECT NAME FROM Facilities WHERE CATEGORIES = '" + category + "'";
+//            SELECT *,( 6378100 * acos( cos( radians(22.337435  ) ) * cos( radians( lat ) )
+//                    * cos( radians( longi ) - radians(114.263764 ) ) + sin( radians(22.337435 ) ) * sin(radians(lat)) ) ) AS distance
+//            FROM facilities
+//            HAVING distance
+//            ORDER BY distance
+//                    ASC
+            String LAT = getIntent().getExtras().getString("LAT");
+            String LONGI = getIntent().getExtras().getString("LONGI");
+            String sql = "SELECT NAME,(6378100 * acos( cos( radians(";
+            String temp = String.valueOf(LAT);
+            sql =sql.concat(temp);
+            sql = sql.concat(") ) * cos( radians( lat ) )* cos( radians(longi) - radians(");
+            temp = String.valueOf(LONGI);
+            sql =sql.concat(temp);
+            sql = sql.concat(") ) + sin( radians(");
+            temp = String.valueOf(LAT);
+            sql =sql.concat(temp);
+            sql = sql.concat(") ) * sin(radians(lat)) ) ) AS distance FROM Facilities WHERE CATEGORIES = '");
+            sql = sql.concat(category +"'");
+            sql = sql.concat("HAVING distance ORDER BY distance ASC");
+//            String sql = "SELECT NAME FROM Facilities WHERE CATEGORIES = '" + category + "'";
             dbManager.querySql(sql);
 
         }
