@@ -69,7 +69,7 @@ public class Everylistview extends ActionBarActivity {
                                 if (view != null) {
                                     String text = (String) ((TextView)view).getText();
                                     if (text != null) {
-                                        Intent intent = new Intent(Everylistview.this, Canteen.class);
+                                        Intent intent = new Intent(Everylistview.this, Information.class);
                                         intent.putExtra("Facilities", text);
                                         startActivity(intent);
                                     }

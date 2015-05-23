@@ -1,13 +1,15 @@
 package com.example.tszwingyim.comp4521;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 
 public class Information extends ActionBarActivity {
@@ -28,83 +30,144 @@ public class Information extends ActionBarActivity {
         Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
 
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this, Map.class);
-                startActivity(intent);
-            }
-        });
-        comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this,Comment.class);
-                startActivity(intent);
-            }
-        });
-        menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this, CanteenFood.class);
-                startActivity(intent);
+        String facility = getIntent().getExtras().getString("Facilities");
+        if (facility != null) {
 
-            }
-        });
-        info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
-                startActivity(intent);
+            map.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = TabManager.getInstance().getIntent(Information.this, Map.class);
+                    startActivity(intent);
+                }
+            });
+            comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = TabManager.getInstance().getIntent(Information.this, Comment.class);
+                    startActivity(intent);
+                }
+            });
+            menu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = TabManager.getInstance().getIntent(Information.this, CanteenFood.class);
+                    startActivity(intent);
 
-            }
-        });
-        promo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this, Promotion.class);
-                startActivity(intent);
+                }
+            });
+            info.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
+                    startActivity(intent);
 
-            }
-        });
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                }
+            });
+            promo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = TabManager.getInstance().getIntent(Information.this, Promotion.class);
+                    startActivity(intent);
+
+                }
+            });
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
                     Intent intent = TabManager.getInstance().getIntent(Information.this, Login.class);
                     startActivity(intent);
 
-            }
-        });
-       logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
-                startActivity(intent);
+                }
+            });
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
+                    startActivity(intent);
 
-            }
-        });
-        howtogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
-                startActivity(intent);
+                }
+            });
+            howtogo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
+                    startActivity(intent);
 
-            }
-        });
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                }
+            });
+            register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                Intent intent = TabManager.getInstance().getIntent(Information.this, Register.class);
-                startActivity(intent);
+                    Intent intent = TabManager.getInstance().getIntent(Information.this, Register.class);
+                    startActivity(intent);
 
-            }
-        });
+                }
+            });
 
+            setUpView(facility);
+        }
 
 
     }
 
+    private void setUpView(String facilityName) {
+        final TextView nameTextView = (TextView) findViewById(R.id.editText_name);
+        final TextView infoTextView = (TextView) findViewById(R.id.editText_info);
+        final TextView categoryTextView = (TextView) findViewById(R.id.editText_category);
+        final RatingBar rankingView = (RatingBar) findViewById(R.id.ratingbar_Indicator);
+        if (nameTextView != null &&
+                infoTextView != null &&
+                categoryTextView != null) {
+                DBManager dbManager = new DBManager();
+            dbManager.queryCallBack = new QueryCallBack() {
+                @Override
+                public void queryResult(String result) {
+                    if (result != null) {
+                        MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                        if (token != null) {
+                            String name = token.nextToken();
+                            if (name != null) {
+                                nameTextView.setText(name);
+                            }
+                            String info = token.nextToken();
+                            if (info != null) {
+                                infoTextView.setText(info);
+                            }
+                            String category = token.nextToken();
+                            if (category != null) {
+                                categoryTextView.setText(category);
+                            }
+                        }
+                    }
+                }
+            };
+
+            String sql = "SELECT Facilities.NAME, Facilities.INFO, Facilities.CATEGORIES FROM Facilities WHERE NAME = '" + facilityName + "'";
+            dbManager.querySql(sql);
+        }
+
+        if (rankingView != null) {
+            DBManager dbManager = new DBManager();
+            dbManager.queryCallBack = new QueryCallBack() {
+                @Override
+                public void queryResult(String result) {
+                    if (result != null) {
+                        MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                        String rating = token.nextToken();
+                        if (rating != null && !rating.equalsIgnoreCase("null")) {
+                            int ratingInt = Integer.parseInt(rating);
+                            rankingView.setNumStars(ratingInt);
+                        }
+                    }
+                }
+            };
+            String sql = "SELECT AVG(Rating) FROM Comments, Facilities WHERE Facilities.NAME = '" + facilityName + "' AND (Facilities.ID = Comments.FacilitiesID)";
+            dbManager.querySql(sql);
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
