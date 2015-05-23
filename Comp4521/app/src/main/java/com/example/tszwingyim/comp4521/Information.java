@@ -106,10 +106,32 @@ public class Information extends ActionBarActivity {
                 }
             });
 
+            setupTitle(facility);
             setUpView(facility);
         }
+    }
 
-
+    private void setupTitle(String facilityName) {
+        DBManager dbManager = new DBManager();
+        dbManager.queryCallBack = new QueryCallBack() {
+            @Override
+            public void queryResult(String result) {
+                if (result != null && result.length() > 0) {
+                    MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                    if (token != null) {
+                        String category = token.nextToken();
+                        if (!category.equalsIgnoreCase("null")) {
+                            TextView titleTextView = (TextView) findViewById(R.id.Category_title);
+                            if (titleTextView != null) {
+                                titleTextView.setText(category + " Facilities");
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        String sql = "SELECT CATEGORIES FROM Facilities WHERE NAME = '" + facilityName + "'";
+        dbManager.querySql(sql);
     }
 
     private void setUpView(String facilityName) {
