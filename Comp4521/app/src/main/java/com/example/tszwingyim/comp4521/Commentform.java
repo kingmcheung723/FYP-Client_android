@@ -29,33 +29,37 @@ public class Commentform extends ActionBarActivity {
         Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
         Button Confirm = (Button) findViewById(R.id.button_confirm);
-
+        final String facility = getIntent().getExtras().getString("Facilities");
 
        Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this,Canteen.class);
+                Intent intent = new Intent(Commentform.this,Canteen.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
             }
         });
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Map.class);
+                Intent intent = new Intent(Commentform.this, Map.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
             }
         });
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this,Comment.class);
+                Intent intent =new Intent(Commentform.this,Comment.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
             }
         });
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, CanteenFood.class);
+                Intent intent =new Intent(Commentform.this, CanteenFood.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -63,7 +67,8 @@ public class Commentform extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Information.class);
+                Intent intent = new Intent(Commentform.this, Information.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -71,7 +76,8 @@ public class Commentform extends ActionBarActivity {
         promo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Commentform.class);
+                Intent intent = new Intent(Commentform.this, Commentform.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -80,7 +86,8 @@ public class Commentform extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Login.class);
+                Intent intent =new Intent(Commentform.this, Login.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -88,7 +95,8 @@ public class Commentform extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Information.class);
+                Intent intent =new Intent(Commentform.this, Information.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -96,7 +104,8 @@ public class Commentform extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Information.class);
+                Intent intent =new Intent(Commentform.this, Information.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -105,15 +114,16 @@ public class Commentform extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Register.class);
+                Intent intent =new Intent(Commentform.this, Register.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
         });
 
 
-        final String itemId = getIntent().getExtras().getString("ITEM_ID");
-        if (itemId != null && itemId.length() > 0) {
+
+        if (facility != null && facility.length() > 0) {
             confirm.setOnClickListener(new View.OnClickListener() {
 
                 public void onClick(View v) {

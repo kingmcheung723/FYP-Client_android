@@ -41,25 +41,28 @@ public class Map extends ActionBarActivity {
         Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
 
-
+        final String facility = getIntent().getExtras().getString("Facilities");
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Map.this, Map.class);
+                Intent intent =  new Intent(Map.this, Map.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
             }
         });
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Map.this,Comment.class);
+                Intent intent =  new Intent(Map.this,Comment.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
             }
         });
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Map.this, CanteenFood.class);
+                Intent intent = new Intent(Map.this, CanteenFood.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -67,7 +70,8 @@ public class Map extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Map.this, Information.class);
+                Intent intent = new Intent(Map.this, Information.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -75,7 +79,8 @@ public class Map extends ActionBarActivity {
         promo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Map.this, Commentform.class);
+                Intent intent =  new Intent(Map.this, Commentform.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -84,7 +89,8 @@ public class Map extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = TabManager.getInstance().getIntent(Map.this, Login.class);
+                Intent intent = new Intent(Map.this, Login.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -92,7 +98,8 @@ public class Map extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Map.this, Information.class);
+                Intent intent =  new Intent(Map.this, Information.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -100,7 +107,8 @@ public class Map extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Map.this, Information.class);
+                Intent intent =  new Intent(Map.this, Information.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -109,7 +117,8 @@ public class Map extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = TabManager.getInstance().getIntent(Map.this, Register.class);
+                Intent intent = new Intent(Map.this, Register.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }

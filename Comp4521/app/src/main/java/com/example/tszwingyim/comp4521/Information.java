@@ -30,27 +30,32 @@ public class Information extends ActionBarActivity {
         Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
 
-        String facility = getIntent().getExtras().getString("Facilities");
+        final String facility = getIntent().getExtras().getString("Facilities");
         if (facility != null) {
 
             map.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Map.class);
-                    startActivity(intent);
-                }
-            });
+
+                        Intent intent = new Intent(Information.this, Map.class);
+                        intent.putExtra("Facilities", facility);
+                        startActivity(intent);
+                    }
+                });
+
             comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Comment.class);
+                    Intent intent =  new Intent(Information.this, Comment.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
                 }
             });
             menu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, CanteenFood.class);
+                    Intent intent = new Intent(Information.this, CanteenFood.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }
@@ -58,7 +63,8 @@ public class Information extends ActionBarActivity {
             info.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
+                    Intent intent = new Intent(Information.this, Information.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }
@@ -66,7 +72,8 @@ public class Information extends ActionBarActivity {
             promo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Commentform.class);
+                    Intent intent =new Intent(Information.this, Commentform.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }
@@ -75,7 +82,8 @@ public class Information extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Login.class);
+                    Intent intent = new Intent(Information.this, Login.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }
@@ -83,7 +91,8 @@ public class Information extends ActionBarActivity {
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
+                    Intent intent = new Intent(Information.this, Information.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }
@@ -91,7 +100,8 @@ public class Information extends ActionBarActivity {
             howtogo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Information.class);
+                    Intent intent =new Intent(Information.this, Information.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }
@@ -100,7 +110,8 @@ public class Information extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = TabManager.getInstance().getIntent(Information.this, Register.class);
+                    Intent intent = new Intent(Information.this, Register.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }

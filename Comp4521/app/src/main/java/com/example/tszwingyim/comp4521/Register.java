@@ -35,7 +35,7 @@ public class Register extends ActionBarActivity {
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Map.class);
+                Intent intent =new Intent(Register.this, Map.class);
                 startActivity(intent);
             }
         });
@@ -43,14 +43,14 @@ public class Register extends ActionBarActivity {
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Comment.class);
+                Intent intent = new Intent(Register.this, Comment.class);
                 startActivity(intent);
             }
         });
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, CanteenFood.class);
+                Intent intent =new Intent(Register.this, CanteenFood.class);
                 startActivity(intent);
 
             }
@@ -58,7 +58,7 @@ public class Register extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
+                Intent intent =new Intent(Register.this, Information.class);
                 startActivity(intent);
 
             }
@@ -66,7 +66,7 @@ public class Register extends ActionBarActivity {
         promo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Commentform.class);
+                Intent intent = new Intent(Register.this, Commentform.class);
                 startActivity(intent);
 
             }
@@ -76,7 +76,7 @@ public class Register extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Login.class);
+                Intent intent =new Intent(Register.this, Login.class);
                 startActivity(intent);
 
             }
@@ -85,7 +85,7 @@ public class Register extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
+                Intent intent =new Intent(Register.this, Information.class);
                 startActivity(intent);
 
             }
@@ -93,7 +93,7 @@ public class Register extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
+                Intent intent =new Intent(Register.this, Information.class);
                 startActivity(intent);
 
             }
@@ -102,7 +102,7 @@ public class Register extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = TabManager.getInstance().getIntent(Register.this, Register.class);
+                Intent intent = new Intent(Register.this, Register.class);
                 startActivity(intent);
 
             }

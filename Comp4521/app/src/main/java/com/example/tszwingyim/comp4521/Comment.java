@@ -53,7 +53,8 @@ public class Comment extends ActionBarActivity {
             map.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Comment.this, Map.class);
+                    Intent intent = new Intent(Comment.this, Map.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
                 }
             });
@@ -68,7 +69,8 @@ public class Comment extends ActionBarActivity {
             menu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Comment.this, CanteenFood.class);
+                    Intent intent =new Intent(Comment.this, CanteenFood.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }
@@ -76,7 +78,8 @@ public class Comment extends ActionBarActivity {
             info.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Comment.this, Information.class);
+                    Intent intent =new Intent(Comment.this, Information.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }
@@ -84,7 +87,8 @@ public class Comment extends ActionBarActivity {
             promo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Comment.this, Commentform.class);
+                    Intent intent = new Intent(Comment.this, Commentform.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }
@@ -93,7 +97,8 @@ public class Comment extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = TabManager.getInstance().getIntent(Comment.this, Login.class);
+                    Intent intent =new Intent(Comment.this, Login.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }
@@ -101,7 +106,8 @@ public class Comment extends ActionBarActivity {
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Comment.this, Information.class);
+                    Intent intent = new Intent(Comment.this, Information.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }
@@ -109,7 +115,8 @@ public class Comment extends ActionBarActivity {
             howtogo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = TabManager.getInstance().getIntent(Comment.this, Information.class);
+                    Intent intent =new Intent(Comment.this, Information.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }
@@ -118,7 +125,8 @@ public class Comment extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = TabManager.getInstance().getIntent(Comment.this, Register.class);
+                    Intent intent =new Intent(Comment.this, Register.class);
+                    intent.putExtra("Facilities", facility);
                     startActivity(intent);
 
                 }

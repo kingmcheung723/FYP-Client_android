@@ -27,25 +27,28 @@ public class CanteenFood extends ActionBarActivity {
         Button logout = (Button) findViewById(R.id.button_logout);
         Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
-
+        final String facility = getIntent().getExtras().getString("Facilities");
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Map.class);
+                Intent intent = new Intent(CanteenFood.this, Map.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
             }
         });
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this,Comment.class);
+                Intent intent = new Intent(CanteenFood.this,Comment.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
             }
         });
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, CanteenFood.class);
+                Intent intent =new Intent(CanteenFood.this, CanteenFood.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -53,7 +56,8 @@ public class CanteenFood extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Information.class);
+                Intent intent =new Intent(CanteenFood.this, Information.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -61,7 +65,8 @@ public class CanteenFood extends ActionBarActivity {
         promo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Commentform.class);
+                Intent intent =new Intent(CanteenFood.this, Commentform.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -70,7 +75,8 @@ public class CanteenFood extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Login.class);
+                Intent intent =new Intent(CanteenFood.this, Login.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -78,7 +84,8 @@ public class CanteenFood extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Information.class);
+                Intent intent = new Intent(CanteenFood.this, Information.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -86,7 +93,8 @@ public class CanteenFood extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Information.class);
+                Intent intent =new Intent(CanteenFood.this, Information.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }
@@ -95,7 +103,8 @@ public class CanteenFood extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = TabManager.getInstance().getIntent(CanteenFood.this, Register.class);
+                Intent intent =new Intent(CanteenFood.this, Register.class);
+                intent.putExtra("Facilities", facility);
                 startActivity(intent);
 
             }

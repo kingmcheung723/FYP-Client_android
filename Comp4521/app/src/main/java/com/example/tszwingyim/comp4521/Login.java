@@ -36,28 +36,28 @@ public class Login extends ActionBarActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Canteen.class);
+                Intent intent = new Intent(Login.this, Canteen.class);
                 startActivity(intent);
             }
         });
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Map.class);
+                Intent intent = new Intent(Login.this, Map.class);
                 startActivity(intent);
             }
         });
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this,Comment.class);
+                Intent intent =new Intent(Login.this,Comment.class);
                 startActivity(intent);
             }
         });
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this, CanteenFood.class);
+                Intent intent = new Intent(Login.this, CanteenFood.class);
                 startActivity(intent);
 
             }
@@ -65,7 +65,7 @@ public class Login extends ActionBarActivity {
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Information.class);
+                Intent intent = new Intent(Login.this, Information.class);
                 startActivity(intent);
 
             }
@@ -73,7 +73,7 @@ public class Login extends ActionBarActivity {
         promo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Commentform.class);
+                Intent intent =new Intent(Login.this, Commentform.class);
                 startActivity(intent);
 
             }
@@ -82,7 +82,7 @@ public class Login extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Login.class);
+                Intent intent = new Intent(Login.this, Login.class);
                 startActivity(intent);
 
             }
@@ -90,7 +90,7 @@ public class Login extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Information.class);
+                Intent intent =new Intent(Login.this, Information.class);
                 startActivity(intent);
 
             }
@@ -98,7 +98,7 @@ public class Login extends ActionBarActivity {
         howtogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Information.class);
+                Intent intent =new Intent(Login.this, Information.class);
                 startActivity(intent);
 
             }
@@ -107,7 +107,7 @@ public class Login extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = TabManager.getInstance().getIntent(Login.this, Register.class);
+                Intent intent =new Intent(Login.this, Register.class);
                 startActivity(intent);
 
             }
