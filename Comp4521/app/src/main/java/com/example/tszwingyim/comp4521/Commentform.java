@@ -141,7 +141,6 @@ public class Commentform extends ActionBarActivity {
                             String comment = commentEditText.getText().toString();
                             if (comment != null && comment.length() > 0) {
                                 String memberEmail = MySharedPreference.getMemberName(Commentform.this);
-                                memberEmail = "kwokhh93@gmail.com";
                                 if (memberEmail != null) {
                                     DBManager dbManager = new DBManager();
                                     dbManager.queryCallBack = new QueryCallBack() {
@@ -154,9 +153,15 @@ public class Commentform extends ActionBarActivity {
                                             }
                                         }
                                     };
+
+                                   System.out.println("INSERT INTO Comments (FacilitiesID, Comment, Email, Rating) VALUES ((SELECT ID FROM Facilities WHERE NAME = '" +
+
+                                           Facilities + "'),'" + comment + "','" + memberEmail + "'," + rating + ")");
+
                                     String insertCommentSQL = "INSERT INTO Comments (FacilitiesID, Comment, Email, Rating) VALUES ((SELECT ID FROM Facilities WHERE NAME = '" +
 
-                                                Facilities + "),'" + comment + "','" + memberEmail + "'," + rating + ")";
+                                            Facilities + "'),'" + comment + "','" + memberEmail + "'," + rating + ")";
+
                                     dbManager.updateSql(insertCommentSQL);
                                 } else {
                                     MySharedPreference.displayDialog("You have not yet registered", Commentform.this);
