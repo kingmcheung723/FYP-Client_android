@@ -79,9 +79,14 @@ public class Register extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = new Intent(Register.this, Login.class);
-
-                    startActivity(intent);
+                    String member = MySharedPreference.getMemberName(Register.this);
+                    if (member != null && member.length() > 0) {
+                        MySharedPreference.displayDialog("You have already logged in", Register.this);
+                    } else {
+                        Intent intent =new Intent(Register.this, Login.class);
+                        intent.putExtra("Facilities", facility);
+                        startActivity(intent);
+                    }
 
                 }
             });
@@ -89,8 +94,14 @@ public class Register extends ActionBarActivity {
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MySharedPreference.clearMemberName(Register.this);
-                    MySharedPreference.displayDialog("Logout success", Register.this);
+
+                    String member = MySharedPreference.getMemberName(Register.this);
+                    if (member != null && member.length() > 0) {
+                        MySharedPreference.clearMemberName(Register.this);
+                        MySharedPreference.displayDialog("Logout success", Register.this);
+                    } else {
+                        MySharedPreference.displayDialog("You haven't log in", Register.this);
+                    }
 
 
                 }

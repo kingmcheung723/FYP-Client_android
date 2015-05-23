@@ -23,21 +23,6 @@ public class Comment extends ActionBarActivity {
         actionBar.hide();
         setContentView(R.layout.activity_comment);
 
-        ListView commentList = (ListView) findViewById(R.id.listView);
-        if (commentList != null) {
-            DBManager dbManager = new DBManager();
-            dbManager.queryCallBack = new QueryCallBack() {
-                @Override
-                public void queryResult(String result) {
-                    if (result != null) {
-
-                    }
-                }
-            };
-            String sql = "SELECT * from Comments WHERE FacilitiesID = 1 AND ";
-            dbManager.querySql(sql);
-        }
-
         Button info = (Button) findViewById(R.id.button_info);
         Button comment = (Button) findViewById(R.id.button_comment);
         Button login = (Button) findViewById(R.id.button_login);
@@ -96,19 +81,31 @@ public class Comment extends ActionBarActivity {
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    Intent intent =new Intent(Comment.this, Login.class);
-                    intent.putExtra("Facilities", facility);
-                    startActivity(intent);
+                    String member = MySharedPreference.getMemberName(Comment.this);
+                    if (member != null && member.length() > 0) {
+                        MySharedPreference.displayDialog("You have already logged in", Comment.this);
+                    } else {
+                        Intent intent =new Intent(Comment.this, Login.class);
+                        intent.putExtra("Facilities", facility);
+                        startActivity(intent);
+                    }
 
                 }
             });
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Comment.this, Information.class);
-                    intent.putExtra("Facilities", facility);
-                    startActivity(intent);
+
+
+
+                    String member = MySharedPreference.getMemberName(Comment.this);
+                    if (member != null && member.length() > 0) {
+                        MySharedPreference.clearMemberName(Comment.this);
+                        MySharedPreference.displayDialog("Logout success", Comment.this);
+                    } else {
+                        MySharedPreference.displayDialog("You haven't log in", Comment.this);
+                    }
+
 
                 }
             });
@@ -159,19 +156,6 @@ public class Comment extends ActionBarActivity {
                         }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(Comment.this, android.R.layout.simple_list_item_1, names);
                         listView.setAdapter(adapter);
-//                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                            @Override
-//                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                                if (view != null) {
-//                                    String text = (String) ((TextView) view).getText();
-//                                    if (text != null) {
-//                                        Intent intent = new Intent(Comment.this, Comment.class);
-//                                        intent.putExtra("Facilities", text);
-//                                        startActivity(intent);
-//                                    }
-//                                }
-//                            }
-//                        });
                     }
                 }
             };

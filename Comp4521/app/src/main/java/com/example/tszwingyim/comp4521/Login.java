@@ -32,7 +32,9 @@ public class Login extends ActionBarActivity {
         Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
         Button confirm = (Button) findViewById(R.id.button_confirm);
+
         final String facility = getIntent().getExtras().getString("Facilities");
+
         if (facility != null) {
 
             map.setOnClickListener(new View.OnClickListener() {
@@ -96,9 +98,13 @@ public class Login extends ActionBarActivity {
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MySharedPreference.clearMemberName(Login.this);
-                    MySharedPreference.displayDialog("Logout success", Login.this);
-
+                    String member = MySharedPreference.getMemberName(Login.this);
+                    if (member != null && member.length() > 0) {
+                        MySharedPreference.clearMemberName(Login.this);
+                        MySharedPreference.displayDialog("Logout success", Login.this);
+                    } else {
+                        MySharedPreference.displayDialog("You haven't log in", Login.this);
+                    }
 
                 }
             });
@@ -131,6 +137,7 @@ public class Login extends ActionBarActivity {
                                     String memberName = token.nextToken();
                                     MySharedPreference.saveMemberName(memberName, Login.this);
                                     Intent intent = new Intent(Login.this, Information.class);
+                                    intent.putExtra("Facilities", facility);
                                     startActivity(intent);
                                 }
                             }

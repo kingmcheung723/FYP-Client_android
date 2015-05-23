@@ -31,6 +31,7 @@ public class Commentform extends ActionBarActivity {
         Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
         Button Confirm = (Button) findViewById(R.id.button_confirm);
+
         final String facility = getIntent().getExtras().getString("Facilities");
 
         final RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingbar);
@@ -91,17 +92,27 @@ public class Commentform extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Commentform.this, Login.class);
-                intent.putExtra("Facilities", facility);
-                startActivity(intent);
+                String member = MySharedPreference.getMemberName(Commentform.this);
+                if (member != null && member.length() > 0) {
+                    MySharedPreference.displayDialog("You have already logged in", Commentform.this);
+                } else {
+                    Intent intent =new Intent(Commentform.this, Login.class);
+                    intent.putExtra("Facilities", facility);
+                    startActivity(intent);
+                }
 
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MySharedPreference.clearMemberName(Commentform.this);
-                MySharedPreference.displayDialog("Logout success", Commentform.this);
+                String member = MySharedPreference.getMemberName(Commentform.this);
+                if (member != null && member.length() > 0) {
+                    MySharedPreference.clearMemberName(Commentform.this);
+                    MySharedPreference.displayDialog("Logout success", Commentform.this);
+                } else {
+                    MySharedPreference.displayDialog("You haven't log in", Commentform.this);
+                }
 
             }
         });

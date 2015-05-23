@@ -90,17 +90,28 @@ public class Map extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Map.this, Login.class);
-                intent.putExtra("Facilities", facility);
-                startActivity(intent);
+                String member = MySharedPreference.getMemberName(Map.this);
+                if (member != null && member.length() > 0) {
+                    MySharedPreference.displayDialog("You have already logged in", Map.this);
+                } else {
+                    Intent intent =new Intent(Map.this, Login.class);
+                    intent.putExtra("Facilities", facility);
+                    startActivity(intent);
+                }
 
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MySharedPreference.clearMemberName(Map.this);
-                MySharedPreference.displayDialog("Logout success", Map.this);
+
+                String member = MySharedPreference.getMemberName(Map.this);
+                if (member != null && member.length() > 0) {
+                    MySharedPreference.clearMemberName(Map.this);
+                    MySharedPreference.displayDialog("Logout success", Map.this);
+                } else {
+                    MySharedPreference.displayDialog("You haven't log in", Map.this);
+                }
 
             }
         });

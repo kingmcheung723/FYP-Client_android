@@ -82,17 +82,29 @@ public class Information extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent = new Intent(Information.this, Login.class);
-                    intent.putExtra("Facilities", facility);
-                    startActivity(intent);
+                    String member = MySharedPreference.getMemberName(Information.this);
+                    if (member != null && member.length() > 0) {
+                        MySharedPreference.displayDialog("You have already logged in", Information.this);
+                    } else {
+                        Intent intent =new Intent(Information.this, Login.class);
+                        intent.putExtra("Facilities", facility);
+                        startActivity(intent);
+                    }
 
                 }
             });
             logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MySharedPreference.clearMemberName(Information.this);
-                    MySharedPreference.displayDialog("Logout success", Information.this);
+
+                    String member = MySharedPreference.getMemberName(Information.this);
+                    if (member != null && member.length() > 0) {
+                        MySharedPreference.clearMemberName(Information.this);
+                        MySharedPreference.displayDialog("Logout success", Information.this);
+                    } else {
+                        MySharedPreference.displayDialog("You haven't log in", Information.this);
+                    }
+
                 }
             });
             howtogo.setOnClickListener(new View.OnClickListener() {
