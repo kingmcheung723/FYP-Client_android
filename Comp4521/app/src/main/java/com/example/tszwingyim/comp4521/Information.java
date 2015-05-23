@@ -1,6 +1,7 @@
 package com.example.tszwingyim.comp4521;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -8,9 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
 
 public class Information extends ActionBarActivity {
 
@@ -159,6 +160,7 @@ public class Information extends ActionBarActivity {
         final TextView nameTextView = (TextView) findViewById(R.id.editText_name);
         final TextView infoTextView = (TextView) findViewById(R.id.editText_info);
         final TextView categoryTextView = (TextView) findViewById(R.id.editText_category);
+
         final RatingBar rankingView = (RatingBar) findViewById(R.id.ratingbar_Indicator);
         if (nameTextView != null &&
                 infoTextView != null &&
@@ -186,11 +188,40 @@ public class Information extends ActionBarActivity {
                     }
                 }
             };
-
             String sql = "SELECT Facilities.NAME, Facilities.INFO, Facilities.CATEGORIES FROM Facilities WHERE NAME = '" + facilityName + "'";
             dbManager.querySql(sql);
-            dbManager.updateSql(sql);
         }
+
+            DBManager dbManager9 = new DBManager();
+
+            dbManager9.queryCallBack = new QueryCallBack() {
+                @Override
+                public void queryResult(String result) {
+                    if (result != null && result.length() > 0) {
+                        MyStringTokenizer token = new MyStringTokenizer(result, "|");
+
+                        if (token != null && token.countTokens() >= 1) {
+                            String imageId = token.nextToken().toString();
+                            String uri = "@drawable/" + imageId;
+                            int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+                            if (imageResource != 0) {
+                                Drawable drawable = getResources().getDrawable(imageResource);
+                                ImageView imageView1 = (ImageView) findViewById(R.id.imageView_like);
+                                imageView1.setImageDrawable(drawable);
+                            } else {
+                                ImageView imageView1 = (ImageView) findViewById(R.id.imageView_like);
+                                Drawable drawable = getResources().getDrawable(R.drawable.ic_launcher);
+                                imageView1.setImageDrawable(drawable);
+                            }
+                        }
+                    }
+
+                }
+            };
+            String imageSql = "SELECT IMAGE FROM Facilities WHERE NAME = " + facilityName;
+            dbManager9.querySql(imageSql);
+
+
 
         if (rankingView != null) {
             DBManager dbManager = new DBManager();
