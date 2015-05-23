@@ -71,13 +71,6 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Menu"
-                android:id="@+id/button_menu"
-                android:layout_weight="1" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="MAP"
                 android:id="@+id/button_map"
                 android:singleLine="false"
@@ -95,13 +88,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="How To Go"
-                android:id="@+id/button3"
-                android:layout_weight="1" />
 
             <Button
                 android:layout_width="wrap_content"
