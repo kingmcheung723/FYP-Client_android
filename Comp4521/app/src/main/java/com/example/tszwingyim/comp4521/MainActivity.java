@@ -33,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
 
             public void onClick(View v) {
                 Intent intent = TabManager.getInstance().getIntent(MainActivity.this, Everylistview.class);
-                intent.putExtra("category", "canteens");
+                intent.putExtra("category", "dinning");
                 startActivity(intent);
             }
         });

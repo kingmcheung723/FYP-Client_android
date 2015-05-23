@@ -5,7 +5,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.StringTokenizer;
 
 
 public class Everylistview extends ActionBarActivity {
@@ -21,10 +25,13 @@ public class Everylistview extends ActionBarActivity {
         if (category != null) {
             if (category.equalsIgnoreCase("others")) {
                 setTitle("Others");
-            } else if (category.equalsIgnoreCase("canteens")) {
-                setTitle("Canteens");
+                displayList("Others");
+            } else if (category.equalsIgnoreCase("dinning")) {
+                setTitle("Dinning");
+                displayList("Dinning");
             } else if (category.equalsIgnoreCase(("sports"))) {
-                setTitle("Sprouts");
+                setTitle("Sports");
+                displayList("SPORTS");
             }
         }
     }
@@ -36,8 +43,29 @@ public class Everylistview extends ActionBarActivity {
         }
     }
 
-    private void displayList() {
+    private void displayList(String category) {
+        final ListView listView = (ListView) findViewById(R.id.listView2);
+        if (listView != null) {
+            DBManager dbManager = new DBManager();
+            dbManager.queryCallBack = new QueryCallBack() {
+                @Override
+                public void queryResult(String result) {
+                    if (result != null) {
+                        MyStringTokenizer token = new MyStringTokenizer(result, "|");
+                        String[] names = new String[token.countTokens()];
+                        int count = 0;
+                        while (token.hasMoreTokens()) {
+                            names[count] = token.nextToken();
+                        }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Everylistview.this, android.R.layout.simple_list_item_1, names);
+                        listView.setAdapter(adapter);
+                    }
+                }
+            };
+            String sql = "SELECT NAME FROM Facilities WHERE CATEGORIES = '" + category + "'";
+            dbManager.querySql(sql);
 
+        }
     }
 
 

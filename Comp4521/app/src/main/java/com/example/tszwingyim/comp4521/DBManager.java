@@ -18,7 +18,7 @@ public class DBManager {
     public static final String SUCCESS = "Success";
 
     private static final String url = "jdbc:mysql://comp4521.ddns.net:8889/comp4521_database?useUnicode=yes&characterEncoding=UTF-8";
-    private static final String user = "fyp_admin";
+    private static final String user = "4521admin";
     private static final String password = null;
     private static final String JDBCDriverName = "com.mysql.jdbc.Driver";
 
