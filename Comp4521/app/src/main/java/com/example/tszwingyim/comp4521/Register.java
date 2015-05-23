@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 
 public class Register extends ActionBarActivity {
@@ -19,60 +17,97 @@ public class Register extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Button confirm = (Button) findViewById(R.id.button_confirmreg);
-//        Button info = (Button) findViewById(R.id.button_info);
-//        Button comment = (Button) findViewById(R.id.button_comment);
-//        //Button member = (Button) findViewById(R.id.button_login);
-//        Button map = (Button) findViewById(R.id.button_map);
-//        Button menu = (Button) findViewById(R.id.button_menu);
-//        Button promo = (Button) findViewById(R.id.button_promo);
-//        map.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Register.this, Map.class);
-//                startActivity(intent);
-//            }
-//        });
-//        comment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Register.this,Comment.class);
-//                startActivity(intent);
-//            }
-//        });
-//        menu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Register.this, CanteenFood.class);
-//                startActivity(intent);
-//
-//            }
-//        });
-//        info.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
-//                startActivity(intent);
-//
-//            }
-//        });
-//        promo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Register.this, Promotion.class);
-//                startActivity(intent);
-//
-//            }
-//        });
-//        member.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = TabManager.getInstance().getIntent(Register.this, Promotion.class);
-//                startActivity(intent);
-//
-//            }
-//        });
-        confirm.setOnClickListener(new ConfirmButtonOnClickListener(this));
+        Button info = (Button) findViewById(R.id.button_info);
+        Button comment = (Button) findViewById(R.id.button_comment);
+        Button login = (Button) findViewById(R.id.button_login);
+        Button map = (Button) findViewById(R.id.button_map);
+        Button menu = (Button) findViewById(R.id.button_menu);
+        Button promo = (Button) findViewById(R.id.button_promo);
+        Button logout = (Button) findViewById(R.id.button_logout);
+        Button howtogo = (Button) findViewById(R.id.button3);
+        Button register = (Button) findViewById(R.id.button4);
+        Button Confirm = (Button) findViewById(R.id.button_confirmreg);
+
+        Confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this,Register.class);
+                startActivity(intent);
+            }
+        });
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Map.class);
+                startActivity(intent);
+            }
+        });
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this,Comment.class);
+                startActivity(intent);
+            }
+        });
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, CanteenFood.class);
+                startActivity(intent);
+
+            }
+        });
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Sports.class);
+                startActivity(intent);
+
+            }
+        });
+        promo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Promotion.class);
+                startActivity(intent);
+
+            }
+        });
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Login.class);
+                startActivity(intent);
+
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Sports.class);
+                startActivity(intent);
+
+            }
+        });
+        howtogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Sports.class);
+                startActivity(intent);
+
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = TabManager.getInstance().getIntent(Register.this, Register.class);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 
@@ -125,7 +160,7 @@ public class Register extends ActionBarActivity {
                     public void queryResult(String result) {
                         if (result != null) {
                             MySharedPreference.saveMemberName(emailStr, Register.this);
-                            Intent intent = TabManager.getInstance().getIntent(Register.this, Information.class);
+                            Intent intent = TabManager.getInstance().getIntent(Register.this, Sports.class);
                             startActivity(intent);
                         }
                     }

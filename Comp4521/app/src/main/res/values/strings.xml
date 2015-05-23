@@ -12,4 +12,7 @@
     <string name="title_activity_commentform">Commentform</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_register">Register</string>
+    <string name="title_activity_others">Others</string>
+    <string name="title_activity_canteen">Canteen</string>
+    <string name="title_activity_everylistview">Everylistview</string>
 </resources>

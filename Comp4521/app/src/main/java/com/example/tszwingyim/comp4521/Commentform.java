@@ -17,6 +17,98 @@ public class Commentform extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commentform);
         Button confirm = (Button) findViewById(R.id.button_confirm);
+        Button info = (Button) findViewById(R.id.button_info);
+        Button comment = (Button) findViewById(R.id.button_comment);
+        Button login = (Button) findViewById(R.id.button_login);
+        Button map = (Button) findViewById(R.id.button_map);
+        Button menu = (Button) findViewById(R.id.button_menu);
+        Button promo = (Button) findViewById(R.id.button_promo);
+        Button logout = (Button) findViewById(R.id.button_logout);
+        Button howtogo = (Button) findViewById(R.id.button3);
+        Button register = (Button) findViewById(R.id.button4);
+        Button Confirm = (Button) findViewById(R.id.button_confirm);
+
+
+       Confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this,Canteen.class);
+                startActivity(intent);
+            }
+        });
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Map.class);
+                startActivity(intent);
+            }
+        });
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this,Comment.class);
+                startActivity(intent);
+            }
+        });
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, CanteenFood.class);
+                startActivity(intent);
+
+            }
+        });
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Sports.class);
+                startActivity(intent);
+
+            }
+        });
+        promo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Promotion.class);
+                startActivity(intent);
+
+            }
+        });
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Login.class);
+                startActivity(intent);
+
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Sports.class);
+                startActivity(intent);
+
+            }
+        });
+        howtogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Sports.class);
+                startActivity(intent);
+
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = TabManager.getInstance().getIntent(Commentform.this, Register.class);
+                startActivity(intent);
+
+            }
+        });
+
 
         final String itemId = getIntent().getExtras().getString("ITEM_ID");
         if (itemId != null && itemId.length() > 0) {
