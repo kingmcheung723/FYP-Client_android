@@ -146,6 +146,7 @@ public class Information extends ActionBarActivity {
 
             String sql = "SELECT Facilities.NAME, Facilities.INFO, Facilities.CATEGORIES FROM Facilities WHERE NAME = '" + facilityName + "'";
             dbManager.querySql(sql);
+            dbManager.updateSql(sql);
         }
 
         if (rankingView != null) {
@@ -163,7 +164,7 @@ public class Information extends ActionBarActivity {
                     }
                 }
             };
-            String sql = "SELECT AVG(Rating) FROM Comments, Facilities WHERE Facilities.NAME = '" + facilityName + "' AND (Facilities.ID = Comments.FacilitiesID)";
+            String sql = "SELECT ROUND(AVG(Rating),0) FROM Comments, Facilities WHERE Facilities.NAME = '" + facilityName + "' AND (Facilities.ID = Comments.FacilitiesID)";
             dbManager.querySql(sql);
         }
 
