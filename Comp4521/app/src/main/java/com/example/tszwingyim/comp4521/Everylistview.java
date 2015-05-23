@@ -56,7 +56,11 @@ public class Everylistview extends ActionBarActivity {
                         String[] names = new String[token.countTokens()];
                         int count = 0;
                         while (token.hasMoreTokens()) {
-                            names[count] = token.nextToken();
+                            String name = token.nextToken();
+                            String distance = token.nextToken();
+                            String nameDistance = name + " (" + distance + "m)";
+
+                            names[count] = nameDistance;
                             count++;
                         }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(Everylistview.this, android.R.layout.simple_list_item_1, names);
@@ -77,15 +81,10 @@ public class Everylistview extends ActionBarActivity {
                     }
                 }
             };
-//            SELECT *,( 6378100 * acos( cos( radians(22.337435  ) ) * cos( radians( lat ) )
-//                    * cos( radians( longi ) - radians(114.263764 ) ) + sin( radians(22.337435 ) ) * sin(radians(lat)) ) ) AS distance
-//            FROM facilities
-//            HAVING distance
-//            ORDER BY distance
-//                    ASC
+
             String LAT = getIntent().getExtras().getString("LAT");
             String LONGI = getIntent().getExtras().getString("LONGI");
-            String sql = "SELECT NAME,(6378100 * acos( cos( radians(";
+            String sql = "SELECT NAME,ROUND((6378100 * acos( cos( radians(";
             String temp = String.valueOf(LAT);
             sql =sql.concat(temp);
             sql = sql.concat(") ) * cos( radians( lat ) )* cos( radians(longi) - radians(");
@@ -94,10 +93,9 @@ public class Everylistview extends ActionBarActivity {
             sql = sql.concat(") ) + sin( radians(");
             temp = String.valueOf(LAT);
             sql =sql.concat(temp);
-            sql = sql.concat(") ) * sin(radians(lat)) ) ) AS distance FROM Facilities WHERE CATEGORIES = '");
+            sql = sql.concat(") ) * sin(radians(lat)) ) ) ,0) AS distance FROM Facilities WHERE CATEGORIES = '");
             sql = sql.concat(category +"'");
             sql = sql.concat("HAVING distance ORDER BY distance ASC");
-//            String sql = "SELECT NAME FROM Facilities WHERE CATEGORIES = '" + category + "'";
             dbManager.querySql(sql);
 
         }
