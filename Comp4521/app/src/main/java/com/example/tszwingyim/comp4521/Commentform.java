@@ -100,21 +100,12 @@ public class Commentform extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Commentform.this, Information.class);
-                intent.putExtra("Facilities", facility);
-                startActivity(intent);
+                MySharedPreference.clearMemberName(Commentform.this);
+                MySharedPreference.displayDialog("Logout success", Commentform.this);
 
             }
         });
-        howtogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Commentform.this, Information.class);
-                intent.putExtra("Facilities", facility);
-                startActivity(intent);
 
-            }
-        });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

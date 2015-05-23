@@ -32,79 +32,86 @@ public class Login extends ActionBarActivity {
         Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
         Button confirm = (Button) findViewById(R.id.button_confirm);
+        final String facility = getIntent().getExtras().getString("Facilities");
+        if (facility != null) {
 
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login.this, Map.class);
-                startActivity(intent);
-            }
-        });
-        comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login.this, Comment.class);
-                startActivity(intent);
-            }
-        });
-        menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login.this, CanteenFood.class);
-                startActivity(intent);
+            map.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Login.this, Map.class);
+                    intent.putExtra("Facilities", facility);
+                    startActivity(intent);
+                }
+            });
+            comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Login.this, Comment.class);
+                    intent.putExtra("Facilities", facility);
 
-            }
-        });
-        info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login.this, Information.class);
-                startActivity(intent);
+                    startActivity(intent);
+                }
+            });
+            menu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Login.this, CanteenFood.class);
+                    intent.putExtra("Facilities", facility);
 
-            }
-        });
-        promo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login.this, Commentform.class);
-                startActivity(intent);
+                    startActivity(intent);
 
-            }
-        });
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                }
+            });
+            info.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Login.this, Information.class);
+                    intent.putExtra("Facilities", facility);
 
-                Intent intent = new Intent(Login.this, Login.class);
-                startActivity(intent);
+                    startActivity(intent);
 
-            }
-        });
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login.this, Information.class);
-                startActivity(intent);
+                }
+            });
+            promo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Login.this, Commentform.class);
+                    intent.putExtra("Facilities", facility);
 
-            }
-        });
-        howtogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login.this, Information.class);
-                startActivity(intent);
+                    startActivity(intent);
 
-            }
-        });
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                }
+            });
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                Intent intent = new Intent(Login.this, Register.class);
-                startActivity(intent);
+                    Intent intent = new Intent(Login.this, Login.class);
+                    intent.putExtra("Facilities", facility);
 
-            }
-        });
+                    startActivity(intent);
+
+                }
+            });
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MySharedPreference.clearMemberName(Login.this);
+                    MySharedPreference.displayDialog("Logout success", Login.this);
+
+
+                }
+            });
+            register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(Login.this, Register.class);
+                    startActivity(intent);
+
+                }
+            });
+        }
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override

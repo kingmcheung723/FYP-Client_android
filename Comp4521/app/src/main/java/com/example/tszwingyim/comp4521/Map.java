@@ -99,21 +99,12 @@ public class Map extends ActionBarActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(Map.this, Information.class);
-                intent.putExtra("Facilities", facility);
-                startActivity(intent);
+                MySharedPreference.clearMemberName(Map.this);
+                MySharedPreference.displayDialog("Logout success", Map.this);
 
             }
         });
-        howtogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =  new Intent(Map.this, Information.class);
-                intent.putExtra("Facilities", facility);
-                startActivity(intent);
 
-            }
-        });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
