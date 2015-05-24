@@ -22,10 +22,8 @@ public class CanteenFood extends ActionBarActivity {
         Button comment = (Button) findViewById(R.id.button_comment);
         Button login = (Button) findViewById(R.id.button_login);
         Button map = (Button) findViewById(R.id.button_map);
-        Button menu = (Button) findViewById(R.id.button_menu);
         Button promo = (Button) findViewById(R.id.button_promo);
         Button logout = (Button) findViewById(R.id.button_logout);
-        Button howtogo = (Button) findViewById(R.id.button3);
         Button register = (Button) findViewById(R.id.button4);
         final String facility = getIntent().getExtras().getString("Facilities");
         map.setOnClickListener(new View.OnClickListener() {
@@ -44,15 +42,7 @@ public class CanteenFood extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-        menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(CanteenFood.this, CanteenFood.class);
-                intent.putExtra("Facilities", facility);
-                startActivity(intent);
 
-            }
-        });
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,15 +80,7 @@ public class CanteenFood extends ActionBarActivity {
 
             }
         });
-        howtogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(CanteenFood.this, Information.class);
-                intent.putExtra("Facilities", facility);
-                startActivity(intent);
 
-            }
-        });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

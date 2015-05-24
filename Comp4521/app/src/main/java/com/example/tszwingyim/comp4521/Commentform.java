@@ -28,21 +28,13 @@ public class Commentform extends ActionBarActivity {
         Button promo = (Button) findViewById(R.id.button_promo);
         Button logout = (Button) findViewById(R.id.button_logout);
         Button register = (Button) findViewById(R.id.button4);
-        Button Confirm = (Button) findViewById(R.id.button_confirm);
 
         final String facility = getIntent().getExtras().getString("Facilities");
 
         final RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingbar);
 
 
-        Confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Commentform.this, Canteen.class);
-                intent.putExtra("Facilities", facility);
-                startActivity(intent);
-            }
-        });
+
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
